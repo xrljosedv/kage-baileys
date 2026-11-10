@@ -1,0 +1,18 @@
+
+> kage-baileys@3.2.8 build
+> npm run check:engine && npm run gen:protobuf && npm run gen:types
+
+
+> kage-baileys@3.2.8 check:engine
+> node engine-requirements.js
+
+
+> kage-baileys@3.2.8 gen:protobuf
+> node scripts/generate-protobuf.cjs
+
+WAProto/index.js + index.d.ts regenerated from the single canonical schema.
+
+> kage-baileys@3.2.8 gen:types
+> node scripts/generate-public-types.cjs
+
+Public core types and JavaScript-extra declarations generated.

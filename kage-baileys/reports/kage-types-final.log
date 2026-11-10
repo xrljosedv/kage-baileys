@@ -1,0 +1,4 @@
+
+> kage-baileys@3.2.8-merge.1 check:types
+> tsc -p tsconfig.json
+

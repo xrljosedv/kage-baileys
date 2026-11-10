@@ -1,0 +1,10 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),{spawnSync}=require('node:child_process');
+const root=path.resolve(__dirname,'..');const api=require('../lib');const pb=require('protobufjs');const schema=pb.loadSync(path.join(root,'WAProto/WAProto.proto')).resolveAll();let types=0,fields=0;
+function walk(n){if(n.fieldsArray){types++;fields+=n.fieldsArray.length;if(Object.keys(n.fieldsById).length!==n.fieldsArray.length)throw new Error('Identificadores duplicados en '+n.fullName)}for(const c of n.nestedArray||[])walk(c)}walk(schema);
+const coverage=require('../maintenance/api-coverage.json').map(item=>{const mod=require(path.join(root,item.archivo));return {archivo:item.archivo,exportaciones:item.exportaciones.length,faltantes:item.exportaciones.filter(k=>!(k in mod))}});
+const imports=spawnSync(process.execPath,[path.join(__dirname,'check-imports.cjs')],{encoding:'utf8'});
+const report={paquete:require('../package.json').name,version:require('../package.json').version,node:process.version,estructuraUnica:!fs.existsSync(path.join(root,'vendor')),exportacionesPublicas:Object.keys(api).length,tiposProtocolo:types,camposProtocolo:fields,cobertura:coverage,importaciones:JSON.parse(imports.stdout),alcance:'Validación local. Los recorridos reales de WhatsApp necesitan una sesión y servicios compatibles.'};
+fs.writeFileSync(path.join(root,'maintenance/verification.json'),JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify({paquete:report.paquete,version:report.version,estructuraUnica:report.estructuraUnica,exportaciones:report.exportacionesPublicas,tipos:types,campos:fields,modulosVerificados:coverage.length,errores:coverage.filter(x=>x.faltantes.length).length+report.importaciones.errores.length},null,2));
+if(!report.estructuraUnica||imports.status||coverage.some(x=>x.faltantes.length))process.exitCode=1;

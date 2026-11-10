@@ -1,0 +1,6 @@
+
+> kage-chiaki-runtime@18.1.0-merge.1 check
+> node scripts/comprobar.js
+
+Node v22.23.4: 305 archivos JavaScript, 264 plugins, 142 importaciones locales, 0 fallos.
+La comprobación estática no valida conexión WhatsApp, servicios externos ni módulos nativos en otras plataformas.

@@ -1,0 +1,58 @@
+{
+  "removed": [
+    {
+      "file": "plugins/_antilink.js",
+      "declarations": 2
+    },
+    {
+      "file": "plugins/fun-afktime.js",
+      "declarations": 2
+    },
+    {
+      "file": "plugins/games-_ttt.js",
+      "declarations": 2
+    },
+    {
+      "file": "plugins/_userPrem.js",
+      "declarations": 2
+    }
+  ],
+  "protobuf_changes": [
+    {
+      "file": "lib/simple.js",
+      "calls": 17
+    },
+    {
+      "file": "plugins/search-vimeo.js",
+      "calls": 6
+    },
+    {
+      "file": "plugins/search-tt.js",
+      "calls": 6
+    },
+    {
+      "file": "plugins/search-github.js",
+      "calls": 6
+    },
+    {
+      "file": "plugins/search-appstore.js",
+      "calls": 6
+    },
+    {
+      "file": "plugins/tools-whatmusic.js",
+      "calls": 5
+    },
+    {
+      "file": "plugins/search-patreon.js",
+      "calls": 6
+    },
+    {
+      "file": "plugins/downloads-image.js",
+      "calls": 6
+    },
+    {
+      "file": "plugins/search-tumblr.js",
+      "calls": 6
+    }
+  ]
+}

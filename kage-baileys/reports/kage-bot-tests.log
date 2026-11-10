@@ -1,0 +1,151 @@
+
+> kage-baileys@3.2.8-merge.1 test:bot
+> npm --prefix bot test
+
+
+> kage-chiaki-runtime@18.1.0-merge.1 test
+> node --test tests/*.test.js
+
+TAP version 13
+# [COMANDOS] 1 colisiones registradas; variantes accesibles con archivo:comando
+# Subtest: real original ping plugin through original handler, without prefix
+ok 1 - real original ping plugin through original handler, without prefix
+  ---
+  duration_ms: 9.69033
+  type: 'test'
+  ...
+# Subtest: original alias p and legacy prefix route through handler
+ok 2 - original alias p and legacy prefix route through handler
+  ---
+  duration_ms: 1.519627
+  type: 'test'
+  ...
+# Subtest: normal conversation never runs a command
+ok 3 - normal conversation never runs a command
+  ---
+  duration_ms: 1.13275
+  type: 'test'
+  ...
+# Subtest: no prefix is configurable at actual dispatch layer
+ok 4 - no prefix is configurable at actual dispatch layer
+  ---
+  duration_ms: 1.832575
+  type: 'test'
+  ...
+# Subtest: duplicate delivery across socket replacement executes once
+ok 5 - duplicate delivery across socket replacement executes once
+  ---
+  duration_ms: 1.33774
+  type: 'test'
+  ...
+# Subtest: history append is never replayed as a command
+ok 6 - history append is never replayed as a command
+  ---
+  duration_ms: 0.496537
+  type: 'test'
+  ...
+# Subtest: incoming batch runs original commands once per distinct message
+ok 7 - incoming batch runs original commands once per distinct message
+  ---
+  duration_ms: 2.690625
+  type: 'test'
+  ...
+# Subtest: original group command uses supplied main socket
+ok 8 - original group command uses supplied main socket
+  ---
+  duration_ms: 1.965292
+  type: 'test'
+  ...
+# Subtest: private message cannot execute group-only command
+ok 9 - private message cannot execute group-only command
+  ---
+  duration_ms: 2.062549
+  type: 'test'
+  ...
+# Subtest: command collision reports and executes only selected implementation
+ok 10 - command collision reports and executes only selected implementation
+  ---
+  duration_ms: 5.606039
+  type: 'test'
+  ...
+# Subtest: namespaced conflicting implementation remains callable
+ok 11 - namespaced conflicting implementation remains callable
+  ---
+  duration_ms: 1.229788
+  type: 'test'
+  ...
+# Subtest: metadata removal leaves antilink plugin loadable
+ok 12 - metadata removal leaves antilink plugin loadable
+  ---
+  duration_ms: 0.117942
+  type: 'test'
+  ...
+# Subtest: ViewOnce command has no downloader and only explains protection
+ok 13 - ViewOnce command has no downloader and only explains protection
+  ---
+  duration_ms: 0.183169
+  type: 'test'
+  ...
+# Subtest: native response button aliases become normal commands
+ok 14 - native response button aliases become normal commands
+  ---
+  duration_ms: 0.271975
+  type: 'test'
+  ...
+# Subtest: normal multimedia serialization retains imageMessage
+ok 15 - normal multimedia serialization retains imageMessage
+  ---
+  duration_ms: 0.140361
+  type: 'test'
+  ...
+# Subtest: normal multimedia serialization retains videoMessage
+ok 16 - normal multimedia serialization retains videoMessage
+  ---
+  duration_ms: 0.066462
+  type: 'test'
+  ...
+# Subtest: normal multimedia serialization retains audioMessage
+ok 17 - normal multimedia serialization retains audioMessage
+  ---
+  duration_ms: 0.066784
+  type: 'test'
+  ...
+# Subtest: normal multimedia serialization retains documentMessage
+ok 18 - normal multimedia serialization retains documentMessage
+  ---
+  duration_ms: 0.063712
+  type: 'test'
+  ...
+# Subtest: quoted LID stays LID, never forged as a phone number
+ok 19 - quoted LID stays LID, never forged as a phone number
+  ---
+  duration_ms: 0.352187
+  type: 'test'
+  ...
+# Subtest: store bind is idempotent and handles chats.upsert array payloads
+ok 20 - store bind is idempotent and handles chats.upsert array payloads
+  ---
+  duration_ms: 0.280748
+  type: 'test'
+  ...
+# Subtest: welcome content and LID participant normalization are local and deterministic
+ok 21 - welcome content and LID participant normalization are local and deterministic
+  ---
+  duration_ms: 0.383647
+  type: 'test'
+  ...
+# Subtest: welcome attach replaces its own previous listener
+ok 22 - welcome attach replaces its own previous listener
+  ---
+  duration_ms: 0.134203
+  type: 'test'
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 22
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1220.411194

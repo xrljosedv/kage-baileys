@@ -1,0 +1,30 @@
+
+> kage-baileys@3.2.8-merge.1 start
+> node scripts/start-bot.cjs --offline-smoke
+
+[KAGE BAILEYS] Iniciando el runtime completo adaptado de Chiaki.
+
+[SISTEMA] Encendiendo motores... 🚀
+
+
+       __   _  _   ___     _     _  _   ___       _  _     _     _  _     _   
+     / __| | || | |_ _|   /_\   | |/ / |_ _|     | \| |   /_\   | \| |   /_\  
+    | (__  | __ |  | |   / _ \  | ' <   | |      | .` |  / _ \  | .` |  / _ \ 
+     \___| |_||_| |___| /_/ \_\ |_|\_\ |___|     |_|\_| /_/ \_\ |_|\_| /_/ \_\
+
+                                   _    _   ___ 
+                                  | \  / | |_ _|
+                                  | |\/| |  | | 
+                                  |_|  |_| |___|
+
+
+
+
+                              creado por xrljosedv
+
+
+[SISTEMA] Servidor web activo en el puerto 8080 🌐
+[SESIÓN] Credenciales originales conservadas sin usar; sesión nueva en Sessions/Merged.
+[PLUGINS] Archivo sin comandos ni eventos, omitido: scraper.js
+[PLUGINS] ✅ 263 cargados correctamente
+[OFFLINE_SMOKE_OK] Arranque y plugins cargados; no se abrió WhatsApp.

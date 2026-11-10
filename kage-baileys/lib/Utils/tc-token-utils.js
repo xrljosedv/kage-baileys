@@ -1,0 +1,202 @@
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; } async function buildTcTokenFromJid({ authState, jid, baseContent = [] }) {
+    try {
+        const tcTokenData = await authState.keys.get('tctoken', [jid]);
+        const tcTokenBuffer = _optionalChain([tcTokenData, 'optionalAccess', _ => _[jid], 'optionalAccess', _2 => _2.token]);
+        if (!tcTokenBuffer)
+            return baseContent.length > 0 ? baseContent : undefined;
+        baseContent.push({
+            tag: 'tctoken',
+            attrs: {},
+            content: tcTokenBuffer
+        });
+        return baseContent;
+    }
+    catch (error) {
+        return baseContent.length > 0 ? baseContent : undefined;
+    }
+} exports.buildTcTokenFromJid = buildTcTokenFromJid;
+ 
+ 
+const __kageModule187 = (() => {
+const module = { exports: {} }; const exports = module.exports;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TC_TOKEN_INDEX_KEY = void 0;
+exports.readTcTokenIndex = readTcTokenIndex;
+exports.buildMergedTcTokenIndexWrite = buildMergedTcTokenIndexWrite;
+exports.isTcTokenExpired = isTcTokenExpired;
+exports.shouldSendNewTcToken = shouldSendNewTcToken;
+exports.resolveTcTokenJid = resolveTcTokenJid;
+exports.resolveIssuanceJid = resolveIssuanceJid;
+exports.buildTcTokenFromJid = buildTcTokenFromJid;
+exports.storeTcTokensFromIqResult = storeTcTokensFromIqResult;
+const index_js_1 = require("../WABinary/index.js");
+ 
+ 
+const BOT_PHONE_REGEX = /^1313555\d{4}$|^131655500\d{2}$/;
+ 
+
+
+
+
+
+function isRegularUser(jid) {
+    if (!jid)
+        return false;
+    const user = jid.split('@')[0] ?? '';
+    if (user === '0')
+        return false;  
+    if (BOT_PHONE_REGEX.test(user))
+        return false;  
+    if ((0, index_js_1.isJidMetaAI)(jid))
+        return false;  
+    return !!((0, index_js_1.isPnUser)(jid) || (0, index_js_1.isLidUser)(jid) || (0, index_js_1.isHostedPnUser)(jid) || (0, index_js_1.isHostedLidUser)(jid) || jid.endsWith('@c.us'));
+}
+const TC_TOKEN_BUCKET_DURATION = 604800;  
+const TC_TOKEN_NUM_BUCKETS = 4;  
+ 
+exports.TC_TOKEN_INDEX_KEY = '__index';
+ 
+async function readTcTokenIndex(keys) {
+    const data = await keys.get('tctoken', [exports.TC_TOKEN_INDEX_KEY]);
+    const entry = data[exports.TC_TOKEN_INDEX_KEY];
+    if (!entry?.token?.length)
+        return [];
+    try {
+        const parsed = JSON.parse(Buffer.from(entry.token).toString());
+        if (!Array.isArray(parsed))
+            return [];
+        return parsed.filter((j) => typeof j === 'string' && j.length > 0 && j !== exports.TC_TOKEN_INDEX_KEY);
+    }
+    catch {
+        return [];
+    }
+}
+ 
+async function buildMergedTcTokenIndexWrite(keys, addedJids) {
+    const persisted = await readTcTokenIndex(keys);
+    const merged = new Set(persisted);
+    for (const jid of addedJids) {
+        if (jid && jid !== exports.TC_TOKEN_INDEX_KEY)
+            merged.add(jid);
+    }
+    return {
+        [exports.TC_TOKEN_INDEX_KEY]: { token: Buffer.from(JSON.stringify([...merged])) }
+    };
+}
+ 
+function isTcTokenExpired(timestamp) {
+    if (timestamp === null || timestamp === undefined)
+        return true;
+    const ts = typeof timestamp === 'string' ? parseInt(timestamp) : timestamp;
+    if (isNaN(ts))
+        return true;
+    const now = Math.floor(Date.now() / 1000);
+    const currentBucket = Math.floor(now / TC_TOKEN_BUCKET_DURATION);
+    const cutoffBucket = currentBucket - (TC_TOKEN_NUM_BUCKETS - 1);
+    const cutoffTimestamp = cutoffBucket * TC_TOKEN_BUCKET_DURATION;
+    return ts < cutoffTimestamp;
+}
+function shouldSendNewTcToken(senderTimestamp) {
+    if (senderTimestamp === undefined)
+        return true;
+    const now = Math.floor(Date.now() / 1000);
+    const currentBucket = Math.floor(now / TC_TOKEN_BUCKET_DURATION);
+    const senderBucket = Math.floor(senderTimestamp / TC_TOKEN_BUCKET_DURATION);
+    return currentBucket > senderBucket;
+}
+ 
+async function resolveTcTokenJid(jid, getLIDForPN) {
+    if ((0, index_js_1.isLidUser)(jid))
+        return jid;
+    const lid = await getLIDForPN(jid);
+    return lid ?? jid;
+}
+ 
+async function resolveIssuanceJid(jid, issueToLid, getLIDForPN, getPNForLID) {
+    if (issueToLid) {
+        if ((0, index_js_1.isLidUser)(jid))
+            return jid;
+        const lid = await getLIDForPN(jid);
+        return lid ?? jid;
+    }
+    if (!(0, index_js_1.isLidUser)(jid))
+        return jid;
+    if (getPNForLID) {
+        const pn = await getPNForLID(jid);
+        return pn ?? jid;
+    }
+    return jid;
+}
+async function buildTcTokenFromJid({ authState, jid, baseContent = [], getLIDForPN }) {
+    try {
+        const storageJid = await resolveTcTokenJid(jid, getLIDForPN);
+        const tcTokenData = await authState.keys.get('tctoken', [storageJid]);
+        const entry = tcTokenData?.[storageJid];
+        const tcTokenBuffer = entry?.token;
+        const timestamp = entry?.timestamp;
+        if (!tcTokenBuffer?.length || timestamp === undefined || isTcTokenExpired(timestamp)) {
+            if (tcTokenBuffer) {
+                 
+                 
+                 
+                const cleared = entry?.senderTimestamp !== undefined
+                    ? { token: Buffer.alloc(0), senderTimestamp: entry.senderTimestamp }
+                    : null;
+                await authState.keys.set({ tctoken: { [storageJid]: cleared } });
+            }
+            return baseContent.length > 0 ? baseContent : undefined;
+        }
+        baseContent.push({
+            tag: 'tctoken',
+            attrs: { t: String(timestamp) },
+            content: tcTokenBuffer
+        });
+        return baseContent;
+    }
+    catch (error) {
+        return baseContent.length > 0 ? baseContent : undefined;
+    }
+}
+async function storeTcTokensFromIqResult({ result, fallbackJid, keys, getLIDForPN, onNewJidStored }) {
+    const tokensNode = (0, index_js_1.getBinaryNodeChild)(result, 'tokens');
+    if (!tokensNode)
+        return;
+    const tokenNodes = (0, index_js_1.getBinaryNodeChildren)(tokensNode, 'token');
+    for (const tokenNode of tokenNodes) {
+        if (tokenNode.attrs.type !== 'trusted_contact' || !(tokenNode.content instanceof Uint8Array)) {
+            continue;
+        }
+         
+        const rawJid = (0, index_js_1.jidNormalizedUser)(fallbackJid || tokenNode.attrs.jid);
+        if (!isRegularUser(rawJid))
+            continue;
+        const storageJid = await resolveTcTokenJid(rawJid, getLIDForPN);
+        const existingTcData = await keys.get('tctoken', [storageJid]);
+        const existingEntry = existingTcData[storageJid];
+        const existingTs = existingEntry?.timestamp ? Number(existingEntry.timestamp) : 0;
+        const incomingTs = tokenNode.attrs.t ? Number(tokenNode.attrs.t) : 0;
+         
+        if (!incomingTs)
+            continue;
+        if (existingTs > 0 && existingTs > incomingTs)
+            continue;
+        await keys.set({
+            tctoken: {
+                [storageJid]: {
+                    ...existingEntry,
+                    token: Buffer.from(tokenNode.content),
+                    timestamp: tokenNode.attrs.t
+                }
+            }
+        });
+        onNewJidStored?.(storageJid);
+    }
+}
+
+return module.exports;
+})();
+for (const key of Object.keys(__kageModule187)) {
+ if (key !== '__esModule' && !Object.prototype.hasOwnProperty.call(exports,key)) Object.defineProperty(exports,key,{enumerable:true,configurable:true,get:()=>__kageModule187[key]});
+}
+Object.defineProperty(exports, Symbol.for('kage.advanced'), {value:__kageModule187, configurable:true});

@@ -1,0 +1,2093 @@
+
+> kage-baileys@3.2.8-merge.1 check
+> npm run lint && npm run check:types && npm test && npm run check:package
+
+
+> kage-baileys@3.2.8-merge.1 lint
+> node scripts/check-syntax.cjs && node scripts/check-imports.cjs
+
+SYNTAX_OK: 199 JavaScript files
+{
+  "importacionesLocales": 1116,
+  "errores": []
+}
+
+> kage-baileys@3.2.8-merge.1 check:types
+> tsc -p tsconfig.json
+
+
+> kage-baileys@3.2.8-merge.1 test
+> node --test test/*.test.cjs
+
+TAP version 13
+# Subtest: formato avanzado: bloque de código
+ok 1 - formato avanzado: bloque de código
+  ---
+  duration_ms: 11.015564
+  type: 'test'
+  ...
+# Subtest: formato avanzado: tabla
+ok 2 - formato avanzado: tabla
+  ---
+  duration_ms: 1.528318
+  type: 'test'
+  ...
+# Subtest: formato avanzado: enlaces
+ok 3 - formato avanzado: enlaces
+  ---
+  duration_ms: 0.913043
+  type: 'test'
+  ...
+# Subtest: formato avanzado: respuesta enriquecida
+ok 4 - formato avanzado: respuesta enriquecida
+  ---
+  duration_ms: 1.042169
+  type: 'test'
+  ...
+# Subtest: formato avanzado: flujo nativo
+ok 5 - formato avanzado: flujo nativo
+  ---
+  duration_ms: 1.900559
+  type: 'test'
+  ...
+# Subtest: formato avanzado: pago
+ok 6 - formato avanzado: pago
+  ---
+  duration_ms: 0.850223
+  type: 'test'
+  ...
+# Subtest: formato avanzado: contenido oculto
+ok 7 - formato avanzado: contenido oculto
+  ---
+  duration_ms: 1.807194
+  type: 'test'
+  ...
+# Subtest: formato avanzado: visualización única V2
+ok 8 - formato avanzado: visualización única V2
+  ---
+  duration_ms: 0.673197
+  type: 'test'
+  ...
+# Subtest: formato avanzado: visualización única extendida
+ok 9 - formato avanzado: visualización única extendida
+  ---
+  duration_ms: 1.218816
+  type: 'test'
+  ...
+# Subtest: formato avanzado: estado de grupo
+ok 10 - formato avanzado: estado de grupo
+  ---
+  duration_ms: 0.694483
+  type: 'test'
+  ...
+# Subtest: formato avanzado: contenido directo
+ok 11 - formato avanzado: contenido directo
+  ---
+  duration_ms: 0.26486
+  type: 'test'
+  ...
+# Subtest: el contenido raw no modifica el objeto del consumidor
+ok 12 - el contenido raw no modifica el objeto del consumidor
+  ---
+  duration_ms: 0.186666
+  type: 'test'
+  ...
+# Subtest: citas de canal conservan el contenido y el identificador
+ok 13 - citas de canal conservan el contenido y el identificador
+  ---
+  duration_ms: 1.237722
+  type: 'test'
+  ...
+# Subtest: nombres alternativos del esquema conservan el mismo campo al codificar
+ok 14 - nombres alternativos del esquema conservan el mismo campo al codificar
+  ---
+  duration_ms: 0.523662
+  type: 'test'
+  ...
+# Subtest: todos los módulos declarados conservan sus exportaciones
+ok 15 - todos los módulos declarados conservan sus exportaciones
+  ---
+  duration_ms: 8.040795
+  type: 'test'
+  ...
+# Subtest: una sola raíz de paquete, sin módulos duplicados en carpetas privadas
+ok 16 - una sola raíz de paquete, sin módulos duplicados en carpetas privadas
+  ---
+  duration_ms: 0.145405
+  type: 'test'
+  ...
+# Subtest: banner solicitado y colores en terminales compatibles
+ok 17 - banner solicitado y colores en terminales compatibles
+  ---
+  duration_ms: 0.632814
+  type: 'test'
+  ...
+# Subtest: privacy prevents unwrapping and preserves original wrappers for imageMessage
+ok 18 - privacy prevents unwrapping and preserves original wrappers for imageMessage
+  ---
+  duration_ms: 1.827185
+  type: 'test'
+  ...
+# Subtest: privacy prevents unwrapping and preserves original wrappers for videoMessage
+ok 19 - privacy prevents unwrapping and preserves original wrappers for videoMessage
+  ---
+  duration_ms: 0.319308
+  type: 'test'
+  ...
+# Subtest: privacy prevents unwrapping and preserves original wrappers for audioMessage
+ok 20 - privacy prevents unwrapping and preserves original wrappers for audioMessage
+  ---
+  duration_ms: 0.344516
+  type: 'test'
+  ...
+# Subtest: privacy prevents unwrapping and preserves original wrappers for documentMessage
+ok 21 - privacy prevents unwrapping and preserves original wrappers for documentMessage
+  ---
+  duration_ms: 0.302071
+  type: 'test'
+  ...
+# Subtest: privacy prevents unwrapping and preserves original wrappers for stickerMessage
+ok 22 - privacy prevents unwrapping and preserves original wrappers for stickerMessage
+  ---
+  duration_ms: 0.228157
+  type: 'test'
+  ...
+# Subtest: repair central automation has bounded deduplication and ignores own messages
+ok 23 - repair central automation has bounded deduplication and ignores own messages
+  ---
+  duration_ms: 0.401326
+  type: 'test'
+  ...
+# Subtest: repair disabling automation while download runs prevents the send
+ok 24 - repair disabling automation while download runs prevents the send
+  ---
+  duration_ms: 0.425426
+  type: 'test'
+  ...
+# Subtest: repair public API and socket API expose all documented helpers
+ok 25 - repair public API and socket API expose all documented helpers
+  ---
+  duration_ms: 0.532489
+  type: 'test'
+  ...
+# Subtest: repair media listeners detach and do not duplicate
+ok 26 - repair media listeners detach and do not duplicate
+  ---
+  duration_ms: 0.489321
+  type: 'test'
+  ...
+# Subtest: repair status ZIP preserves text, background colors and metadata
+ok 27 - repair status ZIP preserves text, background colors and metadata
+  ---
+  duration_ms: 3.416836
+  type: 'test'
+  ...
+# Subtest: repair status ZIP rejects contacts not saved and synchronized
+ok 28 - repair status ZIP rejects contacts not saved and synchronized
+  ---
+  duration_ms: 0.712224
+  type: 'test'
+  ...
+# Subtest: repair status ZIP records download failures rather than inventing content
+ok 29 - repair status ZIP records download failures rather than inventing content
+  ---
+  duration_ms: 1.471904
+  type: 'test'
+  ...
+# Subtest: repair status archive writes restricted files and sends only once
+ok 30 - repair status archive writes restricted files and sends only once
+  ---
+  duration_ms: 20.324975
+  type: 'test'
+  ...
+# Subtest: repair status handler integrates saving independently of reactions
+ok 31 - repair status handler integrates saving independently of reactions
+  ---
+  duration_ms: 2.53881
+  type: 'test'
+  ...
+# Subtest: repair status saving refuses automatic delivery to groups
+ok 32 - repair status saving refuses automatic delivery to groups
+  ---
+  duration_ms: 0.330655
+  type: 'test'
+  ...
+# Subtest: base64 estandar con padding correcto se decodifica igual que siempre
+ok 33 - base64 estandar con padding correcto se decodifica igual que siempre
+  ---
+  duration_ms: 2.376927
+  type: 'test'
+  ...
+# Subtest: base64 URL-safe (- y _) se acepta sin error
+ok 34 - base64 URL-safe (- y _) se acepta sin error
+  ---
+  duration_ms: 0.273841
+  type: 'test'
+  ...
+# Subtest: base64 sin padding se completa automaticamente
+ok 35 - base64 sin padding se completa automaticamente
+  ---
+  duration_ms: 0.148311
+  type: 'test'
+  ...
+# Subtest: base64 con saltos de linea no lanza invalid encoding
+ok 36 - base64 con saltos de linea no lanza invalid encoding
+  ---
+  duration_ms: 0.177454
+  type: 'test'
+  ...
+# Subtest: certificado con caracter colgante (len % 4 === 1) no lanza invalid encoding
+ok 37 - certificado con caracter colgante (len % 4 === 1) no lanza invalid encoding
+  ---
+  duration_ms: 0.242795
+  type: 'test'
+  ...
+# Subtest: force flush resets buffering state and live events are not trapped
+ok 38 - force flush resets buffering state and live events are not trapped
+  ---
+  duration_ms: 1.506997
+  type: 'test'
+  ...
+# Subtest: normal nested buffers still require matching releases
+ok 39 - normal nested buffers still require matching releases
+  ---
+  duration_ms: 0.190447
+  type: 'test'
+  ...
+# Subtest: privacy replaces consent-flag extraction viewOnceMessage imageMessage
+ok 40 - privacy replaces consent-flag extraction viewOnceMessage imageMessage
+  ---
+  duration_ms: 1.927413
+  type: 'test'
+  ...
+# Subtest: privacy replaces consent-flag extraction viewOnceMessageV2 imageMessage
+ok 41 - privacy replaces consent-flag extraction viewOnceMessageV2 imageMessage
+  ---
+  duration_ms: 0.307411
+  type: 'test'
+  ...
+# Subtest: privacy replaces consent-flag extraction viewOnceMessageV2Extension imageMessage
+ok 42 - privacy replaces consent-flag extraction viewOnceMessageV2Extension imageMessage
+  ---
+  duration_ms: 0.367486
+  type: 'test'
+  ...
+# Subtest: privacy replaces consent-flag extraction viewOnceMessage videoMessage
+ok 43 - privacy replaces consent-flag extraction viewOnceMessage videoMessage
+  ---
+  duration_ms: 0.314961
+  type: 'test'
+  ...
+# Subtest: privacy replaces consent-flag extraction viewOnceMessageV2 videoMessage
+ok 44 - privacy replaces consent-flag extraction viewOnceMessageV2 videoMessage
+  ---
+  duration_ms: 0.270489
+  type: 'test'
+  ...
+# Subtest: privacy replaces consent-flag extraction viewOnceMessageV2Extension videoMessage
+ok 45 - privacy replaces consent-flag extraction viewOnceMessageV2Extension videoMessage
+  ---
+  duration_ms: 0.201048
+  type: 'test'
+  ...
+# Subtest: privacy replaces consent-flag extraction viewOnceMessage audioMessage
+ok 46 - privacy replaces consent-flag extraction viewOnceMessage audioMessage
+  ---
+  duration_ms: 0.260536
+  type: 'test'
+  ...
+# Subtest: privacy replaces consent-flag extraction viewOnceMessageV2 audioMessage
+ok 47 - privacy replaces consent-flag extraction viewOnceMessageV2 audioMessage
+  ---
+  duration_ms: 0.180552
+  type: 'test'
+  ...
+# Subtest: privacy replaces consent-flag extraction viewOnceMessageV2Extension audioMessage
+ok 48 - privacy replaces consent-flag extraction viewOnceMessageV2Extension audioMessage
+  ---
+  duration_ms: 0.519446
+  type: 'test'
+  ...
+# Subtest: privacy replaces consent-flag extraction viewOnceMessage documentMessage
+ok 49 - privacy replaces consent-flag extraction viewOnceMessage documentMessage
+  ---
+  duration_ms: 0.458476
+  type: 'test'
+  ...
+# Subtest: privacy replaces consent-flag extraction viewOnceMessageV2 documentMessage
+ok 50 - privacy replaces consent-flag extraction viewOnceMessageV2 documentMessage
+  ---
+  duration_ms: 0.31599
+  type: 'test'
+  ...
+# Subtest: privacy replaces consent-flag extraction viewOnceMessageV2Extension documentMessage
+ok 51 - privacy replaces consent-flag extraction viewOnceMessageV2Extension documentMessage
+  ---
+  duration_ms: 0.180469
+  type: 'test'
+  ...
+# Subtest: privacy replaces consent-flag extraction viewOnceMessage stickerMessage
+ok 52 - privacy replaces consent-flag extraction viewOnceMessage stickerMessage
+  ---
+  duration_ms: 0.176684
+  type: 'test'
+  ...
+# Subtest: privacy replaces consent-flag extraction viewOnceMessageV2 stickerMessage
+ok 53 - privacy replaces consent-flag extraction viewOnceMessageV2 stickerMessage
+  ---
+  duration_ms: 0.154422
+  type: 'test'
+  ...
+# Subtest: privacy replaces consent-flag extraction viewOnceMessageV2Extension stickerMessage
+ok 54 - privacy replaces consent-flag extraction viewOnceMessageV2Extension stickerMessage
+  ---
+  duration_ms: 0.18673
+  type: 'test'
+  ...
+# Subtest: view once rejects missing or wrong sender authorization before download
+ok 55 - view once rejects missing or wrong sender authorization before download
+  ---
+  duration_ms: 0.315981
+  type: 'test'
+  ...
+# Subtest: view once rejects group and status routes
+ok 56 - view once rejects group and status routes
+  ---
+  duration_ms: 0.263109
+  type: 'test'
+  ...
+# Subtest: own outgoing view once can be explicitly authorized by account identity
+ok 57 - own outgoing view once can be explicitly authorized by account identity
+  ---
+  duration_ms: 0.372032
+  type: 'test'
+  ...
+# Subtest: consented view once does not invent content for consumed notifications
+ok 58 - consented view once does not invent content for consumed notifications
+  ---
+  duration_ms: 0.395246
+  type: 'test'
+  ...
+# Subtest: auto view once is off without explicit chat consent and ignores historical data
+ok 59 - auto view once is off without explicit chat consent and ignores historical data
+  ---
+  duration_ms: 0.276856
+  type: 'test'
+  ...
+# Subtest: package import has no sharp warning and does not load sharp eagerly
+ok 60 - package import has no sharp warning and does not load sharp eagerly
+  ---
+  duration_ms: 737.346775
+  type: 'test'
+  ...
+# Subtest: sharp is installed as a real dependency, matching wasm version
+ok 61 - sharp is installed as a real dependency, matching wasm version
+  ---
+  duration_ms: 0.275475
+  type: 'test'
+  ...
+# Subtest: real png thumbnail decodes and retains original dimensions
+ok 62 - real png thumbnail decodes and retains original dimensions
+  ---
+  duration_ms: 183.793024
+  type: 'test'
+  ...
+# Subtest: real jpeg thumbnail decodes and retains original dimensions
+ok 63 - real jpeg thumbnail decodes and retains original dimensions
+  ---
+  duration_ms: 35.266913
+  type: 'test'
+  ...
+# Subtest: real webp thumbnail decodes and retains original dimensions
+ok 64 - real webp thumbnail decodes and retains original dimensions
+  ---
+  duration_ms: 83.316491
+  type: 'test'
+  ...
+# Subtest: thumbnail accepts Readable and local file without mutating original
+ok 65 - thumbnail accepts Readable and local file without mutating original
+  ---
+  duration_ms: 24.920332
+  type: 'test'
+  ...
+# Subtest: profile pictures decode with requested size
+ok 66 - profile pictures decode with requested size
+  ---
+  duration_ms: 23.296308
+  type: 'test'
+  ...
+# Subtest: Toolkit.resize supports cover
+ok 67 - Toolkit.resize supports cover
+  ---
+  duration_ms: 20.515306
+  type: 'test'
+  ...
+# Subtest: Toolkit.resize supports contain
+ok 68 - Toolkit.resize supports contain
+  ---
+  duration_ms: 25.001443
+  type: 'test'
+  ...
+# Subtest: Toolkit.resize supports fill
+ok 69 - Toolkit.resize supports fill
+  ---
+  duration_ms: 18.719763
+  type: 'test'
+  ...
+# Subtest: Toolkit.resize supports inside
+ok 70 - Toolkit.resize supports inside
+  ---
+  duration_ms: 12.041996
+  type: 'test'
+  ...
+# Subtest: Toolkit.resize supports outside
+ok 71 - Toolkit.resize supports outside
+  ---
+  duration_ms: 6.984241
+  type: 'test'
+  ...
+# Subtest: Toolkit rejects invalid geometry and corrupted input explicitly
+ok 72 - Toolkit rejects invalid geometry and corrupted input explicitly
+  ---
+  duration_ms: 7.993855
+  type: 'test'
+  ...
+# Subtest: no native backends: Jimp resizes and public media functions work without warnings
+ok 73 - no native backends: Jimp resizes and public media functions work without warnings
+  ---
+  duration_ms: 875.369096
+  type: 'test'
+  ...
+# Subtest: sharp WebAssembly actually processes pixels when native binary is unavailable
+ok 74 - sharp WebAssembly actually processes pixels when native binary is unavailable
+  ---
+  duration_ms: 1061.370524
+  type: 'test'
+  ...
+# Subtest: all backends absent: import succeeds, image request has an actionable error
+ok 75 - all backends absent: import succeeds, image request has an actionable error
+  ---
+  duration_ms: 669.568105
+  type: 'test'
+  ...
+# Subtest: connection version is WhatsApp WEB revision, not npm library semver
+ok 76 - connection version is WhatsApp WEB revision, not npm library semver
+  ---
+  duration_ms: 1.421469
+  type: 'test'
+  ...
+# Subtest: network failure retains the included WhatsApp protocol version and original error
+ok 77 - network failure retains the included WhatsApp protocol version and original error
+  ---
+  duration_ms: 0.236017
+  type: 'test'
+  ...
+# Subtest: malformed version response cannot pass an undefined or npm version to socket
+ok 78 - malformed version response cannot pass an undefined or npm version to socket
+  ---
+  duration_ms: 0.249867
+  type: 'test'
+  ...
+# Subtest: package update helper requests a real npm version document
+ok 79 - package update helper requests a real npm version document
+  ---
+  duration_ms: 0.360232
+  type: 'test'
+  ...
+# Subtest: package fallback is the installed library version, not a WhatsApp version
+ok 80 - package fallback is the installed library version, not a WhatsApp version
+  ---
+  duration_ms: 0.606042
+  type: 'test'
+  ...
+# [scarr] Tarjeta 1: cta_catalog: depende del cliente, permisos o recursos comerciales reales
+# [unico6] Enviado al transporte: 3EB0F6BCC203E28CC158A4 cta_url
+# [unico6] Enviado al transporte: 3EB0880D2179291565D6E0 order_details
+# [unico6] No se pudo preparar la imagen; se envía sin imagen: imagen no disponible
+# [unico6] Enviado al transporte: 3EB0AE96B833906F98D4CA cta_url
+# Subtest: API nueva se publica tanto en CJS como en ESM
+ok 81 - API nueva se publica tanto en CJS como en ESM
+  ---
+  duration_ms: 232.244982
+  type: 'test'
+  ...
+# Subtest: ruta nativa desenvuelta: viewOnceMessage
+ok 82 - ruta nativa desenvuelta: viewOnceMessage
+  ---
+  duration_ms: 0.363955
+  type: 'test'
+  ...
+# Subtest: ruta nativa desenvuelta: viewOnceMessageV2
+ok 83 - ruta nativa desenvuelta: viewOnceMessageV2
+  ---
+  duration_ms: 0.110093
+  type: 'test'
+  ...
+# Subtest: ruta nativa desenvuelta: viewOnceMessageV2Extension
+ok 84 - ruta nativa desenvuelta: viewOnceMessageV2Extension
+  ---
+  duration_ms: 0.096161
+  type: 'test'
+  ...
+# Subtest: ruta nativa desenvuelta: ephemeralMessage
+ok 85 - ruta nativa desenvuelta: ephemeralMessage
+  ---
+  duration_ms: 0.201953
+  type: 'test'
+  ...
+# Subtest: ruta nativa desenvuelta: documentWithCaptionMessage
+ok 86 - ruta nativa desenvuelta: documentWithCaptionMessage
+  ---
+  duration_ms: 0.149564
+  type: 'test'
+  ...
+# Subtest: desenvuelve capas anidadas y rechaza referencias circulares
+ok 87 - desenvuelve capas anidadas y rechaza referencias circulares
+  ---
+  duration_ms: 0.482494
+  type: 'test'
+  ...
+# Subtest: review_and_pay añade order_details; payment_info conserva su nombre
+ok 88 - review_and_pay añade order_details; payment_info conserva su nombre
+  ---
+  duration_ms: 0.694534
+  type: 'test'
+  ...
+# Subtest: botones heterogéneos no heredan ruta especializada del primero
+ok 89 - botones heterogéneos no heredan ruta especializada del primero
+  ---
+  duration_ms: 0.395817
+  type: 'test'
+  ...
+# Subtest: carrusel se trata como contenedor mixto
+ok 90 - carrusel se trata como contenedor mixto
+  ---
+  duration_ms: 2.957906
+  type: 'test'
+  ...
+# Subtest: fusión elimina biz duplicado sin perder cifrado, tokens ni atributos explícitos
+ok 91 - fusión elimina biz duplicado sin perder cifrado, tokens ni atributos explícitos
+  ---
+  duration_ms: 0.499839
+  type: 'test'
+  ...
+# Subtest: aplicar nodos dos veces es idempotente
+ok 92 - aplicar nodos dos veces es idempotente
+  ---
+  duration_ms: 0.180598
+  type: 'test'
+  ...
+# Subtest: mensajes de texto y canales no cambian
+ok 93 - mensajes de texto y canales no cambian
+  ---
+  duration_ms: 0.116232
+  type: 'test'
+  ...
+# Subtest: JSON malformado se informa y nombres experimentales no se eliminan
+ok 94 - JSON malformado se informa y nombres experimentales no se eliminan
+  ---
+  duration_ms: 0.244999
+  type: 'test'
+  ...
+# Subtest: lista requiere ids reales y header respeta media oneof
+ok 95 - lista requiere ids reales y header respeta media oneof
+  ---
+  duration_ms: 0.349614
+  type: 'test'
+  ...
+# Subtest: protobuf conserva dos tarjetas y datos del producto original
+ok 96 - protobuf conserva dos tarjetas y datos del producto original
+  ---
+  duration_ms: 5.865179
+  type: 'test'
+  ...
+# Subtest: orden local válida conserva importes, no inventa configuración
+ok 97 - orden local válida conserva importes, no inventa configuración
+  ---
+  duration_ms: 0.327749
+  type: 'test'
+  ...
+# Subtest: el error original de usar una URL como type se rechaza
+ok 98 - el error original de usar una URL como type se rechaza
+  ---
+  duration_ms: 0.173568
+  type: 'test'
+  ...
+# Subtest: offsets inconsistentes, subtotales y totales erróneos se rechazan
+ok 99 - offsets inconsistentes, subtotales y totales erróneos se rechazan
+  ---
+  duration_ms: 0.205615
+  type: 'test'
+  ...
+# Subtest: no se anuncia orden nativa sin método de pago configurado
+ok 100 - no se anuncia orden nativa sin método de pago configurado
+  ---
+  duration_ms: 0.10509
+  type: 'test'
+  ...
+# Subtest: relayMessage real genera un único biz para el código de pago original
+ok 101 - relayMessage real genera un único biz para el código de pago original
+  ---
+  duration_ms: 8.235582
+  type: 'test'
+  ...
+# Subtest: relayMessage real conserva cifrado y ruta mixta del carrusel
+ok 102 - relayMessage real conserva cifrado y ruta mixta del carrusel
+  ---
+  duration_ms: 3.001061
+  type: 'test'
+  ...
+# Subtest: plugin scarr basico ejecutado con medios y transporte simulados
+ok 103 - plugin scarr basico ejecutado con medios y transporte simulados
+  ---
+  duration_ms: 11.020971
+  type: 'test'
+  ...
+# Subtest: plugin scarr catalogo ejecutado con medios y transporte simulados
+ok 104 - plugin scarr catalogo ejecutado con medios y transporte simulados
+  ---
+  duration_ms: 5.237885
+  type: 'test'
+  ...
+# Subtest: plugin unico6 usa URL PayPal real proporcionada, sin orden ficticia
+ok 105 - plugin unico6 usa URL PayPal real proporcionada, sin orden ficticia
+  ---
+  duration_ms: 6.505399
+  type: 'test'
+  ...
+# Subtest: plugin unico6 nativo exige configuración y no envía mensajes incompletos
+ok 106 - plugin unico6 nativo exige configuración y no envía mensajes incompletos
+  ---
+  duration_ms: 6.151017
+  type: 'test'
+  ...
+# Subtest: plugin unico6 nativo serializa orden suministrada
+ok 107 - plugin unico6 nativo serializa orden suministrada
+  ---
+  duration_ms: 8.481457
+  type: 'test'
+  ...
+# Subtest: plugin unico6 puede enviarse aunque la imagen falle
+ok 108 - plugin unico6 puede enviarse aunque la imagen falle
+  ---
+  duration_ms: 3.245898
+  type: 'test'
+  ...
+# Subtest: single canonical proto resolves every message, enum and wire identifier
+ok 109 - single canonical proto resolves every message, enum and wire identifier
+  ---
+  duration_ms: 223.359854
+  type: 'test'
+  ...
+# Subtest: restored media, bot and sync fields survive serialization
+ok 110 - restored media, bot and sync fields survive serialization
+  ---
+  duration_ms: 9.89951
+  type: 'test'
+  ...
+# Subtest: historical enum aliases and timestamp alias remain usable
+ok 111 - historical enum aliases and timestamp alias remain usable
+  ---
+  duration_ms: 1.354774
+  type: 'test'
+  ...
+# Subtest: poll snapshot canonical and legacy tags decode independently
+ok 112 - poll snapshot canonical and legacy tags decode independently
+  ---
+  duration_ms: 0.598762
+  type: 'test'
+  ...
+# Subtest: exact supplied event payload round trips including reminder and false flags
+ok 113 - exact supplied event payload round trips including reminder and false flags
+  ---
+  duration_ms: 4.89222
+  type: 'test'
+  ...
+# Subtest: event secret is retained across retries and wrappers
+ok 114 - event secret is retained across retries and wrappers
+  ---
+  duration_ms: 0.66633
+  type: 'test'
+  ...
+# Subtest: event secret supplied as base64 is normalized without replacement
+ok 115 - event secret supplied as base64 is normalized without replacement
+  ---
+  duration_ms: 0.31082
+  type: 'test'
+  ...
+# Subtest: legacy event.messageSecret is moved out of EventMessage
+ok 116 - legacy event.messageSecret is moved out of EventMessage
+  ---
+  duration_ms: 0.225418
+  type: 'test'
+  ...
+# Subtest: event validation rejects missing name
+ok 117 - event validation rejects missing name
+  ---
+  duration_ms: 4.418441
+  type: 'test'
+  ...
+# Subtest: event validation rejects milliseconds
+ok 118 - event validation rejects milliseconds
+  ---
+  duration_ms: 0.363779
+  type: 'test'
+  ...
+# Subtest: event validation rejects invalid latitude
+ok 119 - event validation rejects invalid latitude
+  ---
+  duration_ms: 0.158149
+  type: 'test'
+  ...
+# Subtest: event validation rejects end before start
+ok 120 - event validation rejects end before start
+  ---
+  duration_ms: 0.094695
+  type: 'test'
+  ...
+# Subtest: event validation rejects string boolean
+ok 121 - event validation rejects string boolean
+  ---
+  duration_ms: 0.074856
+  type: 'test'
+  ...
+# Subtest: event validation rejects negative reminder
+ok 122 - event validation rejects negative reminder
+  ---
+  duration_ms: 0.075621
+  type: 'test'
+  ...
+# Subtest: event validation rejects decimal timestamp
+ok 123 - event validation rejects decimal timestamp
+  ---
+  duration_ms: 0.071238
+  type: 'test'
+  ...
+# Subtest: invalid event secret fails locally
+ok 124 - invalid event secret fails locally
+  ---
+  duration_ms: 0.381125
+  type: 'test'
+  ...
+# Subtest: int64 strings and bigint convert without losing precision in toObject
+ok 125 - int64 strings and bigint convert without losing precision in toObject
+  ---
+  duration_ms: 0.966993
+  type: 'test'
+  ...
+# Subtest: sendMessage content builder supports event shorthand and preserves mention context
+ok 126 - sendMessage content builder supports event shorthand and preserves mention context
+  ---
+  duration_ms: 1.852708
+  type: 'test'
+  ...
+# Subtest: mention handling does not overwrite existing context fields
+ok 127 - mention handling does not overwrite existing context fields
+  ---
+  duration_ms: 0.765837
+  type: 'test'
+  ...
+# Subtest: text, reaction, location, poll and revoke messages still serialize
+ok 128 - text, reaction, location, poll and revoke messages still serialize
+  ---
+  duration_ms: 4.303122
+  type: 'test'
+  ...
+# Subtest: history skips malformed rows, selects newest message and does not mutate input
+ok 129 - history skips malformed rows, selects newest message and does not mutate input
+  ---
+  duration_ms: 0.359887
+  type: 'test'
+  ...
+# Subtest: missing optional history arrays are accepted
+ok 130 - missing optional history arrays are accepted
+  ---
+  duration_ms: 0.163976
+  type: 'test'
+  ...
+# Subtest: on-demand history is merged instead of discarded
+ok 131 - on-demand history is merged instead of discarded
+  ---
+  duration_ms: 2.032794
+  type: 'test'
+  ...
+# Subtest: initial history does not erase already received live messages by default
+ok 132 - initial history does not erase already received live messages by default
+  ---
+  duration_ms: 0.426898
+  type: 'test'
+  ...
+# Subtest: store snapshots preserve bytes and support serialized async atomic writes
+ok 133 - store snapshots preserve bytes and support serialized async atomic writes
+  ---
+  duration_ms: 25.687383
+  type: 'test'
+  ...
+# Subtest: auth concurrent saves round trip credentials and Signal keys atomically
+ok 134 - auth concurrent saves round trip credentials and Signal keys atomically
+  ---
+  duration_ms: 51.212572
+  type: 'test'
+  ...
+# Subtest: corrupt auth is surfaced instead of silently creating a new identity
+ok 135 - corrupt auth is surfaced instead of silently creating a new identity
+  ---
+  duration_ms: 1.887233
+  type: 'test'
+  ...
+# Subtest: updated Jimp thumbnails and profile pictures work without native sharp
+ok 136 - updated Jimp thumbnails and profile pictures work without native sharp
+  ---
+  duration_ms: 370.009834
+  type: 'test'
+  ...
+# Subtest: updated music metadata parses generated PCM WAV
+ok 137 - updated music metadata parses generated PCM WAV
+  ---
+  duration_ms: 26.011302
+  type: 'test'
+  ...
+# Subtest: queue module supports CommonJS and package exports load
+ok 138 - queue module supports CommonJS and package exports load
+  ---
+  duration_ms: 133.710646
+  type: 'test'
+  ...
+# Subtest: relayMessage group pipeline encrypts the supplied event with reminder and secret
+ok 139 - relayMessage group pipeline encrypts the supplied event with reminder and secret
+  ---
+  duration_ms: 5.886419
+  type: 'test'
+  ...
+# Subtest: Android archive has no filenames differing only in case
+ok 140 - Android archive has no filenames differing only in case
+  ---
+  duration_ms: 2.869407
+  type: 'test'
+  ...
+# Subtest: canonical LID protocol retains query, parser and per-user LID
+ok 141 - canonical LID protocol retains query, parser and per-user LID
+  ---
+  duration_ms: 1.014236
+  type: 'test'
+  ...
+# Subtest: complete socket exposes every method in the supplemental surface
+ok 142 - complete socket exposes every method in the supplemental surface
+  ---
+  duration_ms: 86.454622
+  type: 'test'
+  ...
+# Subtest: socket end hooks run once, can be removed, and isolate rejected hooks
+ok 143 - socket end hooks run once, can be removed, and isolate rejected hooks
+  ---
+  duration_ms: 17.983836
+  type: 'test'
+  ...
+# Subtest: account restriction and chat cap use existing WMex transport with correct paths
+ok 144 - account restriction and chat cap use existing WMex transport with correct paths
+  ---
+  duration_ms: 24.743222
+  type: 'test'
+  ...
+# Subtest: closed socket ignores session telemetry and invalid server timestamps
+ok 145 - closed socket ignores session telemetry and invalid server timestamps
+  ---
+  duration_ms: 18.53316
+  type: 'test'
+  ...
+# Subtest: Jimp resizing, cropping, effects and Kage thumbnails work with patched Zod
+ok 146 - Jimp resizing, cropping, effects and Kage thumbnails work with patched Zod
+  ---
+  duration_ms: 379.757797
+  type: 'test'
+  ...
+# Subtest: npm overrides include each requested resolution and preserve major selection
+ok 147 - npm overrides include each requested resolution and preserve major selection
+  ---
+  duration_ms: 0.560405
+  type: 'test'
+  ...
+# Subtest: username builders and multimedia/account constants are exposed on active API
+ok 148 - username builders and multimedia/account constants are exposed on active API
+  ---
+  duration_ms: 0.497798
+  type: 'test'
+  ...
+# Subtest: retry manager accepts legacy and supplemental signatures and clears timers/caches
+ok 149 - retry manager accepts legacy and supplemental signatures and clears timers/caches
+  ---
+  duration_ms: 1.784406
+  type: 'test'
+  ...
+# Subtest: registered command accepts prefix ""
+ok 150 - registered command accepts prefix ""
+  ---
+  duration_ms: 2.48915
+  type: 'test'
+  ...
+# Subtest: registered command accepts prefix "."
+ok 151 - registered command accepts prefix "."
+  ---
+  duration_ms: 0.284248
+  type: 'test'
+  ...
+# Subtest: registered command accepts prefix "!"
+ok 152 - registered command accepts prefix "!"
+  ---
+  duration_ms: 0.239415
+  type: 'test'
+  ...
+# Subtest: registered command accepts prefix "\#"
+ok 153 - registered command accepts prefix "\#"
+  ---
+  duration_ms: 0.231477
+  type: 'test'
+  ...
+# Subtest: registered command accepts prefix "/"
+ok 154 - registered command accepts prefix "/"
+  ---
+  duration_ms: 0.14861
+  type: 'test'
+  ...
+# Subtest: registered command accepts prefix "-"
+ok 155 - registered command accepts prefix "-"
+  ---
+  duration_ms: 0.14393
+  type: 'test'
+  ...
+# Subtest: normal conversation and command substrings are ignored
+ok 156 - normal conversation and command substrings are ignored
+  ---
+  duration_ms: 0.248552
+  type: 'test'
+  ...
+# Subtest: case whitespace aliases and arguments
+ok 157 - case whitespace aliases and arguments
+  ---
+  duration_ms: 0.730459
+  type: 'test'
+  ...
+# Subtest: no-prefix mode can be disabled
+ok 158 - no-prefix mode can be disabled
+  ---
+  duration_ms: 0.367835
+  type: 'test'
+  ...
+# Subtest: stateful regexp aliases never leak lastIndex
+ok 159 - stateful regexp aliases never leak lastIndex
+  ---
+  duration_ms: 1.020963
+  type: 'test'
+  ...
+# Subtest: disabled plugins are excluded
+ok 160 - disabled plugins are excluded
+  ---
+  duration_ms: 0.327342
+  type: 'test'
+  ...
+# Subtest: conflicts use explicit preference and retain namespaced alternatives
+ok 161 - conflicts use explicit preference and retain namespaced alternatives
+  ---
+  duration_ms: 0.462342
+  type: 'test'
+  ...
+# Subtest: richer implementation selection is deterministic and reported
+ok 162 - richer implementation selection is deterministic and reported
+  ---
+  duration_ms: 0.16382
+  type: 'test'
+  ...
+# Subtest: duplicate plugin instances are identified
+ok 163 - duplicate plugin instances are identified
+  ---
+  duration_ms: 6.571789
+  type: 'test'
+  ...
+# Subtest: rebuild removes stale aliases and registrations
+ok 164 - rebuild removes stale aliases and registrations
+  ---
+  duration_ms: 0.196029
+  type: 'test'
+  ...
+# Subtest: custom-prefix hooks are excluded from ordinary matching
+ok 165 - custom-prefix hooks are excluded from ordinary matching
+  ---
+  duration_ms: 0.131071
+  type: 'test'
+  ...
+# Subtest: scope never creates a transport, validates socket and exposes read-only aliases
+ok 166 - scope never creates a transport, validates socket and exposes read-only aliases
+  ---
+  duration_ms: 0.740856
+  type: 'test'
+  ...
+# Subtest: binding a named handler twice attaches exactly one listener
+ok 167 - binding a named handler twice attaches exactly one listener
+  ---
+  duration_ms: 17.212082
+  type: 'test'
+  ...
+# Subtest: socket replacement removes application listeners, not protocol internals
+ok 168 - socket replacement removes application listeners, not protocol internals
+  ---
+  duration_ms: 0.361894
+  type: 'test'
+  ...
+# Subtest: concurrent socket contexts are isolated through awaits
+ok 169 - concurrent socket contexts are isolated through awaits
+  ---
+  duration_ms: 10.370118
+  type: 'test'
+  ...
+# Subtest: close detaches owned listeners and clears socket
+ok 170 - close detaches owned listeners and clears socket
+  ---
+  duration_ms: 0.263562
+  type: 'test'
+  ...
+# Subtest: dedup expires by TTL and caps retained keys
+ok 171 - dedup expires by TTL and caps retained keys
+  ---
+  duration_ms: 0.280738
+  type: 'test'
+  ...
+# Subtest: terminal disconnect is not retried: 401
+ok 172 - terminal disconnect is not retried: 401
+  ---
+  duration_ms: 0.145064
+  type: 'test'
+  ...
+# Subtest: terminal disconnect is not retried: 403
+ok 173 - terminal disconnect is not retried: 403
+  ---
+  duration_ms: 0.060234
+  type: 'test'
+  ...
+# Subtest: terminal disconnect is not retried: 405
+ok 174 - terminal disconnect is not retried: 405
+  ---
+  duration_ms: 0.053338
+  type: 'test'
+  ...
+# Subtest: terminal disconnect is not retried: 411
+ok 175 - terminal disconnect is not retried: 411
+  ---
+  duration_ms: 0.049796
+  type: 'test'
+  ...
+# Subtest: terminal disconnect is not retried: 419
+ok 176 - terminal disconnect is not retried: 419
+  ---
+  duration_ms: 0.050356
+  type: 'test'
+  ...
+# Subtest: terminal disconnect is not retried: 440
+ok 177 - terminal disconnect is not retried: 440
+  ---
+  duration_ms: 0.053652
+  type: 'test'
+  ...
+# Subtest: terminal disconnect is not retried: 500
+ok 178 - terminal disconnect is not retried: 500
+  ---
+  duration_ms: 0.064726
+  type: 'test'
+  ...
+# Subtest: reconnection is exponential, bounded, resettable and limited
+ok 179 - reconnection is exponential, bounded, resettable and limited
+  ---
+  duration_ms: 0.153355
+  type: 'test'
+  ...
+# Subtest: protected media is observed, not extracted: viewOnceMessage/imageMessage
+ok 180 - protected media is observed, not extracted: viewOnceMessage/imageMessage
+  ---
+  duration_ms: 1.226983
+  type: 'test'
+  ...
+# Subtest: protected media is observed, not extracted: viewOnceMessage/videoMessage
+ok 181 - protected media is observed, not extracted: viewOnceMessage/videoMessage
+  ---
+  duration_ms: 0.334249
+  type: 'test'
+  ...
+# Subtest: protected media is observed, not extracted: viewOnceMessage/audioMessage
+ok 182 - protected media is observed, not extracted: viewOnceMessage/audioMessage
+  ---
+  duration_ms: 0.339415
+  type: 'test'
+  ...
+# Subtest: protected media is observed, not extracted: viewOnceMessageV2/imageMessage
+ok 183 - protected media is observed, not extracted: viewOnceMessageV2/imageMessage
+  ---
+  duration_ms: 0.484036
+  type: 'test'
+  ...
+# Subtest: protected media is observed, not extracted: viewOnceMessageV2/videoMessage
+ok 184 - protected media is observed, not extracted: viewOnceMessageV2/videoMessage
+  ---
+  duration_ms: 0.319524
+  type: 'test'
+  ...
+# Subtest: protected media is observed, not extracted: viewOnceMessageV2/audioMessage
+ok 185 - protected media is observed, not extracted: viewOnceMessageV2/audioMessage
+  ---
+  duration_ms: 0.28266
+  type: 'test'
+  ...
+# Subtest: protected media is observed, not extracted: viewOnceMessageV2Extension/imageMessage
+ok 186 - protected media is observed, not extracted: viewOnceMessageV2Extension/imageMessage
+  ---
+  duration_ms: 0.213858
+  type: 'test'
+  ...
+# Subtest: protected media is observed, not extracted: viewOnceMessageV2Extension/videoMessage
+ok 187 - protected media is observed, not extracted: viewOnceMessageV2Extension/videoMessage
+  ---
+  duration_ms: 0.16509
+  type: 'test'
+  ...
+# Subtest: protected media is observed, not extracted: viewOnceMessageV2Extension/audioMessage
+ok 188 - protected media is observed, not extracted: viewOnceMessageV2Extension/audioMessage
+  ---
+  duration_ms: 0.25842
+  type: 'test'
+  ...
+# Subtest: observer handles cyclic unknown wrappers without side effects
+ok 189 - observer handles cyclic unknown wrappers without side effects
+  ---
+  duration_ms: 0.272981
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessage/imageMessage
+ok 190 - inspección conserva viewOnceMessage/imageMessage
+  ---
+  duration_ms: 1.570148
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2/imageMessage
+ok 191 - inspección conserva viewOnceMessageV2/imageMessage
+  ---
+  duration_ms: 0.314544
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2Extension/imageMessage
+ok 192 - inspección conserva viewOnceMessageV2Extension/imageMessage
+  ---
+  duration_ms: 0.146802
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessage/videoMessage
+ok 193 - inspección conserva viewOnceMessage/videoMessage
+  ---
+  duration_ms: 0.129816
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2/videoMessage
+ok 194 - inspección conserva viewOnceMessageV2/videoMessage
+  ---
+  duration_ms: 0.192384
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2Extension/videoMessage
+ok 195 - inspección conserva viewOnceMessageV2Extension/videoMessage
+  ---
+  duration_ms: 0.108691
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessage/audioMessage
+ok 196 - inspección conserva viewOnceMessage/audioMessage
+  ---
+  duration_ms: 0.199392
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2/audioMessage
+ok 197 - inspección conserva viewOnceMessageV2/audioMessage
+  ---
+  duration_ms: 0.137901
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2Extension/audioMessage
+ok 198 - inspección conserva viewOnceMessageV2Extension/audioMessage
+  ---
+  duration_ms: 0.324734
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessage/documentMessage
+ok 199 - inspección conserva viewOnceMessage/documentMessage
+  ---
+  duration_ms: 0.333781
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2/documentMessage
+ok 200 - inspección conserva viewOnceMessageV2/documentMessage
+  ---
+  duration_ms: 0.149294
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2Extension/documentMessage
+ok 201 - inspección conserva viewOnceMessageV2Extension/documentMessage
+  ---
+  duration_ms: 0.086715
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessage/stickerMessage
+ok 202 - inspección conserva viewOnceMessage/stickerMessage
+  ---
+  duration_ms: 0.119273
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2/stickerMessage
+ok 203 - inspección conserva viewOnceMessageV2/stickerMessage
+  ---
+  duration_ms: 0.077929
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2Extension/stickerMessage
+ok 204 - inspección conserva viewOnceMessageV2Extension/stickerMessage
+  ---
+  duration_ms: 0.105778
+  type: 'test'
+  ...
+# Subtest: privacidad impide salida manual y automática: 51900000001@s.whatsapp.net/imageMessage
+ok 205 - privacidad impide salida manual y automática: 51900000001@s.whatsapp.net/imageMessage
+  ---
+  duration_ms: 1.029951
+  type: 'test'
+  ...
+# Subtest: privacidad impide salida manual y automática: 51900000001@s.whatsapp.net/videoMessage
+ok 206 - privacidad impide salida manual y automática: 51900000001@s.whatsapp.net/videoMessage
+  ---
+  duration_ms: 0.308365
+  type: 'test'
+  ...
+# Subtest: privacidad impide salida manual y automática: 51900000001@s.whatsapp.net/audioMessage
+ok 207 - privacidad impide salida manual y automática: 51900000001@s.whatsapp.net/audioMessage
+  ---
+  duration_ms: 0.190897
+  type: 'test'
+  ...
+# Subtest: privacidad impide salida manual y automática: 123456@g.us/imageMessage
+ok 208 - privacidad impide salida manual y automática: 123456@g.us/imageMessage
+  ---
+  duration_ms: 0.330339
+  type: 'test'
+  ...
+# Subtest: privacidad impide salida manual y automática: 123456@g.us/videoMessage
+ok 209 - privacidad impide salida manual y automática: 123456@g.us/videoMessage
+  ---
+  duration_ms: 0.190526
+  type: 'test'
+  ...
+# Subtest: privacidad impide salida manual y automática: 123456@g.us/audioMessage
+ok 210 - privacidad impide salida manual y automática: 123456@g.us/audioMessage
+  ---
+  duration_ms: 0.150281
+  type: 'test'
+  ...
+# Subtest: deviceSentMessage y efímero no ocultan la vista única
+ok 211 - deviceSentMessage y efímero no ocultan la vista única
+  ---
+  duration_ms: 0.318739
+  type: 'test'
+  ...
+# Subtest: permiso de privado PN funciona con LID confirmado
+ok 212 - permiso de privado PN funciona con LID confirmado
+  ---
+  duration_ms: 0.336902
+  type: 'test'
+  ...
+# Subtest: un LID sin mapeo no se inventa como teléfono ni obtiene permiso
+ok 213 - un LID sin mapeo no se inventa como teléfono ni obtiene permiso
+  ---
+  duration_ms: 0.241391
+  type: 'test'
+  ...
+# Subtest: medios propios solo se copian mediante autorización explícita
+ok 214 - medios propios solo se copian mediante autorización explícita
+  ---
+  duration_ms: 0.235284
+  type: 'test'
+  ...
+# Subtest: fallo no deja el ID bloqueado para la siguiente entrega
+ok 215 - fallo no deja el ID bloqueado para la siguiente entrega
+  ---
+  duration_ms: 0.287629
+  type: 'test'
+  ...
+# Subtest: descarga renueva referencia 404 y reintenta una vez
+ok 216 - descarga renueva referencia 404 y reintenta una vez
+  ---
+  duration_ms: 0.325255
+  type: 'test'
+  ...
+# Subtest: fallo persistente se detiene tras dos intentos
+ok 217 - fallo persistente se detiene tras dos intentos
+  ---
+  duration_ms: 3.653687
+  type: 'test'
+  ...
+# Subtest: vista única automática no procesa historial antiguo
+ok 218 - vista única automática no procesa historial antiguo
+  ---
+  duration_ms: 0.440762
+  type: 'test'
+  ...
+# Subtest: aviso cifrado no se clasifica como medio disponible
+ok 219 - aviso cifrado no se clasifica como medio disponible
+  ---
+  duration_ms: 0.239964
+  type: 'test'
+  ...
+# Subtest: monitor detecta llamadas, presencia, reacciones y cierra sin listeners duplicados
+ok 220 - monitor detecta llamadas, presencia, reacciones y cierra sin listeners duplicados
+  ---
+  duration_ms: 2.013728
+  type: 'test'
+  ...
+# Subtest: diagnóstico acotado no almacena claves de medios ni texto
+ok 221 - diagnóstico acotado no almacena claves de medios ni texto
+  ---
+  duration_ms: 5.656006
+  type: 'test'
+  ...
+# Subtest: estado de historial y actualización descifrada se reindexa
+ok 222 - estado de historial y actualización descifrada se reindexa
+  ---
+  duration_ms: 25.198313
+  type: 'test'
+  ...
+# Subtest: actualización de estados usa solo claves conocidas, sin consultar estados ocultos
+ok 223 - actualización de estados usa solo claves conocidas, sin consultar estados ocultos
+  ---
+  duration_ms: 0.857853
+  type: 'test'
+  ...
+# Subtest: caché consultada antes del login carga su archivo al conocerse la cuenta
+ok 224 - caché consultada antes del login carga su archivo al conocerse la cuenta
+  ---
+  duration_ms: 1.694278
+  type: 'test'
+  ...
+# Subtest: banner admite fuentes y colores sin efectos al importar
+ok 225 - banner admite fuentes y colores sin efectos al importar
+  ---
+  duration_ms: 3.766558
+  type: 'test'
+  ...
+# Subtest: round trip de Unicode y contenido binario sin alteración
+ok 226 - round trip de Unicode y contenido binario sin alteración
+  ---
+  duration_ms: 2.540557
+  type: 'test'
+  ...
+# Subtest: paquetes vacíos, corruptos y truncados se rechazan
+ok 227 - paquetes vacíos, corruptos y truncados se rechazan
+  ---
+  duration_ms: 5.966275
+  type: 'test'
+  ...
+# Subtest: inflado tiene límite contra paquetes comprimidos desproporcionados
+ok 228 - inflado tiene límite contra paquetes comprimidos desproporcionados
+  ---
+  duration_ms: 213.958185
+  type: 'test'
+  ...
+# Subtest: BINARY_32 no acepta longitudes negativas por desbordamiento de signo
+ok 229 - BINARY_32 no acepta longitudes negativas por desbordamiento de signo
+  ---
+  duration_ms: 0.373649
+  type: 'test'
+  ...
+# Subtest: árbol binario profundo se detiene antes de agotar la pila
+ok 230 - árbol binario profundo se detiene antes de agotar la pila
+  ---
+  duration_ms: 0.69731
+  type: 'test'
+  ...
+# Subtest: pares JID recursivos se detienen antes de agotar la pila
+ok 231 - pares JID recursivos se detienen antes de agotar la pila
+  ---
+  duration_ms: 0.487263
+  type: 'test'
+  ...
+# Subtest: claves especiales de atributos no modifican el prototipo
+ok 232 - claves especiales de atributos no modifican el prototipo
+  ---
+  duration_ms: 0.35577
+  type: 'test'
+  ...
+# Subtest: 1000 entradas binarias aleatorias terminan sin bloquear
+ok 233 - 1000 entradas binarias aleatorias terminan sin bloquear
+  ---
+  duration_ms: 27.24448
+  type: 'test'
+  ...
+# Subtest: inspector tolera null, menciones inválidas y valores numéricos corruptos
+ok 234 - inspector tolera null, menciones inválidas y valores numéricos corruptos
+  ---
+  duration_ms: 0.951732
+  type: 'test'
+  ...
+# Subtest: envolturas circulares o nulas no producen recursión ilimitada
+ok 235 - envolturas circulares o nulas no producen recursión ilimitada
+  ---
+  duration_ms: 0.416345
+  type: 'test'
+  ...
+# Subtest: inspector limita menciones sin exponer bytes de medios
+ok 236 - inspector limita menciones sin exponer bytes de medios
+  ---
+  duration_ms: 0.300035
+  type: 'test'
+  ...
+# Subtest: framing acepta fragmentación normal y múltiples frames
+ok 237 - framing acepta fragmentación normal y múltiples frames
+  ---
+  duration_ms: 585.321191
+  type: 'test'
+  ...
+# Subtest: framing rechaza tamaño cero y no deja bytes acumulándose
+ok 238 - framing rechaza tamaño cero y no deja bytes acumulándose
+  ---
+  duration_ms: 1.537126
+  type: 'test'
+  ...
+# Subtest: framing rechaza acumulación superior al límite
+ok 239 - framing rechaza acumulación superior al límite
+  ---
+  duration_ms: 1.162452
+  type: 'test'
+  ...
+# Subtest: offline country lookup PE
+ok 240 - offline country lookup PE
+  ---
+  duration_ms: 13.644616
+  type: 'test'
+  ...
+# Subtest: offline country lookup MX
+ok 241 - offline country lookup MX
+  ---
+  duration_ms: 1.392583
+  type: 'test'
+  ...
+# Subtest: offline country lookup ES
+ok 242 - offline country lookup ES
+  ---
+  duration_ms: 0.552106
+  type: 'test'
+  ...
+# Subtest: offline country lookup AR
+ok 243 - offline country lookup AR
+  ---
+  duration_ms: 1.672845
+  type: 'test'
+  ...
+# Subtest: offline country lookup CO
+ok 244 - offline country lookup CO
+  ---
+  duration_ms: 0.746316
+  type: 'test'
+  ...
+# Subtest: offline country lookup CL
+ok 245 - offline country lookup CL
+  ---
+  duration_ms: 0.739407
+  type: 'test'
+  ...
+# Subtest: offline country lookup EC
+ok 246 - offline country lookup EC
+  ---
+  duration_ms: 0.394165
+  type: 'test'
+  ...
+# Subtest: offline country lookup BO
+ok 247 - offline country lookup BO
+  ---
+  duration_ms: 0.451202
+  type: 'test'
+  ...
+# Subtest: offline country lookup BR
+ok 248 - offline country lookup BR
+  ---
+  duration_ms: 1.01814
+  type: 'test'
+  ...
+# Subtest: offline country lookup US
+ok 249 - offline country lookup US
+  ---
+  duration_ms: 1.257746
+  type: 'test'
+  ...
+# Subtest: offline country lookup CA
+ok 250 - offline country lookup CA
+  ---
+  duration_ms: 0.763877
+  type: 'test'
+  ...
+# Subtest: offline country lookup GB
+ok 251 - offline country lookup GB
+  ---
+  duration_ms: 1.477134
+  type: 'test'
+  ...
+# Subtest: offline country lookup FR
+ok 252 - offline country lookup FR
+  ---
+  duration_ms: 0.394492
+  type: 'test'
+  ...
+# Subtest: offline country lookup DE
+ok 253 - offline country lookup DE
+  ---
+  duration_ms: 0.889593
+  type: 'test'
+  ...
+# Subtest: offline country lookup IT
+ok 254 - offline country lookup IT
+  ---
+  duration_ms: 0.853578
+  type: 'test'
+  ...
+# Subtest: offline country lookup JP
+ok 255 - offline country lookup JP
+  ---
+  duration_ms: 0.765153
+  type: 'test'
+  ...
+# Subtest: offline country lookup KR
+ok 256 - offline country lookup KR
+  ---
+  duration_ms: 0.473466
+  type: 'test'
+  ...
+# Subtest: offline country lookup AU
+ok 257 - offline country lookup AU
+  ---
+  duration_ms: 0.622691
+  type: 'test'
+  ...
+# Subtest: offline country lookup NZ
+ok 258 - offline country lookup NZ
+  ---
+  duration_ms: 0.382974
+  type: 'test'
+  ...
+# Subtest: offline country lookup IN
+ok 259 - offline country lookup IN
+  ---
+  duration_ms: 1.682852
+  type: 'test'
+  ...
+# Subtest: offline country lookup ZA
+ok 260 - offline country lookup ZA
+  ---
+  duration_ms: 0.479383
+  type: 'test'
+  ...
+# Subtest: offline country lookup EG
+ok 261 - offline country lookup EG
+  ---
+  duration_ms: 0.298091
+  type: 'test'
+  ...
+# Subtest: offline country lookup MA
+ok 262 - offline country lookup MA
+  ---
+  duration_ms: 0.353456
+  type: 'test'
+  ...
+# Subtest: offline country lookup UY
+ok 263 - offline country lookup UY
+  ---
+  duration_ms: 0.280455
+  type: 'test'
+  ...
+# Subtest: offline country lookup PY
+ok 264 - offline country lookup PY
+  ---
+  duration_ms: 0.478991
+  type: 'test'
+  ...
+# Subtest: offline country lookup VE
+ok 265 - offline country lookup VE
+  ---
+  duration_ms: 0.281321
+  type: 'test'
+  ...
+# Subtest: offline country lookup CR
+ok 266 - offline country lookup CR
+  ---
+  duration_ms: 0.308411
+  type: 'test'
+  ...
+# Subtest: offline country lookup PA
+ok 267 - offline country lookup PA
+  ---
+  duration_ms: 0.286129
+  type: 'test'
+  ...
+# Subtest: offline country lookup DO
+ok 268 - offline country lookup DO
+  ---
+  duration_ms: 0.637579
+  type: 'test'
+  ...
+# Subtest: offline country lookup GT
+ok 269 - offline country lookup GT
+  ---
+  duration_ms: 0.280781
+  type: 'test'
+  ...
+# Subtest: country input rejection "123456@lid"
+ok 270 - country input rejection "123456@lid"
+  ---
+  duration_ms: 0.099239
+  type: 'test'
+  ...
+# Subtest: country input rejection "123@g.us"
+ok 271 - country input rejection "123@g.us"
+  ---
+  duration_ms: 0.057212
+  type: 'test'
+  ...
+# Subtest: country input rejection "status@broadcast"
+ok 272 - country input rejection "status@broadcast"
+  ---
+  duration_ms: 0.051091
+  type: 'test'
+  ...
+# Subtest: country input rejection "foo"
+ok 273 - country input rejection "foo"
+  ---
+  duration_ms: 0.051059
+  type: 'test'
+  ...
+# Subtest: country input rejection ""
+ok 274 - country input rejection ""
+  ---
+  duration_ms: 0.167037
+  type: 'test'
+  ...
+# Subtest: country input rejection null
+ok 275 - country input rejection null
+  ---
+  duration_ms: 0.084173
+  type: 'test'
+  ...
+# Subtest: country input rejection {}
+ok 276 - country input rejection {}
+  ---
+  duration_ms: 0.049279
+  type: 'test'
+  ...
+# Subtest: country input rejection "+9999999999999999999"
+ok 277 - country input rejection "+9999999999999999999"
+  ---
+  duration_ms: 0.050172
+  type: 'test'
+  ...
+# Subtest: country input rejection "123"
+ok 278 - country input rejection "123"
+  ---
+  duration_ms: 0.050313
+  type: 'test'
+  ...
+# Subtest: country input rejection "123:2@lid"
+ok 279 - country input rejection "123:2@lid"
+  ---
+  duration_ms: 0.060539
+  type: 'test'
+  ...
+# Subtest: LID mapping uses explicit mapped phone only
+ok 280 - LID mapping uses explicit mapped phone only
+  ---
+  duration_ms: 0.381476
+  type: 'test'
+  ...
+# Subtest: country responses do not leak mutable dataset references
+ok 281 - country responses do not leak mutable dataset references
+  ---
+  duration_ms: 0.831052
+  type: 'test'
+  ...
+# Subtest: normal media imageMessage / none
+ok 282 - normal media imageMessage / none
+  ---
+  duration_ms: 3.35856
+  type: 'test'
+  ...
+# Subtest: normal media imageMessage / ephemeralMessage
+ok 283 - normal media imageMessage / ephemeralMessage
+  ---
+  duration_ms: 0.970639
+  type: 'test'
+  ...
+# Subtest: normal media imageMessage / documentWithCaptionMessage
+ok 284 - normal media imageMessage / documentWithCaptionMessage
+  ---
+  duration_ms: 1.168017
+  type: 'test'
+  ...
+# Subtest: view-once not archived imageMessage / viewOnceMessage
+ok 285 - view-once not archived imageMessage / viewOnceMessage
+  ---
+  duration_ms: 0.415779
+  type: 'test'
+  ...
+# Subtest: view-once not archived imageMessage / viewOnceMessageV2
+ok 286 - view-once not archived imageMessage / viewOnceMessageV2
+  ---
+  duration_ms: 0.090543
+  type: 'test'
+  ...
+# Subtest: view-once not archived imageMessage / viewOnceMessageV2Extension
+ok 287 - view-once not archived imageMessage / viewOnceMessageV2Extension
+  ---
+  duration_ms: 0.070047
+  type: 'test'
+  ...
+# Subtest: normal media videoMessage / none
+ok 288 - normal media videoMessage / none
+  ---
+  duration_ms: 0.940995
+  type: 'test'
+  ...
+# Subtest: normal media videoMessage / ephemeralMessage
+ok 289 - normal media videoMessage / ephemeralMessage
+  ---
+  duration_ms: 1.16945
+  type: 'test'
+  ...
+# Subtest: normal media videoMessage / documentWithCaptionMessage
+ok 290 - normal media videoMessage / documentWithCaptionMessage
+  ---
+  duration_ms: 0.827801
+  type: 'test'
+  ...
+# Subtest: view-once not archived videoMessage / viewOnceMessage
+ok 291 - view-once not archived videoMessage / viewOnceMessage
+  ---
+  duration_ms: 0.102964
+  type: 'test'
+  ...
+# Subtest: view-once not archived videoMessage / viewOnceMessageV2
+ok 292 - view-once not archived videoMessage / viewOnceMessageV2
+  ---
+  duration_ms: 0.072375
+  type: 'test'
+  ...
+# Subtest: view-once not archived videoMessage / viewOnceMessageV2Extension
+ok 293 - view-once not archived videoMessage / viewOnceMessageV2Extension
+  ---
+  duration_ms: 0.107846
+  type: 'test'
+  ...
+# Subtest: normal media audioMessage / none
+ok 294 - normal media audioMessage / none
+  ---
+  duration_ms: 0.881774
+  type: 'test'
+  ...
+# Subtest: normal media audioMessage / ephemeralMessage
+ok 295 - normal media audioMessage / ephemeralMessage
+  ---
+  duration_ms: 0.799301
+  type: 'test'
+  ...
+# Subtest: normal media audioMessage / documentWithCaptionMessage
+ok 296 - normal media audioMessage / documentWithCaptionMessage
+  ---
+  duration_ms: 1.129958
+  type: 'test'
+  ...
+# Subtest: view-once not archived audioMessage / viewOnceMessage
+ok 297 - view-once not archived audioMessage / viewOnceMessage
+  ---
+  duration_ms: 0.102124
+  type: 'test'
+  ...
+# Subtest: view-once not archived audioMessage / viewOnceMessageV2
+ok 298 - view-once not archived audioMessage / viewOnceMessageV2
+  ---
+  duration_ms: 0.125461
+  type: 'test'
+  ...
+# Subtest: view-once not archived audioMessage / viewOnceMessageV2Extension
+ok 299 - view-once not archived audioMessage / viewOnceMessageV2Extension
+  ---
+  duration_ms: 0.109306
+  type: 'test'
+  ...
+# Subtest: normal media documentMessage / none
+ok 300 - normal media documentMessage / none
+  ---
+  duration_ms: 0.688011
+  type: 'test'
+  ...
+# Subtest: normal media documentMessage / ephemeralMessage
+ok 301 - normal media documentMessage / ephemeralMessage
+  ---
+  duration_ms: 0.452624
+  type: 'test'
+  ...
+# Subtest: normal media documentMessage / documentWithCaptionMessage
+ok 302 - normal media documentMessage / documentWithCaptionMessage
+  ---
+  duration_ms: 0.597226
+  type: 'test'
+  ...
+# Subtest: view-once not archived documentMessage / viewOnceMessage
+ok 303 - view-once not archived documentMessage / viewOnceMessage
+  ---
+  duration_ms: 0.092995
+  type: 'test'
+  ...
+# Subtest: view-once not archived documentMessage / viewOnceMessageV2
+ok 304 - view-once not archived documentMessage / viewOnceMessageV2
+  ---
+  duration_ms: 0.061246
+  type: 'test'
+  ...
+# Subtest: view-once not archived documentMessage / viewOnceMessageV2Extension
+ok 305 - view-once not archived documentMessage / viewOnceMessageV2Extension
+  ---
+  duration_ms: 0.058109
+  type: 'test'
+  ...
+# Subtest: normal media stickerMessage / none
+ok 306 - normal media stickerMessage / none
+  ---
+  duration_ms: 0.420369
+  type: 'test'
+  ...
+# Subtest: normal media stickerMessage / ephemeralMessage
+ok 307 - normal media stickerMessage / ephemeralMessage
+  ---
+  duration_ms: 0.386388
+  type: 'test'
+  ...
+# Subtest: normal media stickerMessage / documentWithCaptionMessage
+ok 308 - normal media stickerMessage / documentWithCaptionMessage
+  ---
+  duration_ms: 0.344114
+  type: 'test'
+  ...
+# Subtest: view-once not archived stickerMessage / viewOnceMessage
+ok 309 - view-once not archived stickerMessage / viewOnceMessage
+  ---
+  duration_ms: 0.078155
+  type: 'test'
+  ...
+# Subtest: view-once not archived stickerMessage / viewOnceMessageV2
+ok 310 - view-once not archived stickerMessage / viewOnceMessageV2
+  ---
+  duration_ms: 0.139668
+  type: 'test'
+  ...
+# Subtest: view-once not archived stickerMessage / viewOnceMessageV2Extension
+ok 311 - view-once not archived stickerMessage / viewOnceMessageV2Extension
+  ---
+  duration_ms: 0.069389
+  type: 'test'
+  ...
+# Subtest: normal media size limit checks actual stream bytes
+ok 312 - normal media size limit checks actual stream bytes
+  ---
+  duration_ms: 1.219341
+  type: 'test'
+  ...
+# Subtest: declared oversized media is rejected before download
+ok 313 - declared oversized media is rejected before download
+  ---
+  duration_ms: 0.168005
+  type: 'test'
+  ...
+# Subtest: empty media reports an explicit error
+ok 314 - empty media reports an explicit error
+  ---
+  duration_ms: 1.451189
+  type: 'test'
+  ...
+# Subtest: download deadline destroys a late stream
+ok 315 - download deadline destroys a late stream
+  ---
+  duration_ms: 184.864551
+  type: 'test'
+  ...
+# Subtest: saved files have deterministic safe names and restrictive permissions
+ok 316 - saved files have deterministic safe names and restrictive permissions
+  ---
+  duration_ms: 6.074151
+  type: 'test'
+  ...
+# Subtest: autodownload requires allowlist and ignores historical messages
+ok 317 - autodownload requires allowlist and ignores historical messages
+  ---
+  duration_ms: 0.428588
+  type: 'test'
+  ...
+# Subtest: status survives a new socket with matching account, binary data intact
+ok 318 - status survives a new socket with matching account, binary data intact
+  ---
+  duration_ms: 1.852137
+  type: 'test'
+  ...
+# Subtest: duplicate status retains stable ID
+ok 319 - duplicate status retains stable ID
+  ---
+  duration_ms: 0.398646
+  type: 'test'
+  ...
+# Subtest: revoke keeps only metadata tombstone and never restores deleted content
+ok 320 - revoke keeps only metadata tombstone and never restores deleted content
+  ---
+  duration_ms: 0.358366
+  type: 'test'
+  ...
+# Subtest: deletion is scoped by author and broadcast route
+ok 321 - deletion is scoped by author and broadcast route
+  ---
+  duration_ms: 0.226258
+  type: 'test'
+  ...
+# Subtest: expired status drops content and stays in short metadata history
+ok 322 - expired status drops content and stays in short metadata history
+  ---
+  duration_ms: 0.163836
+  type: 'test'
+  ...
+# Subtest: status cache bounded to 500 entries
+ok 323 - status cache bounded to 500 entries
+  ---
+  duration_ms: 42.499754
+  type: 'test'
+  ...
+# Subtest: socket bindings install and detach status listeners without duplicates
+ok 324 - socket bindings install and detach status listeners without duplicates
+  ---
+  duration_ms: 5.038753
+  type: 'test'
+  ...
+# Subtest: AI disclosure is honest text, presence always resets after failure
+ok 325 - AI disclosure is honest text, presence always resets after failure
+  ---
+  duration_ms: 0.382661
+  type: 'test'
+  ...
+# Subtest: rich AI envelopes serialize locally without claiming server authentication
+ok 326 - rich AI envelopes serialize locally without claiming server authentication
+  ---
+  duration_ms: 8.013751
+  type: 'test'
+  ...
+# Subtest: browser presets support documented calls and missing browser
+ok 327 - browser presets support documented calls and missing browser
+  ---
+  duration_ms: 0.286861
+  type: 'test'
+  ...
+# Subtest: detaching status tracking never overwrites persisted activation setting
+ok 328 - detaching status tracking never overwrites persisted activation setting
+  ---
+  duration_ms: 0.250415
+  type: 'test'
+  ...
+# Subtest: Baileys has no application-level status reaction exports or socket method
+ok 329 - Baileys has no application-level status reaction exports or socket method
+  ---
+  duration_ms: 1.126947
+  type: 'test'
+  ...
+# Subtest: statusReaction settings never send reactions from Baileys
+ok 330 - statusReaction settings never send reactions from Baileys
+  ---
+  duration_ms: 5.414008
+  type: 'test'
+  ...
+# Subtest: optional status tracking only records received statuses
+ok 331 - optional status tracking only records received statuses
+  ---
+  duration_ms: 1.691746
+  type: 'test'
+  ...
+# Subtest: official status reaction schema survives encoding and decoding
+ok 332 - official status reaction schema survives encoding and decoding
+  ---
+  duration_ms: 4.698685
+  type: 'test'
+  ...
+# Subtest: API pública disponible en CJS y ESM en un único paquete
+ok 333 - API pública disponible en CJS y ESM en un único paquete
+  ---
+  duration_ms: 235.857024
+  type: 'test'
+  ...
+# Subtest: scoped event leases cannot flush another operation or a later generation
+ok 334 - scoped event leases cannot flush another operation or a later generation
+  ---
+  duration_ms: 1.09664
+  type: 'test'
+  ...
+# Subtest: reentrant events emitted while flushing are not discarded
+ok 335 - reentrant events emitted while flushing are not discarded
+  ---
+  duration_ms: 0.897086
+  type: 'test'
+  ...
+# Subtest: missing app-state key no longer creates an unmatched buffering level
+ok 336 - missing app-state key no longer creates an unmatched buffering level
+  ---
+  duration_ms: 5.723411
+  type: 'test'
+  ...
+# Subtest: history disabled releases the initial lease even if keys are missing
+ok 337 - history disabled releases the initial lease even if keys are missing
+  ---
+  duration_ms: 1.957259
+  type: 'test'
+  ...
+# Subtest: a stalled history download never holds live upserts or their event leases
+ok 338 - a stalled history download never holds live upserts or their event leases
+  ---
+  duration_ms: 12.177137
+  type: 'test'
+  ...
+# Subtest: complete socket exposes supplemental methods and closes safely during handshake
+ok 339 - complete socket exposes supplemental methods and closes safely during handshake
+  ---
+  duration_ms: 110.654218
+  type: 'test'
+  ...
+# Subtest: supplemental quick replies use the supplied converter and existing appPatch
+ok 340 - supplemental quick replies use the supplied converter and existing appPatch
+  ---
+  duration_ms: 0.859074
+  type: 'test'
+  ...
+# Subtest: supplemental business and community methods use the same query transport
+ok 341 - supplemental business and community methods use the same query transport
+  ---
+  duration_ms: 0.843848
+  type: 'test'
+  ...
+# Subtest: banner includes requested creator and partner without ANSI in a non-TTY stream
+ok 342 - banner includes requested creator and partner without ANSI in a non-TTY stream
+  ---
+  duration_ms: 0.975571
+  type: 'test'
+  ...
+1..342
+# tests 342
+# suites 0
+# pass 342
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 18323.65781
+
+> kage-baileys@3.2.8-merge.1 check:package
+> node scripts/check-package.cjs
+
+PACKAGE_OK: kage-baileys@3.2.8-merge.1; sin colisiones; entradas CJS/ESM/tipos/protocolo presentes; API verificada.

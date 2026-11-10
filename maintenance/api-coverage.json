@@ -1,0 +1,1642 @@
+[
+  {
+    "archivo": "lib/Addon/http-error.js",
+    "exportaciones": [
+      "HttpError"
+    ],
+    "disponibles": [
+      "HttpError"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Addon/index.js",
+    "exportaciones": [
+      "createCache",
+      "createMutex",
+      "createQueue",
+      "createZip",
+      "detectMediaInfo",
+      "encodeQR",
+      "getAudioWaveform",
+      "getFile"
+    ],
+    "disponibles": [
+      "createCache",
+      "createMutex",
+      "createQueue",
+      "createZip",
+      "detectMediaInfo",
+      "encodeQR",
+      "getAudioWaveform",
+      "getFile"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Addon/keyed-db.js",
+    "exportaciones": [
+      "KeyedDB"
+    ],
+    "disponibles": [
+      "KeyedDB"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Addon/link-preview.js",
+    "exportaciones": [
+      "getLinkPreview"
+    ],
+    "disponibles": [
+      "getLinkPreview"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Defaults/index.js",
+    "exportaciones": [
+      "UNAUTHORIZED_CODES",
+      "BIZ_BOT_SUPPORT_PAYLOAD",
+      "DEFAULT_ORIGIN",
+      "CALL_VIDEO_PREFIX",
+      "CALL_AUDIO_PREFIX",
+      "DONATE_URL",
+      "LIBRARY_NAME",
+      "TEXT_ENCODER",
+      "TEXT_DECODER",
+      "DEF_CALLBACK_PREFIX",
+      "DEF_TAG_PREFIX",
+      "PHONE_CONNECTION_CB",
+      "WA_ADV_ACCOUNT_SIG_PREFIX",
+      "WA_ADV_DEVICE_SIG_PREFIX",
+      "WA_ADV_HOSTED_ACCOUNT_SIG_PREFIX",
+      "WA_ADV_HOSTED_DEVICE_SIG_PREFIX",
+      "WA_DEFAULT_EPHEMERAL",
+      "STATUS_EXPIRY_SECONDS",
+      "PLACEHOLDER_MAX_AGE_SECONDS",
+      "NOISE_MODE",
+      "DICT_VERSION",
+      "KEY_BUNDLE_TYPE",
+      "NOISE_WA_HEADER",
+      "LEXER_REGEX",
+      "URL_REGEX",
+      "WA_CERT_DETAILS",
+      "PROCESSABLE_HISTORY_TYPES",
+      "DEFAULT_CACHE_TTLS",
+      "DEFAULT_CONNECTION_CONFIG",
+      "MEDIA_PATH_MAP",
+      "NEWSLETTER_MEDIA_PATH_MAP",
+      "MEDIA_HKDF_KEY_MAPPING",
+      "MEDIA_KEYS",
+      "HISTORY_SYNC_PAUSED_TIMEOUT_MS",
+      "MIN_PREKEY_COUNT",
+      "INITIAL_PREKEY_COUNT",
+      "UPLOAD_TIMEOUT",
+      "TimeMs"
+    ],
+    "disponibles": [
+      "UNAUTHORIZED_CODES",
+      "BIZ_BOT_SUPPORT_PAYLOAD",
+      "DEFAULT_ORIGIN",
+      "CALL_VIDEO_PREFIX",
+      "CALL_AUDIO_PREFIX",
+      "DONATE_URL",
+      "LIBRARY_NAME",
+      "TEXT_ENCODER",
+      "TEXT_DECODER",
+      "DEF_CALLBACK_PREFIX",
+      "DEF_TAG_PREFIX",
+      "PHONE_CONNECTION_CB",
+      "WA_ADV_ACCOUNT_SIG_PREFIX",
+      "WA_ADV_DEVICE_SIG_PREFIX",
+      "WA_ADV_HOSTED_ACCOUNT_SIG_PREFIX",
+      "WA_ADV_HOSTED_DEVICE_SIG_PREFIX",
+      "WA_DEFAULT_EPHEMERAL",
+      "STATUS_EXPIRY_SECONDS",
+      "PLACEHOLDER_MAX_AGE_SECONDS",
+      "NOISE_MODE",
+      "DICT_VERSION",
+      "KEY_BUNDLE_TYPE",
+      "NOISE_WA_HEADER",
+      "LEXER_REGEX",
+      "URL_REGEX",
+      "WA_CERT_DETAILS",
+      "PROCESSABLE_HISTORY_TYPES",
+      "DEFAULT_CACHE_TTLS",
+      "DEFAULT_CONNECTION_CONFIG",
+      "MEDIA_PATH_MAP",
+      "NEWSLETTER_MEDIA_PATH_MAP",
+      "MEDIA_HKDF_KEY_MAPPING",
+      "MEDIA_KEYS",
+      "HISTORY_SYNC_PAUSED_TIMEOUT_MS",
+      "MIN_PREKEY_COUNT",
+      "INITIAL_PREKEY_COUNT",
+      "UPLOAD_TIMEOUT",
+      "TimeMs"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Signal/Group/ciphertext-message.js",
+    "exportaciones": [
+      "CiphertextMessage"
+    ],
+    "disponibles": [
+      "CiphertextMessage"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Signal/Group/group-session-builder.js",
+    "exportaciones": [
+      "GroupSessionBuilder"
+    ],
+    "disponibles": [
+      "GroupSessionBuilder"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Signal/Group/group_cipher.js",
+    "exportaciones": [
+      "GroupCipher"
+    ],
+    "disponibles": [
+      "GroupCipher"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Signal/Group/index.js",
+    "exportaciones": [
+      "GroupSessionBuilder",
+      "SenderKeyDistributionMessage",
+      "SenderKeyRecord",
+      "SenderKeyName",
+      "GroupCipher",
+      "SenderKeyState",
+      "SenderKeyMessage",
+      "SenderMessageKey",
+      "SenderChainKey",
+      "CiphertextMessage"
+    ],
+    "disponibles": [
+      "GroupSessionBuilder",
+      "SenderKeyDistributionMessage",
+      "SenderKeyRecord",
+      "SenderKeyName",
+      "GroupCipher",
+      "SenderKeyState",
+      "SenderKeyMessage",
+      "SenderMessageKey",
+      "SenderChainKey",
+      "CiphertextMessage"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Signal/Group/keyhelper.js",
+    "exportaciones": [
+      "generateSenderKey",
+      "generateSenderKeyId",
+      "generateSenderSigningKey"
+    ],
+    "disponibles": [
+      "generateSenderKey",
+      "generateSenderKeyId",
+      "generateSenderSigningKey"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Signal/Group/sender-chain-key.js",
+    "exportaciones": [
+      "SenderChainKey"
+    ],
+    "disponibles": [
+      "SenderChainKey"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Signal/Group/sender-key-distribution-message.js",
+    "exportaciones": [
+      "SenderKeyDistributionMessage"
+    ],
+    "disponibles": [
+      "SenderKeyDistributionMessage"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Signal/Group/sender-key-message.js",
+    "exportaciones": [
+      "SenderKeyMessage"
+    ],
+    "disponibles": [
+      "SenderKeyMessage"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Signal/Group/sender-key-name.js",
+    "exportaciones": [
+      "SenderKeyName"
+    ],
+    "disponibles": [
+      "SenderKeyName"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Signal/Group/sender-key-record.js",
+    "exportaciones": [
+      "SenderKeyRecord"
+    ],
+    "disponibles": [
+      "SenderKeyRecord"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Signal/Group/sender-key-state.js",
+    "exportaciones": [
+      "SenderKeyState"
+    ],
+    "disponibles": [
+      "SenderKeyState"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Signal/Group/sender-message-key.js",
+    "exportaciones": [
+      "SenderMessageKey"
+    ],
+    "disponibles": [
+      "SenderMessageKey"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Signal/libsignal.js",
+    "exportaciones": [
+      "makeLibSignalRepository"
+    ],
+    "disponibles": [
+      "makeLibSignalRepository"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Signal/lid-mapping.js",
+    "exportaciones": [
+      "LIDMappingStore"
+    ],
+    "disponibles": [
+      "LIDMappingStore"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Socket/Client/index.js",
+    "exportaciones": [],
+    "disponibles": [],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Socket/Client/types.js",
+    "exportaciones": [
+      "AbstractSocketClient"
+    ],
+    "disponibles": [
+      "AbstractSocketClient"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Socket/Client/websocket.js",
+    "exportaciones": [
+      "WebSocketClient"
+    ],
+    "disponibles": [
+      "WebSocketClient"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Socket/business.js",
+    "exportaciones": [
+      "makeBusinessSocket"
+    ],
+    "disponibles": [
+      "makeBusinessSocket"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Socket/chats.js",
+    "exportaciones": [
+      "buildProfilePictureQueryContent",
+      "makeChatsSocket"
+    ],
+    "disponibles": [
+      "buildProfilePictureQueryContent",
+      "makeChatsSocket"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Socket/communities.js",
+    "exportaciones": [
+      "makeCommunitiesSocket",
+      "extractCommunityMetadata"
+    ],
+    "disponibles": [
+      "makeCommunitiesSocket",
+      "extractCommunityMetadata"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Socket/groups.js",
+    "exportaciones": [
+      "makeGroupsSocket",
+      "extractGroupMetadata"
+    ],
+    "disponibles": [
+      "makeGroupsSocket",
+      "extractGroupMetadata"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Socket/index.js",
+    "exportaciones": [
+      "default"
+    ],
+    "disponibles": [
+      "default"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Socket/messages-recv.js",
+    "exportaciones": [
+      "makeMessagesRecvSocket"
+    ],
+    "disponibles": [
+      "makeMessagesRecvSocket"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Socket/messages-send.js",
+    "exportaciones": [
+      "makeMessagesSocket"
+    ],
+    "disponibles": [
+      "makeMessagesSocket"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Socket/mex.js",
+    "exportaciones": [
+      "executeWMexQuery"
+    ],
+    "disponibles": [
+      "executeWMexQuery"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Socket/newsletter.js",
+    "exportaciones": [
+      "makeNewsletterSocket"
+    ],
+    "disponibles": [
+      "makeNewsletterSocket"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Socket/socket.js",
+    "exportaciones": [
+      "makeSocket"
+    ],
+    "disponibles": [
+      "makeSocket"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Store/index.js",
+    "exportaciones": [],
+    "disponibles": [],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Store/make-in-memory-store.js",
+    "exportaciones": [
+      "waChatKey",
+      "waMessageID",
+      "waLabelAssociationKey",
+      "makeInMemoryStore"
+    ],
+    "disponibles": [
+      "waChatKey",
+      "waMessageID",
+      "waLabelAssociationKey",
+      "makeInMemoryStore"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Store/make-ordered-dictionary.js",
+    "exportaciones": [
+      "makeOrderedDictionary"
+    ],
+    "disponibles": [
+      "makeOrderedDictionary"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Store/object-repository.js",
+    "exportaciones": [
+      "ObjectRepository"
+    ],
+    "disponibles": [
+      "ObjectRepository"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Types/Auth.js",
+    "exportaciones": [],
+    "disponibles": [],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Types/Bussines.js",
+    "exportaciones": [],
+    "disponibles": [],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Types/Call.js",
+    "exportaciones": [],
+    "disponibles": [],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Types/Chat.js",
+    "exportaciones": [
+      "ALL_WA_PATCH_NAMES"
+    ],
+    "disponibles": [
+      "ALL_WA_PATCH_NAMES"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Types/Contact.js",
+    "exportaciones": [],
+    "disponibles": [],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Types/Events.js",
+    "exportaciones": [],
+    "disponibles": [],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Types/GroupMetadata.js",
+    "exportaciones": [],
+    "disponibles": [],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Types/Label.js",
+    "exportaciones": [
+      "LabelColor"
+    ],
+    "disponibles": [
+      "LabelColor"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Types/LabelAssociation.js",
+    "exportaciones": [
+      "LabelAssociationType"
+    ],
+    "disponibles": [
+      "LabelAssociationType"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Types/Message.js",
+    "exportaciones": [
+      "WAProto",
+      "AssociationType",
+      "ButtonHeaderType",
+      "ButtonType",
+      "CarouselCardType",
+      "ListType",
+      "ProtocolType",
+      "WAMessageStubType",
+      "WAMessageStatus",
+      "WAMessageAddressingMode"
+    ],
+    "disponibles": [
+      "WAProto",
+      "AssociationType",
+      "ButtonHeaderType",
+      "ButtonType",
+      "CarouselCardType",
+      "ListType",
+      "ProtocolType",
+      "WAMessageStubType",
+      "WAMessageStatus",
+      "WAMessageAddressingMode"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Types/Mex.js",
+    "exportaciones": [
+      "XWAPaths",
+      "QueryIds"
+    ],
+    "disponibles": [
+      "XWAPaths",
+      "QueryIds"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Types/Product.js",
+    "exportaciones": [],
+    "disponibles": [],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Types/RichType.js",
+    "exportaciones": [
+      "CodeHighlightType",
+      "RichSubMessageType"
+    ],
+    "disponibles": [
+      "CodeHighlightType",
+      "RichSubMessageType"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Types/Signal.js",
+    "exportaciones": [],
+    "disponibles": [],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Types/Socket.js",
+    "exportaciones": [],
+    "disponibles": [],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Types/State.js",
+    "exportaciones": [
+      "SyncState",
+      "ReachoutTimelockEnforcementType",
+      "NewChatMessageCappingStatusType",
+      "NewChatMessageCappingMVStatusType",
+      "NewChatMessageCappingOTEStatusType"
+    ],
+    "disponibles": [
+      "SyncState",
+      "ReachoutTimelockEnforcementType",
+      "NewChatMessageCappingStatusType",
+      "NewChatMessageCappingMVStatusType",
+      "NewChatMessageCappingOTEStatusType"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Types/USync.js",
+    "exportaciones": [],
+    "disponibles": [],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Types/index.js",
+    "exportaciones": [
+      "DisconnectReason"
+    ],
+    "disponibles": [
+      "DisconnectReason"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/auth-utils.js",
+    "exportaciones": [
+      "makeCacheableSignalKeyStore",
+      "addTransactionCapability",
+      "assertMeId",
+      "initAuthCreds"
+    ],
+    "disponibles": [
+      "makeCacheableSignalKeyStore",
+      "addTransactionCapability",
+      "assertMeId",
+      "initAuthCreds"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/browser-utils.js",
+    "exportaciones": [
+      "Browsers",
+      "getPlatformId"
+    ],
+    "disponibles": [
+      "Browsers",
+      "getPlatformId"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/business.js",
+    "exportaciones": [
+      "parseCatalogNode",
+      "parseCollectionsNode",
+      "parseOrderDetailsNode",
+      "toProductNode",
+      "parseProductNode",
+      "uploadingNecessaryImagesOfProduct",
+      "uploadingNecessaryImages"
+    ],
+    "disponibles": [
+      "parseCatalogNode",
+      "parseCollectionsNode",
+      "parseOrderDetailsNode",
+      "toProductNode",
+      "parseProductNode",
+      "uploadingNecessaryImagesOfProduct",
+      "uploadingNecessaryImages"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/chat-utils.js",
+    "exportaciones": [
+      "makeLtHashGenerator",
+      "newLTHashState",
+      "ensureLTHashStateVersion",
+      "MAX_SYNC_ATTEMPTS",
+      "isMissingKeyError",
+      "isAppStateSyncIrrecoverable",
+      "encodeSyncdPatch",
+      "decodeSyncdMutations",
+      "decodeSyncdPatch",
+      "extractSyncdPatches",
+      "downloadExternalBlob",
+      "downloadExternalPatch",
+      "decodeSyncdSnapshot",
+      "decodePatches",
+      "chatModificationToAppPatch",
+      "processSyncAction"
+    ],
+    "disponibles": [
+      "makeLtHashGenerator",
+      "newLTHashState",
+      "ensureLTHashStateVersion",
+      "MAX_SYNC_ATTEMPTS",
+      "isMissingKeyError",
+      "isAppStateSyncIrrecoverable",
+      "encodeSyncdPatch",
+      "decodeSyncdMutations",
+      "decodeSyncdPatch",
+      "extractSyncdPatches",
+      "downloadExternalBlob",
+      "downloadExternalPatch",
+      "decodeSyncdSnapshot",
+      "decodePatches",
+      "chatModificationToAppPatch",
+      "processSyncAction"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/companion-reg-client-utils.js",
+    "exportaciones": [
+      "CompanionWebClientType",
+      "getCompanionWebClientType",
+      "getCompanionPlatformId",
+      "buildPairingQRData"
+    ],
+    "disponibles": [
+      "CompanionWebClientType",
+      "getCompanionWebClientType",
+      "getCompanionPlatformId",
+      "buildPairingQRData"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/crypto.js",
+    "exportaciones": [
+      "md5",
+      "hkdf",
+      "generateSignalPubKey",
+      "Curve",
+      "signedKeyPair",
+      "aesEncryptGCM",
+      "aesDecryptGCM",
+      "aesEncryptCTR",
+      "aesDecryptCTR",
+      "aesDecrypt",
+      "aesDecryptWithIV",
+      "aesEncrypt",
+      "aesEncrypWithIV",
+      "hmacSign",
+      "sha256",
+      "derivePairingCodeKey"
+    ],
+    "disponibles": [
+      "md5",
+      "hkdf",
+      "generateSignalPubKey",
+      "Curve",
+      "signedKeyPair",
+      "aesEncryptGCM",
+      "aesDecryptGCM",
+      "aesEncryptCTR",
+      "aesDecryptCTR",
+      "aesDecrypt",
+      "aesDecryptWithIV",
+      "aesEncrypt",
+      "aesEncrypWithIV",
+      "hmacSign",
+      "sha256",
+      "derivePairingCodeKey"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/decode-wa-message.js",
+    "exportaciones": [
+      "getDecryptionJid",
+      "NO_MESSAGE_FOUND_ERROR_TEXT",
+      "MISSING_KEYS_ERROR_TEXT",
+      "ACCOUNT_RESTRICTED_TEXT",
+      "DECRYPTION_RETRY_CONFIG",
+      "NACK_REASONS",
+      "SERVER_ERROR_CODES",
+      "extractAddressingContext",
+      "decodeMessageNode",
+      "decryptMessageNode"
+    ],
+    "disponibles": [
+      "getDecryptionJid",
+      "NO_MESSAGE_FOUND_ERROR_TEXT",
+      "MISSING_KEYS_ERROR_TEXT",
+      "ACCOUNT_RESTRICTED_TEXT",
+      "DECRYPTION_RETRY_CONFIG",
+      "NACK_REASONS",
+      "SERVER_ERROR_CODES",
+      "extractAddressingContext",
+      "decodeMessageNode",
+      "decryptMessageNode"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/event-buffer.js",
+    "exportaciones": [
+      "makeEventBuffer"
+    ],
+    "disponibles": [
+      "makeEventBuffer"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/generics.js",
+    "exportaciones": [
+      "BufferJSON",
+      "getKeyAuthor",
+      "isStringNullOrEmpty",
+      "writeRandomPadMax16",
+      "unpadRandomMax16",
+      "generateParticipantHashV2",
+      "encodeWAMessage",
+      "generateRegistrationId",
+      "encodeBigEndian",
+      "toNumber",
+      "unixTimestampSeconds",
+      "debouncedTimeout",
+      "delay",
+      "delayCancellable",
+      "promiseTimeout",
+      "generateMessageIDV2",
+      "generateMessageID",
+      "bindWaitForEvent",
+      "bindWaitForConnectionUpdate",
+      "fetchLatestBaileysVersion",
+      "fetchLatestWaWebVersion",
+      "generateMdTagPrefix",
+      "getStatusFromReceiptType",
+      "getErrorCodeFromStreamError",
+      "getCallStatusFromNode",
+      "getCodeFromWSError",
+      "isWABusinessPlatform",
+      "trimUndefined",
+      "bytesToCrockford",
+      "encodeNewsletterMessage"
+    ],
+    "disponibles": [
+      "BufferJSON",
+      "getKeyAuthor",
+      "isStringNullOrEmpty",
+      "writeRandomPadMax16",
+      "unpadRandomMax16",
+      "generateParticipantHashV2",
+      "encodeWAMessage",
+      "generateRegistrationId",
+      "encodeBigEndian",
+      "toNumber",
+      "unixTimestampSeconds",
+      "debouncedTimeout",
+      "delay",
+      "delayCancellable",
+      "promiseTimeout",
+      "generateMessageIDV2",
+      "generateMessageID",
+      "bindWaitForEvent",
+      "bindWaitForConnectionUpdate",
+      "fetchLatestBaileysVersion",
+      "fetchLatestWaWebVersion",
+      "generateMdTagPrefix",
+      "getStatusFromReceiptType",
+      "getErrorCodeFromStreamError",
+      "getCallStatusFromNode",
+      "getCodeFromWSError",
+      "isWABusinessPlatform",
+      "trimUndefined",
+      "bytesToCrockford",
+      "encodeNewsletterMessage"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/history.js",
+    "exportaciones": [
+      "downloadHistory",
+      "processHistoryMessage",
+      "downloadAndProcessHistorySyncNotification",
+      "getHistoryMsg"
+    ],
+    "disponibles": [
+      "downloadHistory",
+      "processHistoryMessage",
+      "downloadAndProcessHistorySyncNotification",
+      "getHistoryMsg"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/identity-change-handler.js",
+    "exportaciones": [
+      "handleIdentityChange"
+    ],
+    "disponibles": [
+      "handleIdentityChange"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/index.js",
+    "exportaciones": [],
+    "disponibles": [],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/link-preview.js",
+    "exportaciones": [
+      "getUrlInfo"
+    ],
+    "disponibles": [
+      "getUrlInfo"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/logger.js",
+    "exportaciones": [
+      "default"
+    ],
+    "disponibles": [
+      "default"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/lt-hash.js",
+    "exportaciones": [
+      "LT_HASH_ANTI_TAMPERING"
+    ],
+    "disponibles": [
+      "LT_HASH_ANTI_TAMPERING"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/make-mutex.js",
+    "exportaciones": [
+      "makeMutex",
+      "makeKeyedMutex"
+    ],
+    "disponibles": [
+      "makeMutex",
+      "makeKeyedMutex"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/message-retry-manager.js",
+    "exportaciones": [
+      "RetryReason",
+      "MessageRetryManager"
+    ],
+    "disponibles": [
+      "RetryReason",
+      "MessageRetryManager"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/messages-media.js",
+    "exportaciones": [
+      "getImageProcessingLibrary",
+      "hkdfInfoKey",
+      "getRawMediaUploadData",
+      "getMediaKeys",
+      "extractVideoThumb",
+      "extractImageThumb",
+      "encodeBase64EncodedStringForUpload",
+      "generateProfilePicture",
+      "mediaMessageSHA256B64",
+      "getAudioData",
+      "toReadable",
+      "toBuffer",
+      "getStream",
+      "generateThumbnail",
+      "getHttpStream",
+      "encryptedStream",
+      "DEF_MEDIA_HOST",
+      "getUrlFromDirectPath",
+      "downloadContentFromMessage",
+      "downloadEncryptedContent",
+      "extensionForMediaMessage",
+      "uploadWithNodeHttp",
+      "getWAUploadToServer",
+      "encryptMediaRetryRequest",
+      "decodeMediaRetryNode",
+      "decryptMediaRetryData",
+      "getStatusCodeForMediaRetry"
+    ],
+    "disponibles": [
+      "getImageProcessingLibrary",
+      "hkdfInfoKey",
+      "getRawMediaUploadData",
+      "getMediaKeys",
+      "extractVideoThumb",
+      "extractImageThumb",
+      "encodeBase64EncodedStringForUpload",
+      "generateProfilePicture",
+      "mediaMessageSHA256B64",
+      "getAudioData",
+      "toReadable",
+      "toBuffer",
+      "getStream",
+      "generateThumbnail",
+      "getHttpStream",
+      "encryptedStream",
+      "DEF_MEDIA_HOST",
+      "getUrlFromDirectPath",
+      "downloadContentFromMessage",
+      "downloadEncryptedContent",
+      "extensionForMediaMessage",
+      "uploadWithNodeHttp",
+      "getWAUploadToServer",
+      "encryptMediaRetryRequest",
+      "decodeMediaRetryNode",
+      "decryptMediaRetryData",
+      "getStatusCodeForMediaRetry"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/messages.js",
+    "exportaciones": [
+      "extractUrlFromText",
+      "generateLinkPreviewIfRequired",
+      "prepareWAMessageMedia",
+      "prepareDisappearingMessageSettingContent",
+      "generateForwardMessageContent",
+      "hasNonNullishProperty",
+      "hasOptionalProperty",
+      "hasValidAlbumMedia",
+      "hasValidInteractiveHeader",
+      "hasValidCarouselHeader",
+      "markViewOnce",
+      "generateWAMessageContent",
+      "generateWAMessageFromContent",
+      "generateWAMessage",
+      "getContentType",
+      "normalizeMessageContent",
+      "extractMessageContent",
+      "getDevice",
+      "updateMessageWithReceipt",
+      "updateMessageWithReaction",
+      "updateMessageWithPollUpdate",
+      "updateMessageWithEventResponse",
+      "getAggregateVotesInPollMessage",
+      "getAggregateResponsesInEventMessage",
+      "aggregateMessageKeysNotFromMe",
+      "downloadMediaMessage",
+      "assertMediaContent",
+      "shouldIncludeBizBinaryNode"
+    ],
+    "disponibles": [
+      "extractUrlFromText",
+      "generateLinkPreviewIfRequired",
+      "prepareWAMessageMedia",
+      "prepareDisappearingMessageSettingContent",
+      "generateForwardMessageContent",
+      "hasNonNullishProperty",
+      "hasOptionalProperty",
+      "hasValidAlbumMedia",
+      "hasValidInteractiveHeader",
+      "hasValidCarouselHeader",
+      "markViewOnce",
+      "generateWAMessageContent",
+      "generateWAMessageFromContent",
+      "generateWAMessage",
+      "getContentType",
+      "normalizeMessageContent",
+      "extractMessageContent",
+      "getDevice",
+      "updateMessageWithReceipt",
+      "updateMessageWithReaction",
+      "updateMessageWithPollUpdate",
+      "updateMessageWithEventResponse",
+      "getAggregateVotesInPollMessage",
+      "getAggregateResponsesInEventMessage",
+      "aggregateMessageKeysNotFromMe",
+      "downloadMediaMessage",
+      "assertMediaContent",
+      "shouldIncludeBizBinaryNode"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/noise-handler.js",
+    "exportaciones": [
+      "makeNoiseHandler"
+    ],
+    "disponibles": [
+      "makeNoiseHandler"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/offline-node-processor.js",
+    "exportaciones": [
+      "makeOfflineNodeProcessor"
+    ],
+    "disponibles": [
+      "makeOfflineNodeProcessor"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/pre-key-manager.js",
+    "exportaciones": [
+      "PreKeyManager"
+    ],
+    "disponibles": [
+      "PreKeyManager"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/process-message.js",
+    "exportaciones": [
+      "cleanMessage",
+      "isRealMessage",
+      "shouldIncrementChatUnread",
+      "getChatId",
+      "decryptPollVote",
+      "decryptEventResponse",
+      "decryptMessageEdit",
+      "default"
+    ],
+    "disponibles": [
+      "cleanMessage",
+      "isRealMessage",
+      "shouldIncrementChatUnread",
+      "getChatId",
+      "decryptPollVote",
+      "decryptEventResponse",
+      "decryptMessageEdit",
+      "default"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/reporting-utils.js",
+    "exportaciones": [
+      "shouldIncludeReportingToken",
+      "getMessageReportingToken"
+    ],
+    "disponibles": [
+      "shouldIncludeReportingToken",
+      "getMessageReportingToken"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/rich-message-utils.js",
+    "exportaciones": [
+      "tokenizeCode",
+      "toUnified",
+      "prepareRichResponseMessage",
+      "botMetadataSignature",
+      "botMetadataCertificate",
+      "wrapToBotForwardedMessage"
+    ],
+    "disponibles": [
+      "tokenizeCode",
+      "toUnified",
+      "prepareRichResponseMessage",
+      "botMetadataSignature",
+      "botMetadataCertificate",
+      "wrapToBotForwardedMessage"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/signal.js",
+    "exportaciones": [
+      "createSignalIdentity",
+      "getPreKeys",
+      "generateOrGetPreKeys",
+      "xmppSignedPreKey",
+      "xmppPreKey",
+      "extractE2ESessionFromRetryReceipt",
+      "parseAndInjectE2ESessions",
+      "extractDeviceJids",
+      "getNextPreKeys",
+      "getNextPreKeysNode"
+    ],
+    "disponibles": [
+      "createSignalIdentity",
+      "getPreKeys",
+      "generateOrGetPreKeys",
+      "xmppSignedPreKey",
+      "xmppPreKey",
+      "extractE2ESessionFromRetryReceipt",
+      "parseAndInjectE2ESessions",
+      "extractDeviceJids",
+      "getNextPreKeys",
+      "getNextPreKeysNode"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/stanza-ack.js",
+    "exportaciones": [
+      "buildAckStanza"
+    ],
+    "disponibles": [
+      "buildAckStanza"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/sync-action-utils.js",
+    "exportaciones": [
+      "processContactAction",
+      "emitSyncActionResults"
+    ],
+    "disponibles": [
+      "processContactAction",
+      "emitSyncActionResults"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/tc-token-utils.js",
+    "exportaciones": [
+      "TC_TOKEN_INDEX_KEY",
+      "readTcTokenIndex",
+      "buildMergedTcTokenIndexWrite",
+      "isTcTokenExpired",
+      "shouldSendNewTcToken",
+      "resolveTcTokenJid",
+      "resolveIssuanceJid",
+      "buildTcTokenFromJid",
+      "storeTcTokensFromIqResult"
+    ],
+    "disponibles": [
+      "TC_TOKEN_INDEX_KEY",
+      "readTcTokenIndex",
+      "buildMergedTcTokenIndexWrite",
+      "isTcTokenExpired",
+      "shouldSendNewTcToken",
+      "resolveTcTokenJid",
+      "resolveIssuanceJid",
+      "buildTcTokenFromJid",
+      "storeTcTokensFromIqResult"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/use-multi-file-auth-state.js",
+    "exportaciones": [
+      "useMultiFileAuthState"
+    ],
+    "disponibles": [
+      "useMultiFileAuthState"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/use-single-file-auth-state.js",
+    "exportaciones": [
+      "useSingleFileAuthState"
+    ],
+    "disponibles": [
+      "useSingleFileAuthState"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/use-sqlite-auth-state.js",
+    "exportaciones": [
+      "useSqliteAuthState"
+    ],
+    "disponibles": [
+      "useSqliteAuthState"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/Utils/validate-connection.js",
+    "exportaciones": [
+      "generateLoginNode",
+      "generateRegistrationNode",
+      "configureSuccessfulPairing",
+      "encodeSignedDeviceIdentity"
+    ],
+    "disponibles": [
+      "generateLoginNode",
+      "generateRegistrationNode",
+      "configureSuccessfulPairing",
+      "encodeSignedDeviceIdentity"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WABinary/constants.js",
+    "exportaciones": [
+      "TAGS",
+      "DOUBLE_BYTE_TOKENS",
+      "SINGLE_BYTE_TOKENS",
+      "TOKEN_MAP",
+      "CPP_KEYWORDS",
+      "CSS_KEYWORDS",
+      "GO_KEYWORDS",
+      "HTML_KEYWORDS",
+      "JS_KEYWORDS",
+      "PYTHON_KEYWORDS",
+      "RUST_KEYWORDS",
+      "C_KEYWORDS",
+      "CSHARP_KEYWORDS",
+      "BASH_KEYWORDS",
+      "CMD_KEYWORDS",
+      "POWERSHELL_KEYWORDS",
+      "LANGUAGE_KEYWORDS"
+    ],
+    "disponibles": [
+      "TAGS",
+      "DOUBLE_BYTE_TOKENS",
+      "SINGLE_BYTE_TOKENS",
+      "TOKEN_MAP",
+      "CPP_KEYWORDS",
+      "CSS_KEYWORDS",
+      "GO_KEYWORDS",
+      "HTML_KEYWORDS",
+      "JS_KEYWORDS",
+      "PYTHON_KEYWORDS",
+      "RUST_KEYWORDS",
+      "C_KEYWORDS",
+      "CSHARP_KEYWORDS",
+      "BASH_KEYWORDS",
+      "CMD_KEYWORDS",
+      "POWERSHELL_KEYWORDS",
+      "LANGUAGE_KEYWORDS"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WABinary/decode.js",
+    "exportaciones": [
+      "decompressingIfRequired",
+      "decodeDecompressedBinaryNode",
+      "decodeBinaryNode"
+    ],
+    "disponibles": [
+      "decompressingIfRequired",
+      "decodeDecompressedBinaryNode",
+      "decodeBinaryNode"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WABinary/encode.js",
+    "exportaciones": [
+      "encodeBinaryNode"
+    ],
+    "disponibles": [
+      "encodeBinaryNode"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WABinary/generic-utils.js",
+    "exportaciones": [
+      "getBinaryNodeChildren",
+      "getBinaryNodeChild",
+      "getAllBinaryNodeChildren",
+      "getBinaryNodeChildBuffer",
+      "getBinaryNodeChildString",
+      "getBinaryNodeChildUInt",
+      "assertNodeErrorFree",
+      "reduceBinaryNodeToDictionary",
+      "getBinaryNodeMessages",
+      "binaryNodeToString",
+      "getBizBinaryNode"
+    ],
+    "disponibles": [
+      "getBinaryNodeChildren",
+      "getBinaryNodeChild",
+      "getAllBinaryNodeChildren",
+      "getBinaryNodeChildBuffer",
+      "getBinaryNodeChildString",
+      "getBinaryNodeChildUInt",
+      "assertNodeErrorFree",
+      "reduceBinaryNodeToDictionary",
+      "getBinaryNodeMessages",
+      "binaryNodeToString",
+      "getBizBinaryNode"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WABinary/index.js",
+    "exportaciones": [],
+    "disponibles": [],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WABinary/jid-utils.js",
+    "exportaciones": [
+      "S_WHATSAPP_NET",
+      "OFFICIAL_BIZ_JID",
+      "SERVER_JID",
+      "PSA_WID",
+      "STORIES_JID",
+      "META_AI_JID",
+      "WAJIDDomains",
+      "getServerFromDomainType",
+      "jidEncode",
+      "jidDecode",
+      "areJidsSameUser",
+      "isJidMetaAI",
+      "isPnUser",
+      "isLidUser",
+      "isJidBroadcast",
+      "isJidGroup",
+      "isJidStatusBroadcast",
+      "isJidNewsletter",
+      "isHostedPnUser",
+      "isHostedLidUser",
+      "isJidBot",
+      "jidNormalizedUser",
+      "transferDevice"
+    ],
+    "disponibles": [
+      "S_WHATSAPP_NET",
+      "OFFICIAL_BIZ_JID",
+      "SERVER_JID",
+      "PSA_WID",
+      "STORIES_JID",
+      "META_AI_JID",
+      "WAJIDDomains",
+      "getServerFromDomainType",
+      "jidEncode",
+      "jidDecode",
+      "areJidsSameUser",
+      "isJidMetaAI",
+      "isPnUser",
+      "isLidUser",
+      "isJidBroadcast",
+      "isJidGroup",
+      "isJidStatusBroadcast",
+      "isJidNewsletter",
+      "isHostedPnUser",
+      "isHostedLidUser",
+      "isJidBot",
+      "jidNormalizedUser",
+      "transferDevice"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WABinary/types.js",
+    "exportaciones": [],
+    "disponibles": [],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WAM/BinaryInfo.js",
+    "exportaciones": [
+      "BinaryInfo"
+    ],
+    "disponibles": [
+      "BinaryInfo"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WAM/constants.js",
+    "exportaciones": [
+      "WEB_EVENTS",
+      "WEB_GLOBALS",
+      "FLAG_BYTE",
+      "FLAG_GLOBAL",
+      "FLAG_EVENT",
+      "FLAG_FIELD",
+      "FLAG_EXTENDED"
+    ],
+    "disponibles": [
+      "WEB_EVENTS",
+      "WEB_GLOBALS",
+      "FLAG_BYTE",
+      "FLAG_GLOBAL",
+      "FLAG_EVENT",
+      "FLAG_FIELD",
+      "FLAG_EXTENDED"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WAM/encode.js",
+    "exportaciones": [
+      "encodeWAM"
+    ],
+    "disponibles": [
+      "encodeWAM"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WAM/index.js",
+    "exportaciones": [],
+    "disponibles": [],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WAUSync/Protocols/USyncContactProtocol.js",
+    "exportaciones": [
+      "USyncContactProtocol"
+    ],
+    "disponibles": [
+      "USyncContactProtocol"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WAUSync/Protocols/USyncDeviceProtocol.js",
+    "exportaciones": [
+      "USyncDeviceProtocol"
+    ],
+    "disponibles": [
+      "USyncDeviceProtocol"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WAUSync/Protocols/USyncDisappearingModeProtocol.js",
+    "exportaciones": [
+      "USyncDisappearingModeProtocol"
+    ],
+    "disponibles": [
+      "USyncDisappearingModeProtocol"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WAUSync/Protocols/USyncStatusProtocol.js",
+    "exportaciones": [
+      "USyncStatusProtocol"
+    ],
+    "disponibles": [
+      "USyncStatusProtocol"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WAUSync/Protocols/USyncUsernameProtocol.js",
+    "exportaciones": [
+      "USyncUsernameProtocol"
+    ],
+    "disponibles": [
+      "USyncUsernameProtocol"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WAUSync/Protocols/USyncBotProfileProtocol.js",
+    "exportaciones": [
+      "USyncBotProfileProtocol"
+    ],
+    "disponibles": [
+      "USyncBotProfileProtocol"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WAUSync/Protocols/USyncLIDProtocol.js",
+    "exportaciones": [
+      "USyncLIDProtocol"
+    ],
+    "disponibles": [
+      "USyncLIDProtocol"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WAUSync/Protocols/index.js",
+    "exportaciones": [],
+    "disponibles": [],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WAUSync/USyncQuery.js",
+    "exportaciones": [
+      "USyncQuery"
+    ],
+    "disponibles": [
+      "USyncQuery"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WAUSync/USyncUser.js",
+    "exportaciones": [
+      "USyncUser"
+    ],
+    "disponibles": [
+      "USyncUser"
+    ],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/WAUSync/index.js",
+    "exportaciones": [],
+    "disponibles": [],
+    "faltantes": []
+  },
+  {
+    "archivo": "lib/index.js",
+    "exportaciones": [
+      "makeWASocket",
+      "default"
+    ],
+    "disponibles": [
+      "makeWASocket",
+      "default"
+    ],
+    "faltantes": []
+  }
+]

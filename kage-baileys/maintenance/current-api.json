@@ -1,0 +1,1944 @@
+{
+  "scope": "Presencia de API, no validación de operaciones contra WhatsApp.",
+  "publicExports": [
+    {
+      "name": "ACCOUNT_RESTRICTED_TEXT",
+      "type": "string"
+    },
+    {
+      "name": "AIRich",
+      "type": "function"
+    },
+    {
+      "name": "ALL_WA_PATCH_NAMES",
+      "type": "object"
+    },
+    {
+      "name": "ActiveCall",
+      "type": "function"
+    },
+    {
+      "name": "AssociationType",
+      "type": "object"
+    },
+    {
+      "name": "BASH_KEYWORDS",
+      "type": "object"
+    },
+    {
+      "name": "BIZ_BOT_SUPPORT_PAYLOAD",
+      "type": "string"
+    },
+    {
+      "name": "BinaryInfo",
+      "type": "function"
+    },
+    {
+      "name": "Browsers",
+      "type": "function"
+    },
+    {
+      "name": "BufferJSON",
+      "type": "object"
+    },
+    {
+      "name": "Button",
+      "type": "function"
+    },
+    {
+      "name": "ButtonHeaderType",
+      "type": "object"
+    },
+    {
+      "name": "ButtonType",
+      "type": "object"
+    },
+    {
+      "name": "ButtonV2",
+      "type": "function"
+    },
+    {
+      "name": "CALL_AUDIO_PREFIX",
+      "type": "string"
+    },
+    {
+      "name": "CALL_VIDEO_PREFIX",
+      "type": "string"
+    },
+    {
+      "name": "CallState",
+      "type": "object"
+    },
+    {
+      "name": "Carousel",
+      "type": "function"
+    },
+    {
+      "name": "CarouselCardType",
+      "type": "object"
+    },
+    {
+      "name": "CodeHighlightType",
+      "type": "object"
+    },
+    {
+      "name": "CompanionWebClientType",
+      "type": "object"
+    },
+    {
+      "name": "Curve",
+      "type": "object"
+    },
+    {
+      "name": "DECRYPTION_RETRY_CONFIG",
+      "type": "object"
+    },
+    {
+      "name": "DEFAULT_CACHE_TTLS",
+      "type": "object"
+    },
+    {
+      "name": "DEFAULT_CONNECTION_CONFIG",
+      "type": "object"
+    },
+    {
+      "name": "DEFAULT_ORIGIN",
+      "type": "string"
+    },
+    {
+      "name": "DEF_CALLBACK_PREFIX",
+      "type": "string"
+    },
+    {
+      "name": "DEF_MEDIA_HOST",
+      "type": "string"
+    },
+    {
+      "name": "DEF_TAG_PREFIX",
+      "type": "string"
+    },
+    {
+      "name": "DICT_VERSION",
+      "type": "number"
+    },
+    {
+      "name": "DONATE_URL",
+      "type": "string"
+    },
+    {
+      "name": "DisconnectReason",
+      "type": "object"
+    },
+    {
+      "name": "Dugong",
+      "type": "function"
+    },
+    {
+      "name": "FLAG_BYTE",
+      "type": "number"
+    },
+    {
+      "name": "FLAG_EVENT",
+      "type": "number"
+    },
+    {
+      "name": "FLAG_EXTENDED",
+      "type": "number"
+    },
+    {
+      "name": "FLAG_FIELD",
+      "type": "number"
+    },
+    {
+      "name": "FLAG_GLOBAL",
+      "type": "number"
+    },
+    {
+      "name": "GO_KEYWORDS",
+      "type": "object"
+    },
+    {
+      "name": "HISTORY_SYNC_PAUSED_TIMEOUT_MS",
+      "type": "number"
+    },
+    {
+      "name": "INITIAL_PREKEY_COUNT",
+      "type": "number"
+    },
+    {
+      "name": "Itsuki",
+      "type": "function"
+    },
+    {
+      "name": "JS_KEYWORDS",
+      "type": "object"
+    },
+    {
+      "name": "KAGE_BUILD",
+      "type": "object"
+    },
+    {
+      "name": "KEY_BUNDLE_TYPE",
+      "type": "object"
+    },
+    {
+      "name": "LANGUAGE_KEYWORDS",
+      "type": "object"
+    },
+    {
+      "name": "LEXER_REGEX",
+      "type": "object"
+    },
+    {
+      "name": "LIBRARY_NAME",
+      "type": "string"
+    },
+    {
+      "name": "LIDMappingStore",
+      "type": "function"
+    },
+    {
+      "name": "LT_HASH_ANTI_TAMPERING",
+      "type": "object"
+    },
+    {
+      "name": "LUA_KEYWORDS",
+      "type": "object"
+    },
+    {
+      "name": "ListType",
+      "type": "object"
+    },
+    {
+      "name": "MAX_SYNC_ATTEMPTS",
+      "type": "number"
+    },
+    {
+      "name": "MEDIA_HKDF_KEY_MAPPING",
+      "type": "object"
+    },
+    {
+      "name": "MEDIA_KEYS",
+      "type": "object"
+    },
+    {
+      "name": "MEDIA_PATH_MAP",
+      "type": "object"
+    },
+    {
+      "name": "MEDIA_RETRY_STATUS_MAP",
+      "type": "object"
+    },
+    {
+      "name": "META_AI_JID",
+      "type": "string"
+    },
+    {
+      "name": "MIN_PREKEY_COUNT",
+      "type": "number"
+    },
+    {
+      "name": "MIN_UPLOAD_INTERVAL",
+      "type": "number"
+    },
+    {
+      "name": "MISSING_KEYS_ERROR_TEXT",
+      "type": "string"
+    },
+    {
+      "name": "MessageRetryManager",
+      "type": "function"
+    },
+    {
+      "name": "MexOperations",
+      "type": "object"
+    },
+    {
+      "name": "MexUpdatesOperations",
+      "type": "object"
+    },
+    {
+      "name": "NACK_REASONS",
+      "type": "object"
+    },
+    {
+      "name": "NEWSLETTER_MEDIA_PATH_MAP",
+      "type": "object"
+    },
+    {
+      "name": "NOISE_MODE",
+      "type": "string"
+    },
+    {
+      "name": "NOISE_WA_HEADER",
+      "type": "object"
+    },
+    {
+      "name": "NO_MESSAGE_FOUND_ERROR_TEXT",
+      "type": "string"
+    },
+    {
+      "name": "NewChatMessageCappingMVStatusType",
+      "type": "object"
+    },
+    {
+      "name": "NewChatMessageCappingOTEStatusType",
+      "type": "object"
+    },
+    {
+      "name": "NewChatMessageCappingStatusType",
+      "type": "object"
+    },
+    {
+      "name": "OFFICIAL_BIZ_JID",
+      "type": "string"
+    },
+    {
+      "name": "ORich",
+      "type": "function"
+    },
+    {
+      "name": "ObjectRepository",
+      "type": "function"
+    },
+    {
+      "name": "PHONENUMBER_MCC",
+      "type": "object"
+    },
+    {
+      "name": "PHONE_CONNECTION_CB",
+      "type": "string"
+    },
+    {
+      "name": "PLACEHOLDER_MAX_AGE_SECONDS",
+      "type": "number"
+    },
+    {
+      "name": "PROCESSABLE_HISTORY_TYPES",
+      "type": "object"
+    },
+    {
+      "name": "PSA_WID",
+      "type": "string"
+    },
+    {
+      "name": "PYTHON_KEYWORDS",
+      "type": "object"
+    },
+    {
+      "name": "PreKeyManager",
+      "type": "function"
+    },
+    {
+      "name": "ProtocolType",
+      "type": "object"
+    },
+    {
+      "name": "QueryIds",
+      "type": "object"
+    },
+    {
+      "name": "ReachoutTimelockEnforcementType",
+      "type": "object"
+    },
+    {
+      "name": "RetryReason",
+      "type": "object"
+    },
+    {
+      "name": "RichSubMessageType",
+      "type": "object"
+    },
+    {
+      "name": "SERVER_ERROR_CODES",
+      "type": "object"
+    },
+    {
+      "name": "SERVER_JID",
+      "type": "string"
+    },
+    {
+      "name": "STATUS_EXPIRY_SECONDS",
+      "type": "number"
+    },
+    {
+      "name": "STORIES_JID",
+      "type": "string"
+    },
+    {
+      "name": "S_WHATSAPP_NET",
+      "type": "string"
+    },
+    {
+      "name": "SyncState",
+      "type": "object"
+    },
+    {
+      "name": "TC_TOKEN_INDEX_KEY",
+      "type": "string"
+    },
+    {
+      "name": "TEXT_DECODER",
+      "type": "object"
+    },
+    {
+      "name": "TEXT_ENCODER",
+      "type": "object"
+    },
+    {
+      "name": "TimeMs",
+      "type": "object"
+    },
+    {
+      "name": "Toolkit",
+      "type": "function"
+    },
+    {
+      "name": "UNAUTHORIZED_CODES",
+      "type": "object"
+    },
+    {
+      "name": "UPLOAD_TIMEOUT",
+      "type": "number"
+    },
+    {
+      "name": "URL_REGEX",
+      "type": "object"
+    },
+    {
+      "name": "USyncBotProfileProtocol",
+      "type": "function"
+    },
+    {
+      "name": "USyncContactProtocol",
+      "type": "function"
+    },
+    {
+      "name": "USyncDeviceProtocol",
+      "type": "function"
+    },
+    {
+      "name": "USyncDisappearingModeProtocol",
+      "type": "function"
+    },
+    {
+      "name": "USyncLIDProtocol",
+      "type": "function"
+    },
+    {
+      "name": "USyncQuery",
+      "type": "function"
+    },
+    {
+      "name": "USyncStatusProtocol",
+      "type": "function"
+    },
+    {
+      "name": "USyncUser",
+      "type": "function"
+    },
+    {
+      "name": "USyncUsernameProtocol",
+      "type": "function"
+    },
+    {
+      "name": "VERSION",
+      "type": "string"
+    },
+    {
+      "name": "VoipClient",
+      "type": "function"
+    },
+    {
+      "name": "WAJIDDomains",
+      "type": "object"
+    },
+    {
+      "name": "WAMessageAddressingMode",
+      "type": "object"
+    },
+    {
+      "name": "WAMessageStatus",
+      "type": "object"
+    },
+    {
+      "name": "WAMessageStubType",
+      "type": "object"
+    },
+    {
+      "name": "WAProto",
+      "type": "object"
+    },
+    {
+      "name": "WA_ADV_ACCOUNT_SIG_PREFIX",
+      "type": "object"
+    },
+    {
+      "name": "WA_ADV_DEVICE_SIG_PREFIX",
+      "type": "object"
+    },
+    {
+      "name": "WA_ADV_HOSTED_ACCOUNT_SIG_PREFIX",
+      "type": "object"
+    },
+    {
+      "name": "WA_ADV_HOSTED_DEVICE_SIG_PREFIX",
+      "type": "object"
+    },
+    {
+      "name": "WA_CERT_DETAILS",
+      "type": "object"
+    },
+    {
+      "name": "WA_DEFAULT_EPHEMERAL",
+      "type": "number"
+    },
+    {
+      "name": "WEB_EVENTS",
+      "type": "object"
+    },
+    {
+      "name": "WEB_GLOBALS",
+      "type": "object"
+    },
+    {
+      "name": "XWAPaths",
+      "type": "object"
+    },
+    {
+      "name": "XWAPathsMexUpdates",
+      "type": "object"
+    },
+    {
+      "name": "addTransactionCapability",
+      "type": "function"
+    },
+    {
+      "name": "aesDecrypt",
+      "type": "function"
+    },
+    {
+      "name": "aesDecryptCTR",
+      "type": "function"
+    },
+    {
+      "name": "aesDecryptGCM",
+      "type": "function"
+    },
+    {
+      "name": "aesDecryptWithIV",
+      "type": "function"
+    },
+    {
+      "name": "aesEncrypWithIV",
+      "type": "function"
+    },
+    {
+      "name": "aesEncrypt",
+      "type": "function"
+    },
+    {
+      "name": "aesEncryptCTR",
+      "type": "function"
+    },
+    {
+      "name": "aesEncryptGCM",
+      "type": "function"
+    },
+    {
+      "name": "aggregateMessageKeysNotFromMe",
+      "type": "function"
+    },
+    {
+      "name": "areJidsSameUser",
+      "type": "function"
+    },
+    {
+      "name": "asciiDecode",
+      "type": "function"
+    },
+    {
+      "name": "asciiEncode",
+      "type": "function"
+    },
+    {
+      "name": "assertMeId",
+      "type": "function"
+    },
+    {
+      "name": "assertMediaContent",
+      "type": "function"
+    },
+    {
+      "name": "assertNodeErrorFree",
+      "type": "function"
+    },
+    {
+      "name": "binaryNodeToString",
+      "type": "function"
+    },
+    {
+      "name": "bindWaitForConnectionUpdate",
+      "type": "function"
+    },
+    {
+      "name": "bindWaitForEvent",
+      "type": "function"
+    },
+    {
+      "name": "botMetadataCertificate",
+      "type": "function"
+    },
+    {
+      "name": "botMetadataSignature",
+      "type": "function"
+    },
+    {
+      "name": "buildAckStanza",
+      "type": "function"
+    },
+    {
+      "name": "buildBotForwardedMessage",
+      "type": "function"
+    },
+    {
+      "name": "buildMergedTcTokenIndexWrite",
+      "type": "function"
+    },
+    {
+      "name": "buildPairingQRData",
+      "type": "function"
+    },
+    {
+      "name": "buildRichContextInfo",
+      "type": "function"
+    },
+    {
+      "name": "buildTcTokenFromJid",
+      "type": "function"
+    },
+    {
+      "name": "bytesToCrockford",
+      "type": "function"
+    },
+    {
+      "name": "captureEventStream",
+      "type": "function"
+    },
+    {
+      "name": "captureStatus",
+      "type": "function"
+    },
+    {
+      "name": "captureUnifiedResponse",
+      "type": "function"
+    },
+    {
+      "name": "cargarExtrasKage",
+      "type": "function"
+    },
+    {
+      "name": "chatModificationToAppPatch",
+      "type": "function"
+    },
+    {
+      "name": "cleanMessage",
+      "type": "function"
+    },
+    {
+      "name": "clearStatuses",
+      "type": "function"
+    },
+    {
+      "name": "configureSuccessfulPairing",
+      "type": "function"
+    },
+    {
+      "name": "createSignalIdentity",
+      "type": "function"
+    },
+    {
+      "name": "debouncedTimeout",
+      "type": "function"
+    },
+    {
+      "name": "decodeBinaryNode",
+      "type": "function"
+    },
+    {
+      "name": "decodeDecompressedBinaryNode",
+      "type": "function"
+    },
+    {
+      "name": "decodeMediaRetryNode",
+      "type": "function"
+    },
+    {
+      "name": "decodeMessageNode",
+      "type": "function"
+    },
+    {
+      "name": "decodePatches",
+      "type": "function"
+    },
+    {
+      "name": "decodeSyncdMutations",
+      "type": "function"
+    },
+    {
+      "name": "decodeSyncdPatch",
+      "type": "function"
+    },
+    {
+      "name": "decodeSyncdSnapshot",
+      "type": "function"
+    },
+    {
+      "name": "decompressingIfRequired",
+      "type": "function"
+    },
+    {
+      "name": "decryptComment",
+      "type": "function"
+    },
+    {
+      "name": "decryptEventEdit",
+      "type": "function"
+    },
+    {
+      "name": "decryptEventResponse",
+      "type": "function"
+    },
+    {
+      "name": "decryptMediaRetryData",
+      "type": "function"
+    },
+    {
+      "name": "decryptMessageEdit",
+      "type": "function"
+    },
+    {
+      "name": "decryptMessageNode",
+      "type": "function"
+    },
+    {
+      "name": "decryptPollVote",
+      "type": "function"
+    },
+    {
+      "name": "decryptReaction",
+      "type": "function"
+    },
+    {
+      "name": "default",
+      "type": "function"
+    },
+    {
+      "name": "delay",
+      "type": "function"
+    },
+    {
+      "name": "delayCancellable",
+      "type": "function"
+    },
+    {
+      "name": "derivePairingCodeKey",
+      "type": "function"
+    },
+    {
+      "name": "downloadAndProcessHistorySyncNotification",
+      "type": "function"
+    },
+    {
+      "name": "downloadConsentedViewOnce",
+      "type": "function"
+    },
+    {
+      "name": "downloadContentFromMessage",
+      "type": "function"
+    },
+    {
+      "name": "downloadEncryptedContent",
+      "type": "function"
+    },
+    {
+      "name": "downloadExternalBlob",
+      "type": "function"
+    },
+    {
+      "name": "downloadExternalPatch",
+      "type": "function"
+    },
+    {
+      "name": "downloadHistory",
+      "type": "function"
+    },
+    {
+      "name": "downloadMediaMessage",
+      "type": "function"
+    },
+    {
+      "name": "downloadNormalMedia",
+      "type": "function"
+    },
+    {
+      "name": "downloadViewOnceMessage",
+      "type": "function"
+    },
+    {
+      "name": "emitSyncActionResults",
+      "type": "function"
+    },
+    {
+      "name": "encodeBase64EncodedStringForUpload",
+      "type": "function"
+    },
+    {
+      "name": "encodeBigEndian",
+      "type": "function"
+    },
+    {
+      "name": "encodeBinaryNode",
+      "type": "function"
+    },
+    {
+      "name": "encodeNewsletterMessage",
+      "type": "function"
+    },
+    {
+      "name": "encodeSignedDeviceIdentity",
+      "type": "function"
+    },
+    {
+      "name": "encodeSyncdPatch",
+      "type": "function"
+    },
+    {
+      "name": "encodeWAM",
+      "type": "function"
+    },
+    {
+      "name": "encodeWAMessage",
+      "type": "function"
+    },
+    {
+      "name": "encryptMediaRetryRequest",
+      "type": "function"
+    },
+    {
+      "name": "encryptedStream",
+      "type": "function"
+    },
+    {
+      "name": "ensureLTHashStateVersion",
+      "type": "function"
+    },
+    {
+      "name": "executeWMexQuery",
+      "type": "function"
+    },
+    {
+      "name": "exportStatusZip",
+      "type": "function"
+    },
+    {
+      "name": "extensionForMediaMessage",
+      "type": "function"
+    },
+    {
+      "name": "extractAddressingContext",
+      "type": "function"
+    },
+    {
+      "name": "extractCommunityMetadata",
+      "type": "function"
+    },
+    {
+      "name": "extractDeviceJids",
+      "type": "function"
+    },
+    {
+      "name": "extractE2ESessionFromRetryReceipt",
+      "type": "function"
+    },
+    {
+      "name": "extractImageThumb",
+      "type": "function"
+    },
+    {
+      "name": "extractMessageContent",
+      "type": "function"
+    },
+    {
+      "name": "extractSyncdPatches",
+      "type": "function"
+    },
+    {
+      "name": "extractUrlFromText",
+      "type": "function"
+    },
+    {
+      "name": "extractVideoThumb",
+      "type": "function"
+    },
+    {
+      "name": "fetchLatestBaileysVersion",
+      "type": "function"
+    },
+    {
+      "name": "fetchLatestKageVersion",
+      "type": "function"
+    },
+    {
+      "name": "fetchLatestWaWebVersion",
+      "type": "function"
+    },
+    {
+      "name": "findStatus",
+      "type": "function"
+    },
+    {
+      "name": "flushStatuses",
+      "type": "function"
+    },
+    {
+      "name": "fromUnicodeEscape",
+      "type": "function"
+    },
+    {
+      "name": "generateCodeBlockContent",
+      "type": "function"
+    },
+    {
+      "name": "generateCodeBlockContentV2",
+      "type": "function"
+    },
+    {
+      "name": "generateForwardMessageContent",
+      "type": "function"
+    },
+    {
+      "name": "generateLatexContent",
+      "type": "function"
+    },
+    {
+      "name": "generateLatexImageContent",
+      "type": "function"
+    },
+    {
+      "name": "generateLatexInlineImageContent",
+      "type": "function"
+    },
+    {
+      "name": "generateLinkContent",
+      "type": "function"
+    },
+    {
+      "name": "generateLinkContentV2",
+      "type": "function"
+    },
+    {
+      "name": "generateLinkPreviewIfRequired",
+      "type": "function"
+    },
+    {
+      "name": "generateListContent",
+      "type": "function"
+    },
+    {
+      "name": "generateLoginNode",
+      "type": "function"
+    },
+    {
+      "name": "generateMdTagPrefix",
+      "type": "function"
+    },
+    {
+      "name": "generateMessageID",
+      "type": "function"
+    },
+    {
+      "name": "generateMessageIDV2",
+      "type": "function"
+    },
+    {
+      "name": "generateOrGetPreKeys",
+      "type": "function"
+    },
+    {
+      "name": "generateParticipantHashV2",
+      "type": "function"
+    },
+    {
+      "name": "generateProfilePicture",
+      "type": "function"
+    },
+    {
+      "name": "generateRegistrationId",
+      "type": "function"
+    },
+    {
+      "name": "generateRegistrationNode",
+      "type": "function"
+    },
+    {
+      "name": "generateRichMessageContent",
+      "type": "function"
+    },
+    {
+      "name": "generateSignalPubKey",
+      "type": "function"
+    },
+    {
+      "name": "generateTableContent",
+      "type": "function"
+    },
+    {
+      "name": "generateTableContentV2",
+      "type": "function"
+    },
+    {
+      "name": "generateThumbnail",
+      "type": "function"
+    },
+    {
+      "name": "generateUnifiedResponseContent",
+      "type": "function"
+    },
+    {
+      "name": "generateWAMessage",
+      "type": "function"
+    },
+    {
+      "name": "generateWAMessageContent",
+      "type": "function"
+    },
+    {
+      "name": "generateWAMessageFromContent",
+      "type": "function"
+    },
+    {
+      "name": "getAggregateResponsesInEventMessage",
+      "type": "function"
+    },
+    {
+      "name": "getAggregateVotesInPollMessage",
+      "type": "function"
+    },
+    {
+      "name": "getAllBinaryNodeChildren",
+      "type": "function"
+    },
+    {
+      "name": "getAudioData",
+      "type": "function"
+    },
+    {
+      "name": "getAudioDuration",
+      "type": "function"
+    },
+    {
+      "name": "getAudioWaveform",
+      "type": "function"
+    },
+    {
+      "name": "getBinaryFilteredBizBot",
+      "type": "function"
+    },
+    {
+      "name": "getBinaryFilteredButtons",
+      "type": "function"
+    },
+    {
+      "name": "getBinaryNodeChild",
+      "type": "function"
+    },
+    {
+      "name": "getBinaryNodeChildBuffer",
+      "type": "function"
+    },
+    {
+      "name": "getBinaryNodeChildString",
+      "type": "function"
+    },
+    {
+      "name": "getBinaryNodeChildUInt",
+      "type": "function"
+    },
+    {
+      "name": "getBinaryNodeChildren",
+      "type": "function"
+    },
+    {
+      "name": "getBinaryNodeMessages",
+      "type": "function"
+    },
+    {
+      "name": "getBizBinaryNode",
+      "type": "function"
+    },
+    {
+      "name": "getBotJid",
+      "type": "function"
+    },
+    {
+      "name": "getCallStatusFromNode",
+      "type": "function"
+    },
+    {
+      "name": "getChatId",
+      "type": "function"
+    },
+    {
+      "name": "getCodeFromWSError",
+      "type": "function"
+    },
+    {
+      "name": "getCompanionPlatformId",
+      "type": "function"
+    },
+    {
+      "name": "getCompanionWebClientType",
+      "type": "function"
+    },
+    {
+      "name": "getContentType",
+      "type": "function"
+    },
+    {
+      "name": "getCountryForJid",
+      "type": "function"
+    },
+    {
+      "name": "getCountryInfo",
+      "type": "function"
+    },
+    {
+      "name": "getDecryptionJid",
+      "type": "function"
+    },
+    {
+      "name": "getDevice",
+      "type": "function"
+    },
+    {
+      "name": "getErrorCodeFromStreamError",
+      "type": "function"
+    },
+    {
+      "name": "getHistoryMsg",
+      "type": "function"
+    },
+    {
+      "name": "getHttpStream",
+      "type": "function"
+    },
+    {
+      "name": "getImageProcessingLibrary",
+      "type": "function"
+    },
+    {
+      "name": "getKeyAuthor",
+      "type": "function"
+    },
+    {
+      "name": "getMediaKeys",
+      "type": "function"
+    },
+    {
+      "name": "getMediaRetryKey",
+      "type": "function"
+    },
+    {
+      "name": "getMessageDiagnostics",
+      "type": "function"
+    },
+    {
+      "name": "getMessageReportingToken",
+      "type": "function"
+    },
+    {
+      "name": "getNextPreKeys",
+      "type": "function"
+    },
+    {
+      "name": "getNextPreKeysNode",
+      "type": "function"
+    },
+    {
+      "name": "getPlatformId",
+      "type": "function"
+    },
+    {
+      "name": "getPreKeys",
+      "type": "function"
+    },
+    {
+      "name": "getRawMediaUploadData",
+      "type": "function"
+    },
+    {
+      "name": "getSenderLid",
+      "type": "function"
+    },
+    {
+      "name": "getServerFromDomainType",
+      "type": "function"
+    },
+    {
+      "name": "getStatusCodeForMediaRetry",
+      "type": "function"
+    },
+    {
+      "name": "getStatusFromReceiptType",
+      "type": "function"
+    },
+    {
+      "name": "getStream",
+      "type": "function"
+    },
+    {
+      "name": "getUrlFromDirectPath",
+      "type": "function"
+    },
+    {
+      "name": "getUrlInfo",
+      "type": "function"
+    },
+    {
+      "name": "getViewOnceContent",
+      "type": "function"
+    },
+    {
+      "name": "getWAUploadToServer",
+      "type": "function"
+    },
+    {
+      "name": "handleAutoMedia",
+      "type": "function"
+    },
+    {
+      "name": "handleAutoViewOnce",
+      "type": "function"
+    },
+    {
+      "name": "handleConsentedAutoViewOnce",
+      "type": "function"
+    },
+    {
+      "name": "handleIdentityChange",
+      "type": "function"
+    },
+    {
+      "name": "handleStatus",
+      "type": "function"
+    },
+    {
+      "name": "handleStatusArchive",
+      "type": "function"
+    },
+    {
+      "name": "hasAdvancedMessageOptions",
+      "type": "function"
+    },
+    {
+      "name": "hasNonNullishProperty",
+      "type": "function"
+    },
+    {
+      "name": "hasOptionalProperty",
+      "type": "function"
+    },
+    {
+      "name": "hasValidAlbumMedia",
+      "type": "function"
+    },
+    {
+      "name": "hasValidCarouselHeader",
+      "type": "function"
+    },
+    {
+      "name": "hasValidInteractiveHeader",
+      "type": "function"
+    },
+    {
+      "name": "hkdf",
+      "type": "function"
+    },
+    {
+      "name": "hkdfInfoKey",
+      "type": "function"
+    },
+    {
+      "name": "hmacSign",
+      "type": "function"
+    },
+    {
+      "name": "initAuthCreds",
+      "type": "function"
+    },
+    {
+      "name": "inspectMessage",
+      "type": "function"
+    },
+    {
+      "name": "installKageTools",
+      "type": "function"
+    },
+    {
+      "name": "installMessageInspector",
+      "type": "function"
+    },
+    {
+      "name": "isAppStateSyncIrrecoverable",
+      "type": "function"
+    },
+    {
+      "name": "isHostedLidUser",
+      "type": "function"
+    },
+    {
+      "name": "isHostedPnUser",
+      "type": "function"
+    },
+    {
+      "name": "isJidBot",
+      "type": "function"
+    },
+    {
+      "name": "isJidBroadcast",
+      "type": "function"
+    },
+    {
+      "name": "isJidGroup",
+      "type": "function"
+    },
+    {
+      "name": "isJidMetaAI",
+      "type": "function"
+    },
+    {
+      "name": "isJidMetaAi",
+      "type": "function"
+    },
+    {
+      "name": "isJidNewsletter",
+      "type": "function"
+    },
+    {
+      "name": "isJidStatusBroadcast",
+      "type": "function"
+    },
+    {
+      "name": "isJidUser",
+      "type": "function"
+    },
+    {
+      "name": "isKnownStatusContact",
+      "type": "function"
+    },
+    {
+      "name": "isLidUser",
+      "type": "function"
+    },
+    {
+      "name": "isMissingKeyError",
+      "type": "function"
+    },
+    {
+      "name": "isPnUser",
+      "type": "function"
+    },
+    {
+      "name": "isRealMessage",
+      "type": "function"
+    },
+    {
+      "name": "isStringNullOrEmpty",
+      "type": "function"
+    },
+    {
+      "name": "isTcTokenExpired",
+      "type": "function"
+    },
+    {
+      "name": "isWABusinessPlatform",
+      "type": "function"
+    },
+    {
+      "name": "jidDecode",
+      "type": "function"
+    },
+    {
+      "name": "jidEncode",
+      "type": "function"
+    },
+    {
+      "name": "jidNormalizedUser",
+      "type": "function"
+    },
+    {
+      "name": "lidToJid",
+      "type": "function"
+    },
+    {
+      "name": "listStatuses",
+      "type": "function"
+    },
+    {
+      "name": "makeCacheManagerAuthState",
+      "type": "function"
+    },
+    {
+      "name": "makeCacheableSignalKeyStore",
+      "type": "function"
+    },
+    {
+      "name": "makeCommunitiesSocket",
+      "type": "function"
+    },
+    {
+      "name": "makeEventBuffer",
+      "type": "function"
+    },
+    {
+      "name": "makeInMemoryStore",
+      "type": "function"
+    },
+    {
+      "name": "makeLtHashGenerator",
+      "type": "function"
+    },
+    {
+      "name": "makeNoiseHandler",
+      "type": "function"
+    },
+    {
+      "name": "makeOfflineNodeProcessor",
+      "type": "function"
+    },
+    {
+      "name": "makeOrderedDictionary",
+      "type": "function"
+    },
+    {
+      "name": "makeStickerPack",
+      "type": "function"
+    },
+    {
+      "name": "makeWASocket",
+      "type": "function"
+    },
+    {
+      "name": "markStatusDeleted",
+      "type": "function"
+    },
+    {
+      "name": "markViewOnce",
+      "type": "function"
+    },
+    {
+      "name": "md5",
+      "type": "function"
+    },
+    {
+      "name": "mediaMessageSHA256B64",
+      "type": "function"
+    },
+    {
+      "name": "mutationKeys",
+      "type": "function"
+    },
+    {
+      "name": "newLTHashState",
+      "type": "function"
+    },
+    {
+      "name": "normalizeEventMessage",
+      "type": "function"
+    },
+    {
+      "name": "normalizeMessageContent",
+      "type": "function"
+    },
+    {
+      "name": "normalizeViewOnceMessage",
+      "type": "function"
+    },
+    {
+      "name": "parseAndInjectE2ESessions",
+      "type": "function"
+    },
+    {
+      "name": "prepareAlbumMessageContent",
+      "type": "function"
+    },
+    {
+      "name": "prepareConsentedViewOnce",
+      "type": "function"
+    },
+    {
+      "name": "prepareDisappearingMessageSettingContent",
+      "type": "function"
+    },
+    {
+      "name": "prepareEventMessage",
+      "type": "function"
+    },
+    {
+      "name": "prepareRichResponseMessage",
+      "type": "function"
+    },
+    {
+      "name": "prepareStream",
+      "type": "function"
+    },
+    {
+      "name": "prepareWAMessageMedia",
+      "type": "function"
+    },
+    {
+      "name": "printQRIfNecessaryListener",
+      "type": "function"
+    },
+    {
+      "name": "processContactAction",
+      "type": "function"
+    },
+    {
+      "name": "processHistoryMessage",
+      "type": "function"
+    },
+    {
+      "name": "processMessage",
+      "type": "function"
+    },
+    {
+      "name": "processSyncAction",
+      "type": "function"
+    },
+    {
+      "name": "promiseTimeout",
+      "type": "function"
+    },
+    {
+      "name": "proto",
+      "type": "object"
+    },
+    {
+      "name": "readAndEmitEventStream",
+      "type": "function"
+    },
+    {
+      "name": "readTcTokenIndex",
+      "type": "function"
+    },
+    {
+      "name": "reduceBinaryNodeToDictionary",
+      "type": "function"
+    },
+    {
+      "name": "refreshReceivedStatuses",
+      "type": "function"
+    },
+    {
+      "name": "rememberMessage",
+      "type": "function"
+    },
+    {
+      "name": "resendViewOnceMessage",
+      "type": "function"
+    },
+    {
+      "name": "resolveIssuanceJid",
+      "type": "function"
+    },
+    {
+      "name": "resolveTcTokenJid",
+      "type": "function"
+    },
+    {
+      "name": "saveConsentedViewOnce",
+      "type": "function"
+    },
+    {
+      "name": "saveNormalMedia",
+      "type": "function"
+    },
+    {
+      "name": "saveReceivedStatus",
+      "type": "function"
+    },
+    {
+      "name": "say",
+      "type": "function"
+    },
+    {
+      "name": "sendAIResponse",
+      "type": "function"
+    },
+    {
+      "name": "sha256",
+      "type": "function"
+    },
+    {
+      "name": "shouldIncludeBizBinaryNode",
+      "type": "function"
+    },
+    {
+      "name": "shouldIncludeReportingToken",
+      "type": "function"
+    },
+    {
+      "name": "shouldIncrementChatUnread",
+      "type": "function"
+    },
+    {
+      "name": "shouldSendNewTcToken",
+      "type": "function"
+    },
+    {
+      "name": "showKageBanner",
+      "type": "function"
+    },
+    {
+      "name": "signedKeyPair",
+      "type": "function"
+    },
+    {
+      "name": "statusContent",
+      "type": "function"
+    },
+    {
+      "name": "storeTcTokensFromIqResult",
+      "type": "function"
+    },
+    {
+      "name": "suppliedProto",
+      "type": "object"
+    },
+    {
+      "name": "toBuffer",
+      "type": "function"
+    },
+    {
+      "name": "toJid",
+      "type": "function"
+    },
+    {
+      "name": "toNumber",
+      "type": "function"
+    },
+    {
+      "name": "toReadable",
+      "type": "function"
+    },
+    {
+      "name": "toTableMetadataV2",
+      "type": "function"
+    },
+    {
+      "name": "toUnicodeEscape",
+      "type": "function"
+    },
+    {
+      "name": "toUnified",
+      "type": "function"
+    },
+    {
+      "name": "tokenizeCode",
+      "type": "function"
+    },
+    {
+      "name": "tokenizeCodeV2",
+      "type": "function"
+    },
+    {
+      "name": "transferDevice",
+      "type": "function"
+    },
+    {
+      "name": "trimUndefined",
+      "type": "function"
+    },
+    {
+      "name": "unixTimestampSeconds",
+      "type": "function"
+    },
+    {
+      "name": "unpadRandomMax16",
+      "type": "function"
+    },
+    {
+      "name": "unwrapNormalMedia",
+      "type": "function"
+    },
+    {
+      "name": "updateMessageWithEventResponse",
+      "type": "function"
+    },
+    {
+      "name": "updateMessageWithPollUpdate",
+      "type": "function"
+    },
+    {
+      "name": "updateMessageWithReaction",
+      "type": "function"
+    },
+    {
+      "name": "updateMessageWithReceipt",
+      "type": "function"
+    },
+    {
+      "name": "uploadFile",
+      "type": "function"
+    },
+    {
+      "name": "uploadWithNodeHttp",
+      "type": "function"
+    },
+    {
+      "name": "useMultiFileAuthState",
+      "type": "function"
+    },
+    {
+      "name": "useSingleFileAuthState",
+      "type": "function"
+    },
+    {
+      "name": "useSqliteAuthState",
+      "type": "function"
+    },
+    {
+      "name": "version",
+      "type": "object"
+    },
+    {
+      "name": "vid2jpg",
+      "type": "function"
+    },
+    {
+      "name": "waChatKey",
+      "type": "function"
+    },
+    {
+      "name": "waLabelAssociationKey",
+      "type": "object"
+    },
+    {
+      "name": "waMessageID",
+      "type": "function"
+    },
+    {
+      "name": "wrapToBotForwardedMessage",
+      "type": "function"
+    },
+    {
+      "name": "writeRandomPadMax16",
+      "type": "function"
+    },
+    {
+      "name": "xmppPreKey",
+      "type": "function"
+    },
+    {
+      "name": "xmppSignedPreKey",
+      "type": "function"
+    }
+  ],
+  "socketMethods": [
+    "addChatLabel",
+    "addLabel",
+    "addMessageLabel",
+    "addOrEditContact",
+    "addOrEditQuickReply",
+    "appPatch",
+    "assertSessions",
+    "chatModify",
+    "cleanDirtyBits",
+    "clearMessage",
+    "communityAcceptInvite",
+    "communityAcceptInviteV4",
+    "communityCreate",
+    "communityCreateGroup",
+    "communityFetchAllParticipating",
+    "communityFetchLinkedGroups",
+    "communityGetInviteInfo",
+    "communityInviteCode",
+    "communityJoinApprovalMode",
+    "communityLeave",
+    "communityLinkGroup",
+    "communityMemberAddMode",
+    "communityMetadata",
+    "communityParticipantsUpdate",
+    "communityQuery",
+    "communityRequestParticipantsList",
+    "communityRequestParticipantsUpdate",
+    "communityRevokeInvite",
+    "communityRevokeInviteV4",
+    "communitySettingUpdate",
+    "communityToggleEphemeral",
+    "communityUnlinkGroup",
+    "communityUpdateDescription",
+    "communityUpdateSubject",
+    "createCallLink",
+    "createParticipantNodes",
+    "digestKeyBundle",
+    "downloadConsentedViewOnce",
+    "downloadNormalMedia",
+    "downloadViewOnceMessage",
+    "enableEventTracking",
+    "enableMediaAutomation",
+    "enableStatusTracking",
+    "end",
+    "executeUSyncQuery",
+    "executeWMexQuery",
+    "exportReceivedStatuses",
+    "fetchAccountReachoutTimelock",
+    "fetchBlocklist",
+    "fetchDisappearingDuration",
+    "fetchMessageHistory",
+    "fetchNewChatMessageCap",
+    "fetchPrivacySettings",
+    "fetchStatus",
+    "findUserId",
+    "generateMessageTag",
+    "getBotListV2",
+    "getBusinessProfile",
+    "getCatalog",
+    "getCollections",
+    "getCountryForJid",
+    "getEphemeralGroup",
+    "getLidUser",
+    "getMediaHost",
+    "getMessageDiagnostics",
+    "getOrderDetails",
+    "getPrivacyTokens",
+    "getReceivedStatuses",
+    "getUSyncDevices",
+    "getViewOnceContent",
+    "groupAcceptInvite",
+    "groupAcceptInviteV4",
+    "groupCreate",
+    "groupFetchAllParticipating",
+    "groupGetInviteInfo",
+    "groupInviteCode",
+    "groupJoinApprovalMode",
+    "groupLeave",
+    "groupMemberAddMode",
+    "groupMetadata",
+    "groupParticipantsUpdate",
+    "groupQuery",
+    "groupRequestParticipantsList",
+    "groupRequestParticipantsUpdate",
+    "groupRevokeInvite",
+    "groupRevokeInviteV4",
+    "groupSettingUpdate",
+    "groupToggleEphemeral",
+    "groupUpdateDescription",
+    "groupUpdateSubject",
+    "handleAutoViewOnce",
+    "inspectMessage",
+    "issuePrivacyTokens",
+    "logout",
+    "newsletterAdminCount",
+    "newsletterChangeOwner",
+    "newsletterCreate",
+    "newsletterDelete",
+    "newsletterDemote",
+    "newsletterFetchMessages",
+    "newsletterFetchUpdates",
+    "newsletterFollow",
+    "newsletterMetadata",
+    "newsletterMute",
+    "newsletterReactMessage",
+    "newsletterReactionMode",
+    "newsletterRemovePicture",
+    "newsletterSubscribed",
+    "newsletterSubscribers",
+    "newsletterUnfollow",
+    "newsletterUnmute",
+    "newsletterUpdate",
+    "newsletterUpdateDescription",
+    "newsletterUpdateName",
+    "newsletterUpdatePicture",
+    "normalizeViewOnceMessage",
+    "offerCall",
+    "onUnexpectedError",
+    "onWhatsApp",
+    "presenceSubscribe",
+    "productCreate",
+    "productDelete",
+    "productUpdate",
+    "profilePictureUrl",
+    "query",
+    "readMessages",
+    "refreshMediaConn",
+    "refreshReceivedStatuses",
+    "registerSocketEndHandler",
+    "rejectCall",
+    "relayMessage",
+    "removeChatLabel",
+    "removeContact",
+    "removeCoverPhoto",
+    "removeMessageLabel",
+    "removeProfilePicture",
+    "removeQuickReply",
+    "requestPairingCode",
+    "requestPlaceholderResend",
+    "resendViewOnceMessage",
+    "resyncAppState",
+    "rotateSignedPreKey",
+    "saveConsentedViewOnce",
+    "saveNormalMedia",
+    "saveReceivedStatus",
+    "sendAIResponse",
+    "sendMessage",
+    "sendMessageAck",
+    "sendNode",
+    "sendPeerDataOperationMessage",
+    "sendPresenceUpdate",
+    "sendRawMessage",
+    "sendReceipt",
+    "sendReceipts",
+    "sendRetryRequest",
+    "sendStatusMentions",
+    "sendUnifiedSession",
+    "sendWAMBuffer",
+    "star",
+    "subscribeNewsletterUpdates",
+    "updateBlockStatus",
+    "updateBusinessProfile",
+    "updateBussinesProfile",
+    "updateCallPrivacy",
+    "updateCoverPhoto",
+    "updateDefaultDisappearingMode",
+    "updateDisableLinkPreviewsPrivacy",
+    "updateGroupsAddPrivacy",
+    "updateLastSeenPrivacy",
+    "updateMediaMessage",
+    "updateMemberLabel",
+    "updateMessagesPrivacy",
+    "updateOnlinePrivacy",
+    "updateProfileName",
+    "updateProfilePicture",
+    "updateProfilePicturePrivacy",
+    "updateProfileStatus",
+    "updateReadReceiptsPrivacy",
+    "updateServerTimeOffset",
+    "updateStatusPrivacy",
+    "uploadPreKeys",
+    "uploadPreKeysToServerIfRequired",
+    "upsertMessage",
+    "waUploadToServer",
+    "waitForConnectionUpdate",
+    "waitForMessage",
+    "waitForSocketOpen"
+  ],
+  "historicalReadme": {
+    "methodsReferenced": 109,
+    "unresolved": [
+      "getBroadcastListInfo"
+    ]
+  }
+}

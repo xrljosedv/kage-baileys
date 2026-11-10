@@ -1,0 +1,2361 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "@cypress/request": {
+      "name": "@cypress/request",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [
+        "google-it",
+        "node-gtts"
+      ],
+      "range": "<=3.0.10",
+      "nodes": [
+        "node_modules/request"
+      ],
+      "fixAvailable": true
+    },
+    "@eslint-community/eslint-utils": {
+      "name": "@eslint-community/eslint-utils",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "eslint"
+      ],
+      "effects": [
+        "eslint"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@eslint-community/eslint-utils"
+      ],
+      "fixAvailable": {
+        "name": "eslint",
+        "version": "4.0.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@eslint/eslintrc": {
+      "name": "@eslint/eslintrc",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "minimatch"
+      ],
+      "effects": [
+        "eslint"
+      ],
+      "range": "0.0.1 || >=0.1.1",
+      "nodes": [
+        "node_modules/@eslint/eslintrc"
+      ],
+      "fixAvailable": {
+        "name": "eslint",
+        "version": "4.0.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@green-code/music-track-data": {
+      "name": "@green-code/music-track-data",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "axios"
+      ],
+      "effects": [],
+      "range": "*",
+      "nodes": [
+        "node_modules/@green-code/music-track-data"
+      ],
+      "fixAvailable": false
+    },
+    "@humanwhocodes/config-array": {
+      "name": "@humanwhocodes/config-array",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "minimatch"
+      ],
+      "effects": [
+        "eslint"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@humanwhocodes/config-array"
+      ],
+      "fixAvailable": {
+        "name": "eslint",
+        "version": "4.0.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@jimp/core": {
+      "name": "@jimp/core",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/types",
+        "@jimp/utils",
+        "file-type",
+        "phin"
+      ],
+      "effects": [
+        "@jimp/custom",
+        "@jimp/plugin-blur"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@jimp/core",
+        "node_modules/@jimp/diff/node_modules/@jimp/core",
+        "node_modules/@jimp/js-bmp/node_modules/@jimp/core",
+        "node_modules/@jimp/js-gif/node_modules/@jimp/core",
+        "node_modules/@jimp/js-jpeg/node_modules/@jimp/core",
+        "node_modules/@jimp/js-png/node_modules/@jimp/core",
+        "node_modules/@jimp/js-tiff/node_modules/@jimp/core",
+        "node_modules/@jimp/plugin-hash/node_modules/@jimp/core",
+        "node_modules/render-gif/node_modules/@jimp/core",
+        "vendor/kage-baileys/node_modules/@jimp/core"
+      ],
+      "fixAvailable": {
+        "name": "jimp",
+        "version": "0.22.12",
+        "isSemVerMajor": true
+      }
+    },
+    "@jimp/custom": {
+      "name": "@jimp/custom",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@jimp/core",
+        "@jimp/core"
+      ],
+      "effects": [
+        "jimp"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@jimp/custom",
+        "node_modules/render-gif/node_modules/@jimp/custom"
+      ],
+      "fixAvailable": {
+        "name": "jimp",
+        "version": "0.22.12",
+        "isSemVerMajor": true
+      }
+    },
+    "@jimp/diff": {
+      "name": "@jimp/diff",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/plugin-resize",
+        "@jimp/types",
+        "@jimp/utils"
+      ],
+      "effects": [],
+      "range": "*",
+      "nodes": [
+        "node_modules/@jimp/diff"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/js-bmp": {
+      "name": "@jimp/js-bmp",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/core",
+        "@jimp/types",
+        "@jimp/utils"
+      ],
+      "effects": [],
+      "range": "*",
+      "nodes": [
+        "node_modules/@jimp/js-bmp"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/js-gif": {
+      "name": "@jimp/js-gif",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/core",
+        "@jimp/types"
+      ],
+      "effects": [],
+      "range": "*",
+      "nodes": [
+        "node_modules/@jimp/js-gif"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/js-jpeg": {
+      "name": "@jimp/js-jpeg",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/core",
+        "@jimp/types"
+      ],
+      "effects": [],
+      "range": "*",
+      "nodes": [
+        "node_modules/@jimp/js-jpeg"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/js-png": {
+      "name": "@jimp/js-png",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/core",
+        "@jimp/types"
+      ],
+      "effects": [],
+      "range": "*",
+      "nodes": [
+        "node_modules/@jimp/js-png"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/js-tiff": {
+      "name": "@jimp/js-tiff",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/core",
+        "@jimp/types"
+      ],
+      "effects": [],
+      "range": "*",
+      "nodes": [
+        "node_modules/@jimp/js-tiff"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/plugin-blit": {
+      "name": "@jimp/plugin-blit",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/types",
+        "@jimp/utils",
+        "zod"
+      ],
+      "effects": [],
+      "range": ">=1.0.2--canary.4e85de0.0",
+      "nodes": [
+        "vendor/kage-baileys/node_modules/@jimp/plugin-blit"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/plugin-blur": {
+      "name": "@jimp/plugin-blur",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/core",
+        "@jimp/utils"
+      ],
+      "effects": [
+        "jimp"
+      ],
+      "range": ">=1.1.2",
+      "nodes": [
+        "vendor/kage-baileys/node_modules/@jimp/plugin-blur"
+      ],
+      "fixAvailable": {
+        "name": "terminal-image",
+        "version": "5.0.1",
+        "isSemVerMajor": true
+      }
+    },
+    "@jimp/plugin-circle": {
+      "name": "@jimp/plugin-circle",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/types",
+        "zod"
+      ],
+      "effects": [
+        "jimp"
+      ],
+      "range": ">=1.0.2--canary.4e85de0.0",
+      "nodes": [
+        "vendor/kage-baileys/node_modules/@jimp/plugin-circle"
+      ],
+      "fixAvailable": {
+        "name": "jimp",
+        "version": "0.22.12",
+        "isSemVerMajor": true
+      }
+    },
+    "@jimp/plugin-color": {
+      "name": "@jimp/plugin-color",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/core",
+        "@jimp/types",
+        "@jimp/utils",
+        "zod"
+      ],
+      "effects": [],
+      "range": ">=1.0.2--canary.4e85de0.0",
+      "nodes": [
+        "node_modules/@jimp/plugin-hash/node_modules/@jimp/plugin-color",
+        "vendor/kage-baileys/node_modules/@jimp/plugin-color"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/plugin-contain": {
+      "name": "@jimp/plugin-contain",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/core",
+        "@jimp/plugin-blit",
+        "@jimp/plugin-resize",
+        "@jimp/types",
+        "@jimp/utils",
+        "zod"
+      ],
+      "effects": [],
+      "range": ">=1.0.2--canary.4e85de0.0",
+      "nodes": [
+        "vendor/kage-baileys/node_modules/@jimp/plugin-contain"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/plugin-cover": {
+      "name": "@jimp/plugin-cover",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/core",
+        "@jimp/plugin-crop",
+        "@jimp/plugin-resize",
+        "@jimp/types",
+        "zod"
+      ],
+      "effects": [],
+      "range": ">=1.0.2--canary.4e85de0.0",
+      "nodes": [
+        "vendor/kage-baileys/node_modules/@jimp/plugin-cover"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/plugin-crop": {
+      "name": "@jimp/plugin-crop",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/core",
+        "@jimp/types",
+        "@jimp/utils",
+        "zod"
+      ],
+      "effects": [],
+      "range": ">=1.0.2--canary.4e85de0.0",
+      "nodes": [
+        "vendor/kage-baileys/node_modules/@jimp/plugin-crop"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/plugin-displace": {
+      "name": "@jimp/plugin-displace",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/types",
+        "@jimp/utils",
+        "zod"
+      ],
+      "effects": [],
+      "range": ">=1.0.2--canary.4e85de0.0",
+      "nodes": [
+        "vendor/kage-baileys/node_modules/@jimp/plugin-displace"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/plugin-dither": {
+      "name": "@jimp/plugin-dither",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/types"
+      ],
+      "effects": [],
+      "range": ">=1.0.2--canary.4e85de0.0",
+      "nodes": [
+        "vendor/kage-baileys/node_modules/@jimp/plugin-dither"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/plugin-fisheye": {
+      "name": "@jimp/plugin-fisheye",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/types",
+        "@jimp/utils",
+        "zod"
+      ],
+      "effects": [],
+      "range": ">=1.0.2--canary.4e85de0.0",
+      "nodes": [
+        "vendor/kage-baileys/node_modules/@jimp/plugin-fisheye"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/plugin-flip": {
+      "name": "@jimp/plugin-flip",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/types",
+        "zod"
+      ],
+      "effects": [],
+      "range": ">=1.0.2--canary.4e85de0.0",
+      "nodes": [
+        "vendor/kage-baileys/node_modules/@jimp/plugin-flip"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/plugin-hash": {
+      "name": "@jimp/plugin-hash",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/core",
+        "@jimp/js-bmp",
+        "@jimp/js-jpeg",
+        "@jimp/js-png",
+        "@jimp/js-tiff",
+        "@jimp/plugin-color",
+        "@jimp/plugin-resize",
+        "@jimp/types",
+        "@jimp/utils"
+      ],
+      "effects": [],
+      "range": "*",
+      "nodes": [
+        "node_modules/@jimp/plugin-hash"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/plugin-mask": {
+      "name": "@jimp/plugin-mask",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/types",
+        "zod"
+      ],
+      "effects": [],
+      "range": ">=1.0.2--canary.4e85de0.0",
+      "nodes": [
+        "vendor/kage-baileys/node_modules/@jimp/plugin-mask"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/plugin-print": {
+      "name": "@jimp/plugin-print",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/core",
+        "@jimp/js-jpeg",
+        "@jimp/js-png",
+        "@jimp/plugin-blit",
+        "@jimp/types",
+        "zod"
+      ],
+      "effects": [],
+      "range": ">=1.0.2--canary.4e85de0.0",
+      "nodes": [
+        "vendor/kage-baileys/node_modules/@jimp/plugin-print"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/plugin-quantize": {
+      "name": "@jimp/plugin-quantize",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "zod"
+      ],
+      "effects": [
+        "jimp"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@jimp/plugin-quantize"
+      ],
+      "fixAvailable": {
+        "name": "jimp",
+        "version": "0.22.12",
+        "isSemVerMajor": true
+      }
+    },
+    "@jimp/plugin-resize": {
+      "name": "@jimp/plugin-resize",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/core",
+        "@jimp/types",
+        "zod"
+      ],
+      "effects": [
+        "@jimp/diff",
+        "@jimp/plugin-hash",
+        "@jimp/plugin-rotate"
+      ],
+      "range": ">=1.0.2--canary.4e85de0.0",
+      "nodes": [
+        "node_modules/@jimp/diff/node_modules/@jimp/plugin-resize",
+        "node_modules/@jimp/plugin-hash/node_modules/@jimp/plugin-resize",
+        "vendor/kage-baileys/node_modules/@jimp/plugin-resize"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/plugin-rotate": {
+      "name": "@jimp/plugin-rotate",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/core",
+        "@jimp/plugin-crop",
+        "@jimp/plugin-resize",
+        "@jimp/types",
+        "@jimp/utils",
+        "zod"
+      ],
+      "effects": [],
+      "range": "<=0.3.6-alpha.6 || >=1.0.2--canary.4e85de0.0",
+      "nodes": [
+        "vendor/kage-baileys/node_modules/@jimp/plugin-rotate"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/plugin-threshold": {
+      "name": "@jimp/plugin-threshold",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/core",
+        "@jimp/plugin-color",
+        "@jimp/plugin-hash",
+        "@jimp/types",
+        "@jimp/utils",
+        "zod"
+      ],
+      "effects": [],
+      "range": ">=1.0.2--canary.4e85de0.0",
+      "nodes": [
+        "vendor/kage-baileys/node_modules/@jimp/plugin-threshold"
+      ],
+      "fixAvailable": true
+    },
+    "@jimp/types": {
+      "name": "@jimp/types",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "zod"
+      ],
+      "effects": [
+        "@jimp/core",
+        "@jimp/js-bmp",
+        "@jimp/js-gif",
+        "@jimp/js-jpeg",
+        "@jimp/js-png",
+        "@jimp/js-tiff",
+        "@jimp/plugin-dither",
+        "@jimp/utils"
+      ],
+      "range": ">=1.0.1--canary.1285.8595111491.0",
+      "nodes": [
+        "node_modules/@jimp/diff/node_modules/@jimp/types",
+        "node_modules/@jimp/js-bmp/node_modules/@jimp/types",
+        "node_modules/@jimp/js-gif/node_modules/@jimp/types",
+        "node_modules/@jimp/js-jpeg/node_modules/@jimp/types",
+        "node_modules/@jimp/js-png/node_modules/@jimp/types",
+        "node_modules/@jimp/js-tiff/node_modules/@jimp/types",
+        "node_modules/@jimp/plugin-hash/node_modules/@jimp/types",
+        "vendor/kage-baileys/node_modules/@jimp/types"
+      ],
+      "fixAvailable": {
+        "name": "jimp",
+        "version": "0.22.12",
+        "isSemVerMajor": true
+      }
+    },
+    "@jimp/utils": {
+      "name": "@jimp/utils",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@jimp/types"
+      ],
+      "effects": [],
+      "range": ">=1.0.1--canary.1285.8595111491.0",
+      "nodes": [
+        "node_modules/@jimp/diff/node_modules/@jimp/utils",
+        "node_modules/@jimp/js-bmp/node_modules/@jimp/utils",
+        "node_modules/@jimp/js-gif/node_modules/@jimp/utils",
+        "node_modules/@jimp/js-jpeg/node_modules/@jimp/utils",
+        "node_modules/@jimp/js-png/node_modules/@jimp/utils",
+        "node_modules/@jimp/js-tiff/node_modules/@jimp/utils",
+        "node_modules/@jimp/plugin-hash/node_modules/@jimp/utils",
+        "vendor/kage-baileys/node_modules/@jimp/utils"
+      ],
+      "fixAvailable": true
+    },
+    "@puppeteer/browsers": {
+      "name": "@puppeteer/browsers",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "extract-zip",
+        "proxy-agent"
+      ],
+      "effects": [
+        "puppeteer",
+        "puppeteer-core",
+        "rebrowser-puppeteer-core"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@puppeteer/browsers",
+        "node_modules/rebrowser-puppeteer-core/node_modules/@puppeteer/browsers"
+      ],
+      "fixAvailable": {
+        "name": "puppeteer",
+        "version": "25.16.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@shineiichijo/marika": {
+      "name": "@shineiichijo/marika",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "axios"
+      ],
+      "effects": [],
+      "range": "<=2.0.6",
+      "nodes": [
+        "node_modules/@shineiichijo/marika"
+      ],
+      "fixAvailable": {
+        "name": "@shineiichijo/marika",
+        "version": "3.0.1",
+        "isSemVerMajor": true
+      }
+    },
+    "@vitalets/google-translate-api": {
+      "name": "@vitalets/google-translate-api",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "got"
+      ],
+      "effects": [],
+      "range": "<=8.0.0",
+      "nodes": [
+        "node_modules/@vitalets/google-translate-api"
+      ],
+      "fixAvailable": {
+        "name": "@vitalets/google-translate-api",
+        "version": "9.2.1",
+        "isSemVerMajor": true
+      }
+    },
+    "axios": {
+      "name": "axios",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1090049,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios vulnerable to Server-Side Request Forgery",
+          "url": "https://github.com/advisories/GHSA-4w2v-q235-vp99",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-918"
+          ],
+          "cvss": {
+            "score": 5.9,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N"
+          },
+          "range": "<0.21.1"
+        },
+        {
+          "source": 1097679,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios Cross-Site Request Forgery Vulnerability",
+          "url": "https://github.com/advisories/GHSA-wf5p-g6vw-rhxx",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-352"
+          ],
+          "cvss": {
+            "score": 6.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N"
+          },
+          "range": ">=0.8.1 <0.28.0"
+        },
+        {
+          "source": 1102326,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "axios Inefficient Regular Expression Complexity vulnerability",
+          "url": "https://github.com/advisories/GHSA-cph5-m8f7-6c5x",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-1333"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<0.21.2"
+        },
+        {
+          "source": 1111034,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "axios Requests Vulnerable To Possible SSRF and Credential Leakage via Absolute URL",
+          "url": "https://github.com/advisories/GHSA-jr5f-v2jv-69x6",
+          "severity": "high",
+          "cwe": [
+            "CWE-918"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<0.30.0"
+        },
+        {
+          "source": 1116672,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios has a NO_PROXY Hostname Normalization Bypass that Leads to SSRF",
+          "url": "https://github.com/advisories/GHSA-3p68-rc4w-qgx5",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-441",
+            "CWE-918"
+          ],
+          "cvss": {
+            "score": 4.8,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N"
+          },
+          "range": "<0.31.0"
+        },
+        {
+          "source": 1117573,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Authentication Bypass via Prototype Pollution Gadget in `validateStatus` Merge Strategy",
+          "url": "https://github.com/advisories/GHSA-w9j2-pvgh-6h63",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-287",
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 4.8,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N"
+          },
+          "range": "<=0.31.0"
+        },
+        {
+          "source": 1117575,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Incomplete Fix for CVE-2025-62718 — NO_PROXY Protection Bypassed via RFC 1122 Loopback Subnet (127.0.0.0/8) in Axios 1.15.0",
+          "url": "https://github.com/advisories/GHSA-pmwg-cvhr-8vh7",
+          "severity": "high",
+          "cwe": [
+            "CWE-183",
+            "CWE-441",
+            "CWE-918"
+          ],
+          "cvss": {
+            "score": 7.2,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:L/A:N"
+          },
+          "range": "<=0.31.0"
+        },
+        {
+          "source": 1117579,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Null Byte Injection via Reverse-Encoding in AxiosURLSearchParams",
+          "url": "https://github.com/advisories/GHSA-xhjh-pmcv-23jw",
+          "severity": "low",
+          "cwe": [
+            "CWE-116",
+            "CWE-626"
+          ],
+          "cvss": {
+            "score": 3.7,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:N"
+          },
+          "range": "<=0.31.0"
+        },
+        {
+          "source": 1117582,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: no_proxy bypass via IP alias allows SSRF",
+          "url": "https://github.com/advisories/GHSA-m7pr-hjqh-92cm",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-918"
+          ],
+          "cvss": {
+            "score": 6.8,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:N/A:N"
+          },
+          "range": "<=0.31.0"
+        },
+        {
+          "source": 1117586,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios' HTTP adapter-streamed uploads bypass maxBodyLength when maxRedirects: 0",
+          "url": "https://github.com/advisories/GHSA-5c9x-8gcm-mpgx",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-770"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": "<=0.31.0"
+        },
+        {
+          "source": 1117588,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: HTTP adapter streamed responses bypass maxContentLength",
+          "url": "https://github.com/advisories/GHSA-vf2m-468p-8v99",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-770"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": "<=0.31.0"
+        },
+        {
+          "source": 1117590,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Prototype Pollution Gadgets - Response Tampering, Data Exfiltration, and Request Hijacking",
+          "url": "https://github.com/advisories/GHSA-pf86-5x62-jrwf",
+          "severity": "high",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 7.4,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N"
+          },
+          "range": "<=0.31.0"
+        },
+        {
+          "source": 1117592,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Header Injection via Prototype Pollution",
+          "url": "https://github.com/advisories/GHSA-6chq-wfr3-2hj9",
+          "severity": "high",
+          "cwe": [
+            "CWE-113",
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 7.4,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N"
+          },
+          "range": "<=0.31.0"
+        },
+        {
+          "source": 1117594,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: XSRF Token Cross-Origin Leakage via Prototype Pollution Gadget in `withXSRFToken` Boolean Coercion",
+          "url": "https://github.com/advisories/GHSA-xx6v-rp6x-q39c",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-183",
+            "CWE-201"
+          ],
+          "cvss": {
+            "score": 5.4,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N"
+          },
+          "range": "<=0.31.0"
+        },
+        {
+          "source": 1117857,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios is Vulnerable to Denial of Service via __proto__ Key in mergeConfig",
+          "url": "https://github.com/advisories/GHSA-43fc-jf86-j433",
+          "severity": "high",
+          "cwe": [
+            "CWE-754",
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<=0.30.2"
+        },
+        {
+          "source": 1119403,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios has Unrestricted Cloud Metadata Exfiltration via Header Injection Chain",
+          "url": "https://github.com/advisories/GHSA-fvcv-3m26-pcqx",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-113",
+            "CWE-444",
+            "CWE-918"
+          ],
+          "cvss": {
+            "score": 4.8,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N"
+          },
+          "range": "<0.31.0"
+        },
+        {
+          "source": 1120124,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: unbounded recursion in toFormData causes DoS via deeply nested request data",
+          "url": "https://github.com/advisories/GHSA-62hf-57xw-28j9",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-674"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<=0.31.0"
+        },
+        {
+          "source": 1120546,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Regular Expression Denial of Service (ReDoS) via Cookie Name Injection",
+          "url": "https://github.com/advisories/GHSA-hfxv-24rg-xrqf",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-1333"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<=0.31.1"
+        },
+        {
+          "source": 1120644,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Proxy-Authorization Credential Leak to Origin Server Across HTTP-to-HTTPS Redirect in Axios Node.js HTTP Adapter",
+          "url": "https://github.com/advisories/GHSA-p92q-9vqr-4j8v",
+          "severity": "high",
+          "cwe": [
+            "CWE-201"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=0.31.1"
+        },
+        {
+          "source": 1120646,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Proxy-Authorization header leaks to redirect target when proxy is re-evaluated to direct connection",
+          "url": "https://github.com/advisories/GHSA-j5f8-grm9-p9fc",
+          "severity": "high",
+          "cwe": [
+            "CWE-200"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N"
+          },
+          "range": "<=0.31.1"
+        },
+        {
+          "source": 1120648,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "axios Vulnerable to Credential Theft and Response Hijacking via Prototype Pollution Gadget in Config Merge",
+          "url": "https://github.com/advisories/GHSA-3g43-6gmg-66jw",
+          "severity": "high",
+          "cwe": [
+            "CWE-94",
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 7,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:L/A:L"
+          },
+          "range": ">=0.19.0 <0.31.1"
+        },
+        {
+          "source": 1120651,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "axios has DoS & Header Injection via Prototype Pollution Read-Side Gadgets in axios merge functions",
+          "url": "https://github.com/advisories/GHSA-898c-q2cr-xwhg",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 4.8,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:L"
+          },
+          "range": "<=0.31.1"
+        },
+        {
+          "source": 1123825,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "axios's shouldBypassProxy does not recognize IPv4-mapped IPv6 addresses, allowing NO_PROXY bypass (incomplete fix for CVE-2025-62718)",
+          "url": "https://github.com/advisories/GHSA-pjwm-pj3p-43mv",
+          "severity": "high",
+          "cwe": [
+            "CWE-289",
+            "CWE-918"
+          ],
+          "cvss": {
+            "score": 8.6,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N"
+          },
+          "range": "<=0.31.1"
+        },
+        {
+          "source": 1147948,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Prototype pollution gadgets can alter axios request construction",
+          "url": "https://github.com/advisories/GHSA-mmx7-hfxf-jppx",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<0.33.0"
+        },
+        {
+          "source": 1153181,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Nested axios option objects can consume polluted prototype values",
+          "url": "https://github.com/advisories/GHSA-7q8q-rj6j-mhjq",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=0.8.0 <0.33.0"
+        },
+        {
+          "source": 1240602,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Prototype-Pollution Gadget in the Default Instance Allows Inherited Object.prototype.method to Override HTTP Method",
+          "url": "https://github.com/advisories/GHSA-9fr6-4gfg-395g",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=0.27.2 <0.34.0"
+        },
+        "follow-redirects"
+      ],
+      "effects": [
+        "@green-code/music-track-data",
+        "@shineiichijo/marika",
+        "fb-downloader-scrapper",
+        "song-lyrics-api",
+        "wa-sticker-formatter"
+      ],
+      "range": "<=0.33.0",
+      "nodes": [
+        "node_modules/@green-code/music-track-data/node_modules/axios",
+        "node_modules/@shineiichijo/marika/node_modules/axios",
+        "node_modules/fb-downloader-scrapper/node_modules/axios",
+        "node_modules/song-lyrics-api/node_modules/axios",
+        "node_modules/wa-sticker-formatter/node_modules/axios"
+      ],
+      "fixAvailable": {
+        "name": "wa-sticker-formatter",
+        "version": "1.6.0",
+        "isSemVerMajor": true
+      }
+    },
+    "basic-ftp": {
+      "name": "basic-ftp",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1240853,
+          "name": "basic-ftp",
+          "dependency": "basic-ftp",
+          "title": "basic-ftp: Quadratic-time CPU denial of service in Client.list() Unix directory-listing parser (RE_LINE backtracking)",
+          "url": "https://github.com/advisories/GHSA-c475-qrg2-pj4r",
+          "severity": "high",
+          "cwe": [
+            "CWE-1333"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=6.2.0"
+        }
+      ],
+      "effects": [
+        "get-uri"
+      ],
+      "range": "<=6.2.0",
+      "nodes": [
+        "node_modules/basic-ftp"
+      ],
+      "fixAvailable": {
+        "name": "puppeteer",
+        "version": "25.16.0",
+        "isSemVerMajor": true
+      }
+    },
+    "chromium-bidi": {
+      "name": "chromium-bidi",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "zod"
+      ],
+      "effects": [
+        "puppeteer-core"
+      ],
+      "range": "0.5.13 - 157.0.8081-0",
+      "nodes": [
+        "node_modules/chromium-bidi",
+        "node_modules/rebrowser-puppeteer-core/node_modules/chromium-bidi"
+      ],
+      "fixAvailable": {
+        "name": "puppeteer",
+        "version": "25.16.0",
+        "isSemVerMajor": true
+      }
+    },
+    "deepmerge": {
+      "name": "deepmerge",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1243505,
+          "name": "deepmerge",
+          "dependency": "deepmerge",
+          "title": "deepmerge mergeObject() allows prototype poisoning of returned objects",
+          "url": "https://github.com/advisories/GHSA-gcqx-w48m-w2h4",
+          "severity": "low",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+          },
+          "range": ">=4.2.0 <=4.3.1"
+        }
+      ],
+      "effects": [
+        "puppeteer-extra"
+      ],
+      "range": ">=4.2.0",
+      "nodes": [
+        "node_modules/deepmerge"
+      ],
+      "fixAvailable": true
+    },
+    "eslint": {
+      "name": "eslint",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "@eslint-community/eslint-utils",
+        "@eslint/eslintrc",
+        "@humanwhocodes/config-array",
+        "file-entry-cache",
+        "minimatch"
+      ],
+      "effects": [
+        "@eslint-community/eslint-utils",
+        "eslint-config-google"
+      ],
+      "range": "0.7.1 - 2.0.0-rc.1 || >=4.1.0",
+      "nodes": [
+        "node_modules/eslint"
+      ],
+      "fixAvailable": {
+        "name": "eslint",
+        "version": "4.0.0",
+        "isSemVerMajor": true
+      }
+    },
+    "eslint-config-google": {
+      "name": "eslint-config-google",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "eslint"
+      ],
+      "effects": [],
+      "range": ">=0.9.0",
+      "nodes": [
+        "node_modules/eslint-config-google"
+      ],
+      "fixAvailable": {
+        "name": "eslint-config-google",
+        "version": "0.8.1",
+        "isSemVerMajor": true
+      }
+    },
+    "extract-zip": {
+      "name": "extract-zip",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1139346,
+          "name": "extract-zip",
+          "dependency": "extract-zip",
+          "title": "extract-zip unvalidated symlink path traversal",
+          "url": "https://github.com/advisories/GHSA-jmr9-qjv8-65gv",
+          "severity": "high",
+          "cwe": [
+            "CWE-22"
+          ],
+          "cvss": {
+            "score": 8.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N"
+          },
+          "range": "<=2.0.1"
+        },
+        {
+          "source": 1193685,
+          "name": "extract-zip",
+          "dependency": "extract-zip",
+          "title": "extract-zip allows arbitrary file writes through symlink archive entries",
+          "url": "https://github.com/advisories/GHSA-7pqw-9j4j-h8q3",
+          "severity": "high",
+          "cwe": [
+            "CWE-22"
+          ],
+          "cvss": {
+            "score": 8.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:H/A:H"
+          },
+          "range": "<=2.0.1"
+        }
+      ],
+      "effects": [
+        "@puppeteer/browsers"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/extract-zip"
+      ],
+      "fixAvailable": {
+        "name": "puppeteer",
+        "version": "25.16.0",
+        "isSemVerMajor": true
+      }
+    },
+    "fb-downloader-scrapper": {
+      "name": "fb-downloader-scrapper",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "axios"
+      ],
+      "effects": [],
+      "range": "<=2.0.0",
+      "nodes": [
+        "node_modules/fb-downloader-scrapper"
+      ],
+      "fixAvailable": {
+        "name": "fb-downloader-scrapper",
+        "version": "3.0.1",
+        "isSemVerMajor": true
+      }
+    },
+    "file-entry-cache": {
+      "name": "file-entry-cache",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "flat-cache"
+      ],
+      "effects": [
+        "eslint"
+      ],
+      "range": "4.0.0 - 7.0.2",
+      "nodes": [
+        "node_modules/file-entry-cache"
+      ],
+      "fixAvailable": {
+        "name": "eslint",
+        "version": "4.0.0",
+        "isSemVerMajor": true
+      }
+    },
+    "file-type": {
+      "name": "file-type",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1114301,
+          "name": "file-type",
+          "dependency": "file-type",
+          "title": "file-type affected by infinite loop in ASF parser on malformed input with zero-size sub-header",
+          "url": "https://github.com/advisories/GHSA-5v7r-6r5c-r473",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-835"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=13.0.0 <21.3.1"
+        }
+      ],
+      "effects": [
+        "@jimp/core"
+      ],
+      "range": "13.0.0 - 21.3.0",
+      "nodes": [
+        "node_modules/@jimp/core/node_modules/file-type",
+        "node_modules/wa-sticker-formatter/node_modules/file-type"
+      ],
+      "fixAvailable": {
+        "name": "jimp",
+        "version": "0.22.12",
+        "isSemVerMajor": true
+      }
+    },
+    "flat-cache": {
+      "name": "flat-cache",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "rimraf"
+      ],
+      "effects": [
+        "file-entry-cache"
+      ],
+      "range": "1.3.4 - 4.0.0",
+      "nodes": [
+        "node_modules/flat-cache"
+      ],
+      "fixAvailable": {
+        "name": "eslint",
+        "version": "4.0.0",
+        "isSemVerMajor": true
+      }
+    },
+    "follow-redirects": {
+      "name": "follow-redirects",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1092623,
+          "name": "follow-redirects",
+          "dependency": "follow-redirects",
+          "title": "Exposure of Sensitive Information to an Unauthorized Actor in follow-redirects",
+          "url": "https://github.com/advisories/GHSA-pw2r-vq6v-hr8c",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-200",
+            "CWE-212"
+          ],
+          "cvss": {
+            "score": 5.9,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N"
+          },
+          "range": "<1.14.8"
+        },
+        {
+          "source": 1096856,
+          "name": "follow-redirects",
+          "dependency": "follow-redirects",
+          "title": "follow-redirects' Proxy-Authorization header kept across hosts",
+          "url": "https://github.com/advisories/GHSA-cxjh-pqwp-8mfp",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-200"
+          ],
+          "cvss": {
+            "score": 6.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N"
+          },
+          "range": "<=1.15.5"
+        },
+        {
+          "source": 1102323,
+          "name": "follow-redirects",
+          "dependency": "follow-redirects",
+          "title": "Exposure of sensitive information in follow-redirects",
+          "url": "https://github.com/advisories/GHSA-74fj-2j2h-c42q",
+          "severity": "high",
+          "cwe": [
+            "CWE-359"
+          ],
+          "cvss": {
+            "score": 8,
+            "vectorString": "CVSS:3.0/AV:N/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H"
+          },
+          "range": "<1.14.7"
+        },
+        {
+          "source": 1109569,
+          "name": "follow-redirects",
+          "dependency": "follow-redirects",
+          "title": "Follow Redirects improperly handles URLs in the url.parse() function",
+          "url": "https://github.com/advisories/GHSA-jchw-25xp-jwwc",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-20",
+            "CWE-601"
+          ],
+          "cvss": {
+            "score": 6.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N"
+          },
+          "range": "<1.15.4"
+        },
+        {
+          "source": 1116560,
+          "name": "follow-redirects",
+          "dependency": "follow-redirects",
+          "title": "follow-redirects leaks Custom Authentication Headers to Cross-Domain Redirect Targets",
+          "url": "https://github.com/advisories/GHSA-r4q5-vmmm-2653",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-200"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=1.15.11"
+        }
+      ],
+      "effects": [
+        "axios"
+      ],
+      "range": "<=1.15.11",
+      "nodes": [
+        "node_modules/song-lyrics-api/node_modules/follow-redirects"
+      ],
+      "fixAvailable": {
+        "name": "wa-sticker-formatter",
+        "version": "1.6.0",
+        "isSemVerMajor": true
+      }
+    },
+    "get-uri": {
+      "name": "get-uri",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "basic-ftp"
+      ],
+      "effects": [
+        "pac-proxy-agent"
+      ],
+      "range": ">=5.0.0",
+      "nodes": [
+        "node_modules/get-uri"
+      ],
+      "fixAvailable": {
+        "name": "puppeteer",
+        "version": "25.16.0",
+        "isSemVerMajor": true
+      }
+    },
+    "glob": {
+      "name": "glob",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "minimatch"
+      ],
+      "effects": [
+        "protobufjs-cli",
+        "rimraf"
+      ],
+      "range": "3.0.0 - 13.0.6",
+      "nodes": [
+        "node_modules/glob",
+        "node_modules/rimraf/node_modules/glob"
+      ],
+      "fixAvailable": {
+        "name": "eslint",
+        "version": "4.0.0",
+        "isSemVerMajor": true
+      }
+    },
+    "google-it": {
+      "name": "google-it",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "@cypress/request"
+      ],
+      "effects": [],
+      "range": "",
+      "nodes": [
+        "node_modules/google-it"
+      ],
+      "fixAvailable": true
+    },
+    "got": {
+      "name": "got",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1088948,
+          "name": "got",
+          "dependency": "got",
+          "title": "Got allows a redirect to a UNIX socket",
+          "url": "https://github.com/advisories/GHSA-pfrx-2q88-qq97",
+          "severity": "moderate",
+          "cwe": [],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+          },
+          "range": "<11.8.5"
+        }
+      ],
+      "effects": [
+        "@vitalets/google-translate-api"
+      ],
+      "range": "<11.8.5",
+      "nodes": [
+        "node_modules/@vitalets/google-translate-api/node_modules/got"
+      ],
+      "fixAvailable": {
+        "name": "@vitalets/google-translate-api",
+        "version": "9.2.1",
+        "isSemVerMajor": true
+      }
+    },
+    "image-size": {
+      "name": "image-size",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1239765,
+          "name": "image-size",
+          "dependency": "image-size",
+          "title": "image-size: JXL and HEIF parsers allow denial of service through infinite loops",
+          "url": "https://github.com/advisories/GHSA-5p2g-fcmc-qvqq",
+          "severity": "high",
+          "cwe": [
+            "CWE-835"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=1.2.0 <=2.0.2"
+        },
+        {
+          "source": 1239766,
+          "name": "image-size",
+          "dependency": "image-size",
+          "title": "image-size: ICNS parser allows denial of service through an infinite loop",
+          "url": "https://github.com/advisories/GHSA-w3rx-r6r6-pgpr",
+          "severity": "high",
+          "cwe": [
+            "CWE-835"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=0.6.3 <=2.0.2"
+        }
+      ],
+      "effects": [],
+      "range": "0.6.3 - 2.0.2",
+      "nodes": [
+        "node_modules/wa-sticker-formatter/node_modules/image-size"
+      ],
+      "fixAvailable": true
+    },
+    "jimp": {
+      "name": "jimp",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "@jimp/core",
+        "@jimp/custom",
+        "@jimp/custom",
+        "@jimp/diff",
+        "@jimp/js-bmp",
+        "@jimp/js-gif",
+        "@jimp/js-jpeg",
+        "@jimp/js-png",
+        "@jimp/js-tiff",
+        "@jimp/plugin-blit",
+        "@jimp/plugin-blur",
+        "@jimp/plugin-circle",
+        "@jimp/plugin-color",
+        "@jimp/plugin-contain",
+        "@jimp/plugin-cover",
+        "@jimp/plugin-crop",
+        "@jimp/plugin-displace",
+        "@jimp/plugin-dither",
+        "@jimp/plugin-fisheye",
+        "@jimp/plugin-flip",
+        "@jimp/plugin-hash",
+        "@jimp/plugin-mask",
+        "@jimp/plugin-print",
+        "@jimp/plugin-quantize",
+        "@jimp/plugin-resize",
+        "@jimp/plugin-rotate",
+        "@jimp/plugin-threshold",
+        "@jimp/types",
+        "@jimp/utils"
+      ],
+      "effects": [
+        "render-gif"
+      ],
+      "range": ">=0.3.6-alpha.5",
+      "nodes": [
+        "node_modules/jimp",
+        "node_modules/render-gif/node_modules/jimp",
+        "vendor/kage-baileys/node_modules/jimp"
+      ],
+      "fixAvailable": {
+        "name": "terminal-image",
+        "version": "5.0.1",
+        "isSemVerMajor": true
+      }
+    },
+    "minimatch": {
+      "name": "minimatch",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1244012,
+          "name": "minimatch",
+          "dependency": "minimatch",
+          "title": "minimatch has potential denial of service via globparts amplification",
+          "url": "https://github.com/advisories/GHSA-g3hv-75wg-m249",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-405"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<11.0.1"
+        }
+      ],
+      "effects": [
+        "@eslint/eslintrc",
+        "@humanwhocodes/config-array",
+        "eslint",
+        "glob",
+        "redstar"
+      ],
+      "range": "<11.0.1",
+      "nodes": [
+        "node_modules/glob/node_modules/minimatch",
+        "node_modules/minimatch"
+      ],
+      "fixAvailable": {
+        "name": "eslint",
+        "version": "4.0.0",
+        "isSemVerMajor": true
+      }
+    },
+    "node-fzf": {
+      "name": "node-fzf",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "redstar"
+      ],
+      "effects": [
+        "yt-search"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/node-fzf"
+      ],
+      "fixAvailable": {
+        "name": "yt-search",
+        "version": "0.0.2",
+        "isSemVerMajor": true
+      }
+    },
+    "node-gtts": {
+      "name": "node-gtts",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "@cypress/request"
+      ],
+      "effects": [],
+      "range": "",
+      "nodes": [
+        "node_modules/node-gtts"
+      ],
+      "fixAvailable": true
+    },
+    "openai": {
+      "name": "openai",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "zod"
+      ],
+      "effects": [],
+      "range": "4.55.0 - 5.23.2",
+      "nodes": [
+        "node_modules/openai"
+      ],
+      "fixAvailable": true
+    },
+    "pac-proxy-agent": {
+      "name": "pac-proxy-agent",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "get-uri"
+      ],
+      "effects": [
+        "proxy-agent"
+      ],
+      "range": ">=6.0.0",
+      "nodes": [
+        "node_modules/pac-proxy-agent"
+      ],
+      "fixAvailable": {
+        "name": "puppeteer",
+        "version": "25.16.0",
+        "isSemVerMajor": true
+      }
+    },
+    "phin": {
+      "name": "phin",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1096967,
+          "name": "phin",
+          "dependency": "phin",
+          "title": "phin may include sensitive headers in subsequent requests after redirect",
+          "url": "https://github.com/advisories/GHSA-x565-32qp-m3vf",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-200"
+          ],
+          "cvss": {
+            "score": 4.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:N"
+          },
+          "range": "<3.7.1"
+        }
+      ],
+      "effects": [
+        "@jimp/core"
+      ],
+      "range": "<3.7.1",
+      "nodes": [
+        "node_modules/phin"
+      ],
+      "fixAvailable": {
+        "name": "jimp",
+        "version": "0.22.12",
+        "isSemVerMajor": true
+      }
+    },
+    "protobufjs-cli": {
+      "name": "protobufjs-cli",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "glob"
+      ],
+      "effects": [],
+      "range": "*",
+      "nodes": [
+        "node_modules/protobufjs-cli"
+      ],
+      "fixAvailable": false
+    },
+    "proxy-agent": {
+      "name": "proxy-agent",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "pac-proxy-agent"
+      ],
+      "effects": [
+        "@puppeteer/browsers"
+      ],
+      "range": ">=6.0.0",
+      "nodes": [
+        "node_modules/proxy-agent"
+      ],
+      "fixAvailable": {
+        "name": "puppeteer",
+        "version": "25.16.0",
+        "isSemVerMajor": true
+      }
+    },
+    "puppeteer": {
+      "name": "puppeteer",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "@puppeteer/browsers",
+        "puppeteer-core"
+      ],
+      "effects": [],
+      "range": "19.8.1 - 24.43.1",
+      "nodes": [
+        "node_modules/puppeteer"
+      ],
+      "fixAvailable": {
+        "name": "puppeteer",
+        "version": "25.16.0",
+        "isSemVerMajor": true
+      }
+    },
+    "puppeteer-core": {
+      "name": "puppeteer-core",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@puppeteer/browsers",
+        "chromium-bidi"
+      ],
+      "effects": [
+        "puppeteer"
+      ],
+      "range": "19.8.4 - 25.12.0",
+      "nodes": [
+        "node_modules/puppeteer-core"
+      ],
+      "fixAvailable": {
+        "name": "puppeteer",
+        "version": "25.16.0",
+        "isSemVerMajor": true
+      }
+    },
+    "puppeteer-extra": {
+      "name": "puppeteer-extra",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        "deepmerge"
+      ],
+      "effects": [
+        "puppeteer-real-browser"
+      ],
+      "range": ">=2.1.6",
+      "nodes": [
+        "node_modules/puppeteer-extra"
+      ],
+      "fixAvailable": true
+    },
+    "puppeteer-real-browser": {
+      "name": "puppeteer-real-browser",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "puppeteer-extra",
+        "rebrowser-puppeteer-core"
+      ],
+      "effects": [],
+      "range": "<=1.2.20 || >=1.3.3",
+      "nodes": [
+        "node_modules/puppeteer-real-browser"
+      ],
+      "fixAvailable": true
+    },
+    "qs": {
+      "name": "qs",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1119502,
+          "name": "qs",
+          "dependency": "qs",
+          "title": "qs has a remotely triggerable DoS: qs.stringify crashes with TypeError on null/undefined entries in comma-format arrays when encodeValuesOnly is set",
+          "url": "https://github.com/advisories/GHSA-q8mj-m7cp-5q26",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-476"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=6.11.1 <=6.15.1"
+        },
+        {
+          "source": 1158506,
+          "name": "qs",
+          "dependency": "qs",
+          "title": "qs array-limit bypass via bracket-key comma parsing",
+          "url": "https://github.com/advisories/GHSA-x5fp-wj9c-mxmx",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-770"
+          ],
+          "cvss": {
+            "score": 3.7,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=6.14.2 <=6.15.3"
+        },
+        {
+          "source": 1158507,
+          "name": "qs",
+          "dependency": "qs",
+          "title": "qs: Denial of Service via Attacker Controlled isBuffer",
+          "url": "https://github.com/advisories/GHSA-4mjr-xmp4-gh2g",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-248",
+            "CWE-703"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=2.2.5 <6.16.0"
+        },
+        {
+          "source": 1243687,
+          "name": "qs",
+          "dependency": "qs",
+          "title": "qs : qs.stringify with arrayFormat 'comma' throws an uncaught TypeError on array elements carrying a non-callable own toString (DoS)",
+          "url": "https://github.com/advisories/GHSA-6pq8-jhm2-2vcw",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-248",
+            "CWE-704"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=6.7.0 <=6.16.0"
+        }
+      ],
+      "effects": [],
+      "range": "2.2.5 - 6.16.0",
+      "nodes": [
+        "node_modules/request/node_modules/qs"
+      ],
+      "fixAvailable": true
+    },
+    "rebrowser-puppeteer-core": {
+      "name": "rebrowser-puppeteer-core",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@puppeteer/browsers",
+        "chromium-bidi"
+      ],
+      "effects": [
+        "puppeteer-real-browser"
+      ],
+      "range": "<=24.8.1",
+      "nodes": [
+        "node_modules/rebrowser-puppeteer-core"
+      ],
+      "fixAvailable": true
+    },
+    "redstar": {
+      "name": "redstar",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "minimatch"
+      ],
+      "effects": [
+        "node-fzf"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/redstar"
+      ],
+      "fixAvailable": {
+        "name": "yt-search",
+        "version": "0.0.2",
+        "isSemVerMajor": true
+      }
+    },
+    "render-gif": {
+      "name": "render-gif",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "jimp"
+      ],
+      "effects": [
+        "terminal-image"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/render-gif"
+      ],
+      "fixAvailable": {
+        "name": "terminal-image",
+        "version": "5.0.1",
+        "isSemVerMajor": true
+      }
+    },
+    "rimraf": {
+      "name": "rimraf",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "glob"
+      ],
+      "effects": [
+        "flat-cache"
+      ],
+      "range": "2.3.0 - 3.0.2 || >=4.2.0",
+      "nodes": [
+        "node_modules/rimraf"
+      ],
+      "fixAvailable": {
+        "name": "eslint",
+        "version": "4.0.0",
+        "isSemVerMajor": true
+      }
+    },
+    "sharp": {
+      "name": "sharp",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1094888,
+          "name": "sharp",
+          "dependency": "sharp",
+          "title": "sharp vulnerability in libwebp dependency CVE-2023-4863",
+          "url": "https://github.com/advisories/GHSA-54xq-cgqr-rpm3",
+          "severity": "high",
+          "cwe": [],
+          "cvss": {
+            "score": 7.8,
+            "vectorString": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H"
+          },
+          "range": "<0.32.6"
+        },
+        {
+          "source": 1124066,
+          "name": "sharp",
+          "dependency": "sharp",
+          "title": "sharp inherited vulnerabilities in libvips: CVE-2026-33327, CVE-2026-33328, CVE-2026-35590, CVE-2026-35591",
+          "url": "https://github.com/advisories/GHSA-f88m-g3jw-g9cj",
+          "severity": "high",
+          "cwe": [
+            "CWE-1395"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<0.35.0"
+        },
+        {
+          "source": 1193725,
+          "name": "sharp",
+          "dependency": "sharp",
+          "title": "sharp: Vulnerabilities in libheif: GHSA-g89c-p67h-r497 and GHSA-2jg2-4ch7-h545",
+          "url": "https://github.com/advisories/GHSA-rgj7-g3m4-5g8c",
+          "severity": "high",
+          "cwe": [
+            "CWE-122"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<0.35.4"
+        },
+        {
+          "source": 1241331,
+          "name": "sharp",
+          "dependency": "sharp",
+          "title": "sharp : Vulnerability in librsvg dependency CVE-2026-96889",
+          "url": "https://github.com/advisories/GHSA-wq5f-xc86-pv6w",
+          "severity": "high",
+          "cwe": [
+            "CWE-416",
+            "CWE-1395"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<0.35.5"
+        }
+      ],
+      "effects": [
+        "wa-sticker-formatter"
+      ],
+      "range": "<=0.35.5-rc.1",
+      "nodes": [
+        "node_modules/wa-sticker-formatter/node_modules/sharp"
+      ],
+      "fixAvailable": {
+        "name": "wa-sticker-formatter",
+        "version": "1.6.0",
+        "isSemVerMajor": true
+      }
+    },
+    "song-lyrics-api": {
+      "name": "song-lyrics-api",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "axios"
+      ],
+      "effects": [],
+      "range": "*",
+      "nodes": [
+        "node_modules/song-lyrics-api"
+      ],
+      "fixAvailable": false
+    },
+    "terminal-image": {
+      "name": "terminal-image",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "render-gif"
+      ],
+      "effects": [],
+      "range": "1.2.0 - 4.2.0",
+      "nodes": [
+        "node_modules/terminal-image"
+      ],
+      "fixAvailable": {
+        "name": "terminal-image",
+        "version": "5.0.1",
+        "isSemVerMajor": true
+      }
+    },
+    "uuid": {
+      "name": "uuid",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1119441,
+          "name": "uuid",
+          "dependency": "uuid",
+          "title": "uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided",
+          "url": "https://github.com/advisories/GHSA-w5hq-g745-h8pq",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-787",
+            "CWE-1285"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N"
+          },
+          "range": "<11.1.1"
+        }
+      ],
+      "effects": [
+        "@cypress/request"
+      ],
+      "range": "<11.1.1",
+      "nodes": [
+        "node_modules/request/node_modules/uuid"
+      ],
+      "fixAvailable": true
+    },
+    "wa-sticker-formatter": {
+      "name": "wa-sticker-formatter",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "axios",
+        "file-type",
+        "sharp"
+      ],
+      "effects": [],
+      "range": ">=2.0.0",
+      "nodes": [
+        "node_modules/wa-sticker-formatter"
+      ],
+      "fixAvailable": {
+        "name": "wa-sticker-formatter",
+        "version": "1.6.0",
+        "isSemVerMajor": true
+      }
+    },
+    "yt-search": {
+      "name": "yt-search",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "node-fzf"
+      ],
+      "effects": [],
+      "range": ">=0.1.0",
+      "nodes": [
+        "node_modules/yt-search"
+      ],
+      "fixAvailable": {
+        "name": "yt-search",
+        "version": "0.0.2",
+        "isSemVerMajor": true
+      }
+    },
+    "zod": {
+      "name": "zod",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1243066,
+          "name": "zod",
+          "dependency": "zod",
+          "title": "Zod can exhaust memory while validating oversized constrained collections",
+          "url": "https://github.com/advisories/GHSA-mrhx-c7xc-m3w5",
+          "severity": "high",
+          "cwe": [
+            "CWE-770"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<4.6.6"
+        }
+      ],
+      "effects": [
+        "@jimp/plugin-blit",
+        "@jimp/plugin-circle",
+        "@jimp/plugin-color",
+        "@jimp/plugin-contain",
+        "@jimp/plugin-cover",
+        "@jimp/plugin-crop",
+        "@jimp/plugin-displace",
+        "@jimp/plugin-fisheye",
+        "@jimp/plugin-flip",
+        "@jimp/plugin-mask",
+        "@jimp/plugin-print",
+        "@jimp/plugin-quantize",
+        "@jimp/plugin-resize",
+        "@jimp/plugin-rotate",
+        "@jimp/plugin-threshold",
+        "@jimp/types",
+        "chromium-bidi",
+        "openai"
+      ],
+      "range": "<4.6.6",
+      "nodes": [
+        "node_modules/zod"
+      ],
+      "fixAvailable": {
+        "name": "jimp",
+        "version": "0.22.12",
+        "isSemVerMajor": true
+      }
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 2,
+      "moderate": 26,
+      "high": 50,
+      "critical": 0,
+      "total": 78
+    },
+    "dependencies": {
+      "prod": 1117,
+      "dev": 99,
+      "optional": 60,
+      "peer": 1,
+      "peerOptional": 0,
+      "total": 1275
+    }
+  }
+}

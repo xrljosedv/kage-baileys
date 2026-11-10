@@ -1,0 +1,29 @@
+{
+  "entorno": {
+    "node": "v22.23.4"
+  },
+  "baileys": {
+    "version": "3.2.8-chiaki.1",
+    "pruebas_correctas": 354,
+    "fallos": 0,
+    "sintaxis_importaciones_tipos_empaquetado": "correctos"
+  },
+  "bot": {
+    "version": "19.0.1",
+    "pruebas_correctas": 10,
+    "fallos": 0,
+    "archivos_javascript_validados": 517,
+    "plugins_cargados_arranque_offline": 263,
+    "doctor": "correcto"
+  },
+  "conexion_whatsapp_real_probada": false,
+  "dependencias_nativas_navegadores_servicios_externos_probados": false,
+  "observaciones": "Se conservan los chequeos criptográficos de Signal. No se eliminan sesiones para intentar reparar descifrado. Las sesiones caducadas o inconsistentes pueden requerir revincular. Las pruebas de instalación no ejecutaron scripts de dependencias ni descargaron navegadores.",
+  "funciones_nuevas": [
+    "diagnosticowa",
+    "estadobaileys",
+    "limpiarcachewa"
+  ],
+  "fuente_baileys_en_bot": "vendor/kage-baileys",
+  "comentarios_codigo_javascript": false
+}

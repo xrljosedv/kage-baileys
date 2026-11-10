@@ -1,0 +1,2725 @@
+
+> kage-baileys@3.2.2 prepublishOnly
+> npm run build && npm run check
+
+
+> kage-baileys@3.2.2 build
+> npm run check:engine && npm run gen:protobuf && npm run gen:types
+
+
+> kage-baileys@3.2.2 check:engine
+> node engine-requirements.js
+
+
+> kage-baileys@3.2.2 gen:protobuf
+> node scripts/generate-protobuf.cjs
+
+WAProto/index.js + index.d.ts regenerated from the single canonical schema.
+
+> kage-baileys@3.2.2 gen:types
+> node scripts/generate-public-types.cjs
+
+⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+Public core types and JavaScript-extra declarations generated.
+
+> kage-baileys@3.2.2 check
+> npm run lint && npm run check:types && npm test && npm run check:package
+
+
+> kage-baileys@3.2.2 lint
+> node scripts/check-syntax.cjs && node scripts/check-imports.cjs
+
+SYNTAX_OK: 187 JavaScript files
+{
+  "importacionesLocales": 1086,
+  "errores": []
+}
+
+> kage-baileys@3.2.2 check:types
+> tsc -p tsconfig.json
+
+
+> kage-baileys@3.2.2 test
+> node --test test/*.test.cjs
+
+TAP version 13
+# ⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+# ⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+# Subtest: formato avanzado: bloque de código
+ok 1 - formato avanzado: bloque de código
+  ---
+  duration_ms: 10.778129
+  type: 'test'
+  ...
+# Subtest: formato avanzado: tabla
+ok 2 - formato avanzado: tabla
+  ---
+  duration_ms: 1.513943
+  type: 'test'
+  ...
+# Subtest: formato avanzado: enlaces
+ok 3 - formato avanzado: enlaces
+  ---
+  duration_ms: 0.953275
+  type: 'test'
+  ...
+# Subtest: formato avanzado: respuesta enriquecida
+ok 4 - formato avanzado: respuesta enriquecida
+  ---
+  duration_ms: 0.98996
+  type: 'test'
+  ...
+# Subtest: formato avanzado: flujo nativo
+ok 5 - formato avanzado: flujo nativo
+  ---
+  duration_ms: 1.866737
+  type: 'test'
+  ...
+# Subtest: formato avanzado: pago
+ok 6 - formato avanzado: pago
+  ---
+  duration_ms: 0.938792
+  type: 'test'
+  ...
+# Subtest: formato avanzado: contenido oculto
+ok 7 - formato avanzado: contenido oculto
+  ---
+  duration_ms: 1.858168
+  type: 'test'
+  ...
+# Subtest: formato avanzado: visualización única V2
+ok 8 - formato avanzado: visualización única V2
+  ---
+  duration_ms: 0.690431
+  type: 'test'
+  ...
+# Subtest: formato avanzado: visualización única extendida
+ok 9 - formato avanzado: visualización única extendida
+  ---
+  duration_ms: 1.287202
+  type: 'test'
+  ...
+# Subtest: formato avanzado: estado de grupo
+ok 10 - formato avanzado: estado de grupo
+  ---
+  duration_ms: 0.689534
+  type: 'test'
+  ...
+# Subtest: formato avanzado: contenido directo
+ok 11 - formato avanzado: contenido directo
+  ---
+  duration_ms: 0.278049
+  type: 'test'
+  ...
+# Subtest: el contenido raw no modifica el objeto del consumidor
+ok 12 - el contenido raw no modifica el objeto del consumidor
+  ---
+  duration_ms: 0.190322
+  type: 'test'
+  ...
+# Subtest: citas de canal conservan el contenido y el identificador
+ok 13 - citas de canal conservan el contenido y el identificador
+  ---
+  duration_ms: 1.282947
+  type: 'test'
+  ...
+# Subtest: nombres alternativos del esquema conservan el mismo campo al codificar
+ok 14 - nombres alternativos del esquema conservan el mismo campo al codificar
+  ---
+  duration_ms: 0.440337
+  type: 'test'
+  ...
+# Subtest: todos los módulos declarados conservan sus exportaciones
+ok 15 - todos los módulos declarados conservan sus exportaciones
+  ---
+  duration_ms: 3.227486
+  type: 'test'
+  ...
+# Subtest: una sola raíz de paquete, sin módulos duplicados en carpetas privadas
+ok 16 - una sola raíz de paquete, sin módulos duplicados en carpetas privadas
+  ---
+  duration_ms: 0.143355
+  type: 'test'
+  ...
+# Subtest: banner solicitado y colores en terminales compatibles
+ok 17 - banner solicitado y colores en terminales compatibles
+  ---
+  duration_ms: 0.568238
+  type: 'test'
+  ...
+# ⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+# ⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+# Subtest: repair preserves bytes and original wrappers for imageMessage
+ok 18 - repair preserves bytes and original wrappers for imageMessage
+  ---
+  duration_ms: 3.80111
+  type: 'test'
+  ...
+# Subtest: repair preserves bytes and original wrappers for videoMessage
+ok 19 - repair preserves bytes and original wrappers for videoMessage
+  ---
+  duration_ms: 0.994812
+  type: 'test'
+  ...
+# Subtest: repair preserves bytes and original wrappers for audioMessage
+ok 20 - repair preserves bytes and original wrappers for audioMessage
+  ---
+  duration_ms: 0.936298
+  type: 'test'
+  ...
+# Subtest: repair preserves bytes and original wrappers for documentMessage
+ok 21 - repair preserves bytes and original wrappers for documentMessage
+  ---
+  duration_ms: 0.809452
+  type: 'test'
+  ...
+# Subtest: repair preserves bytes and original wrappers for stickerMessage
+ok 22 - repair preserves bytes and original wrappers for stickerMessage
+  ---
+  duration_ms: 1.01743
+  type: 'test'
+  ...
+# Subtest: repair central automation has bounded deduplication and ignores own messages
+ok 23 - repair central automation has bounded deduplication and ignores own messages
+  ---
+  duration_ms: 1.591462
+  type: 'test'
+  ...
+# Subtest: repair disabling automation while download runs prevents the send
+ok 24 - repair disabling automation while download runs prevents the send
+  ---
+  duration_ms: 0.903278
+  type: 'test'
+  ...
+# Subtest: repair public API and socket API expose all documented helpers
+ok 25 - repair public API and socket API expose all documented helpers
+  ---
+  duration_ms: 0.484332
+  type: 'test'
+  ...
+# Subtest: repair media listeners detach and do not duplicate
+ok 26 - repair media listeners detach and do not duplicate
+  ---
+  duration_ms: 0.486814
+  type: 'test'
+  ...
+# Subtest: repair status ZIP preserves text, background colors and metadata
+ok 27 - repair status ZIP preserves text, background colors and metadata
+  ---
+  duration_ms: 2.856735
+  type: 'test'
+  ...
+# Subtest: repair status ZIP rejects contacts not saved and synchronized
+ok 28 - repair status ZIP rejects contacts not saved and synchronized
+  ---
+  duration_ms: 0.742376
+  type: 'test'
+  ...
+# Subtest: repair status ZIP records download failures rather than inventing content
+ok 29 - repair status ZIP records download failures rather than inventing content
+  ---
+  duration_ms: 0.796391
+  type: 'test'
+  ...
+# Subtest: repair status archive writes restricted files and sends only once
+ok 30 - repair status archive writes restricted files and sends only once
+  ---
+  duration_ms: 11.495647
+  type: 'test'
+  ...
+# Subtest: repair status handler integrates saving independently of reactions
+ok 31 - repair status handler integrates saving independently of reactions
+  ---
+  duration_ms: 7.448685
+  type: 'test'
+  ...
+# Subtest: repair status saving refuses automatic delivery to groups
+ok 32 - repair status saving refuses automatic delivery to groups
+  ---
+  duration_ms: 0.278318
+  type: 'test'
+  ...
+# Subtest: base64 estandar con padding correcto se decodifica igual que siempre
+ok 33 - base64 estandar con padding correcto se decodifica igual que siempre
+  ---
+  duration_ms: 2.490698
+  type: 'test'
+  ...
+# Subtest: base64 URL-safe (- y _) se acepta sin error
+ok 34 - base64 URL-safe (- y _) se acepta sin error
+  ---
+  duration_ms: 0.289273
+  type: 'test'
+  ...
+# Subtest: base64 sin padding se completa automaticamente
+ok 35 - base64 sin padding se completa automaticamente
+  ---
+  duration_ms: 0.165473
+  type: 'test'
+  ...
+# Subtest: base64 con saltos de linea no lanza invalid encoding
+ok 36 - base64 con saltos de linea no lanza invalid encoding
+  ---
+  duration_ms: 0.145905
+  type: 'test'
+  ...
+# Subtest: certificado con caracter colgante (len % 4 === 1) no lanza invalid encoding
+ok 37 - certificado con caracter colgante (len % 4 === 1) no lanza invalid encoding
+  ---
+  duration_ms: 0.228154
+  type: 'test'
+  ...
+# Subtest: force flush resets buffering state and live events are not trapped
+ok 38 - force flush resets buffering state and live events are not trapped
+  ---
+  duration_ms: 1.418746
+  type: 'test'
+  ...
+# Subtest: normal nested buffers still require matching releases
+ok 39 - normal nested buffers still require matching releases
+  ---
+  duration_ms: 0.19228
+  type: 'test'
+  ...
+# ⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+# ⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+# Subtest: consented viewOnceMessage imageMessage
+ok 40 - consented viewOnceMessage imageMessage
+  ---
+  duration_ms: 5.662509
+  type: 'test'
+  ...
+# Subtest: consented viewOnceMessageV2 imageMessage
+ok 41 - consented viewOnceMessageV2 imageMessage
+  ---
+  duration_ms: 1.113172
+  type: 'test'
+  ...
+# Subtest: consented viewOnceMessageV2Extension imageMessage
+ok 42 - consented viewOnceMessageV2Extension imageMessage
+  ---
+  duration_ms: 0.831212
+  type: 'test'
+  ...
+# Subtest: consented viewOnceMessage videoMessage
+ok 43 - consented viewOnceMessage videoMessage
+  ---
+  duration_ms: 0.83386
+  type: 'test'
+  ...
+# Subtest: consented viewOnceMessageV2 videoMessage
+ok 44 - consented viewOnceMessageV2 videoMessage
+  ---
+  duration_ms: 1.043125
+  type: 'test'
+  ...
+# Subtest: consented viewOnceMessageV2Extension videoMessage
+ok 45 - consented viewOnceMessageV2Extension videoMessage
+  ---
+  duration_ms: 0.749396
+  type: 'test'
+  ...
+# Subtest: consented viewOnceMessage audioMessage
+ok 46 - consented viewOnceMessage audioMessage
+  ---
+  duration_ms: 0.760999
+  type: 'test'
+  ...
+# Subtest: consented viewOnceMessageV2 audioMessage
+ok 47 - consented viewOnceMessageV2 audioMessage
+  ---
+  duration_ms: 0.787096
+  type: 'test'
+  ...
+# Subtest: consented viewOnceMessageV2Extension audioMessage
+ok 48 - consented viewOnceMessageV2Extension audioMessage
+  ---
+  duration_ms: 1.438898
+  type: 'test'
+  ...
+# Subtest: consented viewOnceMessage documentMessage
+ok 49 - consented viewOnceMessage documentMessage
+  ---
+  duration_ms: 1.01597
+  type: 'test'
+  ...
+# Subtest: consented viewOnceMessageV2 documentMessage
+ok 50 - consented viewOnceMessageV2 documentMessage
+  ---
+  duration_ms: 0.683355
+  type: 'test'
+  ...
+# Subtest: consented viewOnceMessageV2Extension documentMessage
+ok 51 - consented viewOnceMessageV2Extension documentMessage
+  ---
+  duration_ms: 0.552099
+  type: 'test'
+  ...
+# Subtest: consented viewOnceMessage stickerMessage
+ok 52 - consented viewOnceMessage stickerMessage
+  ---
+  duration_ms: 0.539955
+  type: 'test'
+  ...
+# Subtest: consented viewOnceMessageV2 stickerMessage
+ok 53 - consented viewOnceMessageV2 stickerMessage
+  ---
+  duration_ms: 0.626558
+  type: 'test'
+  ...
+# Subtest: consented viewOnceMessageV2Extension stickerMessage
+ok 54 - consented viewOnceMessageV2Extension stickerMessage
+  ---
+  duration_ms: 0.538606
+  type: 'test'
+  ...
+# Subtest: view once rejects missing or wrong sender authorization before download
+ok 55 - view once rejects missing or wrong sender authorization before download
+  ---
+  duration_ms: 0.585108
+  type: 'test'
+  ...
+# Subtest: view once rejects group and status routes
+ok 56 - view once rejects group and status routes
+  ---
+  duration_ms: 0.217845
+  type: 'test'
+  ...
+# Subtest: own outgoing view once can be explicitly authorized by account identity
+ok 57 - own outgoing view once can be explicitly authorized by account identity
+  ---
+  duration_ms: 0.624016
+  type: 'test'
+  ...
+# Subtest: consented view once does not invent content for consumed notifications
+ok 58 - consented view once does not invent content for consumed notifications
+  ---
+  duration_ms: 0.172977
+  type: 'test'
+  ...
+# Subtest: auto view once is off without explicit chat consent and ignores historical data
+ok 59 - auto view once is off without explicit chat consent and ignores historical data
+  ---
+  duration_ms: 0.622372
+  type: 'test'
+  ...
+# Subtest: connection version is WhatsApp WEB revision, not npm library semver
+ok 60 - connection version is WhatsApp WEB revision, not npm library semver
+  ---
+  duration_ms: 1.468809
+  type: 'test'
+  ...
+# Subtest: network failure retains the included WhatsApp protocol version and original error
+ok 61 - network failure retains the included WhatsApp protocol version and original error
+  ---
+  duration_ms: 0.246585
+  type: 'test'
+  ...
+# Subtest: malformed version response cannot pass an undefined or npm version to socket
+ok 62 - malformed version response cannot pass an undefined or npm version to socket
+  ---
+  duration_ms: 0.216532
+  type: 'test'
+  ...
+# Subtest: package update helper requests a real npm version document
+ok 63 - package update helper requests a real npm version document
+  ---
+  duration_ms: 0.297625
+  type: 'test'
+  ...
+# Subtest: package fallback is the installed library version, not a WhatsApp version
+ok 64 - package fallback is the installed library version, not a WhatsApp version
+  ---
+  duration_ms: 0.598664
+  type: 'test'
+  ...
+# Subtest: single canonical proto resolves every message, enum and wire identifier
+ok 65 - single canonical proto resolves every message, enum and wire identifier
+  ---
+  duration_ms: 182.126438
+  type: 'test'
+  ...
+# Subtest: restored media, bot and sync fields survive serialization
+ok 66 - restored media, bot and sync fields survive serialization
+  ---
+  duration_ms: 8.801805
+  type: 'test'
+  ...
+# Subtest: historical enum aliases and timestamp alias remain usable
+ok 67 - historical enum aliases and timestamp alias remain usable
+  ---
+  duration_ms: 1.214933
+  type: 'test'
+  ...
+# Subtest: poll snapshot canonical and legacy tags decode independently
+ok 68 - poll snapshot canonical and legacy tags decode independently
+  ---
+  duration_ms: 0.544529
+  type: 'test'
+  ...
+# Subtest: exact supplied event payload round trips including reminder and false flags
+ok 69 - exact supplied event payload round trips including reminder and false flags
+  ---
+  duration_ms: 4.915676
+  type: 'test'
+  ...
+# Subtest: event secret is retained across retries and wrappers
+ok 70 - event secret is retained across retries and wrappers
+  ---
+  duration_ms: 0.654541
+  type: 'test'
+  ...
+# Subtest: event secret supplied as base64 is normalized without replacement
+ok 71 - event secret supplied as base64 is normalized without replacement
+  ---
+  duration_ms: 0.275898
+  type: 'test'
+  ...
+# Subtest: legacy event.messageSecret is moved out of EventMessage
+ok 72 - legacy event.messageSecret is moved out of EventMessage
+  ---
+  duration_ms: 0.272453
+  type: 'test'
+  ...
+# Subtest: event validation rejects missing name
+ok 73 - event validation rejects missing name
+  ---
+  duration_ms: 0.459579
+  type: 'test'
+  ...
+# Subtest: event validation rejects milliseconds
+ok 74 - event validation rejects milliseconds
+  ---
+  duration_ms: 0.37401
+  type: 'test'
+  ...
+# Subtest: event validation rejects invalid latitude
+ok 75 - event validation rejects invalid latitude
+  ---
+  duration_ms: 0.171902
+  type: 'test'
+  ...
+# Subtest: event validation rejects end before start
+ok 76 - event validation rejects end before start
+  ---
+  duration_ms: 3.236045
+  type: 'test'
+  ...
+# Subtest: event validation rejects string boolean
+ok 77 - event validation rejects string boolean
+  ---
+  duration_ms: 0.083311
+  type: 'test'
+  ...
+# Subtest: event validation rejects negative reminder
+ok 78 - event validation rejects negative reminder
+  ---
+  duration_ms: 0.078584
+  type: 'test'
+  ...
+# Subtest: event validation rejects decimal timestamp
+ok 79 - event validation rejects decimal timestamp
+  ---
+  duration_ms: 0.069249
+  type: 'test'
+  ...
+# Subtest: invalid event secret fails locally
+ok 80 - invalid event secret fails locally
+  ---
+  duration_ms: 0.418846
+  type: 'test'
+  ...
+# Subtest: int64 strings and bigint convert without losing precision in toObject
+ok 81 - int64 strings and bigint convert without losing precision in toObject
+  ---
+  duration_ms: 1.06823
+  type: 'test'
+  ...
+# Subtest: sendMessage content builder supports event shorthand and preserves mention context
+ok 82 - sendMessage content builder supports event shorthand and preserves mention context
+  ---
+  duration_ms: 1.762917
+  type: 'test'
+  ...
+# Subtest: mention handling does not overwrite existing context fields
+ok 83 - mention handling does not overwrite existing context fields
+  ---
+  duration_ms: 0.70661
+  type: 'test'
+  ...
+# Subtest: text, reaction, location, poll and revoke messages still serialize
+ok 84 - text, reaction, location, poll and revoke messages still serialize
+  ---
+  duration_ms: 4.347107
+  type: 'test'
+  ...
+# Subtest: history skips malformed rows, selects newest message and does not mutate input
+ok 85 - history skips malformed rows, selects newest message and does not mutate input
+  ---
+  duration_ms: 0.355613
+  type: 'test'
+  ...
+# Subtest: missing optional history arrays are accepted
+ok 86 - missing optional history arrays are accepted
+  ---
+  duration_ms: 0.121783
+  type: 'test'
+  ...
+# Subtest: on-demand history is merged instead of discarded
+ok 87 - on-demand history is merged instead of discarded
+  ---
+  duration_ms: 2.038855
+  type: 'test'
+  ...
+# Subtest: initial history does not erase already received live messages by default
+ok 88 - initial history does not erase already received live messages by default
+  ---
+  duration_ms: 0.47919
+  type: 'test'
+  ...
+# Subtest: store snapshots preserve bytes and support serialized async atomic writes
+ok 89 - store snapshots preserve bytes and support serialized async atomic writes
+  ---
+  duration_ms: 55.151434
+  type: 'test'
+  ...
+# Subtest: auth concurrent saves round trip credentials and Signal keys atomically
+ok 90 - auth concurrent saves round trip credentials and Signal keys atomically
+  ---
+  duration_ms: 53.626204
+  type: 'test'
+  ...
+# ⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+# ⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+# Subtest: corrupt auth is surfaced instead of silently creating a new identity
+ok 91 - corrupt auth is surfaced instead of silently creating a new identity
+  ---
+  duration_ms: 1.611098
+  type: 'test'
+  ...
+# Subtest: updated Jimp thumbnails and profile pictures work without native sharp
+ok 92 - updated Jimp thumbnails and profile pictures work without native sharp
+  ---
+  duration_ms: 193.609796
+  type: 'test'
+  ...
+# Subtest: updated music metadata parses generated PCM WAV
+ok 93 - updated music metadata parses generated PCM WAV
+  ---
+  duration_ms: 9.951409
+  type: 'test'
+  ...
+# Subtest: queue module supports CommonJS and package exports load
+ok 94 - queue module supports CommonJS and package exports load
+  ---
+  duration_ms: 125.697761
+  type: 'test'
+  ...
+# Subtest: relayMessage group pipeline encrypts the supplied event with reminder and secret
+ok 95 - relayMessage group pipeline encrypts the supplied event with reminder and secret
+  ---
+  duration_ms: 5.646541
+  type: 'test'
+  ...
+# ⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+# ⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+# Subtest: Android archive has no filenames differing only in case
+ok 96 - Android archive has no filenames differing only in case
+  ---
+  duration_ms: 1.846741
+  type: 'test'
+  ...
+# Subtest: canonical LID protocol retains query, parser and per-user LID
+ok 97 - canonical LID protocol retains query, parser and per-user LID
+  ---
+  duration_ms: 0.893151
+  type: 'test'
+  ...
+# Subtest: complete socket exposes every method in the supplemental surface
+ok 98 - complete socket exposes every method in the supplemental surface
+  ---
+  duration_ms: 84.949925
+  type: 'test'
+  ...
+# Subtest: socket end hooks run once, can be removed, and isolate rejected hooks
+ok 99 - socket end hooks run once, can be removed, and isolate rejected hooks
+  ---
+  duration_ms: 19.055615
+  type: 'test'
+  ...
+# Subtest: account restriction and chat cap use existing WMex transport with correct paths
+ok 100 - account restriction and chat cap use existing WMex transport with correct paths
+  ---
+  duration_ms: 21.51489
+  type: 'test'
+  ...
+# Subtest: closed socket ignores session telemetry and invalid server timestamps
+ok 101 - closed socket ignores session telemetry and invalid server timestamps
+  ---
+  duration_ms: 19.347776
+  type: 'test'
+  ...
+# Subtest: Jimp resizing, cropping, effects and Kage thumbnails work with patched Zod
+ok 102 - Jimp resizing, cropping, effects and Kage thumbnails work with patched Zod
+  ---
+  duration_ms: 840.009055
+  type: 'test'
+  ...
+# Subtest: npm overrides include each requested resolution and preserve major selection
+ok 103 - npm overrides include each requested resolution and preserve major selection
+  ---
+  duration_ms: 0.521021
+  type: 'test'
+  ...
+# Subtest: username builders and multimedia/account constants are exposed on active API
+ok 104 - username builders and multimedia/account constants are exposed on active API
+  ---
+  duration_ms: 0.51638
+  type: 'test'
+  ...
+# Subtest: retry manager accepts legacy and supplemental signatures and clears timers/caches
+ok 105 - retry manager accepts legacy and supplemental signatures and clears timers/caches
+  ---
+  duration_ms: 1.814632
+  type: 'test'
+  ...
+# ⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+# ⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+# Subtest: inspección conserva viewOnceMessage/imageMessage
+ok 106 - inspección conserva viewOnceMessage/imageMessage
+  ---
+  duration_ms: 1.630264
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2/imageMessage
+ok 107 - inspección conserva viewOnceMessageV2/imageMessage
+  ---
+  duration_ms: 0.319918
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2Extension/imageMessage
+ok 108 - inspección conserva viewOnceMessageV2Extension/imageMessage
+  ---
+  duration_ms: 0.217953
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessage/videoMessage
+ok 109 - inspección conserva viewOnceMessage/videoMessage
+  ---
+  duration_ms: 0.233037
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2/videoMessage
+ok 110 - inspección conserva viewOnceMessageV2/videoMessage
+  ---
+  duration_ms: 0.158708
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2Extension/videoMessage
+ok 111 - inspección conserva viewOnceMessageV2Extension/videoMessage
+  ---
+  duration_ms: 0.133999
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessage/audioMessage
+ok 112 - inspección conserva viewOnceMessage/audioMessage
+  ---
+  duration_ms: 0.290361
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2/audioMessage
+ok 113 - inspección conserva viewOnceMessageV2/audioMessage
+  ---
+  duration_ms: 0.167386
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2Extension/audioMessage
+ok 114 - inspección conserva viewOnceMessageV2Extension/audioMessage
+  ---
+  duration_ms: 0.313061
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessage/documentMessage
+ok 115 - inspección conserva viewOnceMessage/documentMessage
+  ---
+  duration_ms: 0.429687
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2/documentMessage
+ok 116 - inspección conserva viewOnceMessageV2/documentMessage
+  ---
+  duration_ms: 0.186931
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2Extension/documentMessage
+ok 117 - inspección conserva viewOnceMessageV2Extension/documentMessage
+  ---
+  duration_ms: 0.10665
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessage/stickerMessage
+ok 118 - inspección conserva viewOnceMessage/stickerMessage
+  ---
+  duration_ms: 0.100762
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2/stickerMessage
+ok 119 - inspección conserva viewOnceMessageV2/stickerMessage
+  ---
+  duration_ms: 0.086801
+  type: 'test'
+  ...
+# Subtest: inspección conserva viewOnceMessageV2Extension/stickerMessage
+ok 120 - inspección conserva viewOnceMessageV2Extension/stickerMessage
+  ---
+  duration_ms: 0.084568
+  type: 'test'
+  ...
+# Subtest: automático usa misma salida manual: 51900000001@s.whatsapp.net/imageMessage
+ok 121 - automático usa misma salida manual: 51900000001@s.whatsapp.net/imageMessage
+  ---
+  duration_ms: 5.204298
+  type: 'test'
+  ...
+# Subtest: automático usa misma salida manual: 51900000001@s.whatsapp.net/videoMessage
+ok 122 - automático usa misma salida manual: 51900000001@s.whatsapp.net/videoMessage
+  ---
+  duration_ms: 1.774699
+  type: 'test'
+  ...
+# Subtest: automático usa misma salida manual: 51900000001@s.whatsapp.net/audioMessage
+ok 123 - automático usa misma salida manual: 51900000001@s.whatsapp.net/audioMessage
+  ---
+  duration_ms: 1.734465
+  type: 'test'
+  ...
+# Subtest: automático usa misma salida manual: 123456@g.us/imageMessage
+ok 124 - automático usa misma salida manual: 123456@g.us/imageMessage
+  ---
+  duration_ms: 1.512343
+  type: 'test'
+  ...
+# Subtest: automático usa misma salida manual: 123456@g.us/videoMessage
+ok 125 - automático usa misma salida manual: 123456@g.us/videoMessage
+  ---
+  duration_ms: 2.210792
+  type: 'test'
+  ...
+# Subtest: automático usa misma salida manual: 123456@g.us/audioMessage
+ok 126 - automático usa misma salida manual: 123456@g.us/audioMessage
+  ---
+  duration_ms: 1.656411
+  type: 'test'
+  ...
+# Subtest: deviceSentMessage y efímero no ocultan la vista única
+ok 127 - deviceSentMessage y efímero no ocultan la vista única
+  ---
+  duration_ms: 0.775969
+  type: 'test'
+  ...
+# Subtest: permiso de privado PN funciona con LID confirmado
+ok 128 - permiso de privado PN funciona con LID confirmado
+  ---
+  duration_ms: 0.784486
+  type: 'test'
+  ...
+# Subtest: un LID sin mapeo no se inventa como teléfono ni obtiene permiso
+ok 129 - un LID sin mapeo no se inventa como teléfono ni obtiene permiso
+  ---
+  duration_ms: 0.492257
+  type: 'test'
+  ...
+# Subtest: medios propios solo se copian mediante autorización explícita
+ok 130 - medios propios solo se copian mediante autorización explícita
+  ---
+  duration_ms: 1.833378
+  type: 'test'
+  ...
+# Subtest: fallo no deja el ID bloqueado para la siguiente entrega
+ok 131 - fallo no deja el ID bloqueado para la siguiente entrega
+  ---
+  duration_ms: 1.400428
+  type: 'test'
+  ...
+# Subtest: descarga renueva referencia 404 y reintenta una vez
+ok 132 - descarga renueva referencia 404 y reintenta una vez
+  ---
+  duration_ms: 0.825773
+  type: 'test'
+  ...
+# Subtest: fallo persistente se detiene tras dos intentos
+ok 133 - fallo persistente se detiene tras dos intentos
+  ---
+  duration_ms: 0.321807
+  type: 'test'
+  ...
+# Subtest: vista única automática no procesa historial antiguo
+ok 134 - vista única automática no procesa historial antiguo
+  ---
+  duration_ms: 0.208311
+  type: 'test'
+  ...
+# Subtest: aviso cifrado no se clasifica como medio disponible
+ok 135 - aviso cifrado no se clasifica como medio disponible
+  ---
+  duration_ms: 0.238305
+  type: 'test'
+  ...
+# Subtest: monitor detecta llamadas, presencia, reacciones y cierra sin listeners duplicados
+ok 136 - monitor detecta llamadas, presencia, reacciones y cierra sin listeners duplicados
+  ---
+  duration_ms: 1.216155
+  type: 'test'
+  ...
+# Subtest: diagnóstico acotado no almacena claves de medios ni texto
+ok 137 - diagnóstico acotado no almacena claves de medios ni texto
+  ---
+  duration_ms: 10.811988
+  type: 'test'
+  ...
+# Subtest: estado de historial y actualización descifrada se reindexa
+ok 138 - estado de historial y actualización descifrada se reindexa
+  ---
+  duration_ms: 23.85261
+  type: 'test'
+  ...
+# Subtest: actualización de estados usa solo claves conocidas, sin consultar estados ocultos
+ok 139 - actualización de estados usa solo claves conocidas, sin consultar estados ocultos
+  ---
+  duration_ms: 0.870198
+  type: 'test'
+  ...
+# Subtest: caché consultada antes del login carga su archivo al conocerse la cuenta
+ok 140 - caché consultada antes del login carga su archivo al conocerse la cuenta
+  ---
+  duration_ms: 2.128963
+  type: 'test'
+  ...
+# Subtest: banner admite fuentes y colores sin efectos al importar
+ok 141 - banner admite fuentes y colores sin efectos al importar
+  ---
+  duration_ms: 0.434955
+  type: 'test'
+  ...
+# Subtest: round trip de Unicode y contenido binario sin alteración
+ok 142 - round trip de Unicode y contenido binario sin alteración
+  ---
+  duration_ms: 2.540061
+  type: 'test'
+  ...
+# Subtest: paquetes vacíos, corruptos y truncados se rechazan
+ok 143 - paquetes vacíos, corruptos y truncados se rechazan
+  ---
+  duration_ms: 6.554647
+  type: 'test'
+  ...
+# Subtest: inflado tiene límite contra paquetes comprimidos desproporcionados
+ok 144 - inflado tiene límite contra paquetes comprimidos desproporcionados
+  ---
+  duration_ms: 194.720033
+  type: 'test'
+  ...
+# Subtest: BINARY_32 no acepta longitudes negativas por desbordamiento de signo
+ok 145 - BINARY_32 no acepta longitudes negativas por desbordamiento de signo
+  ---
+  duration_ms: 0.334244
+  type: 'test'
+  ...
+# Subtest: árbol binario profundo se detiene antes de agotar la pila
+ok 146 - árbol binario profundo se detiene antes de agotar la pila
+  ---
+  duration_ms: 0.696187
+  type: 'test'
+  ...
+# Subtest: pares JID recursivos se detienen antes de agotar la pila
+ok 147 - pares JID recursivos se detienen antes de agotar la pila
+  ---
+  duration_ms: 0.500764
+  type: 'test'
+  ...
+# Subtest: claves especiales de atributos no modifican el prototipo
+ok 148 - claves especiales de atributos no modifican el prototipo
+  ---
+  duration_ms: 0.317077
+  type: 'test'
+  ...
+# Subtest: 1000 entradas binarias aleatorias terminan sin bloquear
+ok 149 - 1000 entradas binarias aleatorias terminan sin bloquear
+  ---
+  duration_ms: 32.032432
+  type: 'test'
+  ...
+# Subtest: inspector tolera null, menciones inválidas y valores numéricos corruptos
+ok 150 - inspector tolera null, menciones inválidas y valores numéricos corruptos
+  ---
+  duration_ms: 1.008406
+  type: 'test'
+  ...
+# Subtest: envolturas circulares o nulas no producen recursión ilimitada
+ok 151 - envolturas circulares o nulas no producen recursión ilimitada
+  ---
+  duration_ms: 0.480576
+  type: 'test'
+  ...
+# Subtest: inspector limita menciones sin exponer bytes de medios
+ok 152 - inspector limita menciones sin exponer bytes de medios
+  ---
+  duration_ms: 0.309327
+  type: 'test'
+  ...
+# Subtest: framing acepta fragmentación normal y múltiples frames
+ok 153 - framing acepta fragmentación normal y múltiples frames
+  ---
+  duration_ms: 604.503749
+  type: 'test'
+  ...
+# Subtest: framing rechaza tamaño cero y no deja bytes acumulándose
+ok 154 - framing rechaza tamaño cero y no deja bytes acumulándose
+  ---
+  duration_ms: 1.56557
+  type: 'test'
+  ...
+# Subtest: framing rechaza acumulación superior al límite
+ok 155 - framing rechaza acumulación superior al límite
+  ---
+  duration_ms: 1.06835
+  type: 'test'
+  ...
+# ⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+# ⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+# Subtest: offline country lookup PE
+ok 156 - offline country lookup PE
+  ---
+  duration_ms: 8.810128
+  type: 'test'
+  ...
+# Subtest: offline country lookup MX
+ok 157 - offline country lookup MX
+  ---
+  duration_ms: 1.261994
+  type: 'test'
+  ...
+# Subtest: offline country lookup ES
+ok 158 - offline country lookup ES
+  ---
+  duration_ms: 0.558212
+  type: 'test'
+  ...
+# Subtest: offline country lookup AR
+ok 159 - offline country lookup AR
+  ---
+  duration_ms: 1.603356
+  type: 'test'
+  ...
+# Subtest: offline country lookup CO
+ok 160 - offline country lookup CO
+  ---
+  duration_ms: 0.680803
+  type: 'test'
+  ...
+# Subtest: offline country lookup CL
+ok 161 - offline country lookup CL
+  ---
+  duration_ms: 0.696288
+  type: 'test'
+  ...
+# Subtest: offline country lookup EC
+ok 162 - offline country lookup EC
+  ---
+  duration_ms: 0.439064
+  type: 'test'
+  ...
+# Subtest: offline country lookup BO
+ok 163 - offline country lookup BO
+  ---
+  duration_ms: 0.433725
+  type: 'test'
+  ...
+# Subtest: offline country lookup BR
+ok 164 - offline country lookup BR
+  ---
+  duration_ms: 1.156193
+  type: 'test'
+  ...
+# Subtest: offline country lookup US
+ok 165 - offline country lookup US
+  ---
+  duration_ms: 1.214497
+  type: 'test'
+  ...
+# Subtest: offline country lookup CA
+ok 166 - offline country lookup CA
+  ---
+  duration_ms: 0.734531
+  type: 'test'
+  ...
+# Subtest: offline country lookup GB
+ok 167 - offline country lookup GB
+  ---
+  duration_ms: 1.373776
+  type: 'test'
+  ...
+# Subtest: offline country lookup FR
+ok 168 - offline country lookup FR
+  ---
+  duration_ms: 0.338439
+  type: 'test'
+  ...
+# Subtest: offline country lookup DE
+ok 169 - offline country lookup DE
+  ---
+  duration_ms: 0.863759
+  type: 'test'
+  ...
+# Subtest: offline country lookup IT
+ok 170 - offline country lookup IT
+  ---
+  duration_ms: 0.710815
+  type: 'test'
+  ...
+# Subtest: offline country lookup JP
+ok 171 - offline country lookup JP
+  ---
+  duration_ms: 0.754283
+  type: 'test'
+  ...
+# Subtest: offline country lookup KR
+ok 172 - offline country lookup KR
+  ---
+  duration_ms: 0.442552
+  type: 'test'
+  ...
+# Subtest: offline country lookup AU
+ok 173 - offline country lookup AU
+  ---
+  duration_ms: 0.665426
+  type: 'test'
+  ...
+# Subtest: offline country lookup NZ
+ok 174 - offline country lookup NZ
+  ---
+  duration_ms: 0.422472
+  type: 'test'
+  ...
+# Subtest: offline country lookup IN
+ok 175 - offline country lookup IN
+  ---
+  duration_ms: 1.526035
+  type: 'test'
+  ...
+# Subtest: offline country lookup ZA
+ok 176 - offline country lookup ZA
+  ---
+  duration_ms: 4.554925
+  type: 'test'
+  ...
+# Subtest: offline country lookup EG
+ok 177 - offline country lookup EG
+  ---
+  duration_ms: 0.34144
+  type: 'test'
+  ...
+# Subtest: offline country lookup MA
+ok 178 - offline country lookup MA
+  ---
+  duration_ms: 0.361912
+  type: 'test'
+  ...
+# Subtest: offline country lookup UY
+ok 179 - offline country lookup UY
+  ---
+  duration_ms: 0.344233
+  type: 'test'
+  ...
+# Subtest: offline country lookup PY
+ok 180 - offline country lookup PY
+  ---
+  duration_ms: 0.427832
+  type: 'test'
+  ...
+# Subtest: offline country lookup VE
+ok 181 - offline country lookup VE
+  ---
+  duration_ms: 0.327759
+  type: 'test'
+  ...
+# Subtest: offline country lookup CR
+ok 182 - offline country lookup CR
+  ---
+  duration_ms: 0.3743
+  type: 'test'
+  ...
+# Subtest: offline country lookup PA
+ok 183 - offline country lookup PA
+  ---
+  duration_ms: 0.271892
+  type: 'test'
+  ...
+# Subtest: offline country lookup DO
+ok 184 - offline country lookup DO
+  ---
+  duration_ms: 0.598679
+  type: 'test'
+  ...
+# Subtest: offline country lookup GT
+ok 185 - offline country lookup GT
+  ---
+  duration_ms: 0.236957
+  type: 'test'
+  ...
+# Subtest: country input rejection "123456@lid"
+ok 186 - country input rejection "123456@lid"
+  ---
+  duration_ms: 0.099205
+  type: 'test'
+  ...
+# Subtest: country input rejection "123@g.us"
+ok 187 - country input rejection "123@g.us"
+  ---
+  duration_ms: 0.056574
+  type: 'test'
+  ...
+# Subtest: country input rejection "status@broadcast"
+ok 188 - country input rejection "status@broadcast"
+  ---
+  duration_ms: 0.091207
+  type: 'test'
+  ...
+# Subtest: country input rejection "foo"
+ok 189 - country input rejection "foo"
+  ---
+  duration_ms: 0.063285
+  type: 'test'
+  ...
+# Subtest: country input rejection ""
+ok 190 - country input rejection ""
+  ---
+  duration_ms: 0.163659
+  type: 'test'
+  ...
+# Subtest: country input rejection null
+ok 191 - country input rejection null
+  ---
+  duration_ms: 0.062339
+  type: 'test'
+  ...
+# Subtest: country input rejection {}
+ok 192 - country input rejection {}
+  ---
+  duration_ms: 0.053944
+  type: 'test'
+  ...
+# Subtest: country input rejection "+9999999999999999999"
+ok 193 - country input rejection "+9999999999999999999"
+  ---
+  duration_ms: 0.055114
+  type: 'test'
+  ...
+# Subtest: country input rejection "123"
+ok 194 - country input rejection "123"
+  ---
+  duration_ms: 0.055289
+  type: 'test'
+  ...
+# Subtest: country input rejection "123:2@lid"
+ok 195 - country input rejection "123:2@lid"
+  ---
+  duration_ms: 0.052959
+  type: 'test'
+  ...
+# Subtest: LID mapping uses explicit mapped phone only
+ok 196 - LID mapping uses explicit mapped phone only
+  ---
+  duration_ms: 0.427974
+  type: 'test'
+  ...
+# Subtest: country responses do not leak mutable dataset references
+ok 197 - country responses do not leak mutable dataset references
+  ---
+  duration_ms: 0.851766
+  type: 'test'
+  ...
+# Subtest: normal media imageMessage / none
+ok 198 - normal media imageMessage / none
+  ---
+  duration_ms: 2.759364
+  type: 'test'
+  ...
+# Subtest: normal media imageMessage / ephemeralMessage
+ok 199 - normal media imageMessage / ephemeralMessage
+  ---
+  duration_ms: 0.871272
+  type: 'test'
+  ...
+# Subtest: normal media imageMessage / documentWithCaptionMessage
+ok 200 - normal media imageMessage / documentWithCaptionMessage
+  ---
+  duration_ms: 0.888631
+  type: 'test'
+  ...
+# Subtest: view-once not archived imageMessage / viewOnceMessage
+ok 201 - view-once not archived imageMessage / viewOnceMessage
+  ---
+  duration_ms: 0.429413
+  type: 'test'
+  ...
+# Subtest: view-once not archived imageMessage / viewOnceMessageV2
+ok 202 - view-once not archived imageMessage / viewOnceMessageV2
+  ---
+  duration_ms: 0.091009
+  type: 'test'
+  ...
+# Subtest: view-once not archived imageMessage / viewOnceMessageV2Extension
+ok 203 - view-once not archived imageMessage / viewOnceMessageV2Extension
+  ---
+  duration_ms: 0.070287
+  type: 'test'
+  ...
+# Subtest: normal media videoMessage / none
+ok 204 - normal media videoMessage / none
+  ---
+  duration_ms: 0.759284
+  type: 'test'
+  ...
+# Subtest: normal media videoMessage / ephemeralMessage
+ok 205 - normal media videoMessage / ephemeralMessage
+  ---
+  duration_ms: 0.963642
+  type: 'test'
+  ...
+# Subtest: normal media videoMessage / documentWithCaptionMessage
+ok 206 - normal media videoMessage / documentWithCaptionMessage
+  ---
+  duration_ms: 0.646056
+  type: 'test'
+  ...
+# Subtest: view-once not archived videoMessage / viewOnceMessage
+ok 207 - view-once not archived videoMessage / viewOnceMessage
+  ---
+  duration_ms: 0.091172
+  type: 'test'
+  ...
+# Subtest: view-once not archived videoMessage / viewOnceMessageV2
+ok 208 - view-once not archived videoMessage / viewOnceMessageV2
+  ---
+  duration_ms: 0.108613
+  type: 'test'
+  ...
+# Subtest: view-once not archived videoMessage / viewOnceMessageV2Extension
+ok 209 - view-once not archived videoMessage / viewOnceMessageV2Extension
+  ---
+  duration_ms: 0.079065
+  type: 'test'
+  ...
+# Subtest: normal media audioMessage / none
+ok 210 - normal media audioMessage / none
+  ---
+  duration_ms: 0.699222
+  type: 'test'
+  ...
+# Subtest: normal media audioMessage / ephemeralMessage
+ok 211 - normal media audioMessage / ephemeralMessage
+  ---
+  duration_ms: 0.636884
+  type: 'test'
+  ...
+# Subtest: normal media audioMessage / documentWithCaptionMessage
+ok 212 - normal media audioMessage / documentWithCaptionMessage
+  ---
+  duration_ms: 0.789428
+  type: 'test'
+  ...
+# Subtest: view-once not archived audioMessage / viewOnceMessage
+ok 213 - view-once not archived audioMessage / viewOnceMessage
+  ---
+  duration_ms: 0.114259
+  type: 'test'
+  ...
+# Subtest: view-once not archived audioMessage / viewOnceMessageV2
+ok 214 - view-once not archived audioMessage / viewOnceMessageV2
+  ---
+  duration_ms: 0.065669
+  type: 'test'
+  ...
+# Subtest: view-once not archived audioMessage / viewOnceMessageV2Extension
+ok 215 - view-once not archived audioMessage / viewOnceMessageV2Extension
+  ---
+  duration_ms: 0.107488
+  type: 'test'
+  ...
+# Subtest: normal media documentMessage / none
+ok 216 - normal media documentMessage / none
+  ---
+  duration_ms: 0.672996
+  type: 'test'
+  ...
+# Subtest: normal media documentMessage / ephemeralMessage
+ok 217 - normal media documentMessage / ephemeralMessage
+  ---
+  duration_ms: 0.503834
+  type: 'test'
+  ...
+# Subtest: normal media documentMessage / documentWithCaptionMessage
+ok 218 - normal media documentMessage / documentWithCaptionMessage
+  ---
+  duration_ms: 0.612326
+  type: 'test'
+  ...
+# Subtest: view-once not archived documentMessage / viewOnceMessage
+ok 219 - view-once not archived documentMessage / viewOnceMessage
+  ---
+  duration_ms: 0.091837
+  type: 'test'
+  ...
+# Subtest: view-once not archived documentMessage / viewOnceMessageV2
+ok 220 - view-once not archived documentMessage / viewOnceMessageV2
+  ---
+  duration_ms: 0.065921
+  type: 'test'
+  ...
+# Subtest: view-once not archived documentMessage / viewOnceMessageV2Extension
+ok 221 - view-once not archived documentMessage / viewOnceMessageV2Extension
+  ---
+  duration_ms: 0.063492
+  type: 'test'
+  ...
+# Subtest: normal media stickerMessage / none
+ok 222 - normal media stickerMessage / none
+  ---
+  duration_ms: 0.431626
+  type: 'test'
+  ...
+# Subtest: normal media stickerMessage / ephemeralMessage
+ok 223 - normal media stickerMessage / ephemeralMessage
+  ---
+  duration_ms: 0.384098
+  type: 'test'
+  ...
+# Subtest: normal media stickerMessage / documentWithCaptionMessage
+ok 224 - normal media stickerMessage / documentWithCaptionMessage
+  ---
+  duration_ms: 0.417301
+  type: 'test'
+  ...
+# Subtest: view-once not archived stickerMessage / viewOnceMessage
+ok 225 - view-once not archived stickerMessage / viewOnceMessage
+  ---
+  duration_ms: 0.078102
+  type: 'test'
+  ...
+# Subtest: view-once not archived stickerMessage / viewOnceMessageV2
+ok 226 - view-once not archived stickerMessage / viewOnceMessageV2
+  ---
+  duration_ms: 0.063398
+  type: 'test'
+  ...
+# Subtest: view-once not archived stickerMessage / viewOnceMessageV2Extension
+ok 227 - view-once not archived stickerMessage / viewOnceMessageV2Extension
+  ---
+  duration_ms: 0.060072
+  type: 'test'
+  ...
+# Subtest: normal media size limit checks actual stream bytes
+ok 228 - normal media size limit checks actual stream bytes
+  ---
+  duration_ms: 0.817354
+  type: 'test'
+  ...
+# Subtest: declared oversized media is rejected before download
+ok 229 - declared oversized media is rejected before download
+  ---
+  duration_ms: 0.167358
+  type: 'test'
+  ...
+# Subtest: empty media reports an explicit error
+ok 230 - empty media reports an explicit error
+  ---
+  duration_ms: 1.094324
+  type: 'test'
+  ...
+# Subtest: download deadline destroys a late stream
+ok 231 - download deadline destroys a late stream
+  ---
+  duration_ms: 181.944216
+  type: 'test'
+  ...
+# Subtest: saved files have deterministic safe names and restrictive permissions
+ok 232 - saved files have deterministic safe names and restrictive permissions
+  ---
+  duration_ms: 6.452167
+  type: 'test'
+  ...
+# Subtest: autodownload requires allowlist and ignores historical messages
+ok 233 - autodownload requires allowlist and ignores historical messages
+  ---
+  duration_ms: 0.380054
+  type: 'test'
+  ...
+# Subtest: status survives a new socket with matching account, binary data intact
+ok 234 - status survives a new socket with matching account, binary data intact
+  ---
+  duration_ms: 1.715452
+  type: 'test'
+  ...
+# Subtest: duplicate status retains stable ID
+ok 235 - duplicate status retains stable ID
+  ---
+  duration_ms: 0.340235
+  type: 'test'
+  ...
+# Subtest: revoke keeps only metadata tombstone and never restores deleted content
+ok 236 - revoke keeps only metadata tombstone and never restores deleted content
+  ---
+  duration_ms: 0.393744
+  type: 'test'
+  ...
+# Subtest: deletion is scoped by author and broadcast route
+ok 237 - deletion is scoped by author and broadcast route
+  ---
+  duration_ms: 0.287746
+  type: 'test'
+  ...
+# Subtest: expired status drops content and stays in short metadata history
+ok 238 - expired status drops content and stays in short metadata history
+  ---
+  duration_ms: 0.169402
+  type: 'test'
+  ...
+# Subtest: status cache bounded to 500 entries
+ok 239 - status cache bounded to 500 entries
+  ---
+  duration_ms: 32.264402
+  type: 'test'
+  ...
+# Subtest: socket bindings install and detach status listeners without duplicates
+ok 240 - socket bindings install and detach status listeners without duplicates
+  ---
+  duration_ms: 5.266942
+  type: 'test'
+  ...
+# Subtest: AI disclosure is honest text, presence always resets after failure
+ok 241 - AI disclosure is honest text, presence always resets after failure
+  ---
+  duration_ms: 0.386908
+  type: 'test'
+  ...
+# Subtest: rich AI envelopes serialize locally without claiming server authentication
+ok 242 - rich AI envelopes serialize locally without claiming server authentication
+  ---
+  duration_ms: 7.261174
+  type: 'test'
+  ...
+# Subtest: browser presets support documented calls and missing browser
+ok 243 - browser presets support documented calls and missing browser
+  ---
+  duration_ms: 0.244632
+  type: 'test'
+  ...
+# Subtest: detaching status tracking never overwrites persisted activation setting
+ok 244 - detaching status tracking never overwrites persisted activation setting
+  ---
+  duration_ms: 0.196145
+  type: 'test'
+  ...
+# ⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+# ⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+# Subtest: Baileys has no application-level status reaction exports or socket method
+ok 245 - Baileys has no application-level status reaction exports or socket method
+  ---
+  duration_ms: 1.16547
+  type: 'test'
+  ...
+# Subtest: statusReaction settings never send reactions from Baileys
+ok 246 - statusReaction settings never send reactions from Baileys
+  ---
+  duration_ms: 4.449183
+  type: 'test'
+  ...
+# Subtest: optional status tracking only records received statuses
+ok 247 - optional status tracking only records received statuses
+  ---
+  duration_ms: 1.361574
+  type: 'test'
+  ...
+# Subtest: official status reaction schema survives encoding and decoding
+ok 248 - official status reaction schema survives encoding and decoding
+  ---
+  duration_ms: 4.988659
+  type: 'test'
+  ...
+# ⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+# ⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+# Subtest: API pública disponible en CJS y ESM en un único paquete
+ok 249 - API pública disponible en CJS y ESM en un único paquete
+  ---
+  duration_ms: 241.583592
+  type: 'test'
+  ...
+# Subtest: scoped event leases cannot flush another operation or a later generation
+ok 250 - scoped event leases cannot flush another operation or a later generation
+  ---
+  duration_ms: 5.261184
+  type: 'test'
+  ...
+# Subtest: reentrant events emitted while flushing are not discarded
+ok 251 - reentrant events emitted while flushing are not discarded
+  ---
+  duration_ms: 0.774681
+  type: 'test'
+  ...
+# Subtest: missing app-state key no longer creates an unmatched buffering level
+ok 252 - missing app-state key no longer creates an unmatched buffering level
+  ---
+  duration_ms: 9.894507
+  type: 'test'
+  ...
+# Subtest: history disabled releases the initial lease even if keys are missing
+ok 253 - history disabled releases the initial lease even if keys are missing
+  ---
+  duration_ms: 1.84474
+  type: 'test'
+  ...
+# Subtest: a stalled history download never holds live upserts or their event leases
+ok 254 - a stalled history download never holds live upserts or their event leases
+  ---
+  duration_ms: 9.381043
+  type: 'test'
+  ...
+# Subtest: complete socket exposes supplemental methods and closes safely during handshake
+ok 255 - complete socket exposes supplemental methods and closes safely during handshake
+  ---
+  duration_ms: 106.019825
+  type: 'test'
+  ...
+# Subtest: supplemental quick replies use the supplied converter and existing appPatch
+ok 256 - supplemental quick replies use the supplied converter and existing appPatch
+  ---
+  duration_ms: 0.597357
+  type: 'test'
+  ...
+# Subtest: supplemental business and community methods use the same query transport
+ok 257 - supplemental business and community methods use the same query transport
+  ---
+  duration_ms: 0.652453
+  type: 'test'
+  ...
+# Subtest: banner includes requested creator and partner without ANSI in a non-TTY stream
+ok 258 - banner includes requested creator and partner without ANSI in a non-TTY stream
+  ---
+  duration_ms: 0.869815
+  type: 'test'
+  ...
+1..258
+# tests 258
+# suites 0
+# pass 258
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 12135.972222
+
+> kage-baileys@3.2.2 check:package
+> node scripts/check-package.cjs
+
+⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+PACKAGE_OK: kage-baileys@3.2.2; sin colisiones; entradas CJS/ESM/tipos/protocolo presentes; API verificada.
+
+> kage-baileys@3.2.2 prepack
+> npm run check:package
+
+
+> kage-baileys@3.2.2 check:package
+> node scripts/check-package.cjs
+
+⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+⚠️ [kage-baileys] El módulo opcional sharp no está instalado. Para procesar imágenes instale sharp.
+PACKAGE_OK: kage-baileys@3.2.2; sin colisiones; entradas CJS/ESM/tipos/protocolo presentes; API verificada.
+npm warn This command requires you to be logged in to https://registry.npmjs.org/ (dry-run)
+npm notice Publishing to https://registry.npmjs.org/ with tag latest and public access (dry-run)
+{
+  "id": "kage-baileys@3.2.2",
+  "name": "kage-baileys",
+  "version": "3.2.2",
+  "size": 5996343,
+  "unpackedSize": 40229865,
+  "shasum": "410d681814692bb0c77380104970cf90738944e7",
+  "integrity": "sha512-Rkkn4v15OmR5KLN7WqC1SSHUUzMj8b6AOWvm2+QYMAcfkaycaIX7UhgoyaBm1+HCFvu/zIP1k31ieDeHmEIoRg==",
+  "filename": "kage-baileys-3.2.2.tgz",
+  "files": [
+    {
+      "path": "Example/connection.cjs",
+      "size": 5592,
+      "mode": 420
+    },
+    {
+      "path": "Example/event.cjs",
+      "size": 852,
+      "mode": 420
+    },
+    {
+      "path": "LICENSE",
+      "size": 1069,
+      "mode": 420
+    },
+    {
+      "path": "README.MD",
+      "size": 159473,
+      "mode": 420
+    },
+    {
+      "path": "WAProto/compat.cjs",
+      "size": 1537,
+      "mode": 420
+    },
+    {
+      "path": "WAProto/fix-imports.js",
+      "size": 138,
+      "mode": 420
+    },
+    {
+      "path": "WAProto/GenerateStatics.sh",
+      "size": 77,
+      "mode": 420
+    },
+    {
+      "path": "WAProto/index.d.ts",
+      "size": 5025767,
+      "mode": 420
+    },
+    {
+      "path": "WAProto/index.js",
+      "size": 16713234,
+      "mode": 420
+    },
+    {
+      "path": "WAProto/WAProto.proto",
+      "size": 255537,
+      "mode": 420
+    },
+    {
+      "path": "engine-requirements.js",
+      "size": 316,
+      "mode": 420
+    },
+    {
+      "path": "lib/Addon/http-error.js",
+      "size": 1317,
+      "mode": 420
+    },
+    {
+      "path": "lib/Addon/index.js",
+      "size": 2057,
+      "mode": 420
+    },
+    {
+      "path": "lib/Addon/keyed-db.js",
+      "size": 14390,
+      "mode": 420
+    },
+    {
+      "path": "lib/Addon/link-preview.js",
+      "size": 3124,
+      "mode": 420
+    },
+    {
+      "path": "lib/assets/wasm/loader.js",
+      "size": 348386,
+      "mode": 420
+    },
+    {
+      "path": "lib/assets/wasm/whatsapp.wasm",
+      "size": 9819554,
+      "mode": 420
+    },
+    {
+      "path": "lib/assets/wasm/worker-modules.js",
+      "size": 1861679,
+      "mode": 420
+    },
+    {
+      "path": "lib/Defaults/baileys-version.json",
+      "size": 40,
+      "mode": 420
+    },
+    {
+      "path": "lib/Defaults/connection.js",
+      "size": 3540,
+      "mode": 420
+    },
+    {
+      "path": "lib/Defaults/constants.js",
+      "size": 4168,
+      "mode": 420
+    },
+    {
+      "path": "lib/Defaults/history.js",
+      "size": 1520,
+      "mode": 420
+    },
+    {
+      "path": "lib/Defaults/index.js",
+      "size": 15609,
+      "mode": 420
+    },
+    {
+      "path": "lib/Defaults/media.js",
+      "size": 2948,
+      "mode": 420
+    },
+    {
+      "path": "lib/Defaults/phonenumber-mcc.json",
+      "size": 2883,
+      "mode": 420
+    },
+    {
+      "path": "lib/Defaults/prefix.js",
+      "size": 1168,
+      "mode": 420
+    },
+    {
+      "path": "lib/Defaults/wileys-version.json",
+      "size": 41,
+      "mode": 420
+    },
+    {
+      "path": "lib/Extensions/business-advanced.js",
+      "size": 13119,
+      "mode": 420
+    },
+    {
+      "path": "lib/Extensions/business.js",
+      "size": 4739,
+      "mode": 420
+    },
+    {
+      "path": "lib/Extensions/chats-advanced.js",
+      "size": 46212,
+      "mode": 420
+    },
+    {
+      "path": "lib/Extensions/chats.js",
+      "size": 13917,
+      "mode": 420
+    },
+    {
+      "path": "lib/Extensions/communities-advanced.js",
+      "size": 18987,
+      "mode": 420
+    },
+    {
+      "path": "lib/Extensions/community.js",
+      "size": 3468,
+      "mode": 420
+    },
+    {
+      "path": "lib/Extensions/groups-advanced.js",
+      "size": 15393,
+      "mode": 420
+    },
+    {
+      "path": "lib/Extensions/index.js",
+      "size": 1656,
+      "mode": 420
+    },
+    {
+      "path": "lib/Extensions/messages-recv-advanced.js",
+      "size": 85978,
+      "mode": 420
+    },
+    {
+      "path": "lib/Extensions/messages-send-advanced.js",
+      "size": 28142,
+      "mode": 420
+    },
+    {
+      "path": "lib/Extensions/messages-send.js",
+      "size": 52413,
+      "mode": 420
+    },
+    {
+      "path": "lib/Extensions/newsletter-advanced.js",
+      "size": 10046,
+      "mode": 420
+    },
+    {
+      "path": "lib/Extensions/newsletter.js",
+      "size": 2350,
+      "mode": 420
+    },
+    {
+      "path": "lib/Extensions/socket.js",
+      "size": 13914,
+      "mode": 420
+    },
+    {
+      "path": "lib/index.d.ts",
+      "size": 21752,
+      "mode": 420
+    },
+    {
+      "path": "lib/index.js",
+      "size": 5540,
+      "mode": 420
+    },
+    {
+      "path": "lib/index.mjs",
+      "size": 24800,
+      "mode": 420
+    },
+    {
+      "path": "lib/Modded/message_builder.js",
+      "size": 147961,
+      "mode": 420
+    },
+    {
+      "path": "lib/Signal/Group/ciphertext-message.js",
+      "size": 2252,
+      "mode": 420
+    },
+    {
+      "path": "lib/Signal/Group/group_cipher.js",
+      "size": 13940,
+      "mode": 420
+    },
+    {
+      "path": "lib/Signal/Group/group-session-builder.js",
+      "size": 8877,
+      "mode": 420
+    },
+    {
+      "path": "lib/Signal/Group/index.js",
+      "size": 10106,
+      "mode": 420
+    },
+    {
+      "path": "lib/Signal/Group/keyhelper.js",
+      "size": 5656,
+      "mode": 420
+    },
+    {
+      "path": "lib/Signal/Group/queue-job.js",
+      "size": 1611,
+      "mode": 420
+    },
+    {
+      "path": "lib/Signal/Group/sender-chain-key.js",
+      "size": 4035,
+      "mode": 420
+    },
+    {
+      "path": "lib/Signal/Group/sender-key-distribution-message.js",
+      "size": 8535,
+      "mode": 420
+    },
+    {
+      "path": "lib/Signal/Group/sender-key-message.js",
+      "size": 9668,
+      "mode": 420
+    },
+    {
+      "path": "lib/Signal/Group/sender-key-name.js",
+      "size": 4812,
+      "mode": 420
+    },
+    {
+      "path": "lib/Signal/Group/sender-key-record.js",
+      "size": 6374,
+      "mode": 420
+    },
+    {
+      "path": "lib/Signal/Group/sender-key-state.js",
+      "size": 12095,
+      "mode": 420
+    },
+    {
+      "path": "lib/Signal/Group/sender-message-key.js",
+      "size": 3646,
+      "mode": 420
+    },
+    {
+      "path": "lib/Signal/libsignal.js",
+      "size": 49444,
+      "mode": 420
+    },
+    {
+      "path": "lib/Signal/lid-mapping.js",
+      "size": 35958,
+      "mode": 420
+    },
+    {
+      "path": "lib/Socket/business.js",
+      "size": 36178,
+      "mode": 420
+    },
+    {
+      "path": "lib/Socket/chats.js",
+      "size": 134268,
+      "mode": 420
+    },
+    {
+      "path": "lib/Socket/Client/index.js",
+      "size": 3424,
+      "mode": 420
+    },
+    {
+      "path": "lib/Socket/Client/types.js",
+      "size": 2071,
+      "mode": 420
+    },
+    {
+      "path": "lib/Socket/Client/websocket.js",
+      "size": 7230,
+      "mode": 420
+    },
+    {
+      "path": "lib/Socket/communities.js",
+      "size": 40613,
+      "mode": 420
+    },
+    {
+      "path": "lib/Socket/community.js",
+      "size": 39651,
+      "mode": 420
+    },
+    {
+      "path": "lib/Socket/dugong.js",
+      "size": 27808,
+      "mode": 420
+    },
+    {
+      "path": "lib/Socket/groups.js",
+      "size": 45667,
+      "mode": 420
+    },
+    {
+      "path": "lib/Socket/index.js",
+      "size": 2672,
+      "mode": 420
+    },
+    {
+      "path": "lib/Socket/messages-recv.js",
+      "size": 210475,
+      "mode": 420
+    },
+    {
+      "path": "lib/Socket/messages-send.js",
+      "size": 172842,
+      "mode": 420
+    },
+    {
+      "path": "lib/Socket/mex.js",
+      "size": 7783,
+      "mode": 420
+    },
+    {
+      "path": "lib/Socket/newsletter.js",
+      "size": 29834,
+      "mode": 420
+    },
+    {
+      "path": "lib/Socket/socket.js",
+      "size": 110081,
+      "mode": 420
+    },
+    {
+      "path": "lib/Socket/usync.js",
+      "size": 2302,
+      "mode": 420
+    },
+    {
+      "path": "lib/Store/index.js",
+      "size": 3331,
+      "mode": 420
+    },
+    {
+      "path": "lib/Store/make-cache-manager-store.js",
+      "size": 6273,
+      "mode": 420
+    },
+    {
+      "path": "lib/Store/make-in-memory-store.js",
+      "size": 56139,
+      "mode": 420
+    },
+    {
+      "path": "lib/Store/make-ordered-dictionary.js",
+      "size": 7362,
+      "mode": 420
+    },
+    {
+      "path": "lib/Store/object-repository.js",
+      "size": 2902,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/Auth.js",
+      "size": 1117,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/Bussines.js",
+      "size": 1120,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/Call.js",
+      "size": 1117,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/Chat.js",
+      "size": 1599,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/Contact.js",
+      "size": 1117,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/Events.js",
+      "size": 1117,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/GroupMetadata.js",
+      "size": 1117,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/index.js",
+      "size": 7481,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/Label.js",
+      "size": 3998,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/LabelAssociation.js",
+      "size": 1834,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/Message.js",
+      "size": 3103,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/Mex.js",
+      "size": 5090,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/MexUpdates.js",
+      "size": 1499,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/Newsletter.js",
+      "size": 2583,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/Product.js",
+      "size": 1117,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/RichType.js",
+      "size": 1461,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/Signal.js",
+      "size": 1117,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/Socket.js",
+      "size": 1117,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/State.js",
+      "size": 5819,
+      "mode": 420
+    },
+    {
+      "path": "lib/Types/USync.js",
+      "size": 1117,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/auth-utils.js",
+      "size": 33495,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/automation-tools.js",
+      "size": 13939,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/baileys-event-stream.js",
+      "size": 4871,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/browser-utils.js",
+      "size": 4724,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/business.js",
+      "size": 28143,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/chat-utils.js",
+      "size": 105303,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/companion-reg-client-utils.js",
+      "size": 5068,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/consented-media.js",
+      "size": 3867,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/countries.json",
+      "size": 87496,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/COUNTRY-DATA-LICENSE",
+      "size": 25853,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/country-info.js",
+      "size": 1602,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/crypto.js",
+      "size": 21048,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/decode-wa-message.js",
+      "size": 38299,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/event-buffer.js",
+      "size": 73415,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/event-message.js",
+      "size": 4109,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/generics.js",
+      "size": 49763,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/history.js",
+      "size": 16434,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/identity-change-handler.js",
+      "size": 5952,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/index.js",
+      "size": 6509,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/kage-event-stream.js",
+      "size": 2490,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/link-preview.js",
+      "size": 12231,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/logger.js",
+      "size": 1803,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/lt-hash.js",
+      "size": 4012,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/make-mutex.js",
+      "size": 4429,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/message-inspector.js",
+      "size": 9504,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/message-retry-manager.js",
+      "size": 26215,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/messages-media.js",
+      "size": 103780,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/messages.js",
+      "size": 192230,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/noise-handler.js",
+      "size": 21918,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/offline-node-processor.js",
+      "size": 4080,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/pre-key-manager.js",
+      "size": 13883,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/process-message.js",
+      "size": 95371,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/reporting-utils.js",
+      "size": 19033,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/rich-message-utils.js",
+      "size": 15149,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/rich-messages.js",
+      "size": 32634,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/signal.js",
+      "size": 24416,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/stanza-ack.js",
+      "size": 2858,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/status-archive.js",
+      "size": 8125,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/status-refresh.js",
+      "size": 2328,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/status-tools.js",
+      "size": 11710,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/sticker-pack.js",
+      "size": 3394,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/sync-action-utils.js",
+      "size": 4716,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/tc-token-utils.js",
+      "size": 9510,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/terminal-banner.js",
+      "size": 2008,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/use-multi-file-auth-state.js",
+      "size": 15416,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/use-single-file-auth-state.js",
+      "size": 4143,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/use-sqlite-auth-state.js",
+      "size": 5957,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/validate-connection.js",
+      "size": 27301,
+      "mode": 420
+    },
+    {
+      "path": "lib/Utils/view-once-compat.js",
+      "size": 5362,
+      "mode": 420
+    },
+    {
+      "path": "lib/VoIP/audio-feeder.js",
+      "size": 11674,
+      "mode": 420
+    },
+    {
+      "path": "lib/VoIP/index.js",
+      "size": 24679,
+      "mode": 420
+    },
+    {
+      "path": "lib/VoIP/relay-transport.js",
+      "size": 52217,
+      "mode": 420
+    },
+    {
+      "path": "lib/VoIP/signaling.js",
+      "size": 53445,
+      "mode": 420
+    },
+    {
+      "path": "lib/VoIP/types.js",
+      "size": 1257,
+      "mode": 420
+    },
+    {
+      "path": "lib/VoIP/wasm-engine.js",
+      "size": 115446,
+      "mode": 420
+    },
+    {
+      "path": "lib/VoIP/worker-bootstrap.js",
+      "size": 78233,
+      "mode": 420
+    },
+    {
+      "path": "lib/WABinary/constants.js",
+      "size": 85903,
+      "mode": 420
+    },
+    {
+      "path": "lib/WABinary/decode.js",
+      "size": 29672,
+      "mode": 420
+    },
+    {
+      "path": "lib/WABinary/encode.js",
+      "size": 26156,
+      "mode": 420
+    },
+    {
+      "path": "lib/WABinary/generic-utils.js",
+      "size": 17195,
+      "mode": 420
+    },
+    {
+      "path": "lib/WABinary/index.js",
+      "size": 3971,
+      "mode": 420
+    },
+    {
+      "path": "lib/WABinary/jid-utils.js",
+      "size": 21355,
+      "mode": 420
+    },
+    {
+      "path": "lib/WABinary/types.js",
+      "size": 1117,
+      "mode": 420
+    },
+    {
+      "path": "lib/WAM/BinaryInfo.js",
+      "size": 1902,
+      "mode": 420
+    },
+    {
+      "path": "lib/WAM/constants.js",
+      "size": 2185855,
+      "mode": 420
+    },
+    {
+      "path": "lib/WAM/encode.js",
+      "size": 19187,
+      "mode": 420
+    },
+    {
+      "path": "lib/WAM/index.js",
+      "size": 3697,
+      "mode": 420
+    },
+    {
+      "path": "lib/WAUSync/index.js",
+      "size": 3715,
+      "mode": 420
+    },
+    {
+      "path": "lib/WAUSync/Protocols/index.js",
+      "size": 4175,
+      "mode": 420
+    },
+    {
+      "path": "lib/WAUSync/Protocols/USyncBotProfileProtocol.js",
+      "size": 5089,
+      "mode": 420
+    },
+    {
+      "path": "lib/WAUSync/Protocols/USyncContactProtocol.js",
+      "size": 3991,
+      "mode": 420
+    },
+    {
+      "path": "lib/WAUSync/Protocols/USyncDeviceProtocol.js",
+      "size": 7307,
+      "mode": 420
+    },
+    {
+      "path": "lib/WAUSync/Protocols/USyncDisappearingModeProtocol.js",
+      "size": 3488,
+      "mode": 420
+    },
+    {
+      "path": "lib/WAUSync/Protocols/USyncLIDProtocol.js",
+      "size": 1566,
+      "mode": 420
+    },
+    {
+      "path": "lib/WAUSync/Protocols/USyncStatusProtocol.js",
+      "size": 4483,
+      "mode": 420
+    },
+    {
+      "path": "lib/WAUSync/Protocols/USyncUsernameProtocol.js",
+      "size": 1955,
+      "mode": 420
+    },
+    {
+      "path": "lib/WAUSync/USyncQuery.js",
+      "size": 11398,
+      "mode": 420
+    },
+    {
+      "path": "lib/WAUSync/USyncUser.js",
+      "size": 2810,
+      "mode": 420
+    },
+    {
+      "path": "licenses/upstream-MIT.txt",
+      "size": 1111,
+      "mode": 420
+    },
+    {
+      "path": "maintenance/api-coverage.json",
+      "size": 36025,
+      "mode": 420
+    },
+    {
+      "path": "maintenance/archivos-sha256.json",
+      "size": 29011,
+      "mode": 420
+    },
+    {
+      "path": "maintenance/dependency-audit.json",
+      "size": 13523,
+      "mode": 420
+    },
+    {
+      "path": "maintenance/extension-inventory.json",
+      "size": 985,
+      "mode": 420
+    },
+    {
+      "path": "maintenance/protocol-update.json",
+      "size": 60071,
+      "mode": 420
+    },
+    {
+      "path": "maintenance/protocol-wire-audit.json",
+      "size": 52,
+      "mode": 420
+    },
+    {
+      "path": "maintenance/reference-socket-surface.json",
+      "size": 5103,
+      "mode": 420
+    },
+    {
+      "path": "maintenance/resumen-validacion.json",
+      "size": 1099,
+      "mode": 420
+    },
+    {
+      "path": "maintenance/validation.log",
+      "size": 46318,
+      "mode": 420
+    },
+    {
+      "path": "maintenance/verification.json",
+      "size": 12257,
+      "mode": 420
+    },
+    {
+      "path": "package.json",
+      "size": 5360,
+      "mode": 420
+    },
+    {
+      "path": "scripts/check-imports.cjs",
+      "size": 1227,
+      "mode": 420
+    },
+    {
+      "path": "scripts/check-package.cjs",
+      "size": 2005,
+      "mode": 420
+    },
+    {
+      "path": "scripts/check-syntax.cjs",
+      "size": 835,
+      "mode": 420
+    },
+    {
+      "path": "scripts/generate-protobuf.cjs",
+      "size": 2946,
+      "mode": 420
+    },
+    {
+      "path": "scripts/generate-public-types.cjs",
+      "size": 3313,
+      "mode": 420
+    },
+    {
+      "path": "scripts/kage-base64-fix.cjs",
+      "size": 1879,
+      "mode": 420
+    },
+    {
+      "path": "scripts/maintenance.cjs",
+      "size": 1863,
+      "mode": 420
+    },
+    {
+      "path": "test/advanced.test.cjs",
+      "size": 3263,
+      "mode": 420
+    },
+    {
+      "path": "test/archive-repair.test.cjs",
+      "size": 6286,
+      "mode": 420
+    },
+    {
+      "path": "test/base64-fix.test.cjs",
+      "size": 2554,
+      "mode": 420
+    },
+    {
+      "path": "test/buffering.test.cjs",
+      "size": 1036,
+      "mode": 420
+    },
+    {
+      "path": "test/consented-media.test.cjs",
+      "size": 2590,
+      "mode": 420
+    },
+    {
+      "path": "test/installation-repair.test.cjs",
+      "size": 2272,
+      "mode": 420
+    },
+    {
+      "path": "test/maintenance.test.cjs",
+      "size": 15615,
+      "mode": 420
+    },
+    {
+      "path": "test/npm-publication.test.cjs",
+      "size": 8205,
+      "mode": 420
+    },
+    {
+      "path": "test/recepcion-reparada.test.cjs",
+      "size": 8943,
+      "mode": 420
+    },
+    {
+      "path": "test/resilience-binary.test.cjs",
+      "size": 4378,
+      "mode": 420
+    },
+    {
+      "path": "test/resilience-transport.test.cjs",
+      "size": 1894,
+      "mode": 420
+    },
+    {
+      "path": "test/revision.test.cjs",
+      "size": 10532,
+      "mode": 420
+    },
+    {
+      "path": "test/status-policy.test.cjs",
+      "size": 2530,
+      "mode": 420
+    },
+    {
+      "path": "test/types.test.ts",
+      "size": 396,
+      "mode": 420
+    },
+    {
+      "path": "test/upgrade.test.cjs",
+      "size": 7248,
+      "mode": 420
+    },
+    {
+      "path": "tsconfig.json",
+      "size": 348,
+      "mode": 420
+    }
+  ],
+  "entryCount": 214,
+  "bundled": []
+}

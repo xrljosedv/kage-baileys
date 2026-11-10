@@ -1,0 +1,5 @@
+
+> kage-baileys@3.2.8-merge.1 check:package
+> node scripts/check-package.cjs
+
+PACKAGE_OK: kage-baileys@3.2.8-merge.1; sin colisiones; entradas CJS/ESM/tipos/protocolo presentes; API verificada.

@@ -1,0 +1,10 @@
+
+> kage-chiaki-runtime@18.1.0-merge.1 plugins:check
+> node scripts/check-plugins.js
+
+{
+  "loaded": 263,
+  "auxiliary": 1,
+  "failed": [],
+  "conflicts": 0
+}

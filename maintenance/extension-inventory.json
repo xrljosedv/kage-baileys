@@ -1,0 +1,57 @@
+[
+  {
+    "layer": "chats",
+    "methods": [
+      "messageMutex",
+      "receiptMutex",
+      "appStatePatchMutex",
+      "notificationMutex",
+      "getLidUser",
+      "clearMessage",
+      "addOrEditQuickReply",
+      "removeQuickReply"
+    ]
+  },
+  {
+    "layer": "newsletter",
+    "methods": [
+      "executeWMexQuery",
+      "newsletterUpdate",
+      "newsletterSubscribers"
+    ]
+  },
+  {
+    "layer": "messages-send",
+    "methods": [
+      "profilePictureUrl",
+      "getEphemeralGroup",
+      "messageRetryManager",
+      "updateMemberLabel",
+      "sendStatusMentions"
+    ]
+  },
+  {
+    "layer": "business",
+    "methods": [
+      "updateBussinesProfile",
+      "updateCoverPhoto",
+      "removeCoverPhoto"
+    ]
+  },
+  {
+    "layer": "community",
+    "methods": [
+      "communityQuery"
+    ]
+  },
+  {
+    "layer": "socket",
+    "methods": [
+      "digestKeyBundle",
+      "rotateSignedPreKey",
+      "wamBuffer",
+      "executeUSyncQuery",
+      "onWhatsApp"
+    ]
+  }
+]

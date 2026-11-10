@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-25",
+  "package": "kage-baileys",
+  "version": "3.2.8",
+  "environment": {
+    "node": "v22.23.4",
+    "platform": "linux",
+    "architecture": "x64"
+  },
+  "results": {
+    "build": "passed",
+    "syntax": "passed",
+    "localImports": "passed",
+    "typescript": "passed",
+    "tests": {
+      "total": 274,
+      "passed": 274,
+      "failed": 0,
+      "skipped": 0
+    },
+    "imageTests": {
+      "total": 16,
+      "passed": 16,
+      "paths": [
+        "sharp native",
+        "sharp WebAssembly with native binary blocked",
+        "Jimp with native backends blocked"
+      ]
+    },
+    "package": "passed",
+    "doctor": "passed",
+    "api": {
+      "publicExports": 436,
+      "socketMethods": 187,
+      "existingModulesChecked": 110
+    },
+    "cleanInstall": {
+      "command": "npm ci --include=optional --ignore-scripts",
+      "status": "passed",
+      "doctor": "passed",
+      "testsPassed": 274,
+      "testsFailed": 0,
+      "scope": "Image processing works with lifecycle scripts blocked; this does not certify optional VoIP or SQLite binaries."
+    },
+    "readmeImageExample": "passed: exact example produced three decodable image files",
+    "packedConsumer": {
+      "installation": "passed with --ignore-scripts --include=optional",
+      "commonjs": "passed",
+      "esm": "passed",
+      "toolkitSvgToPng": "passed, decoded 8x8 PNG"
+    }
+  },
+  "limitations": [
+    "No real WhatsApp session, message delivery or call was tested.",
+    "Other operating systems and the hosting in the screenshot were not physically tested.",
+    "Optional native VoIP/SQLite integrations are not certified by these image tests.",
+    "Historical README snippets are preserved, not all certified; getBroadcastListInfo is not exposed as a socket method."
+  ],
+  "security": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 29,
+    "critical": 0,
+    "total": 29
+  }
+}

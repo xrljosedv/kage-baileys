@@ -1,0 +1,31 @@
+{
+  "scope": "Supplied Baileys 7.0.0-rc14; export names and protobuf field declarations only, not behavioral or live compatibility",
+  "api": {
+    "method": "Static official export declarations compared with actual Kage runtime exports",
+    "officialExportCount": 262,
+    "missingExports": [],
+    "extraExports": 200
+  },
+  "schema": {
+    "types": 498,
+    "fields": 2424,
+    "missingTypes": [],
+    "missingFields": [
+      {
+        "type": ".proto.Message.MessageHistoryMetadata",
+        "name": "oldestMessageTimestamp",
+        "id": 2
+      }
+    ],
+    "conflicts": [],
+    "compatibilityAliases": [
+      {
+        "type": ".proto.Message.MessageHistoryMetadata",
+        "officialName": "oldestMessageTimestamp",
+        "kageName": "oldestMessageTimestampInWindow",
+        "wireField": 2,
+        "runtimeRoundTripTestPassed": true
+      }
+    ]
+  }
+}

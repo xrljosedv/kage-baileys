@@ -1,0 +1,50 @@
+{
+  "paquete": "kage-baileys",
+  "version": "3.2.2",
+  "fechaUTC": "2026-10-25",
+  "node": "v22.23.4",
+  "plataforma": "linux x64",
+  "pruebas": {
+    "total": 258,
+    "correctas": 258,
+    "fallidas": 0
+  },
+  "compilacion": "correcta",
+  "typescript": "correcto",
+  "instalacionLimpia": "npm ci --include=dev --omit=optional: exit 0",
+  "publicacionSimulada": "npm publish --dry-run: exit 0 (no publica en el registro)",
+  "seguridad": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "reglasDependencias": {
+    "resolutions": 27,
+    "overrides": 29
+  },
+  "exportaciones": 436,
+  "modulosComparados": 110,
+  "licencias": "LICENSE y licenses/upstream-MIT.txt",
+  "cambios": [
+    "Protocolos USync con nombre canónico sin colisiones de mayúsculas en Android",
+    "LID de usuario y builders de username en las clases activas",
+    "Métodos de cuenta, límites de chat, sesión unificada y cierre en el transporte principal",
+    "Constantes WMex y mapas multimedia accesibles desde la API activa",
+    "Firmas compatibles y limpieza de caché del gestor de reintentos",
+    "resolutions y overrides npm; actualización de Zod con regresiones de Jimp",
+    "tsconfig, build, prepublishOnly, prepack y validación de paquete",
+    "Tipos públicos y protocolos regenerados; CJS y ESM comprobados"
+  ],
+  "limitaciones": [
+    "No se ha conectado una cuenta real de WhatsApp ni enviado mensajes reales.",
+    "No se ha publicado nada en npm. Hace falta una cuenta con permiso sobre kage-baileys y autenticación vigente.",
+    "Termux/Android no está disponible para pruebas nativas; se ha comprobado la ausencia de colisiones de nombres que causaban el fallo.",
+    "VoIP, SQLite y algunas capacidades multimedia necesitan módulos opcionales compatibles con el equipo.",
+    "npm audit describe las versiones de este proyecto con su lockfile y overrides; los consumidores usan la resolución de dependencias de su propio proyecto.",
+    "La presencia de todas las exportaciones no equivale a probar todos los recorridos contra los servidores de WhatsApp."
+  ],
+  "instalacionConsumidor": "TGZ instalado en un proyecto npm nuevo; CJS/ESM, 436 exportaciones, LID, username, constantes y protobuf comprobados."
+}

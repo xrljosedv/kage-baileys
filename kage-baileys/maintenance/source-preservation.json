@@ -1,0 +1,1077 @@
+[
+  {
+    "original": "Example/connection.cjs",
+    "current": "Example/connection.cjs",
+    "status": "modified"
+  },
+  {
+    "original": "Example/event.cjs",
+    "current": "Example/event.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "LICENSE",
+    "current": "LICENSE",
+    "status": "unchanged"
+  },
+  {
+    "original": "README.MD",
+    "current": "docs/README-original.md",
+    "status": "unchanged"
+  },
+  {
+    "original": "WAProto/GenerateStatics.sh",
+    "current": "WAProto/GenerateStatics.sh",
+    "status": "unchanged"
+  },
+  {
+    "original": "WAProto/WAProto.proto",
+    "current": "WAProto/WAProto.proto",
+    "status": "unchanged"
+  },
+  {
+    "original": "WAProto/compat.cjs",
+    "current": "WAProto/compat.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "WAProto/fix-imports.js",
+    "current": "WAProto/fix-imports.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "WAProto/index.d.ts",
+    "current": "WAProto/index.d.ts",
+    "status": "unchanged"
+  },
+  {
+    "original": "WAProto/index.js",
+    "current": "WAProto/index.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "engine-requirements.js",
+    "current": "engine-requirements.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Addon/http-error.js",
+    "current": "lib/Addon/http-error.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Addon/index.js",
+    "current": "lib/Addon/index.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Addon/keyed-db.js",
+    "current": "lib/Addon/keyed-db.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Addon/link-preview.js",
+    "current": "lib/Addon/link-preview.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Defaults/baileys-version.json",
+    "current": "lib/Defaults/baileys-version.json",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Defaults/connection.js",
+    "current": "lib/Defaults/connection.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Defaults/constants.js",
+    "current": "lib/Defaults/constants.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Defaults/history.js",
+    "current": "lib/Defaults/history.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Defaults/index.js",
+    "current": "lib/Defaults/index.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Defaults/media.js",
+    "current": "lib/Defaults/media.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Defaults/phonenumber-mcc.json",
+    "current": "lib/Defaults/phonenumber-mcc.json",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Defaults/prefix.js",
+    "current": "lib/Defaults/prefix.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Defaults/wileys-version.json",
+    "current": "lib/Defaults/wileys-version.json",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Extensions/business-advanced.js",
+    "current": "lib/Extensions/business-advanced.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Extensions/business.js",
+    "current": "lib/Extensions/business.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Extensions/chats-advanced.js",
+    "current": "lib/Extensions/chats-advanced.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Extensions/chats.js",
+    "current": "lib/Extensions/chats.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Extensions/communities-advanced.js",
+    "current": "lib/Extensions/communities-advanced.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Extensions/community.js",
+    "current": "lib/Extensions/community.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Extensions/groups-advanced.js",
+    "current": "lib/Extensions/groups-advanced.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Extensions/index.js",
+    "current": "lib/Extensions/index.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Extensions/messages-recv-advanced.js",
+    "current": "lib/Extensions/messages-recv-advanced.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Extensions/messages-send-advanced.js",
+    "current": "lib/Extensions/messages-send-advanced.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Extensions/messages-send.js",
+    "current": "lib/Extensions/messages-send.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Extensions/newsletter-advanced.js",
+    "current": "lib/Extensions/newsletter-advanced.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Extensions/newsletter.js",
+    "current": "lib/Extensions/newsletter.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Extensions/socket.js",
+    "current": "lib/Extensions/socket.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Modded/message_builder.js",
+    "current": "lib/Modded/message_builder.js",
+    "status": "modified"
+  },
+  {
+    "original": "lib/Signal/Group/ciphertext-message.js",
+    "current": "lib/Signal/Group/ciphertext-message.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Signal/Group/group-session-builder.js",
+    "current": "lib/Signal/Group/group-session-builder.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Signal/Group/group_cipher.js",
+    "current": "lib/Signal/Group/group_cipher.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Signal/Group/index.js",
+    "current": "lib/Signal/Group/index.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Signal/Group/keyhelper.js",
+    "current": "lib/Signal/Group/keyhelper.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Signal/Group/queue-job.js",
+    "current": "lib/Signal/Group/queue-job.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Signal/Group/sender-chain-key.js",
+    "current": "lib/Signal/Group/sender-chain-key.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Signal/Group/sender-key-distribution-message.js",
+    "current": "lib/Signal/Group/sender-key-distribution-message.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Signal/Group/sender-key-message.js",
+    "current": "lib/Signal/Group/sender-key-message.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Signal/Group/sender-key-name.js",
+    "current": "lib/Signal/Group/sender-key-name.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Signal/Group/sender-key-record.js",
+    "current": "lib/Signal/Group/sender-key-record.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Signal/Group/sender-key-state.js",
+    "current": "lib/Signal/Group/sender-key-state.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Signal/Group/sender-message-key.js",
+    "current": "lib/Signal/Group/sender-message-key.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Signal/libsignal.js",
+    "current": "lib/Signal/libsignal.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Signal/lid-mapping.js",
+    "current": "lib/Signal/lid-mapping.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Socket/Client/index.js",
+    "current": "lib/Socket/Client/index.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Socket/Client/types.js",
+    "current": "lib/Socket/Client/types.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Socket/Client/websocket.js",
+    "current": "lib/Socket/Client/websocket.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Socket/business.js",
+    "current": "lib/Socket/business.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Socket/chats.js",
+    "current": "lib/Socket/chats.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Socket/communities.js",
+    "current": "lib/Socket/communities.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Socket/community.js",
+    "current": "lib/Socket/community.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Socket/dugong.js",
+    "current": "lib/Socket/dugong.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Socket/groups.js",
+    "current": "lib/Socket/groups.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Socket/index.js",
+    "current": "lib/Socket/index.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Socket/messages-recv.js",
+    "current": "lib/Socket/messages-recv.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Socket/messages-send.js",
+    "current": "lib/Socket/messages-send.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Socket/mex.js",
+    "current": "lib/Socket/mex.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Socket/newsletter.js",
+    "current": "lib/Socket/newsletter.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Socket/socket.js",
+    "current": "lib/Socket/socket.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Socket/usync.js",
+    "current": "lib/Socket/usync.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Store/index.js",
+    "current": "lib/Store/index.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Store/make-cache-manager-store.js",
+    "current": "lib/Store/make-cache-manager-store.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Store/make-in-memory-store.js",
+    "current": "lib/Store/make-in-memory-store.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Store/make-ordered-dictionary.js",
+    "current": "lib/Store/make-ordered-dictionary.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Store/object-repository.js",
+    "current": "lib/Store/object-repository.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/Auth.js",
+    "current": "lib/Types/Auth.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/Bussines.js",
+    "current": "lib/Types/Bussines.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/Call.js",
+    "current": "lib/Types/Call.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/Chat.js",
+    "current": "lib/Types/Chat.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/Contact.js",
+    "current": "lib/Types/Contact.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/Events.js",
+    "current": "lib/Types/Events.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/GroupMetadata.js",
+    "current": "lib/Types/GroupMetadata.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/Label.js",
+    "current": "lib/Types/Label.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/LabelAssociation.js",
+    "current": "lib/Types/LabelAssociation.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/Message.js",
+    "current": "lib/Types/Message.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/Mex.js",
+    "current": "lib/Types/Mex.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/MexUpdates.js",
+    "current": "lib/Types/MexUpdates.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/Newsletter.js",
+    "current": "lib/Types/Newsletter.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/Product.js",
+    "current": "lib/Types/Product.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/RichType.js",
+    "current": "lib/Types/RichType.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/Signal.js",
+    "current": "lib/Types/Signal.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/Socket.js",
+    "current": "lib/Types/Socket.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/State.js",
+    "current": "lib/Types/State.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/USync.js",
+    "current": "lib/Types/USync.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Types/index.js",
+    "current": "lib/Types/index.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/COUNTRY-DATA-LICENSE",
+    "current": "lib/Utils/COUNTRY-DATA-LICENSE",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/auth-utils.js",
+    "current": "lib/Utils/auth-utils.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/automation-tools.js",
+    "current": "lib/Utils/automation-tools.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/baileys-event-stream.js",
+    "current": "lib/Utils/baileys-event-stream.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/browser-utils.js",
+    "current": "lib/Utils/browser-utils.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/business.js",
+    "current": "lib/Utils/business.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/chat-utils.js",
+    "current": "lib/Utils/chat-utils.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/companion-reg-client-utils.js",
+    "current": "lib/Utils/companion-reg-client-utils.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/consented-media.js",
+    "current": "lib/Utils/consented-media.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/countries.json",
+    "current": "lib/Utils/countries.json",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/country-info.js",
+    "current": "lib/Utils/country-info.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/crypto.js",
+    "current": "lib/Utils/crypto.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/decode-wa-message.js",
+    "current": "lib/Utils/decode-wa-message.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/event-buffer.js",
+    "current": "lib/Utils/event-buffer.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/event-message.js",
+    "current": "lib/Utils/event-message.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/generics.js",
+    "current": "lib/Utils/generics.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/history.js",
+    "current": "lib/Utils/history.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/identity-change-handler.js",
+    "current": "lib/Utils/identity-change-handler.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/index.js",
+    "current": "lib/Utils/index.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/kage-event-stream.js",
+    "current": "lib/Utils/kage-event-stream.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/link-preview.js",
+    "current": "lib/Utils/link-preview.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/logger.js",
+    "current": "lib/Utils/logger.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/lt-hash.js",
+    "current": "lib/Utils/lt-hash.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/make-mutex.js",
+    "current": "lib/Utils/make-mutex.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/message-inspector.js",
+    "current": "lib/Utils/message-inspector.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/message-retry-manager.js",
+    "current": "lib/Utils/message-retry-manager.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/messages-media.js",
+    "current": "lib/Utils/messages-media.js",
+    "status": "modified"
+  },
+  {
+    "original": "lib/Utils/messages.js",
+    "current": "lib/Utils/messages.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/noise-handler.js",
+    "current": "lib/Utils/noise-handler.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/offline-node-processor.js",
+    "current": "lib/Utils/offline-node-processor.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/pre-key-manager.js",
+    "current": "lib/Utils/pre-key-manager.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/process-message.js",
+    "current": "lib/Utils/process-message.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/reporting-utils.js",
+    "current": "lib/Utils/reporting-utils.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/rich-message-utils.js",
+    "current": "lib/Utils/rich-message-utils.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/rich-messages.js",
+    "current": "lib/Utils/rich-messages.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/signal.js",
+    "current": "lib/Utils/signal.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/stanza-ack.js",
+    "current": "lib/Utils/stanza-ack.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/status-archive.js",
+    "current": "lib/Utils/status-archive.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/status-refresh.js",
+    "current": "lib/Utils/status-refresh.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/status-tools.js",
+    "current": "lib/Utils/status-tools.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/sticker-pack.js",
+    "current": "lib/Utils/sticker-pack.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/sync-action-utils.js",
+    "current": "lib/Utils/sync-action-utils.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/tc-token-utils.js",
+    "current": "lib/Utils/tc-token-utils.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/terminal-banner.js",
+    "current": "lib/Utils/terminal-banner.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/use-multi-file-auth-state.js",
+    "current": "lib/Utils/use-multi-file-auth-state.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/use-single-file-auth-state.js",
+    "current": "lib/Utils/use-single-file-auth-state.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/use-sqlite-auth-state.js",
+    "current": "lib/Utils/use-sqlite-auth-state.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/validate-connection.js",
+    "current": "lib/Utils/validate-connection.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/Utils/view-once-compat.js",
+    "current": "lib/Utils/view-once-compat.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/VoIP/audio-feeder.js",
+    "current": "lib/VoIP/audio-feeder.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/VoIP/index.js",
+    "current": "lib/VoIP/index.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/VoIP/relay-transport.js",
+    "current": "lib/VoIP/relay-transport.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/VoIP/signaling.js",
+    "current": "lib/VoIP/signaling.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/VoIP/types.js",
+    "current": "lib/VoIP/types.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/VoIP/wasm-engine.js",
+    "current": "lib/VoIP/wasm-engine.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/VoIP/worker-bootstrap.js",
+    "current": "lib/VoIP/worker-bootstrap.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WABinary/constants.js",
+    "current": "lib/WABinary/constants.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WABinary/decode.js",
+    "current": "lib/WABinary/decode.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WABinary/encode.js",
+    "current": "lib/WABinary/encode.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WABinary/generic-utils.js",
+    "current": "lib/WABinary/generic-utils.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WABinary/index.js",
+    "current": "lib/WABinary/index.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WABinary/jid-utils.js",
+    "current": "lib/WABinary/jid-utils.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WABinary/types.js",
+    "current": "lib/WABinary/types.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WAM/BinaryInfo.js",
+    "current": "lib/WAM/BinaryInfo.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WAM/constants.js",
+    "current": "lib/WAM/constants.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WAM/encode.js",
+    "current": "lib/WAM/encode.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WAM/index.js",
+    "current": "lib/WAM/index.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WAUSync/Protocols/USyncBotProfileProtocol.js",
+    "current": "lib/WAUSync/Protocols/USyncBotProfileProtocol.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WAUSync/Protocols/USyncContactProtocol.js",
+    "current": "lib/WAUSync/Protocols/USyncContactProtocol.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WAUSync/Protocols/USyncDeviceProtocol.js",
+    "current": "lib/WAUSync/Protocols/USyncDeviceProtocol.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WAUSync/Protocols/USyncDisappearingModeProtocol.js",
+    "current": "lib/WAUSync/Protocols/USyncDisappearingModeProtocol.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WAUSync/Protocols/USyncLIDProtocol.js",
+    "current": "lib/WAUSync/Protocols/USyncLIDProtocol.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WAUSync/Protocols/USyncStatusProtocol.js",
+    "current": "lib/WAUSync/Protocols/USyncStatusProtocol.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WAUSync/Protocols/USyncUsernameProtocol.js",
+    "current": "lib/WAUSync/Protocols/USyncUsernameProtocol.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WAUSync/Protocols/index.js",
+    "current": "lib/WAUSync/Protocols/index.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WAUSync/USyncQuery.js",
+    "current": "lib/WAUSync/USyncQuery.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WAUSync/USyncUser.js",
+    "current": "lib/WAUSync/USyncUser.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/WAUSync/index.js",
+    "current": "lib/WAUSync/index.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/assets/wasm/loader.js",
+    "current": "lib/assets/wasm/loader.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/assets/wasm/whatsapp.wasm",
+    "current": "lib/assets/wasm/whatsapp.wasm",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/assets/wasm/worker-modules.js",
+    "current": "lib/assets/wasm/worker-modules.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/index.d.ts",
+    "current": "lib/index.d.ts",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/index.js",
+    "current": "lib/index.js",
+    "status": "unchanged"
+  },
+  {
+    "original": "lib/index.mjs",
+    "current": "lib/index.mjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "licenses/upstream-MIT.txt",
+    "current": "licenses/upstream-MIT.txt",
+    "status": "unchanged"
+  },
+  {
+    "original": "maintenance/api-coverage.json",
+    "current": "maintenance/api-coverage.json",
+    "status": "unchanged"
+  },
+  {
+    "original": "maintenance/archivos-sha256.json",
+    "current": "maintenance/historical/archivos-sha256.json",
+    "status": "unchanged"
+  },
+  {
+    "original": "maintenance/consumer-validation.log",
+    "current": "maintenance/historical/consumer-validation.log",
+    "status": "unchanged"
+  },
+  {
+    "original": "maintenance/dependency-audit.json",
+    "current": "maintenance/historical/dependency-audit.json",
+    "status": "unchanged"
+  },
+  {
+    "original": "maintenance/extension-inventory.json",
+    "current": "maintenance/extension-inventory.json",
+    "status": "unchanged"
+  },
+  {
+    "original": "maintenance/protocol-update.json",
+    "current": "maintenance/historical/protocol-update.json",
+    "status": "unchanged"
+  },
+  {
+    "original": "maintenance/protocol-wire-audit.json",
+    "current": "maintenance/historical/protocol-wire-audit.json",
+    "status": "unchanged"
+  },
+  {
+    "original": "maintenance/reference-socket-surface.json",
+    "current": "maintenance/reference-socket-surface.json",
+    "status": "unchanged"
+  },
+  {
+    "original": "maintenance/resumen-validacion.json",
+    "current": "maintenance/historical/resumen-validacion.json",
+    "status": "unchanged"
+  },
+  {
+    "original": "maintenance/validation.log",
+    "current": "maintenance/historical/validation.log",
+    "status": "unchanged"
+  },
+  {
+    "original": "maintenance/verification.json",
+    "current": "maintenance/historical/verification.json",
+    "status": "unchanged"
+  },
+  {
+    "original": "package.json",
+    "current": "package.json",
+    "status": "modified"
+  },
+  {
+    "original": "scripts/check-imports.cjs",
+    "current": "scripts/check-imports.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "scripts/check-package.cjs",
+    "current": "scripts/check-package.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "scripts/check-syntax.cjs",
+    "current": "scripts/check-syntax.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "scripts/generate-protobuf.cjs",
+    "current": "scripts/generate-protobuf.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "scripts/generate-public-types.cjs",
+    "current": "scripts/generate-public-types.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "scripts/kage-base64-fix.cjs",
+    "current": "scripts/kage-base64-fix.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "scripts/maintenance.cjs",
+    "current": "scripts/maintenance.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "test/advanced.test.cjs",
+    "current": "test/advanced.test.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "test/archive-repair.test.cjs",
+    "current": "test/archive-repair.test.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "test/base64-fix.test.cjs",
+    "current": "test/base64-fix.test.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "test/buffering.test.cjs",
+    "current": "test/buffering.test.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "test/consented-media.test.cjs",
+    "current": "test/consented-media.test.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "test/installation-repair.test.cjs",
+    "current": "test/installation-repair.test.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "test/maintenance.test.cjs",
+    "current": "test/maintenance.test.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "test/npm-publication.test.cjs",
+    "current": "test/npm-publication.test.cjs",
+    "status": "modified"
+  },
+  {
+    "original": "test/recepcion-reparada.test.cjs",
+    "current": "test/recepcion-reparada.test.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "test/resilience-binary.test.cjs",
+    "current": "test/resilience-binary.test.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "test/resilience-transport.test.cjs",
+    "current": "test/resilience-transport.test.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "test/revision.test.cjs",
+    "current": "test/revision.test.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "test/status-policy.test.cjs",
+    "current": "test/status-policy.test.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "test/types.test.ts",
+    "current": "test/types.test.ts",
+    "status": "unchanged"
+  },
+  {
+    "original": "test/upgrade.test.cjs",
+    "current": "test/upgrade.test.cjs",
+    "status": "unchanged"
+  },
+  {
+    "original": "tsconfig.json",
+    "current": "tsconfig.json",
+    "status": "unchanged"
+  }
+]

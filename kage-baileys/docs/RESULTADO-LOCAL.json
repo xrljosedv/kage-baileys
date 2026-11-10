@@ -1,0 +1,135 @@
+{
+  "modo": "DEMOSTRACION_LOCAL_SIN_WHATSAPP",
+  "visualizacionEnTelefono": "NO_VERIFICADA",
+  "carrusel": {
+    "validacion": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "bytes": 314,
+    "biz": {
+      "tag": "biz",
+      "attrs": {},
+      "content": [
+        {
+          "tag": "interactive",
+          "attrs": {
+            "type": "native_flow",
+            "v": "1"
+          },
+          "content": [
+            {
+              "tag": "native_flow",
+              "attrs": {
+                "v": "9",
+                "name": "mixed"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "contenido": {
+      "viewOnceMessage": {
+        "message": {
+          "interactiveMessage": {
+            "body": {
+              "text": "Selecciona una opción"
+            },
+            "carouselMessage": {
+              "cards": [
+                {
+                  "body": {
+                    "text": "Texto"
+                  },
+                  "footer": {
+                    "text": "Footer"
+                  },
+                  "nativeFlowMessage": {
+                    "buttons": [
+                      {
+                        "name": "quick_reply",
+                        "buttonParamsJson": "{\"display_text\":\"Responder\",\"id\":\"your_id\"}"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "body": {
+                    "text": "Texto"
+                  },
+                  "footer": {
+                    "text": "Footer"
+                  },
+                  "nativeFlowMessage": {
+                    "buttons": [
+                      {
+                        "name": "cta_url",
+                        "buttonParamsJson": "{\"display_text\":\"Ir al Canal\",\"url\":\"https://whatsapp.com/channel/0029Va4K0PZ5a245NkngBA2M\"}"
+                      },
+                      {
+                        "name": "cta_copy",
+                        "buttonParamsJson": "{\"display_text\":\"Copiar\",\"copy_code\":\"texto\"}"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "messageVersion": 1
+            }
+          }
+        }
+      }
+    }
+  },
+  "pagoPorEnlace": {
+    "validacion": {
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    "bytes": 151,
+    "biz": {
+      "tag": "biz",
+      "attrs": {},
+      "content": [
+        {
+          "tag": "interactive",
+          "attrs": {
+            "type": "native_flow",
+            "v": "1"
+          },
+          "content": [
+            {
+              "tag": "native_flow",
+              "attrs": {
+                "v": "9",
+                "name": "mixed"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "contenido": {
+      "viewOnceMessage": {
+        "message": {
+          "interactiveMessage": {
+            "body": {
+              "text": "Abre PayPal para consultar el importe y pagar."
+            },
+            "nativeFlowMessage": {
+              "buttons": [
+                {
+                  "name": "cta_url",
+                  "buttonParamsJson": "{\"display_text\":\"Abrir PayPal\",\"url\":\"https://paypal.me/CarlosFiden410/12\"}"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

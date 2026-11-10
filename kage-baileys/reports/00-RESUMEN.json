@@ -1,0 +1,91 @@
+{
+  "date": "2026-10-31",
+  "environment": {
+    "node": "v22.23.4",
+    "npm": "10.9.9",
+    "os": "Linux x64",
+    "required_node": ">=22.12.0"
+  },
+  "original_files": {
+    "kage": 243,
+    "chiaki": 311
+  },
+  "changes": {
+    "kage": {
+      "modified": 11,
+      "new": 12
+    },
+    "chiaki": {
+      "modified": 62,
+      "new": 8
+    }
+  },
+  "missing_original_files": [],
+  "tests": {
+    "Kage_library": {
+      "pass": 342,
+      "fail": 0
+    },
+    "Kage_bot": {
+      "pass": 22,
+      "fail": 0
+    },
+    "Chiaki_bot": {
+      "pass": 22,
+      "fail": 0
+    },
+    "plugin_load": {
+      "registered": 263,
+      "auxiliary": 1,
+      "failed": 0
+    },
+    "syntax_and_local_imports_Chiaki": "505 JS / 1260 local imports / 0 errors",
+    "syntax_and_local_imports_Kage_bot": "305 JS / 142 local imports / 0 errors",
+    "offline_startup_both": "PASS; no WhatsApp transport created",
+    "whatsapp_live": "NOT RUN",
+    "external_services": "NOT RUN"
+  },
+  "security": {
+    "kage": {
+      "info": 0,
+      "low": 0,
+      "moderate": 3,
+      "high": 29,
+      "critical": 0,
+      "total": 32
+    },
+    "kage-bot": {
+      "info": 0,
+      "low": 2,
+      "moderate": 27,
+      "high": 22,
+      "critical": 0,
+      "total": 51
+    },
+    "chiaki": {
+      "info": 0,
+      "low": 2,
+      "moderate": 26,
+      "high": 50,
+      "critical": 0,
+      "total": 78
+    }
+  },
+  "privacy_test_callbacks_migrated": 18,
+  "metadata_declarations_removed": 8,
+  "non_js_checks": [
+    {
+      "project": "KAGE",
+      "file": "WAProto/GenerateStatics.sh",
+      "test": "bash -n",
+      "result": "PASS",
+      "error": ""
+    },
+    {
+      "project": "CHIAKI",
+      "file": "lib/ookla-speedtest.py",
+      "test": "Python ast.parse",
+      "result": "PASS"
+    }
+  ]
+}

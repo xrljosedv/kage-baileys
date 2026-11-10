@@ -1,0 +1,5 @@
+
+> kage-baileys@3.2.8-merge.1 gen:protobuf
+> node scripts/generate-protobuf.cjs
+
+WAProto/index.js + index.d.ts regenerated from the single canonical schema.

@@ -1,0 +1,147 @@
+
+> chiaki-nanami@18.1.0-merge.1 test
+> node --test tests/*.test.js
+
+TAP version 13
+# [COMANDOS] 1 colisiones registradas; variantes accesibles con archivo:comando
+# Subtest: real original ping plugin through original handler, without prefix
+ok 1 - real original ping plugin through original handler, without prefix
+  ---
+  duration_ms: 12.001059
+  type: 'test'
+  ...
+# Subtest: original alias p and legacy prefix route through handler
+ok 2 - original alias p and legacy prefix route through handler
+  ---
+  duration_ms: 1.868107
+  type: 'test'
+  ...
+# Subtest: normal conversation never runs a command
+ok 3 - normal conversation never runs a command
+  ---
+  duration_ms: 1.355243
+  type: 'test'
+  ...
+# Subtest: no prefix is configurable at actual dispatch layer
+ok 4 - no prefix is configurable at actual dispatch layer
+  ---
+  duration_ms: 7.692054
+  type: 'test'
+  ...
+# Subtest: duplicate delivery across socket replacement executes once
+ok 5 - duplicate delivery across socket replacement executes once
+  ---
+  duration_ms: 1.806219
+  type: 'test'
+  ...
+# Subtest: history append is never replayed as a command
+ok 6 - history append is never replayed as a command
+  ---
+  duration_ms: 0.490234
+  type: 'test'
+  ...
+# Subtest: incoming batch runs original commands once per distinct message
+ok 7 - incoming batch runs original commands once per distinct message
+  ---
+  duration_ms: 3.037973
+  type: 'test'
+  ...
+# Subtest: original group command uses supplied main socket
+ok 8 - original group command uses supplied main socket
+  ---
+  duration_ms: 2.488538
+  type: 'test'
+  ...
+# Subtest: private message cannot execute group-only command
+ok 9 - private message cannot execute group-only command
+  ---
+  duration_ms: 2.339396
+  type: 'test'
+  ...
+# Subtest: command collision reports and executes only selected implementation
+ok 10 - command collision reports and executes only selected implementation
+  ---
+  duration_ms: 2.469957
+  type: 'test'
+  ...
+# Subtest: namespaced conflicting implementation remains callable
+ok 11 - namespaced conflicting implementation remains callable
+  ---
+  duration_ms: 1.429208
+  type: 'test'
+  ...
+# Subtest: metadata removal leaves antilink plugin loadable
+ok 12 - metadata removal leaves antilink plugin loadable
+  ---
+  duration_ms: 0.132192
+  type: 'test'
+  ...
+# Subtest: ViewOnce command has no downloader and only explains protection
+ok 13 - ViewOnce command has no downloader and only explains protection
+  ---
+  duration_ms: 0.200202
+  type: 'test'
+  ...
+# Subtest: native response button aliases become normal commands
+ok 14 - native response button aliases become normal commands
+  ---
+  duration_ms: 0.266212
+  type: 'test'
+  ...
+# Subtest: normal multimedia serialization retains imageMessage
+ok 15 - normal multimedia serialization retains imageMessage
+  ---
+  duration_ms: 0.227385
+  type: 'test'
+  ...
+# Subtest: normal multimedia serialization retains videoMessage
+ok 16 - normal multimedia serialization retains videoMessage
+  ---
+  duration_ms: 0.083371
+  type: 'test'
+  ...
+# Subtest: normal multimedia serialization retains audioMessage
+ok 17 - normal multimedia serialization retains audioMessage
+  ---
+  duration_ms: 0.119832
+  type: 'test'
+  ...
+# Subtest: normal multimedia serialization retains documentMessage
+ok 18 - normal multimedia serialization retains documentMessage
+  ---
+  duration_ms: 0.086541
+  type: 'test'
+  ...
+# Subtest: quoted LID stays LID, never forged as a phone number
+ok 19 - quoted LID stays LID, never forged as a phone number
+  ---
+  duration_ms: 0.419596
+  type: 'test'
+  ...
+# Subtest: store bind is idempotent and handles chats.upsert array payloads
+ok 20 - store bind is idempotent and handles chats.upsert array payloads
+  ---
+  duration_ms: 0.319986
+  type: 'test'
+  ...
+# Subtest: welcome content and LID participant normalization are local and deterministic
+ok 21 - welcome content and LID participant normalization are local and deterministic
+  ---
+  duration_ms: 0.494822
+  type: 'test'
+  ...
+# Subtest: welcome attach replaces its own previous listener
+ok 22 - welcome attach replaces its own previous listener
+  ---
+  duration_ms: 0.199888
+  type: 'test'
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 22
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1176.479205

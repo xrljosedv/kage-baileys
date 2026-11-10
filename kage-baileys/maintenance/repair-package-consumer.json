@@ -1,0 +1,6 @@
+{
+  "installation": "passed with --ignore-scripts --include=optional",
+  "commonjs": "passed",
+  "esm": "passed",
+  "toolkitSvgToPng": "passed, decoded 8x8 PNG"
+}

@@ -1,0 +1,566 @@
+{
+  "paquete": "kage-baileys",
+  "version": "3.2.8",
+  "node": "v22.23.4",
+  "estructuraUnica": true,
+  "exportacionesPublicas": 436,
+  "tiposProtocolo": 734,
+  "camposProtocolo": 3412,
+  "cobertura": [
+    {
+      "archivo": "lib/Addon/http-error.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Addon/index.js",
+      "exportaciones": 8,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Addon/keyed-db.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Addon/link-preview.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Defaults/index.js",
+      "exportaciones": 38,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Signal/Group/ciphertext-message.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Signal/Group/group-session-builder.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Signal/Group/group_cipher.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Signal/Group/index.js",
+      "exportaciones": 10,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Signal/Group/keyhelper.js",
+      "exportaciones": 3,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Signal/Group/sender-chain-key.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Signal/Group/sender-key-distribution-message.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Signal/Group/sender-key-message.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Signal/Group/sender-key-name.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Signal/Group/sender-key-record.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Signal/Group/sender-key-state.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Signal/Group/sender-message-key.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Signal/libsignal.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Signal/lid-mapping.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Socket/Client/index.js",
+      "exportaciones": 0,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Socket/Client/types.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Socket/Client/websocket.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Socket/business.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Socket/chats.js",
+      "exportaciones": 2,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Socket/communities.js",
+      "exportaciones": 2,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Socket/groups.js",
+      "exportaciones": 2,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Socket/index.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Socket/messages-recv.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Socket/messages-send.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Socket/mex.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Socket/newsletter.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Socket/socket.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Store/index.js",
+      "exportaciones": 0,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Store/make-in-memory-store.js",
+      "exportaciones": 4,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Store/make-ordered-dictionary.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Store/object-repository.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Types/Auth.js",
+      "exportaciones": 0,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Types/Bussines.js",
+      "exportaciones": 0,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Types/Call.js",
+      "exportaciones": 0,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Types/Chat.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Types/Contact.js",
+      "exportaciones": 0,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Types/Events.js",
+      "exportaciones": 0,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Types/GroupMetadata.js",
+      "exportaciones": 0,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Types/Label.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Types/LabelAssociation.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Types/Message.js",
+      "exportaciones": 10,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Types/Mex.js",
+      "exportaciones": 2,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Types/Product.js",
+      "exportaciones": 0,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Types/RichType.js",
+      "exportaciones": 2,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Types/Signal.js",
+      "exportaciones": 0,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Types/Socket.js",
+      "exportaciones": 0,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Types/State.js",
+      "exportaciones": 5,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Types/USync.js",
+      "exportaciones": 0,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Types/index.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/auth-utils.js",
+      "exportaciones": 4,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/browser-utils.js",
+      "exportaciones": 2,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/business.js",
+      "exportaciones": 7,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/chat-utils.js",
+      "exportaciones": 16,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/companion-reg-client-utils.js",
+      "exportaciones": 4,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/crypto.js",
+      "exportaciones": 16,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/decode-wa-message.js",
+      "exportaciones": 10,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/event-buffer.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/generics.js",
+      "exportaciones": 30,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/history.js",
+      "exportaciones": 4,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/identity-change-handler.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/index.js",
+      "exportaciones": 0,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/link-preview.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/logger.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/lt-hash.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/make-mutex.js",
+      "exportaciones": 2,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/message-retry-manager.js",
+      "exportaciones": 2,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/messages-media.js",
+      "exportaciones": 27,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/messages.js",
+      "exportaciones": 28,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/noise-handler.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/offline-node-processor.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/pre-key-manager.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/process-message.js",
+      "exportaciones": 8,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/reporting-utils.js",
+      "exportaciones": 2,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/rich-message-utils.js",
+      "exportaciones": 6,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/signal.js",
+      "exportaciones": 10,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/stanza-ack.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/sync-action-utils.js",
+      "exportaciones": 2,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/tc-token-utils.js",
+      "exportaciones": 9,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/use-multi-file-auth-state.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/use-single-file-auth-state.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/use-sqlite-auth-state.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/Utils/validate-connection.js",
+      "exportaciones": 4,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WABinary/constants.js",
+      "exportaciones": 17,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WABinary/decode.js",
+      "exportaciones": 3,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WABinary/encode.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WABinary/generic-utils.js",
+      "exportaciones": 11,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WABinary/index.js",
+      "exportaciones": 0,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WABinary/jid-utils.js",
+      "exportaciones": 23,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WABinary/types.js",
+      "exportaciones": 0,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WAM/BinaryInfo.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WAM/constants.js",
+      "exportaciones": 7,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WAM/encode.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WAM/index.js",
+      "exportaciones": 0,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WAUSync/Protocols/USyncContactProtocol.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WAUSync/Protocols/USyncDeviceProtocol.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WAUSync/Protocols/USyncDisappearingModeProtocol.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WAUSync/Protocols/USyncStatusProtocol.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WAUSync/Protocols/USyncUsernameProtocol.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WAUSync/Protocols/USyncBotProfileProtocol.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WAUSync/Protocols/USyncLIDProtocol.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WAUSync/Protocols/index.js",
+      "exportaciones": 0,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WAUSync/USyncQuery.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WAUSync/USyncUser.js",
+      "exportaciones": 1,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/WAUSync/index.js",
+      "exportaciones": 0,
+      "faltantes": []
+    },
+    {
+      "archivo": "lib/index.js",
+      "exportaciones": 2,
+      "faltantes": []
+    }
+  ],
+  "importaciones": {
+    "importacionesLocales": 1097,
+    "errores": []
+  },
+  "alcance": "Validación local. Los recorridos reales de WhatsApp necesitan una sesión y servicios compatibles."
+}

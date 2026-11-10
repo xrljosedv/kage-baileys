@@ -1,0 +1,21 @@
+
+> kage-baileys@3.2.8 doctor
+> node scripts/doctor.cjs
+
+{
+  "package": "kage-baileys",
+  "version": "3.2.8",
+  "node": "v22.23.4",
+  "platform": "linux",
+  "arch": "x64",
+  "checks": {
+    "node": true,
+    "thumbnail": true,
+    "toolkit": true,
+    "profile": true
+  },
+  "scope": "Diagnóstico local; no inicia sesión ni envía mensajes.",
+  "imageBackend": "sharp-native",
+  "ffmpeg": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers",
+  "ok": true
+}

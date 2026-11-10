@@ -1,0 +1,92 @@
+[
+  {
+    "file": "archive-repair.test.cjs",
+    "originalName": "'repair preserves bytes and original wrappers for ' + type",
+    "reason": "Privacy contract: extraction/resend replaced by observation-only; original retained under maintenance."
+  },
+  {
+    "file": "archive-repair.test.cjs",
+    "originalName": "'repair central automation has bounded deduplication and ignores own messages'",
+    "reason": "Privacy contract: extraction/resend replaced by observation-only; original retained under maintenance."
+  },
+  {
+    "file": "archive-repair.test.cjs",
+    "originalName": "'repair disabling automation while download runs prevents the send'",
+    "reason": "Privacy contract: extraction/resend replaced by observation-only; original retained under maintenance."
+  },
+  {
+    "file": "consented-media.test.cjs",
+    "originalName": "`consented ${wrapper} ${type}`",
+    "reason": "Privacy contract: extraction/resend replaced by observation-only; original retained under maintenance."
+  },
+  {
+    "file": "consented-media.test.cjs",
+    "originalName": "'view once rejects missing or wrong sender authorization before download'",
+    "reason": "Privacy contract: extraction/resend replaced by observation-only; original retained under maintenance."
+  },
+  {
+    "file": "consented-media.test.cjs",
+    "originalName": "'view once rejects group and status routes'",
+    "reason": "Privacy contract: extraction/resend replaced by observation-only; original retained under maintenance."
+  },
+  {
+    "file": "consented-media.test.cjs",
+    "originalName": "'own outgoing view once can be explicitly authorized by account identity'",
+    "reason": "Privacy contract: extraction/resend replaced by observation-only; original retained under maintenance."
+  },
+  {
+    "file": "consented-media.test.cjs",
+    "originalName": "'consented view once does not invent content for consumed notifications'",
+    "reason": "Privacy contract: extraction/resend replaced by observation-only; original retained under maintenance."
+  },
+  {
+    "file": "consented-media.test.cjs",
+    "originalName": "'auto view once is off without explicit chat consent and ignores historical data'",
+    "reason": "Privacy contract: extraction/resend replaced by observation-only; original retained under maintenance."
+  },
+  {
+    "file": "recepcion-reparada.test.cjs",
+    "originalName": "`automático usa misma salida manual: ${route}/${type}`",
+    "reason": "Privacy contract: extraction/resend replaced by observation-only; original retained under maintenance."
+  },
+  {
+    "file": "recepcion-reparada.test.cjs",
+    "originalName": "'deviceSentMessage y efímero no ocultan la vista única'",
+    "reason": "Privacy contract: extraction/resend replaced by observation-only; original retained under maintenance."
+  },
+  {
+    "file": "recepcion-reparada.test.cjs",
+    "originalName": "'permiso de privado PN funciona con LID confirmado'",
+    "reason": "Privacy contract: extraction/resend replaced by observation-only; original retained under maintenance."
+  },
+  {
+    "file": "recepcion-reparada.test.cjs",
+    "originalName": "'un LID sin mapeo no se inventa como teléfono ni obtiene permiso'",
+    "reason": "Privacy contract: extraction/resend replaced by observation-only; original retained under maintenance."
+  },
+  {
+    "file": "recepcion-reparada.test.cjs",
+    "originalName": "'medios propios solo se copian mediante autorización explícita'",
+    "reason": "Privacy contract: extraction/resend replaced by observation-only; original retained under maintenance."
+  },
+  {
+    "file": "recepcion-reparada.test.cjs",
+    "originalName": "'fallo no deja el ID bloqueado para la siguiente entrega'",
+    "reason": "Privacy contract: extraction/resend replaced by observation-only; original retained under maintenance."
+  },
+  {
+    "file": "recepcion-reparada.test.cjs",
+    "originalName": "'descarga renueva referencia 404 y reintenta una vez'",
+    "reason": "Privacy contract: extraction/resend replaced by observation-only; original retained under maintenance."
+  },
+  {
+    "file": "recepcion-reparada.test.cjs",
+    "originalName": "'fallo persistente se detiene tras dos intentos'",
+    "reason": "Privacy contract: extraction/resend replaced by observation-only; original retained under maintenance."
+  },
+  {
+    "file": "recepcion-reparada.test.cjs",
+    "originalName": "'vista única automática no procesa historial antiguo'",
+    "reason": "Privacy contract: extraction/resend replaced by observation-only; original retained under maintenance."
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "original": "kage-baileys.zip",
+  "sha256_original": "27bdb43ac4b882c589df90e6d9fac8bb8608a84c97e03acf310e6b3ec2bbfdfa",
+  "archivos_originales_conservados_sin_cambios": 230,
+  "archivos_modificados": [
+    "lib/Extensions/messages-send.js",
+    "lib/Socket/index.js",
+    "lib/Socket/messages-send.js",
+    "lib/index.d.ts",
+    "lib/index.js",
+    "lib/index.mjs",
+    "scripts/generate-public-types.cjs"
+  ],
+  "archivos_añadidos": [
+    "Example/plugins/scarr.mjs",
+    "Example/plugins/unico6.mjs",
+    "docs/INSTALACION-INTERACTIVOS.txt",
+    "docs/RESULTADO-LOCAL.json",
+    "docs/RESULTADO-PRUEBAS.txt",
+    "lib/Utils/interactive-compat.d.ts",
+    "lib/Utils/interactive-compat.js",
+    "scripts/demo-interactive.cjs",
+    "test/interactive-compat.test.cjs"
+  ],
+  "archivos_originales_eliminados": [],
+  "version_y_dependencias": "originales, sin cambios",
+  "verificacion_local": {
+    "aprobadas": 302,
+    "fallidas": 0
+  },
+  "visualizacion_real_en_whatsapp": "NO_VERIFICADA"
+}

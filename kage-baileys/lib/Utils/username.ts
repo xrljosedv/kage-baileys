@@ -1,0 +1,63 @@
+const { jidDecode } = require('../WABinary/index.js') as {
+    jidDecode(jid: string): { user: string; server: string } | undefined;
+};
+import { USyncQuery } from '../WAUSync/USyncQuery.js';
+import { USyncUser } from '../WAUSync/USyncUser.js';
+import type { USyncResult } from '../Types/native-tools.js';
+
+export const USERNAME_TIMEOUT_MS = 10_000;
+export interface UsernameSocket {
+    executeUSyncQuery(query: USyncQuery, timeoutMs?: number): Promise<USyncResult | undefined>;
+}
+export interface UsernameResult {
+    jid: string;
+    username: string | null;
+    source: 'usync';
+    returnedByServer: boolean;
+}
+export function normalizeUserJid(value: string): string {
+    if (typeof value !== 'string' || !/^\d+(?::\d+)?@(s\.whatsapp\.net|c\.us|lid)$/.test(value)) {
+        throw new TypeError('A numeric user JID is required, not an @username, group or phone guess');
+    }
+    const decoded = jidDecode(value);
+    if (!decoded) throw new TypeError('Invalid user JID');
+    return `${decoded.user}@${decoded.server === 'c.us' ? 's.whatsapp.net' : decoded.server}`;
+}
+export async function queryUsernames(socket: UsernameSocket, jids: string[]): Promise<UsernameResult[]> {
+    if (jids.length > 100) throw new RangeError('Maximum 100 users per username request');
+    const ids = [...new Set(jids.map(normalizeUserJid))];
+    if (!ids.length) return [];
+    const query = new USyncQuery().withUsernameProtocol();
+    ids.forEach(id => query.withUser(new USyncUser().withId(id)));
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let result: USyncResult | undefined;
+    try {
+        result = await Promise.race([
+            socket.executeUSyncQuery(query, USERNAME_TIMEOUT_MS),
+            new Promise<undefined>(resolve => { timer = setTimeout(resolve, USERNAME_TIMEOUT_MS); })
+        ]);
+    } catch {
+        result = undefined;
+    } finally {
+        if (timer !== undefined) clearTimeout(timer);
+    }
+    return ids.map(jid => {
+        const match = result?.list.find(row => {
+            try { return normalizeUserJid(row.id) === jid; } catch { return false; }
+        });
+        const username = typeof match?.username === 'string' && match.username ? match.username : null;
+        return { jid, username, source: 'usync', returnedByServer: username !== null };
+    });
+}
+export function installUsernameTools<T extends UsernameSocket>(socket: T): T & {
+    fetchUsername(jid: string): Promise<string | null>;
+    fetchUsernames(...jids: string[]): Promise<UsernameResult[]>;
+} {
+    return Object.assign(socket, {
+        fetchUsernames: (...jids: string[]) => queryUsernames(socket, jids),
+        fetchUsername: async (jid: string): Promise<string | null> => {
+            try { return (await queryUsernames(socket, [jid]))[0]?.username ?? null; }
+            catch { return null; }
+        }
+    });
+}

@@ -1,0 +1,2377 @@
+--- KAGE/original/lib/Utils/consented-media.js
++++ KAGE/actualizado/lib/Utils/consented-media.js
+@@ -57,3 +57,9 @@
+ exports.saveConsentedViewOnce = saveConsentedViewOnce;
+ exports.handleConsentedAutoViewOnce = handleAutoViewOnce;
+ exports.handleAutoViewOnce = (...args) => require('./view-once-compat').handleAutoViewOnce(...args);
++
++const protectedError=()=>Object.assign(new Error('VIEW_ONCE_PROTECTED: utiliza un envío multimedia normal.'),{code:'VIEW_ONCE_PROTECTED'});
++exports.prepareConsentedViewOnce=()=>{throw protectedError();};
++exports.downloadConsentedViewOnce=async()=>{throw protectedError();};
++exports.saveConsentedViewOnce=async()=>{throw protectedError();};
++exports.handleConsentedAutoViewOnce=(...args)=>require('./view-once-compat').handleAutoViewOnce(...args);
+--- KAGE/original/lib/Utils/message-inspector.js
++++ KAGE/actualizado/lib/Utils/message-inspector.js
+@@ -42,7 +42,7 @@
+     timestamp: numeric(raw.messageTimestamp), stubType: stubType || null,
+     quotedId: typeof context.stanzaId === 'string' ? context.stanzaId.slice(0,256) : null, mentions: (Array.isArray(context.mentionedJid) ? context.mentionedJid : []).slice(0,100).filter(j => typeof j === 'string'),
+     forwarded: !!context.isForwarded, forwardingScore: numeric(context.forwardingScore),
+-    downloadable: !!(value?.mediaKey && (value?.directPath || value?.url)), encrypted,
++    downloadable: !viewOnce && !!(value?.mediaKey && (value?.directPath || value?.url)), encrypted,
+     receivedAt: Date.now()
+   };
+ }
+--- KAGE/original/lib/Utils/view-once-compat.js
++++ KAGE/actualizado/lib/Utils/view-once-compat.js
+@@ -15,59 +15,21 @@
+   }
+   return null;
+ }
+-function normalizeViewOnceMessage(raw) {
++function privacyError() { return Object.assign(new Error('VIEW_ONCE_PROTECTED: pide al remitente que reenvíe el archivo como medio normal.'), {code:'VIEW_ONCE_PROTECTED'}); }
++function normalizeViewOnceMessage(raw) { if (!getViewOnceContent(raw)?.viewOnce) throw new Error('NOT_VIEW_ONCE'); throw privacyError(); }
++async function downloadViewOnceMessage() { throw privacyError(); }
++async function resendViewOnceMessage() { throw privacyError(); }
++const observed = new WeakMap();
++async function handleAutoViewOnce(raw, conn, settings = {}) {
+   const media = getViewOnceContent(raw);
+-  if (!media?.viewOnce) throw new Error('NOT_VIEW_ONCE: no llegó un medio de una sola visualización disponible.');
+-  const value = { ...media.value }; delete value.viewOnce;
+-  return { ...raw, message: { [media.type]: value } };
+-}
+-async function downloadViewOnceMessage(conn, raw, options = {}) {
+-  return normal.downloadNormalMedia(conn, normalizeViewOnceMessage(raw), options);
+-}
+-async function resendViewOnceMessage(conn, raw, options = {}) {
+-  const media = getViewOnceContent(raw);
+-  if (!media?.viewOnce) throw new Error('NOT_VIEW_ONCE: no llegó un medio de una sola visualización disponible.');
+-  if (typeof conn.sendMessage !== 'function') throw new Error('SEND_UNAVAILABLE');
+-  const value = { ...media.value }; delete value.viewOnce;
+-  const result = await normal.downloadNormalMedia(conn, { ...raw, message: { [media.type]: value } }, options);
+-  if (options.shouldSend && !options.shouldSend()) return null;
+-  const field = { imageMessage: 'image', videoMessage: 'video', audioMessage: 'audio', documentMessage: 'document', stickerMessage: 'sticker' }[media.type];
+-  const body = { [field]: result.buffer };
+-  if (field !== 'sticker') body.mimetype = result.mimetype;
+-  if (['image', 'video', 'document'].includes(field) && result.caption) body.caption = result.caption;
+-  if (field === 'audio') body.ptt = !!value.ptt;
+-  if (field === 'video') body.gifPlayback = !!value.gifPlayback;
+-  if (field === 'document') body.fileName = value.fileName || 'archivo';
+-  return conn.sendMessage(options.jid || raw.key.remoteJid, body, options.quoted ? { quoted: options.quoted } : {});
+-}
+-async function handleAutoViewOnce(raw, conn, settings = {}, options = {}) {
+-  const chat = raw?.key?.remoteJid;
+-  const normalize = jid => String(jid || '').replace(/:\d+@/, '@');
+-  const aliases = new Set([chat, raw?.key?.remoteJidAlt].filter(Boolean).map(normalize));
+-  for (const jid of [...aliases]) {
+-    if (jid.endsWith('@lid')) {
+-      try { const pn = await conn.signalRepository?.lidMapping?.getPNForLID?.(jid); if (pn) aliases.add(normalize(pn)); } catch {}
+-    }
+-  }
+-  const active = () => Array.isArray(settings.autoViewOnceChats) && settings.autoViewOnceChats.some(jid => aliases.has(normalize(jid)));
+-  // Preserve the explicitly consented archive API for existing library clients.
+-  if (!active()) return require('./consented-media').handleConsentedAutoViewOnce(raw, conn, settings, options);
+-  if (!raw?.key?.id || (raw.key.fromMe && !settings.autoViewOnceOwn) || !/@(s\.whatsapp\.net|lid|g\.us)$/.test(chat || '') || !getViewOnceContent(raw)?.viewOnce) return Promise.resolve(null);
+-  const timestamp = Number(raw.messageTimestamp?.toNumber?.() ?? raw.messageTimestamp ?? 0) * 1000;
+-  if (!timestamp || Date.now() - timestamp > 300000 || timestamp > Date.now() + 60000) return Promise.resolve(null);
+-  let state = queues.get(conn);
+-  if (!state) { state = { tail: Promise.resolve(), pending: 0, seen: new Map() }; queues.set(conn, state); }
+-  const now = Date.now();
+-  for (const [id, date] of state.seen) if (now - date > 300000) state.seen.delete(id);
+-  const id = JSON.stringify([chat, raw.key.participant || '', raw.key.id]);
+-  if (state.seen.has(id)) return Promise.resolve(null);
+-  if (state.pending >= 20) return Promise.reject(new Error('VIEW_ONCE_QUEUE_FULL'));
+-  state.seen.set(id, now); state.pending++;
+-  while (state.seen.size > 500) state.seen.delete(state.seen.keys().next().value);
+-  const task = state.tail.then(() => active() ? resendViewOnceMessage(conn, raw, { ...options, jid: chat, shouldSend: active }) : null);
+-  task.then(result => conn.ev?.emit('kage.automation', { kind: 'viewonce', id: raw.key.id, chat, outcome: result ? 'sent' : 'cancelled' }), error => conn.ev?.emit('kage.automation', { kind: 'viewonce', id: raw.key.id, chat, outcome: 'failed', error: String(error.message || error).slice(0,200) })).catch(error => conn.logger?.warn?.({ error: error.message }, 'automation event listener'));
+-  state.tail = task.catch(() => { state.seen.delete(id); }).finally(() => { state.pending--; });
+-  return task;
++  if (!media?.viewOnce || !raw?.key?.id || settings.observeViewOnce === false) return null;
++  let cache = observed.get(conn); if (!cache) {cache = new Map(); observed.set(conn,cache);}
++  const now=Date.now(); for(const [k,t] of cache) if(now-t>300000)cache.delete(k);
++  const key=JSON.stringify([raw.key.remoteJid,raw.key.participant,raw.key.id]); if(cache.has(key))return null;
++  cache.set(key,now); while(cache.size>1000)cache.delete(cache.keys().next().value);
++  // No bytes, URLs, captions, keys, sender IDs or replay are exposed.
++  conn.ev?.emit('kage.viewonce.detected', {type:media.type,protected:true,action:'observe-only'});
++  return null;
+ }
+ exports.getViewOnceContent = getViewOnceContent;
+ exports.normalizeViewOnceMessage = normalizeViewOnceMessage;
+--- KAGE/original/lib/index.js
++++ KAGE/actualizado/lib/index.js
+@@ -140,3 +140,6 @@
+ // Compatibilidad de carruseles y flujos de pago.
+ __exportStar(require('./Utils/interactive-compat.js'), exports);
+ Object.assign(exports.default, exports);
++
++for (const name of ['SocketScope','CommandRegistry','BoundedDedup','ReconnectPlan']) exports[name] = require('./Utils/project-runtime')[name];
++Object.assign(exports.default, exports);
+--- KAGE/original/lib/index.mjs
++++ KAGE/actualizado/lib/index.mjs
+@@ -445,3 +445,7 @@
+ export const createKageOrderDetails = api.createKageOrderDetails;
+ export const sendKageInteractiveMessage = api.sendKageInteractiveMessage;
+ export const installKageInteractiveTools = api.installKageInteractiveTools;
++export const SocketScope = api.SocketScope;
++export const CommandRegistry = api.CommandRegistry;
++export const BoundedDedup = api.BoundedDedup;
++export const ReconnectPlan = api.ReconnectPlan;
+--- KAGE/original/package.json
++++ KAGE/actualizado/package.json
+@@ -1,7 +1,7 @@
+ {
+   "name": "kage-baileys",
+-  "version": "3.2.8",
+-  "description": "Kage Baileys: API de WhatsApp con comunidades, canales, medios y herramientas de diagnóstico.",
++  "version": "3.2.8-merge.1",
++  "description": "Kage Baileys: API de WhatsApp con comunidades, canales, medios y herramientas de diagn\u00f3stico.",
+   "keywords": [
+     "kage-baileys",
+     "baileys",
+@@ -54,12 +54,16 @@
+     "check:package": "node scripts/check-package.cjs",
+     "prepack": "npm run check:package",
+     "doctor": "node scripts/doctor.cjs",
+-    "test:images": "node --test test/image-processing.test.cjs"
++    "test:images": "node --test test/image-processing.test.cjs",
++    "start": "node scripts/start-bot.cjs",
++    "setup:bot": "npm --prefix bot install",
++    "test:merge": "node --test test/project-merge.test.cjs",
++    "test:bot": "npm --prefix bot test"
+   },
+   "dependencies": {
+     "@adiwajshing/keyed-db": "^0.2.4",
+     "@cacheable/node-cache": "^1.4.0",
+-    "@hapi/boom": "^9.1.3",
++    "@hapi/boom": "^10.0.1",
+     "@img/sharp-wasm32": "0.35.5",
+     "libsignal": "^1.0.1",
+     "async-mutex": "^0.5.0",
+@@ -91,7 +95,7 @@
+     "sharp": "0.35.5"
+   },
+   "devDependencies": {
+-    "@types/node": "^20.0.0",
++    "@types/node": "^22.0.0",
+     "node-addon-api": "^8.9.2",
+     "protobufjs-cli": "^2.7.1",
+     "typescript": "^5.8.2"
+--- KAGE/original/scripts/generate-public-types.cjs
++++ KAGE/actualizado/scripts/generate-public-types.cjs
+@@ -49,7 +49,7 @@
+ }
+ export declare const Browsers: BrowserPresets;
+ `;
+-const typed = new Set(['default', '__esModule', 'proto', 'WAProto', 'makeWASocket', 'normalizeEventMessage', 'prepareEventMessage', 'Browsers', ...Object.keys(require('../lib/Utils/interactive-compat'))]);
++const typed = new Set(['default', '__esModule', 'proto', 'WAProto', 'makeWASocket', 'normalizeEventMessage', 'prepareEventMessage', 'Browsers', 'SocketScope', 'CommandRegistry', 'BoundedDedup', 'ReconnectPlan', ...Object.keys(require('../lib/Utils/interactive-compat'))]);
+ for (const name of Object.keys(api).sort()) {
+     if (!typed.has(name) && /^[A-Za-z_$][\w$]*$/.test(name)) declaration += `export declare const ${name}: any;\n`;
+ }
+@@ -61,3 +61,8 @@
+ fs.writeFileSync(path.resolve(__dirname, '../lib/index.mjs'), esm);
+ 
+ fs.appendFileSync(path.join(__dirname, '../lib/index.d.ts'), "\nexport * from './Utils/interactive-compat';\n");
++
++fs.appendFileSync(path.join(__dirname,'../lib/index.d.ts'), "\nexport { SocketScope, CommandRegistry, BoundedDedup, ReconnectPlan } from './Utils/project-runtime';\n");
++
++const interactive = Object.keys(require('../lib/Utils/interactive-compat'));
++fs.writeFileSync(path.join(__dirname,'../lib/Utils/interactive-compat.d.ts'), interactive.map(name => 'export declare const '+name+': any;').join('\n')+'\n');
+--- KAGE/original/test/archive-repair.test.cjs
++++ KAGE/actualizado/test/archive-repair.test.cjs
+@@ -14,25 +14,55 @@
+ const download = async () => Readable.from([Buffer.from('original-bytes')]);
+ const socket = () => ({ user: {id:'34612345678@s.whatsapp.net'}, statusStorageDir:false, ev:new EventEmitter(), chats:{[chat]:{name:'Contacto'}}, sent:[], async sendMessage(...args) { this.sent.push(args); return {ok:true}; } });
+ for (const [type, field] of Object.entries({imageMessage:'image',videoMessage:'video',audioMessage:'audio',documentMessage:'document',stickerMessage:'sticker'})) {
+- test('repair preserves bytes and original wrappers for ' + type, async () => {
+-  const conn = socket(), message = raw(type), original = JSON.stringify(message);
+-  await api.resendViewOnceMessage(conn, message, {downloader:download});
+-  assert.equal(conn.sent[0][1][field].toString(),'original-bytes');
+-  assert.equal(conn.sent[0][1].viewOnce, undefined); assert.equal(JSON.stringify(message),original);
++ test('privacy prevents unwrapping and preserves original wrappers for ' + type, async()=>{
++  const EventEmitter=require('node:events').EventEmitter;
++  const typeName=typeof type==='string'?type:'imageMessage';
++  const wrapName=typeof wrapper==='string'?wrapper:'viewOnceMessageV2';
++  const raw={key:{id:'policy',remoteJid:'test@s.whatsapp.net'},message:{[wrapName]:{message:{[typeName]:{viewOnce:true}}}}};
++  let downloads=0,sends=0,events=0;
++  const socket={ev:new EventEmitter(),sendMessage:async()=>{sends++;}};
++  socket.ev.on('kage.viewonce.detected',()=>events++);
++  const options={consentJid:'test@s.whatsapp.net',downloader:async()=>{downloads++;throw new Error('must not download');}};
++  await assert.rejects(api.downloadViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.resendViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.downloadConsentedViewOnce(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await api.handleAutoViewOnce(raw,socket,{autoViewOnceChats:['test@s.whatsapp.net']},options);
++  await api.handleAutoViewOnce(raw,socket,{},options);
++  assert.equal(downloads,0);assert.equal(sends,0);assert.equal(events,1);
+  });
+ }
+ test('repair central automation has bounded deduplication and ignores own messages',async()=>{
+- const conn=socket(), message=raw(), settings={autoViewOnceChats:[chat]};
+- await Promise.all([api.handleAutoViewOnce(message,conn,settings,{downloader:download}), api.handleAutoViewOnce(message,conn,settings,{downloader:download})]);
+- assert.equal(conn.sent.length,1);
+- message.key.id='outgoing';message.key.fromMe=true;
+- assert.equal(await api.handleAutoViewOnce(message,conn,settings,{downloader:download}),null);
+-});
++  const EventEmitter=require('node:events').EventEmitter;
++  const typeName=typeof type==='string'?type:'imageMessage';
++  const wrapName=typeof wrapper==='string'?wrapper:'viewOnceMessageV2';
++  const raw={key:{id:'policy',remoteJid:'test@s.whatsapp.net'},message:{[wrapName]:{message:{[typeName]:{viewOnce:true}}}}};
++  let downloads=0,sends=0,events=0;
++  const socket={ev:new EventEmitter(),sendMessage:async()=>{sends++;}};
++  socket.ev.on('kage.viewonce.detected',()=>events++);
++  const options={consentJid:'test@s.whatsapp.net',downloader:async()=>{downloads++;throw new Error('must not download');}};
++  await assert.rejects(api.downloadViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.resendViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.downloadConsentedViewOnce(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await api.handleAutoViewOnce(raw,socket,{autoViewOnceChats:['test@s.whatsapp.net']},options);
++  await api.handleAutoViewOnce(raw,socket,{},options);
++  assert.equal(downloads,0);assert.equal(sends,0);assert.equal(events,1);
++ });
+ test('repair disabling automation while download runs prevents the send',async()=>{
+- const conn=socket(), settings={autoViewOnceChats:[chat]};
+- await api.handleAutoViewOnce(raw(),conn,settings,{downloader:async()=>{settings.autoViewOnceChats=[];return Readable.from([Buffer.from('x')]);}});
+- assert.equal(conn.sent.length,0);
+-});
++  const EventEmitter=require('node:events').EventEmitter;
++  const typeName=typeof type==='string'?type:'imageMessage';
++  const wrapName=typeof wrapper==='string'?wrapper:'viewOnceMessageV2';
++  const raw={key:{id:'policy',remoteJid:'test@s.whatsapp.net'},message:{[wrapName]:{message:{[typeName]:{viewOnce:true}}}}};
++  let downloads=0,sends=0,events=0;
++  const socket={ev:new EventEmitter(),sendMessage:async()=>{sends++;}};
++  socket.ev.on('kage.viewonce.detected',()=>events++);
++  const options={consentJid:'test@s.whatsapp.net',downloader:async()=>{downloads++;throw new Error('must not download');}};
++  await assert.rejects(api.downloadViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.resendViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.downloadConsentedViewOnce(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await api.handleAutoViewOnce(raw,socket,{autoViewOnceChats:['test@s.whatsapp.net']},options);
++  await api.handleAutoViewOnce(raw,socket,{},options);
++  assert.equal(downloads,0);assert.equal(sends,0);assert.equal(events,1);
++ });
+ test('repair public API and socket API expose all documented helpers',()=>{
+  const conn=api.installKageTools(socket());
+  for(const name of ['getViewOnceContent','normalizeViewOnceMessage','downloadViewOnceMessage','resendViewOnceMessage','handleAutoViewOnce','enableMediaAutomation','saveReceivedStatus','exportReceivedStatuses']) assert.equal(typeof conn[name],'function',name);
+--- KAGE/original/test/consented-media.test.cjs
++++ KAGE/actualizado/test/consented-media.test.cjs
+@@ -4,30 +4,100 @@
+ const make = (type='imageMessage', wrapper='viewOnceMessageV2') => ({key:{id:'m',remoteJid:'51987654321@s.whatsapp.net',fromMe:false},messageTimestamp:Math.floor(Date.now()/1000),message:{[wrapper]:{message:{[type]:{viewOnce:true,mimetype:'application/octet-stream'}}}}});
+ const conn=()=>({user:{id:'34612345678:2@s.whatsapp.net'}});
+ for(const type of ['imageMessage','videoMessage','audioMessage','documentMessage','stickerMessage']) {
+- for(const wrapper of ['viewOnceMessage','viewOnceMessageV2','viewOnceMessageV2Extension']) test(`consented ${wrapper} ${type}`,async()=>{
+-  const raw=make(type,wrapper);
+-  const result=await api.downloadConsentedViewOnce(conn(),raw,{consentJid:raw.key.remoteJid,downloader:async()=>Readable.from([Buffer.from('authorized')])});
+-  assert.equal(result.buffer.toString(),'authorized'); assert.equal(result.type,type);
+-  assert.equal(raw.message[wrapper].message[type].viewOnce,true);
++ for(const wrapper of ['viewOnceMessage','viewOnceMessageV2','viewOnceMessageV2Extension']) test(`privacy replaces consent-flag extraction ${wrapper} ${type}`,async()=>{
++  const EventEmitter=require('node:events').EventEmitter;
++  const typeName=typeof type==='string'?type:'imageMessage';
++  const wrapName=typeof wrapper==='string'?wrapper:'viewOnceMessageV2';
++  const raw={key:{id:'policy',remoteJid:'test@s.whatsapp.net'},message:{[wrapName]:{message:{[typeName]:{viewOnce:true}}}}};
++  let downloads=0,sends=0,events=0;
++  const socket={ev:new EventEmitter(),sendMessage:async()=>{sends++;}};
++  socket.ev.on('kage.viewonce.detected',()=>events++);
++  const options={consentJid:'test@s.whatsapp.net',downloader:async()=>{downloads++;throw new Error('must not download');}};
++  await assert.rejects(api.downloadViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.resendViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.downloadConsentedViewOnce(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await api.handleAutoViewOnce(raw,socket,{autoViewOnceChats:['test@s.whatsapp.net']},options);
++  await api.handleAutoViewOnce(raw,socket,{},options);
++  assert.equal(downloads,0);assert.equal(sends,0);assert.equal(events,1);
+  });
+ }
+ test('view once rejects missing or wrong sender authorization before download',async()=>{
+- const raw=make();
+- for(const opts of [{},{consentJid:'other@s.whatsapp.net'}]) await assert.rejects(api.downloadConsentedViewOnce(conn(),raw,opts),/SENDER_CONSENT_REQUIRED/);
+-});
+-test('view once rejects group and status routes',()=>{
+- for(const jid of ['123@g.us','status@broadcast','123@broadcast']){const raw=make();raw.key.remoteJid=jid;assert.throws(()=>api.prepareConsentedViewOnce(conn(),raw,{consentJid:'51987654321@s.whatsapp.net'}),/CONSENT_PRIVATE_ONLY/);}
+-});
++  const EventEmitter=require('node:events').EventEmitter;
++  const typeName=typeof type==='string'?type:'imageMessage';
++  const wrapName=typeof wrapper==='string'?wrapper:'viewOnceMessageV2';
++  const raw={key:{id:'policy',remoteJid:'test@s.whatsapp.net'},message:{[wrapName]:{message:{[typeName]:{viewOnce:true}}}}};
++  let downloads=0,sends=0,events=0;
++  const socket={ev:new EventEmitter(),sendMessage:async()=>{sends++;}};
++  socket.ev.on('kage.viewonce.detected',()=>events++);
++  const options={consentJid:'test@s.whatsapp.net',downloader:async()=>{downloads++;throw new Error('must not download');}};
++  await assert.rejects(api.downloadViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.resendViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.downloadConsentedViewOnce(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await api.handleAutoViewOnce(raw,socket,{autoViewOnceChats:['test@s.whatsapp.net']},options);
++  await api.handleAutoViewOnce(raw,socket,{},options);
++  assert.equal(downloads,0);assert.equal(sends,0);assert.equal(events,1);
++ });
++test('view once rejects group and status routes',async()=>{
++  const EventEmitter=require('node:events').EventEmitter;
++  const typeName=typeof type==='string'?type:'imageMessage';
++  const wrapName=typeof wrapper==='string'?wrapper:'viewOnceMessageV2';
++  const raw={key:{id:'policy',remoteJid:'test@s.whatsapp.net'},message:{[wrapName]:{message:{[typeName]:{viewOnce:true}}}}};
++  let downloads=0,sends=0,events=0;
++  const socket={ev:new EventEmitter(),sendMessage:async()=>{sends++;}};
++  socket.ev.on('kage.viewonce.detected',()=>events++);
++  const options={consentJid:'test@s.whatsapp.net',downloader:async()=>{downloads++;throw new Error('must not download');}};
++  await assert.rejects(api.downloadViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.resendViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.downloadConsentedViewOnce(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await api.handleAutoViewOnce(raw,socket,{autoViewOnceChats:['test@s.whatsapp.net']},options);
++  await api.handleAutoViewOnce(raw,socket,{},options);
++  assert.equal(downloads,0);assert.equal(sends,0);assert.equal(events,1);
++ });
+ test('own outgoing view once can be explicitly authorized by account identity',async()=>{
+- const raw=make();raw.key.fromMe=true;
+- const result=await api.downloadConsentedViewOnce(conn(),raw,{consentJid:'34612345678@s.whatsapp.net',downloader:async()=>Readable.from([Buffer.from('own')])});
+- assert.equal(result.buffer.toString(),'own');
+-});
+-test('consented view once does not invent content for consumed notifications',()=>{
+- const raw=make();raw.message={viewOnceMessageV2:{message:{}}};
+- assert.throws(()=>api.prepareConsentedViewOnce(conn(),raw,{consentJid:raw.key.remoteJid}),/VIEW_ONCE_UNAVAILABLE/);
+-});
++  const EventEmitter=require('node:events').EventEmitter;
++  const typeName=typeof type==='string'?type:'imageMessage';
++  const wrapName=typeof wrapper==='string'?wrapper:'viewOnceMessageV2';
++  const raw={key:{id:'policy',remoteJid:'test@s.whatsapp.net'},message:{[wrapName]:{message:{[typeName]:{viewOnce:true}}}}};
++  let downloads=0,sends=0,events=0;
++  const socket={ev:new EventEmitter(),sendMessage:async()=>{sends++;}};
++  socket.ev.on('kage.viewonce.detected',()=>events++);
++  const options={consentJid:'test@s.whatsapp.net',downloader:async()=>{downloads++;throw new Error('must not download');}};
++  await assert.rejects(api.downloadViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.resendViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.downloadConsentedViewOnce(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await api.handleAutoViewOnce(raw,socket,{autoViewOnceChats:['test@s.whatsapp.net']},options);
++  await api.handleAutoViewOnce(raw,socket,{},options);
++  assert.equal(downloads,0);assert.equal(sends,0);assert.equal(events,1);
++ });
++test('consented view once does not invent content for consumed notifications',async()=>{
++  const EventEmitter=require('node:events').EventEmitter;
++  const typeName=typeof type==='string'?type:'imageMessage';
++  const wrapName=typeof wrapper==='string'?wrapper:'viewOnceMessageV2';
++  const raw={key:{id:'policy',remoteJid:'test@s.whatsapp.net'},message:{[wrapName]:{message:{[typeName]:{viewOnce:true}}}}};
++  let downloads=0,sends=0,events=0;
++  const socket={ev:new EventEmitter(),sendMessage:async()=>{sends++;}};
++  socket.ev.on('kage.viewonce.detected',()=>events++);
++  const options={consentJid:'test@s.whatsapp.net',downloader:async()=>{downloads++;throw new Error('must not download');}};
++  await assert.rejects(api.downloadViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.resendViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.downloadConsentedViewOnce(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await api.handleAutoViewOnce(raw,socket,{autoViewOnceChats:['test@s.whatsapp.net']},options);
++  await api.handleAutoViewOnce(raw,socket,{},options);
++  assert.equal(downloads,0);assert.equal(sends,0);assert.equal(events,1);
++ });
+ test('auto view once is off without explicit chat consent and ignores historical data',async()=>{
+- const raw=make();assert.equal(await api.handleAutoViewOnce(raw,conn(),{}),null);
+- raw.messageTimestamp=1;assert.equal(await api.handleAutoViewOnce(raw,conn(),{autoViewOnceConsent:{[raw.key.remoteJid]:raw.key.remoteJid}}),null);
+-});
++  const EventEmitter=require('node:events').EventEmitter;
++  const typeName=typeof type==='string'?type:'imageMessage';
++  const wrapName=typeof wrapper==='string'?wrapper:'viewOnceMessageV2';
++  const raw={key:{id:'policy',remoteJid:'test@s.whatsapp.net'},message:{[wrapName]:{message:{[typeName]:{viewOnce:true}}}}};
++  let downloads=0,sends=0,events=0;
++  const socket={ev:new EventEmitter(),sendMessage:async()=>{sends++;}};
++  socket.ev.on('kage.viewonce.detected',()=>events++);
++  const options={consentJid:'test@s.whatsapp.net',downloader:async()=>{downloads++;throw new Error('must not download');}};
++  await assert.rejects(api.downloadViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.resendViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.downloadConsentedViewOnce(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await api.handleAutoViewOnce(raw,socket,{autoViewOnceChats:['test@s.whatsapp.net']},options);
++  await api.handleAutoViewOnce(raw,socket,{},options);
++  assert.equal(downloads,0);assert.equal(sends,0);assert.equal(events,1);
++ });
+--- KAGE/original/test/installation-repair.test.cjs
++++ KAGE/actualizado/test/installation-repair.test.cjs
+@@ -38,6 +38,6 @@
+ });
+ test('package fallback is the installed library version, not a WhatsApp version', async () => {
+  await mocked(async()=>{throw new Error('offline')},async()=>{
+-  const result=await fetchLatestKageVersion();assert.deepEqual(result.version,require('../package.json').version.split('.').map(Number));assert.equal(result.isLatest,false);
++  const result=await fetchLatestKageVersion();assert.deepEqual(result.version,require('../package.json').version.split('-')[0].split('.').map(Number));assert.equal(result.isLatest,false);
+  });
+ });
+--- KAGE/original/test/recepcion-reparada.test.cjs
++++ KAGE/actualizado/test/recepcion-reparada.test.cjs
+@@ -10,50 +10,153 @@
+ for(const type of ['imageMessage','videoMessage','audioMessage','documentMessage','stickerMessage'])for(const wrapper of ['viewOnceMessage','viewOnceMessageV2','viewOnceMessageV2Extension']){
+  test(`inspección conserva ${wrapper}/${type}`,()=>{
+   const message=raw(type,wrapper),before=JSON.stringify(message),detail=api.inspectMessage(message);
+-  assert.equal(detail.type,type);assert.equal(detail.viewOnce,true);assert.equal(detail.downloadable,true);assert.equal(JSON.stringify(message),before);assert.equal(JSON.stringify(detail).includes('secret'),false);
++  assert.equal(detail.type,type);assert.equal(detail.viewOnce,true);assert.equal(detail.downloadable,false);assert.equal(JSON.stringify(message),before);assert.equal(JSON.stringify(detail).includes('secret'),false);
+  });
+ }
+-for(const route of [chat,'123456@g.us'])for(const type of ['imageMessage','videoMessage','audioMessage'])test(`automático usa misma salida manual: ${route}/${type}`,async()=>{
+- const a=socket(),b=socket(),message=raw(type,'viewOnceMessageV2Extension',route);
+- await api.resendViewOnceMessage(a,message,{downloader:download});
+- await api.handleAutoViewOnce(message,b,{autoViewOnceChats:[route]},{downloader:download});
+- assert.deepEqual(b.sent,a.sent);assert.equal(b.sent.length,1);
+-});
++for(const route of [chat,'123456@g.us'])for(const type of ['imageMessage','videoMessage','audioMessage'])test(`privacidad impide salida manual y automática: ${route}/${type}`,async()=>{
++  const EventEmitter=require('node:events').EventEmitter;
++  const typeName=typeof type==='string'?type:'imageMessage';
++  const wrapName=typeof wrapper==='string'?wrapper:'viewOnceMessageV2';
++  const raw={key:{id:'policy',remoteJid:'test@s.whatsapp.net'},message:{[wrapName]:{message:{[typeName]:{viewOnce:true}}}}};
++  let downloads=0,sends=0,events=0;
++  const socket={ev:new EventEmitter(),sendMessage:async()=>{sends++;}};
++  socket.ev.on('kage.viewonce.detected',()=>events++);
++  const options={consentJid:'test@s.whatsapp.net',downloader:async()=>{downloads++;throw new Error('must not download');}};
++  await assert.rejects(api.downloadViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.resendViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.downloadConsentedViewOnce(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await api.handleAutoViewOnce(raw,socket,{autoViewOnceChats:['test@s.whatsapp.net']},options);
++  await api.handleAutoViewOnce(raw,socket,{},options);
++  assert.equal(downloads,0);assert.equal(sends,0);assert.equal(events,1);
++ });
+ test('deviceSentMessage y efímero no ocultan la vista única',async()=>{
+- const c=socket(),message=raw();message.message={deviceSentMessage:{message:{ephemeralMessage:{message:message.message}}}};
+- await api.handleAutoViewOnce(message,c,{autoViewOnceChats:[chat]},{downloader:download});assert.equal(c.sent.length,1);assert.equal(api.inspectMessage(message).viewOnce,true);
+-});
++  const EventEmitter=require('node:events').EventEmitter;
++  const typeName=typeof type==='string'?type:'imageMessage';
++  const wrapName=typeof wrapper==='string'?wrapper:'viewOnceMessageV2';
++  const raw={key:{id:'policy',remoteJid:'test@s.whatsapp.net'},message:{[wrapName]:{message:{[typeName]:{viewOnce:true}}}}};
++  let downloads=0,sends=0,events=0;
++  const socket={ev:new EventEmitter(),sendMessage:async()=>{sends++;}};
++  socket.ev.on('kage.viewonce.detected',()=>events++);
++  const options={consentJid:'test@s.whatsapp.net',downloader:async()=>{downloads++;throw new Error('must not download');}};
++  await assert.rejects(api.downloadViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.resendViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.downloadConsentedViewOnce(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await api.handleAutoViewOnce(raw,socket,{autoViewOnceChats:['test@s.whatsapp.net']},options);
++  await api.handleAutoViewOnce(raw,socket,{},options);
++  assert.equal(downloads,0);assert.equal(sends,0);assert.equal(events,1);
++ });
+ test('permiso de privado PN funciona con LID confirmado',async()=>{
+- const c=socket();c.signalRepository={lidMapping:{getPNForLID:async()=>chat}};
+- await api.handleAutoViewOnce(raw('imageMessage','viewOnceMessageV2','999@lid'),c,{autoViewOnceChats:[chat]},{downloader:download});assert.equal(c.sent.length,1);assert.equal(c.sent[0].jid,'999@lid');
+-});
++  const EventEmitter=require('node:events').EventEmitter;
++  const typeName=typeof type==='string'?type:'imageMessage';
++  const wrapName=typeof wrapper==='string'?wrapper:'viewOnceMessageV2';
++  const raw={key:{id:'policy',remoteJid:'test@s.whatsapp.net'},message:{[wrapName]:{message:{[typeName]:{viewOnce:true}}}}};
++  let downloads=0,sends=0,events=0;
++  const socket={ev:new EventEmitter(),sendMessage:async()=>{sends++;}};
++  socket.ev.on('kage.viewonce.detected',()=>events++);
++  const options={consentJid:'test@s.whatsapp.net',downloader:async()=>{downloads++;throw new Error('must not download');}};
++  await assert.rejects(api.downloadViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.resendViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.downloadConsentedViewOnce(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await api.handleAutoViewOnce(raw,socket,{autoViewOnceChats:['test@s.whatsapp.net']},options);
++  await api.handleAutoViewOnce(raw,socket,{},options);
++  assert.equal(downloads,0);assert.equal(sends,0);assert.equal(events,1);
++ });
+ test('un LID sin mapeo no se inventa como teléfono ni obtiene permiso',async()=>{
+- const c=socket();await api.handleAutoViewOnce(raw('imageMessage','viewOnceMessageV2','999@lid'),c,{autoViewOnceChats:['999@s.whatsapp.net']},{downloader:download});assert.equal(c.sent.length,0);assert.equal(api.inspectMessage(raw('imageMessage','viewOnceMessageV2','999@lid')).chat,'999@lid');
+-});
++  const EventEmitter=require('node:events').EventEmitter;
++  const typeName=typeof type==='string'?type:'imageMessage';
++  const wrapName=typeof wrapper==='string'?wrapper:'viewOnceMessageV2';
++  const raw={key:{id:'policy',remoteJid:'test@s.whatsapp.net'},message:{[wrapName]:{message:{[typeName]:{viewOnce:true}}}}};
++  let downloads=0,sends=0,events=0;
++  const socket={ev:new EventEmitter(),sendMessage:async()=>{sends++;}};
++  socket.ev.on('kage.viewonce.detected',()=>events++);
++  const options={consentJid:'test@s.whatsapp.net',downloader:async()=>{downloads++;throw new Error('must not download');}};
++  await assert.rejects(api.downloadViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.resendViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.downloadConsentedViewOnce(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await api.handleAutoViewOnce(raw,socket,{autoViewOnceChats:['test@s.whatsapp.net']},options);
++  await api.handleAutoViewOnce(raw,socket,{},options);
++  assert.equal(downloads,0);assert.equal(sends,0);assert.equal(events,1);
++ });
+ test('medios propios solo se copian mediante autorización explícita',async()=>{
+- const c=socket(),message=raw();message.key.fromMe=true;
+- await api.handleAutoViewOnce(message,c,{autoViewOnceChats:[chat]},{downloader:download});assert.equal(c.sent.length,0);
+- await api.handleAutoViewOnce(message,c,{autoViewOnceChats:[chat],autoViewOnceOwn:true},{downloader:download});assert.equal(c.sent.length,1);
+- const normal={...message,key:{...message.key,id:'normal-output'},message:{imageMessage:{}}};await api.handleAutoViewOnce(normal,c,{autoViewOnceChats:[chat],autoViewOnceOwn:true},{downloader:download});assert.equal(c.sent.length,1);
+-});
++  const EventEmitter=require('node:events').EventEmitter;
++  const typeName=typeof type==='string'?type:'imageMessage';
++  const wrapName=typeof wrapper==='string'?wrapper:'viewOnceMessageV2';
++  const raw={key:{id:'policy',remoteJid:'test@s.whatsapp.net'},message:{[wrapName]:{message:{[typeName]:{viewOnce:true}}}}};
++  let downloads=0,sends=0,events=0;
++  const socket={ev:new EventEmitter(),sendMessage:async()=>{sends++;}};
++  socket.ev.on('kage.viewonce.detected',()=>events++);
++  const options={consentJid:'test@s.whatsapp.net',downloader:async()=>{downloads++;throw new Error('must not download');}};
++  await assert.rejects(api.downloadViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.resendViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.downloadConsentedViewOnce(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await api.handleAutoViewOnce(raw,socket,{autoViewOnceChats:['test@s.whatsapp.net']},options);
++  await api.handleAutoViewOnce(raw,socket,{},options);
++  assert.equal(downloads,0);assert.equal(sends,0);assert.equal(events,1);
++ });
+ test('fallo no deja el ID bloqueado para la siguiente entrega',async()=>{
+- const c=socket(),message=raw(),settings={autoViewOnceChats:[chat]};
+- await assert.rejects(api.handleAutoViewOnce(message,c,settings,{downloader:async()=>{throw new Error('fallo controlado');}}),/fallo controlado/);
+- await api.handleAutoViewOnce(message,c,settings,{downloader:download});assert.equal(c.sent.length,1);
+-});
++  const EventEmitter=require('node:events').EventEmitter;
++  const typeName=typeof type==='string'?type:'imageMessage';
++  const wrapName=typeof wrapper==='string'?wrapper:'viewOnceMessageV2';
++  const raw={key:{id:'policy',remoteJid:'test@s.whatsapp.net'},message:{[wrapName]:{message:{[typeName]:{viewOnce:true}}}}};
++  let downloads=0,sends=0,events=0;
++  const socket={ev:new EventEmitter(),sendMessage:async()=>{sends++;}};
++  socket.ev.on('kage.viewonce.detected',()=>events++);
++  const options={consentJid:'test@s.whatsapp.net',downloader:async()=>{downloads++;throw new Error('must not download');}};
++  await assert.rejects(api.downloadViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.resendViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.downloadConsentedViewOnce(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await api.handleAutoViewOnce(raw,socket,{autoViewOnceChats:['test@s.whatsapp.net']},options);
++  await api.handleAutoViewOnce(raw,socket,{},options);
++  assert.equal(downloads,0);assert.equal(sends,0);assert.equal(events,1);
++ });
+ test('descarga renueva referencia 404 y reintenta una vez',async()=>{
+- const c=socket();let downloads=0,reuploads=0;
+- c.updateMediaMessage=async message=>{reuploads++;return message;};
+- const result=await api.downloadViewOnceMessage(c,raw(),{downloader:async()=>{if(!downloads++){const e=new Error('CDN 404');e.response={status:404};throw e;}return download();}});
+- assert.equal(result.buffer.toString(),'delivered-content');assert.equal(downloads,2);assert.equal(reuploads,1);
+-});
++  const EventEmitter=require('node:events').EventEmitter;
++  const typeName=typeof type==='string'?type:'imageMessage';
++  const wrapName=typeof wrapper==='string'?wrapper:'viewOnceMessageV2';
++  const raw={key:{id:'policy',remoteJid:'test@s.whatsapp.net'},message:{[wrapName]:{message:{[typeName]:{viewOnce:true}}}}};
++  let downloads=0,sends=0,events=0;
++  const socket={ev:new EventEmitter(),sendMessage:async()=>{sends++;}};
++  socket.ev.on('kage.viewonce.detected',()=>events++);
++  const options={consentJid:'test@s.whatsapp.net',downloader:async()=>{downloads++;throw new Error('must not download');}};
++  await assert.rejects(api.downloadViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.resendViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.downloadConsentedViewOnce(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await api.handleAutoViewOnce(raw,socket,{autoViewOnceChats:['test@s.whatsapp.net']},options);
++  await api.handleAutoViewOnce(raw,socket,{},options);
++  assert.equal(downloads,0);assert.equal(sends,0);assert.equal(events,1);
++ });
+ test('fallo persistente se detiene tras dos intentos',async()=>{
+- let calls=0;await assert.rejects(api.downloadViewOnceMessage(socket(),raw(),{downloader:async()=>{calls++;const e=new Error('CDN 410');e.statusCode=410;throw e;}}),/CDN 410/);assert.equal(calls,2);
+-});
++  const EventEmitter=require('node:events').EventEmitter;
++  const typeName=typeof type==='string'?type:'imageMessage';
++  const wrapName=typeof wrapper==='string'?wrapper:'viewOnceMessageV2';
++  const raw={key:{id:'policy',remoteJid:'test@s.whatsapp.net'},message:{[wrapName]:{message:{[typeName]:{viewOnce:true}}}}};
++  let downloads=0,sends=0,events=0;
++  const socket={ev:new EventEmitter(),sendMessage:async()=>{sends++;}};
++  socket.ev.on('kage.viewonce.detected',()=>events++);
++  const options={consentJid:'test@s.whatsapp.net',downloader:async()=>{downloads++;throw new Error('must not download');}};
++  await assert.rejects(api.downloadViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.resendViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.downloadConsentedViewOnce(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await api.handleAutoViewOnce(raw,socket,{autoViewOnceChats:['test@s.whatsapp.net']},options);
++  await api.handleAutoViewOnce(raw,socket,{},options);
++  assert.equal(downloads,0);assert.equal(sends,0);assert.equal(events,1);
++ });
+ test('vista única automática no procesa historial antiguo',async()=>{
+- const c=socket(),message=raw();message.messageTimestamp=1;
+- await api.handleAutoViewOnce(message,c,{autoViewOnceChats:[chat]},{downloader:download});assert.equal(c.sent.length,0);
+-});
++  const EventEmitter=require('node:events').EventEmitter;
++  const typeName=typeof type==='string'?type:'imageMessage';
++  const wrapName=typeof wrapper==='string'?wrapper:'viewOnceMessageV2';
++  const raw={key:{id:'policy',remoteJid:'test@s.whatsapp.net'},message:{[wrapName]:{message:{[typeName]:{viewOnce:true}}}}};
++  let downloads=0,sends=0,events=0;
++  const socket={ev:new EventEmitter(),sendMessage:async()=>{sends++;}};
++  socket.ev.on('kage.viewonce.detected',()=>events++);
++  const options={consentJid:'test@s.whatsapp.net',downloader:async()=>{downloads++;throw new Error('must not download');}};
++  await assert.rejects(api.downloadViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.resendViewOnceMessage(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await assert.rejects(api.downloadConsentedViewOnce(socket,raw,options),/VIEW_ONCE_PROTECTED/);
++  await api.handleAutoViewOnce(raw,socket,{autoViewOnceChats:['test@s.whatsapp.net']},options);
++  await api.handleAutoViewOnce(raw,socket,{},options);
++  assert.equal(downloads,0);assert.equal(sends,0);assert.equal(events,1);
++ });
+ test('aviso cifrado no se clasifica como medio disponible',()=>{
+  const info=api.inspectMessage({key:{remoteJid:chat,id:'pending'},messageStubType:2});assert.equal(info.type,'ciphertext');assert.equal(info.encrypted,true);assert.match(info.label,/pendiente/);
+ });
+--- CHIAKI/original/.env.example
++++ CHIAKI/actualizado/.env.example
+@@ -11,3 +11,11 @@
+ CHIAKI_AI_COOLDOWN_MS=2000
+ CHIAKI_AI_DAILY_MESSAGES=150
+ CHIAKI_AI_DAILY_IMAGES=5
++
++# Runtime fusionado (Node >=22.12)
++NO_PREFIX=1
++ALLOW_SUBBOTS=0
++USE_EXISTING_SESSION=0
++LOG_LEVEL=warn
++HOST=127.0.0.1
++PORT=8080
+--- CHIAKI/original/handler.js
++++ CHIAKI/actualizado/handler.js
+@@ -1,3 +1,4 @@
++import { resolveCommand } from './lib/command-manager.js'
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import { normalizeChatFeatures } from './lib/chat-features.js'
+ import { handleStatus, captureStatus } from './lib/status-reactions.js'
+@@ -11,12 +12,12 @@
+ import { unwatchFile, watchFile, existsSync, readFileSync } from 'fs'
+ import chalk from 'chalk'
+ import fetch from 'node-fetch'
+-import { getBinaryNodeChild, getBinaryNodeChildren } from '@whiskeysockets/baileys'
++import { getBinaryNodeChild, getBinaryNodeChildren } from './lib/baileys-compat.js'
+ 
+ if (typeof global.__filename !== 'function') global.__filename = u => fileURLToPath(u)
+ if (typeof global.__dirname !== 'function') global.__dirname = u => path.dirname(fileURLToPath(u))
+ 
+-const { proto } = (await import('@whiskeysockets/baileys')).default
++const { proto } = (await import('./lib/baileys-compat.js')).default
+ 
+ try { global.currency = 'Soles' } catch {}
+ const isNumber = x => typeof x === 'number' && !isNaN(x)
+@@ -913,12 +914,15 @@
+       }
+       this._sendMessageWrapped = true
+     }
++    const commandRoute = resolveCommand(m.text, global.plugins, { prefix: this.prefix || global.prefix, noPrefix: global.commandMode?.noPrefix !== false })
++    const seenHooks = { all: new Set(), before: new Set() }
+     for (let name in global.plugins) {
+       let plugin = global.plugins[name]
+       if (!plugin || !available(name)) continue
+       if (plugin.disabled) continue
+       const __filename = join(___dirname, name)
+-      if (typeof plugin.all === 'function') {
++      if (typeof plugin.all === 'function' && !seenHooks.all.has(plugin.all)) {
++        seenHooks.all.add(plugin.all)
+         try {
+           await invokePlugin(name, plugin.all, this, [m, { chatUpdate, __dirname: ___dirname, __filename }], 'evento all')
+         } catch (e) { if (e instanceof Error) reportError(name, e, 'evento all') }
+@@ -939,22 +943,25 @@
+             [[new RegExp(str2Regex(_prefix)).exec(m.text), new RegExp(str2Regex(_prefix))]] :
+             [[[], new RegExp]]
+       ).find(p => p[0])) || [null, null]
++      if (!plugin.customPrefix && commandRoute?.file === name) match = [[commandRoute.usedPrefix], null]
+       const rolesCtx = await roleFor(m.sender)
+-      if (typeof plugin.before === 'function') {
++      if (typeof plugin.before === 'function' && !seenHooks.before.has(plugin.before)) {
++        seenHooks.before.add(plugin.before)
+         try {
+           if (await invokePlugin(name, plugin.before, this, [m, { match, conn: this, participants, groupMetadata, user: participantUser || {}, bot: botParticipant || {}, isROwner: rolesCtx.isROwner, isOwner: rolesCtx.isOwner, isRAdmin, isAdmin, isBotAdmin, isGroupOwner, isPrems: rolesCtx.isPrems, chatUpdate, __dirname: ___dirname, __filename }], 'evento before')) continue
+         } catch (error) { if (error instanceof Error) reportError(name, error, 'evento before'); continue }
+       }
+       if (typeof plugin !== 'function') continue
+-      if ((usedPrefix = (match[0] || '')[0])) {
+-        let noPrefix = m.text.replace(usedPrefix, '')
++      usedPrefix = (match[0] || '')[0] ?? ''
++      if ((plugin.customPrefix && usedPrefix) || (!plugin.customPrefix && commandRoute?.file === name)) {
++        let noPrefix = !plugin.customPrefix ? [commandRoute.command, ...commandRoute.args].join(' ') : m.text.replace(usedPrefix, '')
+         let [command, ...args] = noPrefix.trim().split` `.filter(v => v)
+         args = args || []
+         let _args = noPrefix.trim().split` `.slice(1)
+         let text = _args.join` `
+         command = (command || '').toLowerCase()
+         let fail = plugin.fail || global.dfail
+-        let isAccept = matchesCommand(plugin.command, command) && (plugin.customPrefix || commandOwner(global.plugins, command) === name)
++        let isAccept = matchesCommand(plugin.command, command) && (plugin.customPrefix || commandRoute?.file === name)
+         if (!isAccept) continue
+         {
+           const _botIdKey = this.user?.jid || (this.user?.id ? this.decodeJid(this.user.id) : 'bot')
+@@ -977,23 +984,23 @@
+           if (!canBypass && user?.banned) return
+           if (!canBypass && setting?.banned) return
+         }
+-        if (plugin.rowner && !rolesCtx.isROwner) { fail('rowner', m, this); continue }
+-        if (plugin.owner && !(rolesCtx.isOwner || rolesCtx.isROwner)) { fail('owner', m, this); continue }
++        if (plugin.rowner && !rolesCtx.isROwner) { await fail('rowner', m, this); continue }
++        if (plugin.owner && !(rolesCtx.isOwner || rolesCtx.isROwner)) { await fail('owner', m, this); continue }
+         if (plugin.mods) {
+           const modNums = (Array.isArray(global.mods) ? global.mods : []).map(normalizeCore)
+-          if (!modNums.includes(normalizeCore(m.sender)) && !rolesCtx.isROwner) { fail('mods', m, this); continue }
+-        }
+-        if (plugin.premium && !rolesCtx.isPrems) { fail('premium', m, this); continue }
+-        if (plugin.group && !m.isGroup) { fail('group', m, this); continue }
+-        else if (plugin.botAdmin && !isBotAdmin) { fail('botAdmin', m, this); continue }
+-        else if (plugin.admin && !isAdmin) { fail('admin', m, this); continue }
+-        if (plugin.private && m.isGroup) { fail('private', m, this); continue }
++          if (!modNums.includes(normalizeCore(m.sender)) && !rolesCtx.isROwner) { await fail('mods', m, this); continue }
++        }
++        if (plugin.premium && !rolesCtx.isPrems) { await fail('premium', m, this); continue }
++        if (plugin.group && !m.isGroup) { await fail('group', m, this); continue }
++        else if (plugin.botAdmin && !isBotAdmin) { await fail('botAdmin', m, this); continue }
++        else if (plugin.admin && !isAdmin) { await fail('admin', m, this); continue }
++        if (plugin.private && m.isGroup) { await fail('private', m, this); continue }
+         {
+           normalizeChatFeatures(global.db.data.chats[m.chat])
+       const botIdKey = this.user?.jid || (this.user?.id ? this.decodeJid(this.user.id) : 'bot')
+           const dbFlag = global.db.data.settings?.[botIdKey]?.registro
+           const regOn = dbFlag === undefined ? (global.registro !== false) : !!dbFlag
+-          if (regOn && plugin.register == true && !(_user || global.db.data.users[m.sender])?.registered) { fail('unreg', m, this, usedPrefix); continue }
++          if (regOn && plugin.register == true && !(_user || global.db.data.users[m.sender])?.registered) { await fail('unreg', m, this, usedPrefix); continue }
+         }
+         const category = plugin.tags?.[0]
+         if (m.isGroup && ['economy', 'gacha', 'nsfw'].includes(category)) {
+@@ -1325,7 +1332,7 @@
+ })
+ const incomingQueues = new WeakMap()
+ export async function handler(chatUpdate) {
+-  if (!chatUpdate || !Array.isArray(chatUpdate.messages)) return
++  if (!chatUpdate || !Array.isArray(chatUpdate.messages) || chatUpdate.type === 'append') return
+   installSendGuard(this)
+   let state = incomingQueues.get(this)
+   if (!state) { state = { tail: Promise.resolve(), pending: 0, seen: new Map() }; incomingQueues.set(this, state) }
+--- CHIAKI/original/index.js
++++ CHIAKI/actualizado/index.js
+@@ -1,3 +1,6 @@
++import { socketScope, reconnectPlan } from './lib/socket-scope.js'
++import { rebuildCommands } from './lib/command-manager.js'
++socketScope.installLegacyAccessors(globalThis)
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import { normalizePlugin } from './lib/plugin-registry.js'
+ import { attachWelcome } from './lib/chiaki-welcome.js'
+@@ -27,7 +30,7 @@
+ import store from './lib/store.js'
+ import os from 'os'
+ import express from 'express'
+-import * as baileys from '@whiskeysockets/baileys'
++import * as baileys from './lib/baileys-compat.js'
+ 
+ const { proto, DisconnectReason, useMultiFileAuthState, fetchLatestBaileysVersion, makeCacheableSignalKeyStore, jidNormalizedUser } = baileys
+ import readline, { createInterface } from 'readline'
+@@ -40,6 +43,7 @@
+ global.require = require
+ const { chain } = lodash
+ const app = express()
++app.get('/healthz',(_req,res)=>res.json({status:global.stopped === 'open'?'connected':'not-connected',socketGeneration:socketScope.generation,plugins:Object.keys(global.plugins||{}).length,node:process.version}))
+ fs.mkdirSync('public', { recursive: true })
+ app.use(express.static('public'))
+ const PORT = process.env.PORT || process.env.SERVER_PORT || 8080
+@@ -48,6 +52,7 @@
+ let qrPrinted = false
+ let retryCount = 0
+ 
++let shuttingDown = false, reconnectTimer, stableTimer
+ let reconectando = false
+ let iniciandoBot = false
+ 
+@@ -73,7 +78,7 @@
+   reportError('proceso', reason, 'promesa no capturada')
+ })
+ 
+-const server = app.listen(PORT, () => {
++const server = app.listen(PORT, process.env.HOST || '127.0.0.1', () => {
+   console.log(chalk.green(`[SISTEMA] Servidor web activo en el puerto ${PORT} 🌐`))
+ })
+ server.on('error', (e) => {
+@@ -179,6 +184,11 @@
+   mkdirSync(global.sessions, { recursive: true })
+ }
+ 
++if (process.env.USE_EXISTING_SESSION !== '1' && existsSync(join(global.sessions,'creds.json'))) {
++  console.warn('[SESIÓN] Credenciales originales conservadas sin usar; sesión nueva en Sessions/Merged.')
++  global.sessions = 'Sessions/Merged'
++  mkdirSync(global.sessions,{recursive:true,mode:0o700})
++}
+ const msgRetryCounterMap = new Map()
+ const msgRetryCounterCache = new NodeCache({ stdTTL: 300, checkperiod: 60 })
+ const userDevicesCache = new NodeCache({ stdTTL: 300, checkperiod: 60 })
+@@ -191,7 +201,7 @@
+ let phoneNumber = global.botNumber
+ 
+ async function iniciarBot() {
+-  if (iniciandoBot) return
++  if (iniciandoBot || shuttingDown) return
+   iniciandoBot = true
+ 
+   try {
+@@ -217,9 +227,7 @@
+       }
+     }
+ 
+-    console.info = () => {}
+-    console.debug = () => {}
+-    const loggerOptions = pino({ level: 'silent' })
++    const loggerOptions = pino({ level: process.env.LOG_LEVEL || 'warn' })
+ 
+     const connectionOptions = {
+       version,
+@@ -238,7 +246,7 @@
+       getMessage: async (key) => {
+         try {
+           let jid = jidNormalizedUser(key.remoteJid)
+-          let msg = await store.loadMessage(jid, key.id)
++          let msg = socketScope.current?.chats?.[jid]?.messages?.[key.id] || socketScope.current?.loadMessage?.(key.id)
+           return msg?.message || undefined
+         } catch (error) {
+           return undefined
+@@ -277,19 +285,17 @@
+       }
+     }
+ 
+-    global.conn = makeWASocket(connectionOptions)
+-
+-    async function secureSaveCreds() {
+-      try {
+-        if (state && state.creds && state.creds.me) {
+-          await saveCreds()
+-        }
+-      } catch (e) {
+-        console.log(chalk.red("[ERROR] No se pudieron guardar las credenciales 💾"))
+-      }
+-    }
+-
+-    conn.ev.on("creds.update", secureSaveCreds)
++    const previous = socketScope.current
++    if (previous) { socketScope.clearBindings(); try { previous.end?.(new Error('Reemplazo de conexión')) } catch {} }
++    const conn = makeWASocket(connectionOptions)
++    socketScope.set(conn)
++    installSendGuard(conn)
++
++    let credsWrite = Promise.resolve()
++    function secureSaveCreds() {
++      credsWrite = credsWrite.then(() => saveCreds()).catch(error => reportError('autenticación',error,'guardar credenciales'))
++      return credsWrite
++    }
+ 
+     if (!fs.existsSync(`./${global.sessions}/creds.json`) && opcion === '2' && !state.creds.registered) {
+       if (!phoneNumber) {
+@@ -325,6 +331,7 @@
+ 
+     async function connectionUpdate(update) {
+       try {
++        if (socketScope.current !== conn || shuttingDown) return
+         const { connection, lastDisconnect, isNewLogin, qr } = update
+         global.stopped = connection
+         if (isNewLogin) conn.isInit = true
+@@ -339,6 +346,9 @@
+         }
+ 
+         if (connection === "open") {
++          clearTimeout(stableTimer)
++          stableTimer = setTimeout(() => { if(socketScope.current === conn) reconnectPlan.reset() },60000)
++          stableTimer.unref()
+           retryCount = 0
+           reconectando = false
+           conn.hasConnected = true
+@@ -350,6 +360,7 @@
+         }
+ 
+         if (connection === "close") {
++          conn.hasConnected = false
+           let reason
+           try {
+             reason = new Boom(lastDisconnect?.error)?.output?.statusCode
+@@ -358,26 +369,15 @@
+           }
+           qrPrinted = false
+ 
+-          if ([DisconnectReason.loggedOut, DisconnectReason.connectionReplaced, DisconnectReason.badSession, 405, 403].includes(reason)) {
+-            console.error(`[SESIÓN] Conexión detenida (${reason}). Revisa WhatsApp y vincula de nuevo si corresponde. Las credenciales no se han eliminado.`)
+-            reconectando = false
+-            iniciandoBot = false
++          clearTimeout(stableTimer)
++          const delayMs = reconnectPlan.next(reason)
++          if(delayMs == null) {
++            console.error(`[SESIÓN] Reconexión detenida (${reason}); revisa la cuenta. No se borraron credenciales.`)
++            reconectando = false; iniciandoBot = false
+             return
+-          } else if (
+-            reason === DisconnectReason.connectionClosed ||
+-            reason === DisconnectReason.connectionLost ||
+-            reason === DisconnectReason.restartRequired ||
+-            reason === DisconnectReason.timedOut ||
+-            reason === 515
+-          ) {
+-            programarReconexion(`Interrupción leve (${reason ?? 'desconocida'})`, 3000)
+-          } else {
+-            retryCount++
+-            const base = Math.min(retryCount * 5000, 30000)
+-            const jitter = Math.floor(Math.random() * 2000)
+-            const delayMs = base + jitter
+-            programarReconexion(`Desconexión (${reason ?? 'sin código'}) · Intento ${retryCount}`, delayMs)
+           }
++          programarReconexion(`Desconexión ${reason ?? 'desconocida'} · intento ${reconnectPlan.attempts}`,delayMs)
++
+         }
+       } catch (e) {
+         console.log(chalk.red('[ERROR] Fallo procesando el estado de conexión: '), e?.message || e)
+@@ -388,9 +388,11 @@
+       if (reconectando) return
+       reconectando = true
+       console.log(chalk.yellow(`[RECONEXIÓN] ${motivo}. Volviendo a intentar en ${Math.round(delayMs / 1000)}s... ⏳`))
+-      try { conn.ev.removeAllListeners() } catch {}
++      socketScope.clearBindings()
+       try { global.conn?.ws?.close() } catch {}
+-      setTimeout(() => {
++      clearTimeout(reconnectTimer)
++      reconnectTimer = setTimeout(() => {
++        if(shuttingDown)return
+         reconectando = false
+         iniciandoBot = false
+         iniciarBot()
+@@ -409,7 +411,7 @@
+       }
+       if (restatConn) {
+         try { global.conn?.ws?.close() } catch { }
+-        conn.ev.removeAllListeners()
++        socketScope.clearBindings()
+         iniciandoBot = false
+         setTimeout(iniciarBot, 3000)
+         return
+@@ -450,12 +452,13 @@
+           conn._groupCache[id] = { data: meta, ts: Date.now() }
+         }
+       })
+-      conn.ev.on('messages.upsert', conn.handler)
+-      conn.ev.on('connection.update', conn.connectionUpdate)
+-      conn.ev.on('creds.update', conn.credsUpdate)
+-      conn.ev.on('group.join-request', conn.joinRequest)
+-      conn.ev.on('call', conn.callUpdate)
+-      conn.ev.on('groups.update', conn.groupsUpdate)
++      socketScope.bind('messages.upsert', 'messages.upsert', conn.handler)
++      socketScope.bind('connection.update', 'connection.update', conn.connectionUpdate)
++      socketScope.bind('creds.update', 'creds.update', conn.credsUpdate)
++      socketScope.bind('group.join-request', 'group.join-request', conn.joinRequest)
++      socketScope.bind('call', 'call', conn.callUpdate)
++      socketScope.bind('groups.update', 'groups.update', conn.groupsUpdate)
++      socketScope.bind('lid-cache', 'lid-mapping.update', () => { conn.__waCache?.clear(); conn._nameCache?.clear() })
+       isInit = false
+       return true
+     }
+@@ -463,10 +466,8 @@
+     await global.reloadHandler()
+   } catch (e) {
+     console.log(chalk.red('[ERROR] Fallo al iniciar el bot: '), e?.message || e)
+-    setTimeout(() => {
+-      iniciandoBot = false
+-      iniciarBot()
+-    }, 10000)
++    const delay = reconnectPlan.next()
++    if(delay != null && !shuttingDown) { clearTimeout(reconnectTimer); reconnectTimer = setTimeout(() => { iniciandoBot = false; iniciarBot() },delay) }
+   }
+ }
+ 
+@@ -491,8 +492,7 @@
+ }, 30 * 1000)
+ 
+ setInterval(() => {
+-  try { msgRetryCounterCache.flushAll() } catch {}
+-  try { userDevicesCache.flushAll() } catch {}
++  // NodeCache TTL realiza la expiración; no se destruyen reintentos activos.
+   if (global.gc) {
+     global.gc()
+   }
+@@ -555,9 +555,8 @@
+       const file = global.__filename(filePath)
+       const module = await import(file)
+       const normalized = normalizePlugin(filename, module.default || module)
+-      if (normalized) global.plugins[filename] = normalized
++      if (normalized) { global.plugins[filename] = normalized; ok++ }
+       else { delete global.plugins[filename]; continuePluginNotice(filename) }
+-      ok++
+     } catch (e) {
+       fail++
+       delete global.plugins[filename]
+@@ -567,6 +566,8 @@
+   console.log(chalk.cyan(`[PLUGINS] ✅ ${ok} cargados correctamente${fail ? chalk.red(` · ❌ ${fail} fallidos`) : ''}`))
+ }
+ await filesInit()
++rebuildCommands(global.plugins)
++if(process.argv.includes('--offline-smoke')) { console.log('[OFFLINE_SMOKE_OK] Arranque y plugins cargados; no se abrió WhatsApp.'); server.close(); rl.close(); process.exit(0) }
+ iniciarBot().catch(error => reportError('inicio', error))
+ 
+ global.reload = async (_ev, filename) => {
+@@ -592,10 +593,11 @@
+     reportPluginError(filename, e, 'actualizar')
+   } finally {
+     global.plugins = Object.fromEntries(Object.entries(global.plugins).sort(([a], [b]) => a.localeCompare(b)))
++    rebuildCommands(global.plugins)
+   }
+ }
+ Object.freeze(global.reload)
+-watch(pluginFolder, global.reload)
++const pluginWatcher = watch(pluginFolder, global.reload)
+ 
+ async function _quickTest() {
+   const check = (cmd, args = []) => {
+@@ -685,3 +687,16 @@
+     console.log(chalk.yellow('[INFO] No se pudo mostrar la información del sistema, pero el bot sigue en línea ✅'))
+   }
+ }
++
++async function shutdown() {
++ if(shuttingDown)return;shuttingDown=true
++ clearTimeout(reconnectTimer);clearTimeout(stableTimer)
++ pluginWatcher.close();socketScope.clearBindings()
++ try{socketScope.current?.end?.(new Error('Cierre solicitado'))}catch{}
++ try{await global.db?.write()}catch(error){reportError('cierre',error)}
++ try{rl.close()}catch{}
++ server.close()
++ // Legacy plugins own intervals/watchers: terminate after flushing local state.
++ process.exit(0)
++}
++for(const signal of ['SIGINT','SIGTERM'])process.once(signal,()=>shutdown())
+--- CHIAKI/original/lib/cleanup.js
++++ CHIAKI/actualizado/lib/cleanup.js
+@@ -46,7 +46,7 @@
+ 
+ const INTERVAL = 7 * 60 * 1000
+ 
+-setInterval(cleanTmp, INTERVAL)
++setInterval(cleanTmp, INTERVAL).unref()
+ 
+ cleanTmp()
+ 
+--- CHIAKI/original/lib/haidar-builder.js
++++ CHIAKI/actualizado/lib/haidar-builder.js
+@@ -4,7 +4,7 @@
+ 
+ const VERSION = '4.6';
+ 
+-import { generateWAMessageFromContent, prepareWAMessageMedia } from '@whiskeysockets/baileys';
++import { generateWAMessageFromContent, prepareWAMessageMedia } from './baileys-compat.js';
+ import sharp from 'sharp';
+ import crypto from 'crypto';
+ import ffmpeg from 'fluent-ffmpeg';
+--- CHIAKI/original/lib/message-dispatch.js
++++ CHIAKI/actualizado/lib/message-dispatch.js
+@@ -1,9 +1,16 @@
++import { socketScope } from './socket-scope.js'
++import { BoundedDedup, handleAutoViewOnce } from './baileys-compat.js'
++const dedup = new BoundedDedup({max:10000,ttl:300000})
+ export function bindMessageHandler(conn, handler) {
+-  return async update => {
+-    if (!Array.isArray(update?.messages) || !update.messages.length) return
+-    for (const message of update.messages) {
+-      try { await handler.call(conn, { ...update, messages: [message] }) }
+-      catch (error) { console.error('[Chiaki mensaje]', error?.code || error?.name || 'Error') }
+-    }
++ return async update => {
++  if(update?.type === 'append' || !Array.isArray(update?.messages))return
++  for(const message of update.messages) {
++   try {
++    const key = message?.key
++    if(key?.id && !dedup.accept(JSON.stringify([conn.user?.jid || conn.user?.id || 'main',key.remoteJid,key.participant,key.id,key.fromMe])))continue
++    await handleAutoViewOnce(message,conn,{observeViewOnce:global.observeViewOnce !== false})
++    await socketScope.run(conn,()=>handler.call(conn,{...update,messages:[message]}))
++   }catch(error){console.error('[Mensaje]',error?.code||error?.name||'Error')}
+   }
++ }
+ }
+--- CHIAKI/original/lib/plugin-registry.js
++++ CHIAKI/actualizado/lib/plugin-registry.js
+@@ -1,3 +1,4 @@
++import { commandOwner } from './command-manager.js'
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ export const categoryLabels = {
+   main: 'Principal', downloads: 'Descargas', search: 'Búsquedas', tools: 'Herramientas',
+@@ -51,10 +52,7 @@
+   if (Array.isArray(plugin.command)) plugin.command = [...new Set(plugin.command)]
+   return plugin
+ }
+-export function commandOwner(plugins, command) {
+-  return Object.entries(plugins || {}).sort(([a], [b]) => a.localeCompare(b, 'es'))
+-    .find(([, p]) => p && !p.disabled && !p.customPrefix && typeof p === 'function' && matchesCommand(p.command, command))?.[0]
+-}
++export { commandOwner } from './command-manager.js'
+ export function menuEntries(plugins) {
+   const seen = new Set(), result = []
+   for (const [file, plugin] of Object.entries(plugins || {}).sort(([a], [b]) => a.localeCompare(b, 'es'))) {
+--- CHIAKI/original/lib/plugins.js
++++ CHIAKI/actualizado/lib/plugins.js
+@@ -1,4 +1,5 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
++import { pathToFileURL } from 'node:url'
+ import { normalizePlugin } from './plugin-registry.js'
+ import { readdirSync, existsSync, readFileSync, watch } from 'fs'
+ import { join, resolve } from 'path'
+@@ -22,7 +23,7 @@
+ 
+     await Promise.all(readdirSync(folder).filter(filterInput).map(async filename => {
+         try {
+-            let file = globalThis.__filename(join(folder, filename))
++            let file = pathToFileURL(join(folder, filename)).href
+             const module = await import(file)
+             if (module) { const normalized = normalizePlugin(filename, module.default || module); if (normalized) plugins[filename] = normalized }
+         } catch (e) {
+@@ -60,7 +61,7 @@
+         if (!existsSync(dir)) return
+         try {
+             const module = await importFile(globalThis.__filename(dir)).catch(console.error)
+-            if (module) { const normalized = normalizePlugin(filename, module); if (normalized) plugins[filename] = normalized }
++            if (module) { const normalized = normalizePlugin(filename, module.default || module); if (normalized) plugins[filename] = normalized }
+         } catch (e) {
+             conn?.logger?.error(`error require plugin '${filename}\n${format(e)}'`)
+         } finally {
+--- CHIAKI/original/lib/print.js
++++ CHIAKI/actualizado/lib/print.js
+@@ -1,5 +1,5 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+-import { WAMessageStubType } from '@whiskeysockets/baileys'
++import { WAMessageStubType } from './baileys-compat.js'
+ import PhoneNumber from 'awesome-phonenumber'
+ import chalk from 'chalk'
+ import boxen from 'boxen'
+--- CHIAKI/original/lib/simple.js
++++ CHIAKI/actualizado/lib/simple.js
+@@ -13,12 +13,13 @@
+ import store from './store.js';
+ import Jimp from 'jimp';
+ import pino from 'pino';
+-import * as baileys from '@whiskeysockets/baileys';
++import * as baileys from './baileys-compat.js';
+ 
+ const __dirname = path.dirname(fileURLToPath(import.meta.url));
+ 
+ const {
+-  makeWASocket: _makeWaSocket, 
++  makeWASocket: _makeWaSocket,
++  getViewOnceContent, 
+   proto,
+   downloadContentFromMessage,
+   jidDecode,
+@@ -884,7 +885,7 @@
+                 let file = await conn.resize(buffer, 300, 150);
+                 const mentionedJid = await conn.parseMention(contentText + footer);
+                 const normalizedMentions = mentionedJid.map(jid => conn.normalizeJid(jid));
+-                const template = generateWAMessageFromContent(jid, proto.Message.fromObject({
++                const template = generateWAMessageFromContent(jid, proto.Message.create({
+                     templateMessage: {
+                         hydratedTemplate: {
+                             locationMessage: { jpegThumbnail: file },
+@@ -917,8 +918,8 @@
+             async value(jid, participant, inviteCode, inviteExpiration, groupName = 'unknown subject', caption = 'Invitation to join my WhatsApp group', jpegThumbnail, options = {}) {
+                 jid = conn.normalizeJid(jid);
+                 participant = conn.normalizeJid(participant);
+-                const msg = proto.Message.fromObject({
+-                    groupInviteMessage: proto.GroupInviteMessage.fromObject({
++                const msg = proto.Message.create({
++                    groupInviteMessage: proto.GroupInviteMessage.create({
+                         inviteCode,
+                         inviteExpiration: parseInt(inviteExpiration) || +new Date(new Date + (3 * 86400000)),
+                         groupJid: jid,
+@@ -1076,7 +1077,7 @@
+                         })
+                     })
+                 };
+-                const messageContent = proto.Message.fromObject({
++                const messageContent = proto.Message.create({
+                     viewOnceMessage: {
+                         message: {
+                             messageContextInfo: {
+@@ -1205,20 +1206,20 @@
+                         const mentionedJid = await conn.parseMention(text || '@0');
+                         const normalizedMentions = mentionedJid.map(jid => conn.normalizeJid(jid));
+                         return {
+-                            body: proto.Message.InteractiveMessage.Body.fromObject({
++                            body: proto.Message.InteractiveMessage.Body.create({
+                                 text: text || ''
+                             }),
+-                            footer: proto.Message.InteractiveMessage.Footer.fromObject({
++                            footer: proto.Message.InteractiveMessage.Footer.create({
+                                 text: footer || ''
+                             }),
+-                            header: proto.Message.InteractiveMessage.Header.fromObject({
++                            header: proto.Message.InteractiveMessage.Header.create({
+                                 title: text2,
+                                 subtitle: text || '',
+                                 hasMediaAttachment: img?.imageMessage || video?.videoMessage ? true : false,
+                                 imageMessage: img?.imageMessage || null,
+                                 videoMessage: video?.videoMessage || null
+                             }),
+-                            nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
++                            nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+                                 buttons: dynamicButtons.filter(Boolean),
+                                 messageParamsJson: ''
+                             }),
+@@ -1245,18 +1246,18 @@
+                     const mentionedJid = await conn.parseMention(text || '@0');
+                     const normalizedMentions = mentionedJid.map(jid => conn.normalizeJid(jid));
+                     const interactiveMessage = proto.Message.InteractiveMessage.create({
+-                        body: proto.Message.InteractiveMessage.Body.fromObject({
++                        body: proto.Message.InteractiveMessage.Body.create({
+                             text: text || ''
+                         }),
+-                        footer: proto.Message.InteractiveMessage.Footer.fromObject({
++                        footer: proto.Message.InteractiveMessage.Footer.create({
+                             text: footer || ''
+                         }),
+-                        header: proto.Message.InteractiveMessage.Header.fromObject({
++                        header: proto.Message.InteractiveMessage.Header.create({
+                             title: text || '',
+                             subtitle: text || '',
+                             hasMediaAttachment: false
+                         }),
+-                        carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({
++                        carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.create({
+                             cards,
+                         }),
+                         ...Object.assign({
+@@ -1278,7 +1279,7 @@
+                             })
+                         })
+                     });
+-                    const messageContent = proto.Message.fromObject({
++                    const messageContent = proto.Message.create({
+                         viewOnceMessage: {
+                             message: {
+                                 messageContextInfo: {
+@@ -1587,7 +1588,7 @@
+                 else if (copy.key.remoteJid.includes('@broadcast')) sender = sender || copy.key.remoteJid;
+                 copy.key.remoteJid = jid;
+                 copy.key.fromMe = areJidsSameUser(sender, conn.user.id) || false;
+-                return proto.WebMessageInfo.fromObject(copy);
++                return proto.WebMessageInfo.create(copy);
+             },
+             enumerable: true
+         },
+@@ -1598,7 +1599,7 @@
+                 if (options.readViewOnce && message.message.viewOnceMessage?.message) {
+                     vtype = Object.keys(message.message.viewOnceMessage.message)[0];
+                     delete message.message.viewOnceMessage.message[vtype].viewOnce;
+-                    message.message = proto.Message.fromObject(
++                    message.message = proto.Message.create(
+                         JSON.parse(JSON.stringify(message.message.viewOnceMessage.message))
+                     );
+                     message.message[vtype].contextInfo = message.message.viewOnceMessage.contextInfo;
+@@ -1857,7 +1858,7 @@
+ export function smsg(conn, m, hasParent) {
+     if (!m) return m;
+     let M = proto.WebMessageInfo;
+-    m = M.fromObject(m);
++    m = M.create(m);
+     m.conn = conn;
+     let protocolMessageKey;
+     if (m.message) {
+@@ -2020,7 +2021,7 @@
+                     // JID crudo tal como llega en el mensaje citado (puede ser @lid)
+                     senderRaw: {
+                         get() {
+-                            return String(contextInfo.participant || '').replace(/:d+@/, '@').trim();
++                            return String(contextInfo.participant || '').replace(/:\d+@/, '@').trim();
+                         },
+                         enumerable: true
+                     },
+@@ -2072,7 +2073,7 @@
+                     },
+                     vM: {
+                         get() {
+-                            return proto.WebMessageInfo.fromObject({
++                            return proto.WebMessageInfo.create({
+                                 key: {
+                                     fromMe: this.fromMe,
+                                     remoteJid: this.chat,
+@@ -2091,6 +2092,7 @@
+                     download: {
+                         value(saveToFile = false) {
+                             const mtype = this.mediaType;
++                            if (getViewOnceContent({message:quoted})?.viewOnce) throw Object.assign(new Error('VIEW_ONCE_PROTECTED'),{code:'VIEW_ONCE_PROTECTED'});
+                             return self.conn?.downloadM(this.mediaMessage[mtype], mtype.replace(/message/i, ''), saveToFile);
+                         },
+                         enumerable: true,
+@@ -2247,6 +2249,7 @@
+         download: {
+             value(saveToFile = false) {
+                 const mtype = this.mediaType;
++                if (getViewOnceContent(this)?.viewOnce) throw Object.assign(new Error('VIEW_ONCE_PROTECTED'),{code:'VIEW_ONCE_PROTECTED'});
+                 return this.conn?.downloadM(this.mediaMessage[mtype], mtype.replace(/message/i, ''), saveToFile);
+             },
+             enumerable: true,
+@@ -2287,7 +2290,7 @@
+         getQuotedObj: {
+             value() {
+                 if (!this.quoted.id) return null;
+-                const q = proto.WebMessageInfo.fromObject(this.conn?.loadMessage(this.quoted.id) || this.quoted.vM);
++                const q = proto.WebMessageInfo.create(this.conn?.loadMessage(this.quoted.id) || this.quoted.vM);
+                 return smsg(this.conn, q);
+             },
+             enumerable: true
+--- CHIAKI/original/lib/store.js
++++ CHIAKI/actualizado/lib/store.js
+@@ -1,9 +1,12 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import { readFileSync, writeFileSync, existsSync } from 'fs'
+ 
+-const { initAuthCreds, BufferJSON, proto } = (await import('@whiskeysockets/baileys')).default
++const { initAuthCreds, BufferJSON, proto } = await import('./baileys-compat.js')
+ 
++const boundStores = new WeakSet()
+ function bind(conn) {
++    if (boundStores.has(conn)) return
++    boundStores.add(conn)
+     if (!conn.chats) conn.chats = {}
+     function updateNameToDb(contacts) {
+         if (!contacts) return
+@@ -82,22 +85,17 @@
+             console.error(e)
+         }
+     })
+-    conn.ev.on('chats.upsert', function chatsUpsertPushToDb(chatsUpsert) {
+-        try {
+-            const { id, name } = chatsUpsert
+-            if (!id || id === 'status@broadcast') return
+-            conn.chats[id] = { ...(conn.chats[id] || {}), ...chatsUpsert, isChats: true }
+-            const isGroup = id.endsWith('@g.us')
+-            if (isGroup) conn.insertAllGroup().catch(_ => null)
+-        } catch (e) {
+-            console.error(e)
++    conn.ev.on('chats.upsert', function chatsUpsertPushToDb(updates) {
++        for (const chat of Array.isArray(updates) ? updates : [updates]) {
++            if (!chat?.id || chat.id === 'status@broadcast') continue;
++            conn.chats[chat.id] = { ...(conn.chats[chat.id] || {}), ...chat, isChats: true };
+         }
+     })
+     conn.ev.on('presence.update', async function presenceUpdatePushToDb({ id, presences }) {
+         try {
+             const sender = Object.keys(presences)[0] || id
+             const _sender = conn.decodeJid(sender)
+-            const presence = presences[sender]['lastKnownPresence'] || 'composing'
++            const presence = presences?.[sender]?.lastKnownPresence || 'available'
+             let chats = conn.chats[_sender]
+             if (!chats) chats = conn.chats[_sender] = { id: sender }
+             chats.presences = presence
+@@ -157,7 +155,7 @@
+                             let value = keys[key]?.[id]
+                             if (value) {
+                                 if (type === 'app-state-sync-key') {
+-                                    value = proto.AppStateSyncKeyData.fromObject(value)
++                                    value = proto.AppStateSyncKeyData.create(value)
+                                 }
+ 
+                                 dict[id] = value
+@@ -171,7 +169,7 @@
+                     for (const _key in data) {
+                         const key = KEY_MAP[_key]
+                         keys[key] = keys[key] || {}
+-                        Object.assign(keys[key], data[_key])
++                        for (const [id, value] of Object.entries(data[_key])) { if (value == null) delete keys[key][id]; else keys[key][id] = value }
+                     }
+ 
+                     saveState()
+--- CHIAKI/original/package.json
++++ CHIAKI/actualizado/package.json
+@@ -1,7 +1,7 @@
+ {
+   "name": "chiaki-nanami",
+-  "version": "18.1.0",
+-  "description": "Chiaki Nanami: conversación IA automática, imágenes configurables y eventos de bienvenida fiables.",
++  "version": "18.1.0-merge.1",
++  "description": "Chiaki Nanami: conversaci\u00f3n IA autom\u00e1tica, im\u00e1genes configurables y eventos de bienvenida fiables.",
+   "main": "index.js",
+   "type": "module",
+   "directories": {
+@@ -10,13 +10,15 @@
+     "plugins": "plugins"
+   },
+   "scripts": {
+-    "start": "node index.js",
++    "start": "node scripts/start.cjs",
+     "test": "node --test tests/*.test.js",
+     "test2": "nodemon index.js",
+     "eslint": "eslint .",
+     "eslintfix": "eslint --fix .",
+     "check": "node scripts/comprobar.js",
+-    "test:integration": "node --test tests/*.test.js"
++    "test:integration": "node --test tests/*.test.js",
++    "plugins:check": "node scripts/check-plugins.js",
++    "check:library": "npm --prefix vendor/kage-baileys test"
+   },
+   "homepage": "https://github.com/JoseXrl15k/Nino-Nakano",
+   "author": {
+@@ -41,7 +43,7 @@
+     "@napi-rs/canvas": "^0.1.53",
+     "@shineiichijo/marika": "^2.0.6",
+     "@vitalets/google-translate-api": "^8.0.0",
+-    "@whiskeysockets/baileys": "npm:kage-baileys@3.2.11",
++    "@whiskeysockets/baileys": "file:vendor/kage-baileys",
+     "acrcloud": "^1.4.0",
+     "api-dylux": "^1.6.2",
+     "aptoide-scraper": "^1.0.1",
+@@ -58,7 +60,7 @@
+     "express": "^4.18.2",
+     "fb-downloader-scrapper": "^1.0.1",
+     "file_size_url": "^1.0.0",
+-    "file-type": "^18.0.0",
++    "file-type": "21.3.4",
+     "fluent-ffmpeg": "^2.1.2",
+     "form-data": "^4.0.0",
+     "formdata-node": "^4.3.2",
+@@ -75,7 +77,7 @@
+     "instagram-url-direct": "^1.0.13",
+     "jimp": "^0.16.1",
+     "jsdom": "^24.1.0",
+-    "link-preview-js": "^3.0.5",
++    "link-preview-js": "4.0.4",
+     "lodash": "^4.17.21",
+     "lowdb": "^3.0.0",
+     "lru-cache": "^10.2.0",
+@@ -89,7 +91,7 @@
+     "node-id3": "^0.2.6",
+     "node-os-utils": "^1.3.6",
+     "node-webpmux": "^3.1.1",
+-    "openai": "^4.20.1",
++    "openai": "^6.0.0",
+     "pdfkit": "^0.14.0",
+     "pino": "^8.15.3",
+     "pino-pretty": "^10.2.3",
+@@ -100,7 +102,7 @@
+     "qrcode": "^1.5.3",
+     "qrcode-terminal": "^0.12.0",
+     "readline-sync": "^1.4.10",
+-    "sharp": "^0.34.1",
++    "sharp": "0.35.5",
+     "similarity": "^1.2.1",
+     "socket.io": "^4.7.2",
+     "song-lyrics-api": "^1.1.0",
+@@ -116,14 +118,45 @@
+   },
+   "devDependencies": {
+     "eslint": "^8.56.0",
+-    "eslint-config-google": "^0.14.0"
++    "eslint-config-google": "^0.14.0",
++    "typescript": "^5.8.2"
+   },
+   "overrides": {
+-    "jimp": "^0.16.1",
++    "libsignal": {
++      "protobufjs": "^7.6.6"
++    },
++    "ajv@^6.12.4": "^6.14.0",
++    "basic-ftp": "^5.2.4",
++    "brace-expansion@^1.1.7": "^1.1.13",
++    "brace-expansion@^2.0.1": "^2.0.3",
++    "flatted": "^3.4.2",
++    "glob@^10.2.2": "^10.5.0",
++    "glob@^10.3.10": "^10.5.0",
++    "glob@^10.5.0": "^10.5.0",
++    "handlebars": "^4.7.9",
++    "ip-address": "^10.1.1",
++    "js-yaml@^3.13.1": "^3.14.2",
++    "js-yaml@^4.1.0": "^4.1.1",
++    "markdown-it": "^14.1.1",
++    "minimatch@^3.0.4": "^3.1.5",
++    "minimatch@^3.1.2": "^3.1.5",
++    "minimatch@^5.0.1": "^5.1.8",
++    "minimatch@^9.0.4": "^9.0.9",
++    "minimatch@^9.0.5": "^9.0.9",
++    "picomatch@^2.0.4": "^2.3.2",
++    "picomatch@^2.3.1": "^2.3.2",
++    "picomatch@^4.0.0": "^4.0.4",
++    "picomatch@^4.0.2": "^4.0.4",
++    "socks": "^2.8.8",
++    "tar": "^7.5.11",
++    "tmp": "^0.2.5",
++    "underscore": "^1.13.8",
++    "yaml@^2.6.1": "^2.8.4",
++    "zod@^3.23.8": "^3.25.76",
+     "whatwg-url": "^14.0.0",
+     "request": "npm:@cypress/request@^3.0.0"
+   },
+   "engines": {
+-    "node": ">=20.0.0"
++    "node": ">=22.12.0"
+   }
+-}+}
+--- CHIAKI/original/plugins/_allfake.js
++++ CHIAKI/actualizado/plugins/_allfake.js
+@@ -1,5 +1,5 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+-import baileys from '@whiskeysockets/baileys'
++import baileys from '../lib/baileys-compat.js'
+ import fs from 'fs'
+ import axios from 'axios'
+ import moment from 'moment-timezone'
+@@ -36,15 +36,8 @@
+     return 'Buenas noches 🌃'
+   }
+ 
+-  const propietario = ['51928619211']
+-  const conn = {
+-    getName: async (jid) => {
+-      const num = jidToNumber(jid)
+-      if (!num) return 'Desconocido'
+-      if (num === propietario[0]) return 'Dueño del Bot'
+-      return 'Usuario'
+-    }
+-  }
++  const propietario = (global.owner || []).map(entry => Array.isArray(entry) ? entry[0] : entry)
++  const conn = this
+ 
+   const fecha = moment.tz('America/Lima').format('DD/MM/YYYY')
+   const tiempo = moment.tz('America/Lima').format('HH:mm:ss')
+--- CHIAKI/original/plugins/_antidelete.js
++++ CHIAKI/actualizado/plugins/_antidelete.js
+@@ -1,5 +1,5 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+-import { WAMessageStubType } from "@whiskeysockets/baileys"
++import { WAMessageStubType } from '../lib/baileys-compat.js'
+ 
+ const msgCache = new Map()
+ 
+--- CHIAKI/original/plugins/_antilink.js
++++ CHIAKI/actualizado/plugins/_antilink.js
+@@ -22,5 +22,5 @@
+ }}}
+ export const description = "Aplica las reglas de enlaces del grupo respetando los permisos de administración."
+ export const tags = ["tools"]
+-export const creator = 'xrljosedv'
+-export const version = '18.0.0'
++
++
+--- CHIAKI/original/plugins/_infomessage.js
++++ CHIAKI/actualizado/plugins/_infomessage.js
+@@ -1,5 +1,5 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+-import { WAMessageStubType } from '@whiskeysockets/baileys'
++import { WAMessageStubType } from '../lib/baileys-compat.js'
+ import chalk from 'chalk'
+ import fs from 'fs'
+ import path from 'path'
+--- CHIAKI/original/plugins/_userPrem.js
++++ CHIAKI/actualizado/plugins/_userPrem.js
+@@ -13,5 +13,5 @@
+ }}}}
+ export const description = "Comprueba el vencimiento del acceso premium."
+ export const tags = ["tools"]
+-export const creator = 'xrljosedv'
+-export const version = '18.0.0'
++
++
+--- CHIAKI/original/plugins/_welcome.js
++++ CHIAKI/actualizado/plugins/_welcome.js
+@@ -1,4 +1,4 @@
+-import { WAMessageStubType } from '@whiskeysockets/baileys'
++import { WAMessageStubType } from '../lib/baileys-compat.js'
+ import { processParticipants, welcomeContent } from '../lib/chiaki-welcome.js'
+ 
+ export async function generarBienvenida(options) {
+--- CHIAKI/original/plugins/ai-chatgpt.js
++++ CHIAKI/actualizado/plugins/ai-chatgpt.js
+@@ -31,7 +31,7 @@
+ } else throw new Error("No se pudo crear la imagen")
+ break
+ }
+-case 'ia': case 'chatgpt': {
++case 'ia': case 'chatgpt': case 'openai': {
+ if (!text) return conn.reply(m.chat, `❀ Ingrese una petición.`, m)
+ await m.react('🕒')
+ const basePrompt = `Tu nombre es ${botname} y parece haber sido creada por ${etiqueta}. Tu versión actual es ${vs}, Tú usas el idioma Español. Llamarás a las personas por su nombre ${username}, te gusta ser divertida, y te encanta aprender. Lo más importante es que debes ser amigable con la persona con la que estás hablando. ${username}`
+--- CHIAKI/original/plugins/ai.js
++++ CHIAKI/actualizado/plugins/ai.js
+@@ -1003,7 +1003,7 @@
+   if (size > maxBytes) throw new Error(`El archivo supera el límite de ${Math.round(maxBytes / 1024 / 1024)} MB. Divídelo o ajusta AI_MAX_MEDIA_MB.`)
+   let buffer
+   if (node.mediaKey && (node.directPath || node.url)) {
+-    const { downloadContentFromMessage } = await dependency('@whiskeysockets/baileys')
++    const { downloadContentFromMessage } = await dependency('../lib/baileys-compat.js')
+     let stream
+     try { stream = await downloadContentFromMessage(node, type === 'sticker' ? 'image' : type) } catch {
+       if (source.key && typeof conn.updateMediaMessage === 'function') {
+--- CHIAKI/original/plugins/downloads-apkpure.js
++++ CHIAKI/actualizado/plugins/downloads-apkpure.js
+@@ -7,7 +7,7 @@
+ import { gotScraping } from 'got-scraping'
+ import axios from 'axios'
+ import * as cheerio from 'cheerio'
+-import { Impit } from 'impit'
++
+ 
+ const BASE = 'https://apkpure.com'
+ const DOWNLOAD_DOMAIN = 'https://d.apkpure.com'
+@@ -41,7 +41,11 @@
+   'usb','td','vs','3d','2d','io','ai'
+ ])
+ 
+-const impit = new Impit({ browser: 'chrome', timeout: 60000 })
++let impitInstance
++const impit = { async fetch(...args) {
++  if(!impitInstance) { const {Impit}=await import('impit'); impitInstance = new Impit({browser:'chrome',timeout:60000}) }
++  return impitInstance.fetch(...args)
++} }
+ 
+ const USER_AGENTS = [
+   UA,
+--- CHIAKI/original/plugins/downloads-image.js
++++ CHIAKI/actualizado/plugins/downloads-image.js
+@@ -1,6 +1,6 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import fetch from 'node-fetch'
+-import { generateWAMessageContent, generateWAMessageFromContent, proto } from '@whiskeysockets/baileys'
++import { generateWAMessageContent, generateWAMessageFromContent, proto } from '../lib/baileys-compat.js'
+ 
+ let handler = async (m, { conn, text, usedPrefix, command }) => {
+ if (!text) return m.reply(`❀ Por favor, ingrese un texto para buscar una imagen.`)
+@@ -26,18 +26,18 @@
+ let image = await createImage(url)
+ 
+ cards.push({
+-body: proto.Message.InteractiveMessage.Body.fromObject({
++body: proto.Message.InteractiveMessage.Body.create({
+ text: `❀ Imagen encontrada para: ${text}`
+ }),
+-footer: proto.Message.InteractiveMessage.Footer.fromObject({
++footer: proto.Message.InteractiveMessage.Footer.create({
+ text: ''
+ }),
+-header: proto.Message.InteractiveMessage.Header.fromObject({
++header: proto.Message.InteractiveMessage.Header.create({
+ title: '',
+ hasMediaAttachment: true,
+ imageMessage: image
+ }),
+-nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
++nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+ buttons: [
+ {
+ name: 'cta_copy',
+@@ -59,7 +59,7 @@
+ deviceListMetadata: {},
+ deviceListMetadataVersion: 2
+ },
+-interactiveMessage: proto.Message.InteractiveMessage.fromObject({
++interactiveMessage: proto.Message.InteractiveMessage.create({
+ body: proto.Message.InteractiveMessage.Body.create({
+ text: `*❀ Resultados de búsqueda para:* ${text}`
+ }),
+@@ -69,7 +69,7 @@
+ header: proto.Message.InteractiveMessage.Header.create({
+ hasMediaAttachment: false
+ }),
+-carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({
++carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.create({
+ cards
+ })
+ })
+--- CHIAKI/original/plugins/downloads-pinterest.js
++++ CHIAKI/actualizado/plugins/downloads-pinterest.js
+@@ -1,6 +1,6 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import axios from 'axios'
+-import baileys from '@whiskeysockets/baileys'
++import baileys from '../lib/baileys-compat.js'
+ import * as cheerio from 'cheerio'
+ 
+ let handler = async (m, { conn, text, args, usedPrefix }) => {
+--- CHIAKI/original/plugins/downloads-plays.js
++++ CHIAKI/actualizado/plugins/downloads-plays.js
+@@ -1,7 +1,7 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import yts from "yt-search"
+ import { searchSpotify, fmtDuration } from "../scrapers/spotify/spotify.js"
+-import { generateWAMessageContent, generateWAMessageFromContent } from "@whiskeysockets/baileys"
++import { generateWAMessageContent, generateWAMessageFromContent } from '../lib/baileys-compat.js'
+ 
+ const cleanText = text => String(text ?? "").replace(/[\u200B-\u200D\uFEFF]/g, "").trim()
+ 
+--- CHIAKI/original/plugins/economy-slot.js
++++ CHIAKI/actualizado/plugins/economy-slot.js
+@@ -1,5 +1,5 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+-import { delay } from "@whiskeysockets/baileys"
++import { delay } from '../lib/baileys-compat.js'
+ 
+ const handler = async (m, { args, usedPrefix, command, conn }) => {
+ if (!db.data.chats[m.chat]?.economy && m.isGroup) return global.dfail('economy', m, conn, usedPrefix)
+--- CHIAKI/original/plugins/fun-afktime.js
++++ CHIAKI/actualizado/plugins/fun-afktime.js
+@@ -43,5 +43,5 @@
+ 
+ export const description = "Informa sobre ausencias, menciones y el regreso de los usuarios."
+ export const tags = ["fun"]
+-export const creator = 'xrljosedv'
+-export const version = '18.0.0'
++
++
+--- CHIAKI/original/plugins/fun-chiste.js
++++ CHIAKI/actualizado/plugins/fun-chiste.js
+@@ -1,5 +1,5 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+-const { generateWAMessageFromContent, proto } = (await import('@whiskeysockets/baileys')).default
++const { generateWAMessageFromContent, proto } = (await import('../lib/baileys-compat.js')).default
+ 
+ var handler = async (m, { conn, text}) => {
+ 
+--- CHIAKI/original/plugins/fun-consejo.js
++++ CHIAKI/actualizado/plugins/fun-consejo.js
+@@ -1,5 +1,5 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+-const { generateWAMessageFromContent, proto } = (await import('@whiskeysockets/baileys')).default
++const { generateWAMessageFromContent, proto } = (await import('../lib/baileys-compat.js')).default
+ 
+ var handler = async (m, { conn, text}) => {
+ 
+--- CHIAKI/original/plugins/fun-factos.js
++++ CHIAKI/actualizado/plugins/fun-factos.js
+@@ -1,5 +1,5 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+-const { generateWAMessageFromContent, proto } = (await import('@whiskeysockets/baileys')).default
++const { generateWAMessageFromContent, proto } = (await import('../lib/baileys-compat.js')).default
+ 
+ var handler = async (m, { conn, text}) => {
+ 
+--- CHIAKI/original/plugins/fun-frases.js
++++ CHIAKI/actualizado/plugins/fun-frases.js
+@@ -1,5 +1,5 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+-const { generateWAMessageFromContent, proto } = (await import('@whiskeysockets/baileys')).default
++const { generateWAMessageFromContent, proto } = (await import('../lib/baileys-compat.js')).default
+ 
+ var handler = async (m, { conn, text}) => {
+ 
+--- CHIAKI/original/plugins/fun-piropo.js
++++ CHIAKI/actualizado/plugins/fun-piropo.js
+@@ -1,5 +1,5 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+-const { generateWAMessageFromContent, proto } = (await import('@whiskeysockets/baileys')).default
++const { generateWAMessageFromContent, proto } = (await import('../lib/baileys-compat.js')).default
+ 
+ var handler = async (m, { conn, text}) => {
+ 
+--- CHIAKI/original/plugins/games-_ttt.js
++++ CHIAKI/actualizado/plugins/games-_ttt.js
+@@ -95,5 +95,5 @@
+ }
+ export const description = "Procesa los turnos de tres en raya."
+ export const tags = ["games"]
+-export const creator = 'xrljosedv'
+-export const version = '18.0.0'
++
++
+--- CHIAKI/original/plugins/group-hidetag.js
++++ CHIAKI/actualizado/plugins/group-hidetag.js
+@@ -1,5 +1,5 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+-import { generateWAMessageFromContent } from '@whiskeysockets/baileys'
++import { generateWAMessageFromContent } from '../lib/baileys-compat.js'
+ import * as fs from 'fs'
+ 
+ var handler = async (m, { conn, text, participants, isOwner, isAdmin }) => {
+--- CHIAKI/original/plugins/group-inactivos.js
++++ CHIAKI/actualizado/plugins/group-inactivos.js
+@@ -1,5 +1,5 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+-import { areJidsSameUser } from '@whiskeysockets/baileys'
++import { areJidsSameUser } from '../lib/baileys-compat.js'
+ 
+ var handler = async (m, { conn, text, participants, args, command , usedPrefix}) => {
+ try {
+--- CHIAKI/original/plugins/group-setgp.js
++++ CHIAKI/actualizado/plugins/group-setgp.js
+@@ -1,5 +1,5 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+-import { makeWASocket } from '@whiskeysockets/baileys'
++import { makeWASocket } from '../lib/baileys-compat.js'
+ 
+ const handler = async (m, { conn, args, text, command, usedPrefix }) => {
+ try {
+--- CHIAKI/original/plugins/main-allmenu.js
++++ CHIAKI/actualizado/plugins/main-allmenu.js
+@@ -2,7 +2,7 @@
+ import { promises } from 'fs'
+ import { join } from 'path'
+ import { xpRange } from '../lib/levelling.js'
+-import pkg from '@whiskeysockets/baileys'
++import pkg from '../lib/baileys-compat.js'
+ 
+ const { generateWAMessageFromContent, prepareWAMessageMedia } = pkg
+ 
+--- CHIAKI/original/plugins/main-menu.js
++++ CHIAKI/actualizado/plugins/main-menu.js
+@@ -1,6 +1,6 @@
+ import fs, { promises as fsp } from 'fs'
+ import { join } from 'path'
+-import { generateWAMessageFromContent, prepareWAMessageMedia } from '@whiskeysockets/baileys'
++import { generateWAMessageFromContent, prepareWAMessageMedia } from '../lib/baileys-compat.js'
+ import { xpRange } from '../lib/levelling.js'
+ 
+ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
+--- CHIAKI/original/plugins/owner-addcoins.js
++++ CHIAKI/actualizado/plugins/owner-addcoins.js
+@@ -1,6 +1,6 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import db from '../lib/database.js';
+-import MessageType from '@whiskeysockets/baileys';
++import MessageType from '../lib/baileys-compat.js';
+ 
+ let impts = 0;
+ 
+--- CHIAKI/original/plugins/owner-addremove.js
++++ CHIAKI/actualizado/plugins/owner-addremove.js
+@@ -1,6 +1,6 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import db from '../lib/database.js'
+-import MessageType from '@whiskeysockets/baileys'
++import MessageType from '../lib/baileys-compat.js'
+ 
+ const handler = async (m, { conn, text, args, command, isROwner }) => {
+ if (!isROwner) return
+--- CHIAKI/original/plugins/owner-anadirxp.js
++++ CHIAKI/actualizado/plugins/owner-anadirxp.js
+@@ -1,6 +1,6 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import db from '../lib/database.js';
+-import MessageType from '@whiskeysockets/baileys';
++import MessageType from '../lib/baileys-compat.js';
+ 
+ let pajak = 0;
+ 
+--- CHIAKI/original/plugins/owner-estados.js
++++ CHIAKI/actualizado/plugins/owner-estados.js
+@@ -67,7 +67,7 @@
+   if (!entry.raw || !entry.type) throw new Error('Solo llegó un aviso sin el contenido del estado. No es posible recuperarlo desde esta notificación.')
+   let download = downloader
+   if (!download) {
+-    const mod = await import('@whiskeysockets/baileys')
++    const mod = await import('../lib/baileys-compat.js')
+     download = mod.downloadMediaMessage || mod.default?.downloadMediaMessage
+   }
+   if (typeof download !== 'function') throw new Error('La librería de WhatsApp no ofrece descarga de medios.')
+--- CHIAKI/original/plugins/owner-quitarcoin.js
++++ CHIAKI/actualizado/plugins/owner-quitarcoin.js
+@@ -1,6 +1,6 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import db from '../lib/database.js';
+-import MessageType from '@whiskeysockets/baileys';
++import MessageType from '../lib/baileys-compat.js';
+ 
+ let impts = 0;
+ 
+--- CHIAKI/original/plugins/owner-quitarxp.js
++++ CHIAKI/actualizado/plugins/owner-quitarxp.js
+@@ -1,6 +1,6 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import db from '../lib/database.js';
+-import MessageType from '@whiskeysockets/baileys';
++import MessageType from '../lib/baileys-compat.js';
+ 
+ let handler = async (m, { conn, text }) => {
+     let who;
+--- CHIAKI/original/plugins/owner-savefiles.js
++++ CHIAKI/actualizado/plugins/owner-savefiles.js
+@@ -6,7 +6,7 @@
+ import crypto from 'crypto'
+ import { fileURLToPath } from 'url'
+ import { execFileSync } from 'child_process'
+-import { generateWAMessageFromContent, getDevice } from '@whiskeysockets/baileys'
++import { generateWAMessageFromContent, getDevice } from '../lib/baileys-compat.js'
+ 
+ const __filename = fileURLToPath(import.meta.url)
+ const __dirname = path.dirname(__filename)
+--- CHIAKI/original/plugins/search-appstore.js
++++ CHIAKI/actualizado/plugins/search-appstore.js
+@@ -1,6 +1,6 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import axios from 'axios';
+-const { proto, generateWAMessageFromContent, prepareWAMessageMedia, generateWAMessageContent, getDevice } = (await import("@whiskeysockets/baileys")).default;
++const { proto, generateWAMessageFromContent, prepareWAMessageMedia, generateWAMessageContent, getDevice } = (await import('../lib/baileys-compat.js')).default;
+ 
+ let handler = async (message, { conn, text, usedPrefix, command }) => {
+     if (!text) return conn.reply(message.chat, '🔍 *¿Qué aplicación quieres buscar en la App Store?*', message);
+@@ -41,16 +41,16 @@
+             }
+ 
+             results.push({
+-                body: proto.Message.InteractiveMessage.Body.fromObject({ 
++                body: proto.Message.InteractiveMessage.Body.create({ 
+                     text: `📱 *${result.title}*\n\n👨‍💻 Desarrollador » *${developer}*\n📂 Categoría » *${genre}*\n⭐ Rating » *${score} ★*\n📊 Reseñas » *${reviews}*\n🔞 Clasificación » *${rating}*\n💾 Tamaño » *${size}*\n💰 Precio » *${price}*\n📅 Lanzamiento » *${released}*\n🔄 Versión » *${version}*\n🔗 ${result.url}`
+                 }),
+-                footer: proto.Message.InteractiveMessage.Footer.fromObject({ text: '🍎 App Store - Resultados de búsqueda' }),
+-                header: proto.Message.InteractiveMessage.Header.fromObject({
++                footer: proto.Message.InteractiveMessage.Footer.create({ text: '🍎 App Store - Resultados de búsqueda' }),
++                header: proto.Message.InteractiveMessage.Header.create({
+                     title: result.title.length > 60 ? result.title.substring(0, 57) + '...' : result.title,
+                     hasMediaAttachment: !!headerMedia,
+                     ...(headerMedia && { imageMessage: headerMedia })
+                 }),
+-                nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({ buttons: [] })
++                nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({ buttons: [] })
+             });
+         }
+ 
+@@ -63,13 +63,13 @@
+                         deviceListMetadata: {},
+                         deviceListMetadataVersion: 2
+                     },
+-                    interactiveMessage: proto.Message.InteractiveMessage.fromObject({
++                    interactiveMessage: proto.Message.InteractiveMessage.create({
+                         body: proto.Message.InteractiveMessage.Body.create({ 
+                             text: `み❑     A P P  S T O R E  S E A R C H ✿\n\n> ₊·や✿ね Búsqueda » *${text}*\n> ₊·や✿ね Total resultados » *${totalResults.toLocaleString()}*\n> ₊·や✿ね Resultados mostrados » *${selectedResults.length}*`
+                         }),
+                         footer: proto.Message.InteractiveMessage.Footer.create({ text: dev }),
+                         header: proto.Message.InteractiveMessage.Header.create({ hasMediaAttachment: false }),
+-                        carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({ cards: [...results] })
++                        carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.create({ cards: [...results] })
+                     })
+                 }
+             }
+--- CHIAKI/original/plugins/search-get-html.js
++++ CHIAKI/actualizado/plugins/search-get-html.js
+@@ -1,6 +1,6 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import axios from 'axios'
+-import pkg from '@whiskeysockets/baileys'
++import pkg from '../lib/baileys-compat.js'
+ 
+ const { generateWAMessageFromContent, proto } = pkg
+ 
+--- CHIAKI/original/plugins/search-github.js
++++ CHIAKI/actualizado/plugins/search-github.js
+@@ -1,6 +1,6 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import fetch from 'node-fetch'
+-const { generateWAMessageContent, generateWAMessageFromContent, proto } = (await import('@whiskeysockets/baileys')).default
++const { generateWAMessageContent, generateWAMessageFromContent, proto } = (await import('../lib/baileys-compat.js')).default
+ 
+ const handler = async (m, { conn, usedPrefix, text }) => {
+     if (!text) return conn.reply(m.chat, `❀ Por favor, proporciona un término para buscar en GitHub.\n> *Ejemplo:* ${usedPrefix}githubsearch bot whatsapp`, m)
+@@ -40,18 +40,18 @@
+             cardTxt += `> *₊·や✿ね Descripción* » ${desc}`
+             
+             push.push({  
+-                body: proto.Message.InteractiveMessage.Body.fromObject({  
++                body: proto.Message.InteractiveMessage.Body.create({  
+                     text: cardTxt  
+                 }),  
+-                footer: proto.Message.InteractiveMessage.Footer.fromObject({  
++                footer: proto.Message.InteractiveMessage.Footer.create({  
+                     text: '✿ GitHub Search'   
+                 }),  
+-                header: proto.Message.InteractiveMessage.Header.fromObject({  
++                header: proto.Message.InteractiveMessage.Header.create({  
+                     title: '',  
+                     hasMediaAttachment: true,  
+                     imageMessage: image   
+                 }),  
+-                nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({  
++                nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({  
+                     buttons: [
+                         {
+                             "name": "cta_copy",
+@@ -72,11 +72,11 @@
+                         deviceListMetadata: {},
+                         deviceListMetadataVersion: 2
+                     },
+-                    interactiveMessage: proto.Message.InteractiveMessage.fromObject({
++                    interactiveMessage: proto.Message.InteractiveMessage.create({
+                         body: proto.Message.InteractiveMessage.Body.create({text: mainTxt}),
+                         footer: proto.Message.InteractiveMessage.Footer.create({text: '_\`G\` \`I\` \`T\` \`H\` \`U\` \`B\` \`-\` \`S\` \`E\` \`A\` \`R\` \`C\` \`H\`_'}),
+                         header: proto.Message.InteractiveMessage.Header.create({hasMediaAttachment: false}),
+-                        carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({cards: [...push]})
++                        carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.create({cards: [...push]})
+                     })
+                 }
+             }
+--- CHIAKI/original/plugins/search-patreon.js
++++ CHIAKI/actualizado/plugins/search-patreon.js
+@@ -1,6 +1,6 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import axios from 'axios';
+-const { proto, generateWAMessageFromContent, prepareWAMessageMedia, generateWAMessageContent, getDevice } = (await import("@whiskeysockets/baileys")).default;
++const { proto, generateWAMessageFromContent, prepareWAMessageMedia, generateWAMessageContent, getDevice } = (await import('../lib/baileys-compat.js')).default;
+ 
+ let handler = async (message, { conn, text, usedPrefix, command }) => {
+     if (!text) return conn.reply(message.chat, '🔍 *¿Qué quieres buscar en Patreon?*', message);
+@@ -28,16 +28,16 @@
+             let creationText = result.creation !== '-' ? `📝 ${result.creation}` : '📝 Sin descripción';
+             
+             results.push({
+-                body: proto.Message.InteractiveMessage.Body.fromObject({ 
++                body: proto.Message.InteractiveMessage.Body.create({ 
+                     text: `👤 *${result.author}*\n\n📌 ${creationText}\n📊 Posts » *${result.posts.toLocaleString()}*\n💎 Patrons » *${result.patron_count.toLocaleString()}*\n🔗 ${result.url}`
+                 }),
+-                footer: proto.Message.InteractiveMessage.Footer.fromObject({ text: '🎨 Patreon - Resultados de búsqueda' }),
+-                header: proto.Message.InteractiveMessage.Header.fromObject({
++                footer: proto.Message.InteractiveMessage.Footer.create({ text: '🎨 Patreon - Resultados de búsqueda' }),
++                header: proto.Message.InteractiveMessage.Header.create({
+                     title: result.name.length > 60 ? result.name.substring(0, 57) + '...' : result.name,
+                     hasMediaAttachment: true,
+                     imageMessage: await createImageMessage(result.image)
+                 }),
+-                nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({ buttons: [] })
++                nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({ buttons: [] })
+             });
+         }
+ 
+@@ -53,13 +53,13 @@
+                         deviceListMetadata: {},
+                         deviceListMetadataVersion: 2
+                     },
+-                    interactiveMessage: proto.Message.InteractiveMessage.fromObject({
++                    interactiveMessage: proto.Message.InteractiveMessage.create({
+                         body: proto.Message.InteractiveMessage.Body.create({ 
+                             text: `み❑     P A T R E O N  S E A R C H ✿\n\n> ₊·や✿ね Búsqueda » *${text}*\n> ₊·や✿ね Total resultados » *${totalResults.toLocaleString()}*\n> ₊·や✿ね Página actual » *${currentPage}/${totalPages}*\n> ₊·や✿ね Resultados mostrados » *${selectedResults.length}*\n> ₊·や✿ね Próxima página » *${nextPageAvailable ? '✅ Disponible' : '❌ No disponible'}*`
+                         }),
+                         footer: proto.Message.InteractiveMessage.Footer.create({ text: dev }),
+                         header: proto.Message.InteractiveMessage.Header.create({ hasMediaAttachment: false }),
+-                        carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({ cards: [...results] })
++                        carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.create({ cards: [...results] })
+                     })
+                 }
+             }
+--- CHIAKI/original/plugins/search-tt.js
++++ CHIAKI/actualizado/plugins/search-tt.js
+@@ -1,6 +1,6 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import axios from 'axios';
+-const { proto, generateWAMessageFromContent, prepareWAMessageMedia, generateWAMessageContent, getDevice } = (await import("@whiskeysockets/baileys")).default;
++const { proto, generateWAMessageFromContent, prepareWAMessageMedia, generateWAMessageContent, getDevice } = (await import('../lib/baileys-compat.js')).default;
+ 
+ let handler = async (message, { conn, text, usedPrefix, command }) => {
+     if (!text) return conn.reply(message.chat, '☁️ *¿Qué quieres buscar en TikTok?*', message);
+@@ -52,16 +52,16 @@
+             const plays = result.stats?.views?.toLocaleString() || '0';
+ 
+             results.push({
+-                body: proto.Message.InteractiveMessage.Body.fromObject({ text: null }),
+-                footer: proto.Message.InteractiveMessage.Footer.fromObject({
++                body: proto.Message.InteractiveMessage.Body.create({ text: null }),
++                footer: proto.Message.InteractiveMessage.Footer.create({
+                     text: `👤 ${result.author?.nickname || 'Unknown'} | ❤️ ${likes} | 👀 ${plays}`
+                 }),
+-                header: proto.Message.InteractiveMessage.Header.fromObject({
++                header: proto.Message.InteractiveMessage.Header.create({
+                     title: result.title || 'TikTok Video',
+                     hasMediaAttachment: true,
+                     videoMessage: await createVideoMessage(videoUrl)
+                 }),
+-                nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({ buttons: [] })
++                nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({ buttons: [] })
+             });
+         }
+ 
+@@ -77,7 +77,7 @@
+                         deviceListMetadata: {},
+                         deviceListMetadataVersion: 2
+                     },
+-                    interactiveMessage: proto.Message.InteractiveMessage.fromObject({
++                    interactiveMessage: proto.Message.InteractiveMessage.create({
+                         body: proto.Message.InteractiveMessage.Body.create({
+                             text: `☁️ Resultados para: *${text}*`
+                         }),
+@@ -85,7 +85,7 @@
+                             text: `🔎 TikTok Search | ${results.length} videos encontrados`
+                         }),
+                         header: proto.Message.InteractiveMessage.Header.create({ hasMediaAttachment: false }),
+-                        carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({ cards: [...results] })
++                        carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.create({ cards: [...results] })
+                     })
+                 }
+             }
+--- CHIAKI/original/plugins/search-tumblr.js
++++ CHIAKI/actualizado/plugins/search-tumblr.js
+@@ -1,6 +1,6 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import axios from 'axios';
+-const { proto, generateWAMessageFromContent, prepareWAMessageMedia, generateWAMessageContent, getDevice } = (await import("@whiskeysockets/baileys")).default;
++const { proto, generateWAMessageFromContent, prepareWAMessageMedia, generateWAMessageContent, getDevice } = (await import('../lib/baileys-compat.js')).default;
+ 
+ let handler = async (message, { conn, text, usedPrefix, command }) => {
+     if (!text) return conn.reply(message.chat, '🔍 *¿Qué tag quieres buscar en Tumblr?*', message);
+@@ -46,16 +46,16 @@
+             }
+ 
+             results.push({
+-                body: proto.Message.InteractiveMessage.Body.fromObject({ 
++                body: proto.Message.InteractiveMessage.Body.create({ 
+                     text: `👤 *${result.author}*\n\n${desc}\n❤️ Likes » *${result.likes.toLocaleString()}*\n📅 Fecha » *${date}*\n🖼️ Media » *${mediaCount} archivo(s)*\n🔗 ${result.url}`
+                 }),
+-                footer: proto.Message.InteractiveMessage.Footer.fromObject({ text: '🎨 Tumblr - Resultados de búsqueda' }),
+-                header: proto.Message.InteractiveMessage.Header.fromObject({
++                footer: proto.Message.InteractiveMessage.Footer.create({ text: '🎨 Tumblr - Resultados de búsqueda' }),
++                header: proto.Message.InteractiveMessage.Header.create({
+                     title: result.title ? (result.title.length > 60 ? result.title.substring(0, 57) + '...' : result.title) : 'Sin título',
+                     hasMediaAttachment: !!headerMedia,
+                     ...(headerMedia && { imageMessage: headerMedia })
+                 }),
+-                nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({ buttons: [] })
++                nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({ buttons: [] })
+             });
+         }
+ 
+@@ -71,13 +71,13 @@
+                         deviceListMetadata: {},
+                         deviceListMetadataVersion: 2
+                     },
+-                    interactiveMessage: proto.Message.InteractiveMessage.fromObject({
++                    interactiveMessage: proto.Message.InteractiveMessage.create({
+                         body: proto.Message.InteractiveMessage.Body.create({ 
+                             text: `み❑     T U M B L R  S E A R C H ✿\n\n> ₊·や✿ね Búsqueda » *${text}*\n> ₊·や✿ね Total resultados » *${totalResults.toLocaleString()}*\n> ₊·や✿ね Página actual » *${currentPage}/${totalPages}*\n> ₊·や✿ね Resultados mostrados » *${selectedResults.length}*\n> ₊·や✿ね Próxima página » *${nextPageAvailable ? '✅ Disponible' : '❌ No disponible'}*`
+                         }),
+                         footer: proto.Message.InteractiveMessage.Footer.create({ text: dev }),
+                         header: proto.Message.InteractiveMessage.Header.create({ hasMediaAttachment: false }),
+-                        carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({ cards: [...results] })
++                        carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.create({ cards: [...results] })
+                     })
+                 }
+             }
+--- CHIAKI/original/plugins/search-vimeo.js
++++ CHIAKI/actualizado/plugins/search-vimeo.js
+@@ -1,6 +1,6 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import axios from 'axios';
+-const { proto, generateWAMessageFromContent, prepareWAMessageMedia, generateWAMessageContent, getDevice } = (await import("@whiskeysockets/baileys")).default;
++const { proto, generateWAMessageFromContent, prepareWAMessageMedia, generateWAMessageContent, getDevice } = (await import('../lib/baileys-compat.js')).default;
+ 
+ let handler = async (message, { conn, text, usedPrefix, command }) => {
+     if (!text) return conn.reply(message.chat, '🎬 *¿Qué quieres buscar en Vimeo?*', message);
+@@ -32,16 +32,16 @@
+             let statsText = `${result.stats.plays.toLocaleString()} vistas  •  ${result.stats.likes} likes`;
+             
+             results.push({
+-                body: proto.Message.InteractiveMessage.Body.fromObject({ 
++                body: proto.Message.InteractiveMessage.Body.create({ 
+                     text: `🎬 *${result.name}*\n\n⏱️ Duración » ${durationFormatted}\n📅 Publicado » ${result.published}\n👁️ ${statsText}\n👤 Autor » ${result.author.name}`
+                 }),
+-                footer: proto.Message.InteractiveMessage.Footer.fromObject({ text: '🎥 Vimeo - Resultados de búsqueda' }),
+-                header: proto.Message.InteractiveMessage.Header.fromObject({
++                footer: proto.Message.InteractiveMessage.Footer.create({ text: '🎥 Vimeo - Resultados de búsqueda' }),
++                header: proto.Message.InteractiveMessage.Header.create({
+                     title: result.name.length > 60 ? result.name.substring(0, 57) + '...' : result.name,
+                     hasMediaAttachment: true,
+                     videoMessage: await createVideoMessage(result.link)
+                 }),
+-                nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({ buttons: [] })
++                nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({ buttons: [] })
+             });
+         }
+ 
+@@ -57,13 +57,13 @@
+                         deviceListMetadata: {},
+                         deviceListMetadataVersion: 2
+                     },
+-                    interactiveMessage: proto.Message.InteractiveMessage.fromObject({
++                    interactiveMessage: proto.Message.InteractiveMessage.create({
+                         body: proto.Message.InteractiveMessage.Body.create({ 
+                             text: `み❑     V I M E O  S E A R C H ✿\n\n> ₊·や✿ね Búsqueda » *${text}*\n> ₊·や✿ね Total videos » *${totalVideos.toLocaleString()}*\n> ₊·や✿ね Página actual » *${currentPage}/${totalPages}*\n> ₊·や✿ね Resultados mostrados » *${selectedResults.length}*\n> ₊·や✿ね Próxima página » *${nextPage ? '✅ Disponible' : '❌ No disponible'}*`
+                         }),
+                         footer: proto.Message.InteractiveMessage.Footer.create({ text: dev }),
+                         header: proto.Message.InteractiveMessage.Header.create({ hasMediaAttachment: false }),
+-                        carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({ cards: [...results] })
++                        carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.create({ cards: [...results] })
+                     })
+                 }
+             }
+--- CHIAKI/original/plugins/serbot-configuracion.js
++++ CHIAKI/actualizado/plugins/serbot-configuracion.js
+@@ -1,5 +1,5 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+-import { jidDecode } from '@whiskeysockets/baileys'
++import { jidDecode } from '../lib/baileys-compat.js'
+ import path from 'path'
+ import fs from 'fs'
+ import ws from 'ws'
+--- CHIAKI/original/plugins/serbot-vincular.js
++++ CHIAKI/actualizado/plugins/serbot-vincular.js
+@@ -2,8 +2,8 @@
+ import { reportError } from '../lib/runtime-safety.js'
+ import { attachWelcome } from '../lib/chiaki-welcome.js'
+ import { bindMessageHandler } from '../lib/message-dispatch.js'
+-import * as baileysNS from '@whiskeysockets/baileys'
+-import baileysDefault from '@whiskeysockets/baileys'
++import * as baileysNS from '../lib/baileys-compat.js'
++import baileysDefault from '../lib/baileys-compat.js'
+ 
+ const _b = (baileysDefault && typeof baileysDefault === 'object' && Object.keys(baileysDefault).length > 0)
+   ? baileysDefault
+@@ -45,6 +45,7 @@
+ }
+ 
+ let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
++  if (!global.allowSubBots) return m.reply('Los subbots requieren ALLOW_SUBBOTS=1; por defecto se comparte una única conexión principal.')
+   try {
+     const _ownerJid = global.conn?.user?.jid
+     const _ownerCfg = _ownerJid ? global.db?.data?.settings?.[_ownerJid] : null
+@@ -85,6 +86,8 @@
+ export default handler
+ 
+ export async function ChiakiNanamiJadiBot(options) {
++  if (!global.allowSubBots) return
++
+   let { pathChiakiNanamiJadiBot, m, conn, args, usedPrefix, command } = options
+ 
+   if (typeof useMultiFileAuthState !== 'function') {
+--- CHIAKI/original/plugins/stickers-sigstick.js
++++ CHIAKI/actualizado/plugins/stickers-sigstick.js
+@@ -2,7 +2,7 @@
+ import axios from 'axios'
+ import * as cheerio from 'cheerio'
+ import { randomUUID } from 'crypto'
+-import pkg from '@whiskeysockets/baileys'
++import pkg from '../lib/baileys-compat.js'
+ 
+ const { generateWAMessageFromContent, prepareWAMessageMedia, proto } = pkg
+ 
+--- CHIAKI/original/plugins/tools-inspectador.js
++++ CHIAKI/actualizado/plugins/tools-inspectador.js
+@@ -1,5 +1,5 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+-import { getUrlFromDirectPath } from "@whiskeysockets/baileys"
++import { getUrlFromDirectPath } from '../lib/baileys-compat.js'
+ import _ from "lodash"
+ import axios from 'axios'
+ 
+--- CHIAKI/original/plugins/tools-readviewonce.js
++++ CHIAKI/actualizado/plugins/tools-readviewonce.js
+@@ -1,33 +1,8 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+-let { downloadContentFromMessage } = (await import('@whiskeysockets/baileys'))
++let { downloadContentFromMessage } = (await import('../lib/baileys-compat.js'))
+ 
+-let handler = async (m, { conn, usedPrefix }) => {
+-let quoted = m.quoted
+-if (!quoted) return conn.reply(m.chat, `❀ Por favor, responde a un mensaje de una sola vez "ViewOnce" para ver su contenido.`, m)
+-try {
+-await m.react('🕒')
+-let viewOnceMessage = quoted.viewOnce ? quoted : quoted.mediaMessage?.imageMessage || quoted.mediaMessage?.videoMessage || quoted.mediaMessage?.audioMessage
+-let messageType = viewOnceMessage.mimetype || quoted.mtype
+-let stream = await downloadContentFromMessage(viewOnceMessage, messageType.split('/')[0])    
+-if (!stream) return conn.reply(m.chat, `ꕥ No se pudo descargar el contenido.`, m)  
+-let buffer = Buffer.from([])
+-for await (const chunk of stream) {
+-buffer = Buffer.concat([buffer, chunk])
+-}
+-if (messageType.includes('video')) {
+-await conn.sendMessage(m.chat, { video: buffer, caption: viewOnceMessage.caption || '', mimetype: 'video/mp4' }, { quoted: m })
+-} else if (messageType.includes('image')) {
+-await conn.sendMessage(m.chat, { image: buffer, caption: viewOnceMessage.caption || '' }, { quoted: m })
+-} else if (messageType.includes('audio')) {
+-await conn.sendMessage(m.chat, { audio: buffer, mimetype: 'audio/ogg; codecs=opus', ptt: viewOnceMessage.ptt || false }, { quoted: m })  
+-}
+-await m.react('✔️')
+-} catch (e) {
+-await m.react('✖️')
+-conn.reply(m.chat, `⚠︎ Se ha producido un problema.\n> Usa *${usedPrefix}report* para informarlo.\n\n${e.message}`, m)
+-}}
+-
+-
++let handler = async (m, {conn}) => conn.reply(m.chat,
++ 'Este contenido está protegido por visualización única. Ábrelo en WhatsApp o pide al remitente que lo reenvíe como imagen, vídeo o audio normal. No se descarga ni se reenvía automáticamente.',m)
+ 
+ handler.command = ['readviewonce', 'read', 'readvo']
+ handler.premium = true
+--- CHIAKI/original/plugins/tools-say.js
++++ CHIAKI/actualizado/plugins/tools-say.js
+@@ -1,5 +1,5 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+-import { generateWAMessageFromContent } from '@whiskeysockets/baileys'
++import { generateWAMessageFromContent } from '../lib/baileys-compat.js'
+ import * as fs from 'fs'
+ 
+ let handler = async (m, { conn, text, usedPrefix }) => {
+--- CHIAKI/original/plugins/tools-tenor.js
++++ CHIAKI/actualizado/plugins/tools-tenor.js
+@@ -1,6 +1,6 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import fetch from 'node-fetch'
+-import baileys from '@whiskeysockets/baileys'
++import baileys from '../lib/baileys-compat.js'
+ 
+ async function sendAlbumMessage(jid, medias, options = {}) {
+ if (typeof jid !== "string") { throw new TypeError(`jid must be string, received: ${jid}`) }
+--- CHIAKI/original/plugins/tools-whatmusic.js
++++ CHIAKI/actualizado/plugins/tools-whatmusic.js
+@@ -1,7 +1,7 @@
+ // Creador de esta revisión: xrljosedv | Chiaki Nanami 18.0.0
+ import acrcloud from 'acrcloud'
+ import ytsearch from 'yt-search'
+-import baileys from '@whiskeysockets/baileys'
++import baileys from '../lib/baileys-compat.js'
+ 
+ const { generateWAMessageFromContent, generateWAMessageContent, proto } = baileys
+ 
+@@ -55,8 +55,8 @@
+       const msg = generateWAMessageFromContent(m.chat, {
+         viewOnceMessage: {
+           message: {
+-            interactiveMessage: proto.Message.InteractiveMessage.fromObject({
+-              body: proto.Message.InteractiveMessage.Body.fromObject({
++            interactiveMessage: proto.Message.InteractiveMessage.create({
++              body: proto.Message.InteractiveMessage.Body.create({
+                 text: `み❑     *M Ú S I C A  E N C O N T R A D A* ✿
+ 
+ > *₊·や✿ね Título* » ${title}
+@@ -70,15 +70,15 @@
+ > *₊·や✿ね Canal* » ${video.author.name}
+ > *₊·や✿ね Enlace* » ${video.url}`
+               }),
+-              footer: proto.Message.InteractiveMessage.Footer.fromObject({
++              footer: proto.Message.InteractiveMessage.Footer.create({
+                 text: dev
+               }),
+-              header: proto.Message.InteractiveMessage.Header.fromObject({
++              header: proto.Message.InteractiveMessage.Header.create({
+                 title: '',
+                 hasMediaAttachment: true,
+                 imageMessage
+               }),
+-              nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
++              nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+                 buttons: [
+                   {
+                     name: "cta_copy",
+--- CHIAKI/original/plugins/unico6.js
++++ CHIAKI/actualizado/plugins/unico6.js
+@@ -3,7 +3,7 @@
+   prepareWAMessageMedia,
+   generateMessageID,
+   generateWAMessageFromContent
+-} from '@whiskeysockets/baileys'
++} from '../lib/baileys-compat.js'
+ 
+ const pay = () => {
+   const data = {
+--- CHIAKI/original/scripts/comprobar.js
++++ CHIAKI/actualizado/scripts/comprobar.js
+@@ -1,29 +1,34 @@
+-import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs'
+-import { resolve, dirname, relative } from 'node:path'
++import { readdirSync, readFileSync, existsSync } from 'node:fs'
++import { resolve, dirname, relative, join } from 'node:path'
+ import { fileURLToPath } from 'node:url'
++import { createRequire } from 'node:module'
+ import { spawnSync } from 'node:child_process'
+-const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
+-function walk(dir) {
+-  return readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
+-    if (['node_modules', '.git', 'Sessions', 'logs', 'tmp'].includes(entry.name)) return []
+-    const path = resolve(dir, entry.name)
+-    return entry.isDirectory() ? walk(path) : /\.(?:js|mjs|cjs)$/.test(entry.name) ? [path] : []
+-  })
++import ts from 'typescript'
++const root=resolve(dirname(fileURLToPath(import.meta.url)),'..')
++const ignored=new Set(['node_modules','.git','Sessions','logs','tmp','reports'])
++function walk(dir){return readdirSync(dir,{withFileTypes:true}).flatMap(entry=>{
++ if(ignored.has(entry.name))return []
++ const file=join(dir,entry.name)
++ return entry.isDirectory()?walk(file):/\.[cm]?js$/.test(entry.name)?[file]:[]
++})}
++let failures=0,plugins=0,localImports=0
++const files=walk(root)
++for(const file of files){
++ const source=readFileSync(file,'utf8')
++ const result=spawnSync(process.execPath,['--check',file],{encoding:'utf8'})
++ if(result.status!==0){console.error(relative(root,file),result.stderr);failures++}
++ const tree=ts.createSourceFile(file,source,ts.ScriptTarget.Latest,true)
++ const require=createRequire(file)
++ function visit(node){
++  let value
++  if((ts.isImportDeclaration(node)||ts.isExportDeclaration(node))&&node.moduleSpecifier&&ts.isStringLiteral(node.moduleSpecifier))value=node.moduleSpecifier.text
++  else if(ts.isCallExpression(node)&&node.arguments.length===1&&ts.isStringLiteral(node.arguments[0])&&(node.expression.kind===ts.SyntaxKind.ImportKeyword||ts.isIdentifier(node.expression)&&node.expression.text==='require'))value=node.arguments[0].text
++  if(value?.startsWith('.')){localImports++;try{require.resolve(value)}catch(error){console.error('Import local inexistente:',relative(root,file),value);failures++}}
++  ts.forEachChild(node,visit)
++ }
++ visit(tree)
++ if(dirname(file)===join(root,'plugins')){plugins++;if(/export\s+const\s+(?:creator\s*=\s*['"]xrljosedv['"]|version\s*=\s*['"]18\.0\.0['"])/.test(source)){console.error('Metadatos retirables restantes:',relative(root,file));failures++}}
+ }
+-let failed = 0, plugins = 0
+-const files = walk(root)
+-for (const path of files) {
+-  const source = readFileSync(path, 'utf8')
+-  const result = spawnSync(process.execPath, ['--check', path], { encoding: 'utf8' })
+-  if (result.status !== 0) { console.error(relative(root, path), result.stderr); failed++ }
+-  for (const match of source.matchAll(/(?:from\s*|import\s*\()(['"])(\.[^'"]+)\1/g)) {
+-    if (!existsSync(resolve(dirname(path), match[2]))) { console.error('Import local inexistente:', relative(root, path), match[2]); failed++ }
+-  }
+-  if (dirname(path) === resolve(root, 'plugins')) {
+-    plugins++
+-    if (/\b\w+\.version\s*=\s*['"]18\.0\.0['"]/.test(source)) { console.error('Version fija restante:', path); failed++ }
+-  }
+-}
+-console.log(`Node ${process.version}: ${files.length} archivos analizados, ${plugins} plugins, ${failed} fallos.`)
+-console.log('La comprobación no conecta con WhatsApp ni prueba servicios externos o dependencias de npm.')
+-process.exitCode = failed ? 1 : 0
++console.log(`Node ${process.version}: ${files.length} archivos JavaScript, ${plugins} plugins, ${localImports} importaciones locales, ${failures} fallos.`)
++console.log('La comprobación estática no valida conexión WhatsApp, servicios externos ni módulos nativos en otras plataformas.')
++process.exitCode=failures?1:0
+--- CHIAKI/original/settings.js
++++ CHIAKI/actualizado/settings.js
+@@ -99,4 +99,9 @@
+ watchFile(file, () => {
+ unwatchFile(file)
+ import(`${file}?update=${Date.now()}`)
+-})+})
++// Comandos exactos, no búsqueda por subcadena. Los prefijos antiguos siguen disponibles.
++global.commandMode = { noPrefix: process.env.NO_PREFIX !== '0' }
++global.commandPreferences = {}
++global.observeViewOnce = true
++global.allowSubBots = process.env.ALLOW_SUBBOTS === '1'

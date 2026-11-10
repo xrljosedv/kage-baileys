@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noEmit": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": false,
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "test/types.test.ts",
+    "test/native-types.test.ts",
+    "lib/Utils/message-builder.ts",
+    "lib/Utils/username.ts",
+    "lib/WAUSync/USyncQuery.ts",
+    "lib/WAUSync/USyncUser.ts",
+    "lib/WAUSync/Protocols/USyncUsernameProtocol.ts",
+    "lib/Socket/usync.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

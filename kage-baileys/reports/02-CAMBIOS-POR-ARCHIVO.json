@@ -1,0 +1,637 @@
+{
+  "kage": [
+    {
+      "path": "lib/Utils/consented-media.js",
+      "status": "modified",
+      "sha256_before": "29f57410e5b028dc69994072fe79484905c3c8303998ccfecad1b44014530f04",
+      "sha256_after": "8de1f8dd3dc343d98e48fcee115ae63ef90e6406195435138b2081f1a31ae9cc",
+      "bytes_after": 4315
+    },
+    {
+      "path": "lib/Utils/message-inspector.js",
+      "status": "modified",
+      "sha256_before": "54453bda89b6ed4aeb11b413e425aa077f5cd12407100050f6d688c2f9c0c4fa",
+      "sha256_after": "fd9fc45433561a67bf7726227447a936dfb7cf603089d014f6fc94d1065d5e2d",
+      "bytes_after": 9517
+    },
+    {
+      "path": "lib/Utils/view-once-compat.js",
+      "status": "modified",
+      "sha256_before": "8d296f69ab9d0a6b9badd06ba2b570308bed2ddef500e1a437c6a01e199366d9",
+      "sha256_after": "216f4487bc1ec6570c47de8690d82208c7101c3092d4bcd47366568dd053a3aa",
+      "bytes_after": 2463
+    },
+    {
+      "path": "lib/index.js",
+      "status": "modified",
+      "sha256_before": "821f3489cdb6d2125254993dc92398132df63f8e7a69885e2bd033e8128e9d93",
+      "sha256_after": "2e321e54d1eb80a062d297d6da90bcbe75f4cb9b0ac50f76f7c73294c6c5b70c",
+      "bytes_after": 5882
+    },
+    {
+      "path": "lib/index.mjs",
+      "status": "modified",
+      "sha256_before": "12d9ac807e5dc27556e22533a00eabaaf66c36e096631fee7cb718ba6613e38d",
+      "sha256_after": "bc304cfc1129acb480bad7b74fb82942ce76a5e37cb058574ced66039b7f7b23",
+      "bytes_after": 25716
+    },
+    {
+      "path": "package.json",
+      "status": "modified",
+      "sha256_before": "9d807a7ae62abe8cb83f19719e16e64561173d3b4711012585d2e99e3fc41673",
+      "sha256_after": "f78c3c4d355f86d6bcf5bc0cc4613d94bb684087ded5a4680b824c449b2e6991",
+      "bytes_after": 5837
+    },
+    {
+      "path": "scripts/generate-public-types.cjs",
+      "status": "modified",
+      "sha256_before": "338e24df9b05286916570f6876c5445e707bf3e6a78845aeeba5c0bb0d587d4c",
+      "sha256_after": "0d3ea9b5df5a1806daf7f8e07919a63ec7dfdca99f1b366d9d01a4068961ccc7",
+      "bytes_after": 3961
+    },
+    {
+      "path": "test/archive-repair.test.cjs",
+      "status": "modified",
+      "sha256_before": "e2f6885da2bd85056d0f888d2b1a3b5223c4d16038ba1e59f0cb4fa5880dba8b",
+      "sha256_after": "b20d8f61377a30ce85d23074d633ff7a6a69cb5b98a09e15bd4bc0397a3e4a2b",
+      "bytes_after": 8657
+    },
+    {
+      "path": "test/consented-media.test.cjs",
+      "status": "modified",
+      "sha256_before": "3d1df1aa47a5e4356d20eaab3441222a219b2b9f1882771e2db4596dd57e5162",
+      "sha256_after": "3197a34fa942be78bb012601a2a9d128c6cbdf2c702a1b829f8c42d66574e35d",
+      "bytes_after": 7905
+    },
+    {
+      "path": "test/installation-repair.test.cjs",
+      "status": "modified",
+      "sha256_before": "5ee88c141452bd3bde1b72d6dea2c78ff07db3e7cd73bb3f04c36c87948ea75f",
+      "sha256_after": "4ffd97b23b7f60a9bbb53d42394904825f34e6381bd77eb6e9310cd2f39dd91b",
+      "bytes_after": 2286
+    },
+    {
+      "path": "test/recepcion-reparada.test.cjs",
+      "status": "modified",
+      "sha256_before": "635e4c94e5c08e50b27ba2cb1c62cd1c31352bdcf5de4437c7356bf9c5706f04",
+      "sha256_after": "9c4709ff53e210de13126c8f550d4a1accc8acaa99aae5b5b4973a35a9a94ba0",
+      "bytes_after": 16138
+    },
+    {
+      "path": "WAProto/index.d.ts",
+      "status": "new",
+      "sha256_after": "cede07e0a6eea07279af832936a5d333b3939a7b8c32854d8cd0ea3510325eaf",
+      "bytes_after": 5025767
+    },
+    {
+      "path": "lib/Utils/interactive-compat.d.ts",
+      "status": "new",
+      "sha256_after": "f28a4bb67a587fedb58d5b46c87e85e31a6c068fbc6cbd36179bac1296497ed4",
+      "bytes_after": 533
+    },
+    {
+      "path": "lib/Utils/project-runtime.d.ts",
+      "status": "new",
+      "sha256_after": "0931d59debde9219ce581f3d95124a62063e8bd0e40623b3772a6170410d2dac",
+      "bytes_after": 1362
+    },
+    {
+      "path": "lib/Utils/project-runtime.js",
+      "status": "new",
+      "sha256_after": "d2e3e081252b28056010f6a825897f534843243d5743a313feec55626b016754",
+      "bytes_after": 7336
+    },
+    {
+      "path": "lib/index.d.ts",
+      "status": "new",
+      "sha256_after": "3956c1324e085d5447a0653a8e42241a716a2f7aeb245e8ee9afc285775cedf9",
+      "bytes_after": 21899
+    },
+    {
+      "path": "maintenance/legacy-viewonce-tests/archive-repair.test.cjs.original.txt",
+      "status": "new",
+      "sha256_after": "e2f6885da2bd85056d0f888d2b1a3b5223c4d16038ba1e59f0cb4fa5880dba8b",
+      "bytes_after": 6286
+    },
+    {
+      "path": "maintenance/legacy-viewonce-tests/consented-media.test.cjs.original.txt",
+      "status": "new",
+      "sha256_after": "3d1df1aa47a5e4356d20eaab3441222a219b2b9f1882771e2db4596dd57e5162",
+      "bytes_after": 2590
+    },
+    {
+      "path": "maintenance/legacy-viewonce-tests/recepcion-reparada.test.cjs.original.txt",
+      "status": "new",
+      "sha256_after": "635e4c94e5c08e50b27ba2cb1c62cd1c31352bdcf5de4437c7356bf9c5706f04",
+      "bytes_after": 8943
+    },
+    {
+      "path": "package-lock.json",
+      "status": "new",
+      "sha256_after": "fde30491c33c3a02bc35687be7b2537f456a89b5344aadbd2eccbeddcb93b19d",
+      "bytes_after": 148326
+    },
+    {
+      "path": "scripts/start-bot.cjs",
+      "status": "new",
+      "sha256_after": "65e317d565e681165ea2b6a8cf3c79fbfc3cbb913a303893795abafb77e46532",
+      "bytes_after": 558
+    },
+    {
+      "path": "test/project-merge.test.cjs",
+      "status": "new",
+      "sha256_after": "c61a83f5f45426bcf02f5bae1b1d25a31e9c7473ddbe7a2af342f4711fe98008",
+      "bytes_after": 6995
+    },
+    {
+      "path": "test/types.test.ts",
+      "status": "new",
+      "sha256_after": "657455d5e0d9f62935c19c644b6832bfba2f3f16393973ffb5f4b4fdbc948ff4",
+      "bytes_after": 387
+    }
+  ],
+  "chiaki": [
+    {
+      "path": ".env.example",
+      "status": "modified",
+      "sha256_before": "b714fefc2d52001375ce65a54ad0334f235ef599cafd40168e490b59249f0732",
+      "sha256_after": "8af63ae91b90a54af4d7a7cf84158c0279e7ad09da03bd157c00e23e94c41d54",
+      "bytes_after": 494
+    },
+    {
+      "path": "handler.js",
+      "status": "modified",
+      "sha256_before": "806c2a63246d99b21e37b5690bde75d8f9abb307d017efe79869e7d57cb92111",
+      "sha256_after": "f092cbc17a4724d7b43285fcd295c61b0e964dbc9b1cd07724927e846e604a18",
+      "bytes_after": 61438
+    },
+    {
+      "path": "index.js",
+      "status": "modified",
+      "sha256_before": "81173393de54997d4afa93ec738bdca6f8ecea53dd582a3666df875e250d0e3c",
+      "sha256_after": "034b4762e8fe4b902638d7037b7706f418fff9b2c7095af6e1ae7eb049cd94ad",
+      "bytes_after": 28466
+    },
+    {
+      "path": "lib/cleanup.js",
+      "status": "modified",
+      "sha256_before": "2ee667fc622077e93008ec7ccd9bd5932bc9163582ec73056d0d1c2e4f3b1c1d",
+      "sha256_after": "0d82153330460c566edad7800960f417b7dfef13a0e3b6e73739d52ff4e3008b",
+      "bytes_after": 1561
+    },
+    {
+      "path": "lib/haidar-builder.js",
+      "status": "modified",
+      "sha256_before": "a67e23ae6c4b0d9a428fb2312df7b29ab50a9bf60c29626b215565313929cb19",
+      "sha256_after": "62254b8b41220aa70a43da294b47d1310d3ad12e7c3d8357f776e55f730514d4",
+      "bytes_after": 67432
+    },
+    {
+      "path": "lib/message-dispatch.js",
+      "status": "modified",
+      "sha256_before": "5b1e3c73657f4da3183d86f44c15c6832adef996c71c37b8fbe1590c647fa5d3",
+      "sha256_after": "3e39e1fc230979668806e1595ba9a3f3b437e6783a6c263f6c71d24b61646c55",
+      "bytes_after": 824
+    },
+    {
+      "path": "lib/plugin-registry.js",
+      "status": "modified",
+      "sha256_before": "f1c9c06f9335e7cf9156898a7977ac931e64a374c4f051139282042c657be272",
+      "sha256_after": "a414eecff5bf46a4c45d810d3fd9c30b9fe9c97b2c0ef10a7bd65d04565fc3e5",
+      "bytes_after": 4240
+    },
+    {
+      "path": "lib/plugins.js",
+      "status": "modified",
+      "sha256_before": "87c019949be89cc7d582d62587794592f48ea5bf77e785c8c8d36790b50ebb76",
+      "sha256_after": "0b459519b26f3fe65630fdbed6c9fedcb13a3f724af8d12c31fb99a1e7f96362",
+      "bytes_after": 2975
+    },
+    {
+      "path": "lib/print.js",
+      "status": "modified",
+      "sha256_before": "d48c5054a2f0b3f639dca9f01950427d6b1b9cc0d7cb4cba5d275ca1c01fc39e",
+      "sha256_after": "1af88acd54614a4610c6d2421350225e1a0c33c7f57e866d1f3575d020c788bc",
+      "bytes_after": 13238
+    },
+    {
+      "path": "lib/simple.js",
+      "status": "modified",
+      "sha256_before": "be0ac78faff7f67ecdd12fad8cb67177e2c8538c31591a3efedf793e8f001926",
+      "sha256_after": "0a867764e1593104af7254d21c9e08da2f13463b4a8a5f94e1201db2771fd382",
+      "bytes_after": 125136
+    },
+    {
+      "path": "lib/store.js",
+      "status": "modified",
+      "sha256_before": "88b32013e051a63ef65898a00a563f1f670141ebed20c80a6147e1333fcafc8c",
+      "sha256_after": "7ce518624fc3a96555dc7e5b612f4b6628d948850ed8de3b1aa9ba6972af710a",
+      "bytes_after": 6846
+    },
+    {
+      "path": "package.json",
+      "status": "modified",
+      "sha256_before": "15e07f357a9734544d5c2c672bb8474d09806725ad9a2489277b38d1b4dadb86",
+      "sha256_after": "9604ad397a82b559faca7e10285defb01fdd438f634984a1f0d291cf6ba1d548",
+      "bytes_after": 4796
+    },
+    {
+      "path": "plugins/_allfake.js",
+      "status": "modified",
+      "sha256_before": "ae40fa6b668b25968e451f6268ef38e7ec67fdfe23919757069998e9b59d63e2",
+      "sha256_after": "bbfe4400a098aa286ea1bcd8263708b54fb3d5ec9786e287974bd003dae3517d",
+      "bytes_after": 16384
+    },
+    {
+      "path": "plugins/_antidelete.js",
+      "status": "modified",
+      "sha256_before": "9974231931fd58db01df06fbbbc1da53f13a26d611dbc7612d2b68a6c4eaa5e4",
+      "sha256_after": "c636a3612e78762f89984a0b29e754c75a7875ccbe686d55247051267050156a",
+      "bytes_after": 4581
+    },
+    {
+      "path": "plugins/_antilink.js",
+      "status": "modified",
+      "sha256_before": "f5023e00598e113e6be29a61dc2c62086d7aefc3f15da1d04924ac224b1a1efa",
+      "sha256_after": "7f94085d1f513d96605df38c8903f8a449f27ca70ee8dc4090187af4b3e95a87",
+      "bytes_after": 1561
+    },
+    {
+      "path": "plugins/_infomessage.js",
+      "status": "modified",
+      "sha256_before": "44f31f6ce5a7f4d1d4fc772501487defc2021bd93a08acb07e0216bbe9188b18",
+      "sha256_after": "5dddd7ae805041a68776de083863f03328593d3ff69accac4651a9b5b90d782b",
+      "bytes_after": 7921
+    },
+    {
+      "path": "plugins/_userPrem.js",
+      "status": "modified",
+      "sha256_before": "8bb416bac2c9cbe385ab24d9d0783a8a3c235fe8091569330ac176dafc31acdd",
+      "sha256_after": "4bcaf8e6d1f4f274d21e771c98744fe0d1f00163325bc5d288754cdeda12d127",
+      "bytes_after": 705
+    },
+    {
+      "path": "plugins/_welcome.js",
+      "status": "modified",
+      "sha256_before": "aa4b0c0b9701d525eda2748d86c1b3a738f3421e28ae8404f410ca36e42b898e",
+      "sha256_after": "fa0246d39d9927de3c48602137d4975276b202240b6a145ac5758748e215ed9f",
+      "bytes_after": 1366
+    },
+    {
+      "path": "plugins/ai-chatgpt.js",
+      "status": "modified",
+      "sha256_before": "aea5b26d07da7734f6abb5941357177bb55bb01126f6b89cb36ef3566e3d80b0",
+      "sha256_after": "422dd3aa02648bed3174d5119e661be55a75efc5a67fb0d263083cfb978367e9",
+      "bytes_after": 4077
+    },
+    {
+      "path": "plugins/ai.js",
+      "status": "modified",
+      "sha256_before": "aa5f6745518080ed81a592e7c1c8c83c856b09ce3223a92ff6ac34ff31ab3b5c",
+      "sha256_after": "e23a5ea8f640bf606e1dd2979d5b0e5ae9bc1ca1cce58f8d28a421143569532b",
+      "bytes_after": 91310
+    },
+    {
+      "path": "plugins/downloads-apkpure.js",
+      "status": "modified",
+      "sha256_before": "6a12976446c582fae3470ca4a9ecd480a8e749d38b3a099a25b6b788cb6b496b",
+      "sha256_after": "550299e5a3e5e5243aff98d0dd1d31dd465ec29c2bdf6a855b65e045044100b9",
+      "bytes_after": 33150
+    },
+    {
+      "path": "plugins/downloads-image.js",
+      "status": "modified",
+      "sha256_before": "f8b398ffd333efd0adfef4ee2cc0459736f53c8f86ceec2f0ffa5c1e8130f4ed",
+      "sha256_after": "e119a5da4462c67bceed5168f2b9e5e065dc78058282b1f82e132db364cdb44d",
+      "bytes_after": 2965
+    },
+    {
+      "path": "plugins/downloads-pinterest.js",
+      "status": "modified",
+      "sha256_before": "aff2f9fba37a98e90242aa3a36210946b2411638101d38f458167084170a8c7f",
+      "sha256_after": "a4f148a246a416e66ebce83943c40895acdc4035a709c47e6c22b57d2a71977d",
+      "bytes_after": 4643
+    },
+    {
+      "path": "plugins/downloads-plays.js",
+      "status": "modified",
+      "sha256_before": "a2e0179515171f3ac984f48a9f91dac1288959c00fbec69e5026fcdd8363253f",
+      "sha256_after": "ac945ed69e0466e72ecf85c41fd6e8036969ff6fed236bd628f18caf32001ea7",
+      "bytes_after": 7686
+    },
+    {
+      "path": "plugins/economy-slot.js",
+      "status": "modified",
+      "sha256_before": "f020165ebc5a708fc2cfad392c84e698dbde11bde9f932f2ba4d66ba7c8151d9",
+      "sha256_after": "d106bd000bbdf03062d6cc5551ee30b5591ae11b1ecf8f2b1f3b883c7f97d3ec",
+      "bytes_after": 3140
+    },
+    {
+      "path": "plugins/fun-afktime.js",
+      "status": "modified",
+      "sha256_before": "2ad070d973a6fbd42f14960804d2ab0e42626194580beda48ffbb1d163bb960c",
+      "sha256_after": "ab6db32165abc6dbea701988fd9c8c3395e6b7189f00508db26d36618ce72d9e",
+      "bytes_after": 2000
+    },
+    {
+      "path": "plugins/fun-chiste.js",
+      "status": "modified",
+      "sha256_before": "ef59421c30609213f8e05684cf10fb5a6fe08e035629f350c90349044662db25",
+      "sha256_after": "af9c6d076240e0bbc438d3b646d1f318dedb1f270795191dc94d4eb2ff70790f",
+      "bytes_after": 3615
+    },
+    {
+      "path": "plugins/fun-consejo.js",
+      "status": "modified",
+      "sha256_before": "9d060b12a56276f587bb51b8b1238860a0b5941657cf3400b951fbcf79f7da3a",
+      "sha256_after": "b47b54fbc694675915293783b0a7ba1240379f350ef224c6825ee7fb924dc1eb",
+      "bytes_after": 11082
+    },
+    {
+      "path": "plugins/fun-factos.js",
+      "status": "modified",
+      "sha256_before": "e0ce21c2d21c4e8a3dab340078b74fd6478681eac004ca41bfd14c8e008eb795",
+      "sha256_after": "b87908946e939e4b919b11ae078d9bf92f93c838e13c0d02e9f17de313f049d5",
+      "bytes_after": 3288
+    },
+    {
+      "path": "plugins/fun-frases.js",
+      "status": "modified",
+      "sha256_before": "0ac24623a8a077202488eba5d4e98567e8cf7fa94372205f9f63cc14b5b55367",
+      "sha256_after": "d658a04f0674489f32cf2e0a7eb3c86aa6d82757777b0131b1c4a054568551f9",
+      "bytes_after": 3788
+    },
+    {
+      "path": "plugins/fun-piropo.js",
+      "status": "modified",
+      "sha256_before": "93837c52105c4b195c765689bb43cfc9ea2e64463c4fea1c9ff6e1570d5f3b1c",
+      "sha256_after": "ddc721f904fe0de738ff79591337b32af3554c9894de95af9a883c084c67e570",
+      "bytes_after": 16204
+    },
+    {
+      "path": "plugins/games-_ttt.js",
+      "status": "modified",
+      "sha256_before": "7bebfc44d5c22f1f58b1bd19d8a1a2a5d4b1b8c3b602d0290db2459bbc69ecb6",
+      "sha256_after": "b25db3610f246f069650b0fb80ce0835d6e87f9d8c60f83e823b0fcb9c61984e",
+      "bytes_after": 3172
+    },
+    {
+      "path": "plugins/group-hidetag.js",
+      "status": "modified",
+      "sha256_before": "4975c21b534645b820926abb22a0f2195b18811068804423b5d9e64529032d19",
+      "sha256_after": "52fed921e0225874245d9fbe012cd7ea4914fb940e88b650db6786e22ab2f4f1",
+      "bytes_after": 2883
+    },
+    {
+      "path": "plugins/group-inactivos.js",
+      "status": "modified",
+      "sha256_before": "cd6e54ba412349839ac16471a50dc8b830ccc5180eb649ff1fc9e2ef18a486f1",
+      "sha256_after": "c31113ecfacc59840ca075646be981b2fb823c9c5cd206c3fb5f5a11ecefc40c",
+      "bytes_after": 2771
+    },
+    {
+      "path": "plugins/group-setgp.js",
+      "status": "modified",
+      "sha256_before": "d15b14c9efca46b4de5c0a873f2ddc5ef2dd89a64bb921a9d783ee662cfa4b27",
+      "sha256_after": "bed6447251b675e3ac279abb2a27e8a6543e0fbf3d287fc2b6ad1391401efbc8",
+      "bytes_after": 1919
+    },
+    {
+      "path": "plugins/main-allmenu.js",
+      "status": "modified",
+      "sha256_before": "b34f72218901cae1071d63789b18e69369c25c34f5e97dbbdb8143a4dc76810b",
+      "sha256_after": "96eb9db763afd72445baaae13678a8c117cbb1a5a7e1e6b863938370a2b34d41",
+      "bytes_after": 9202
+    },
+    {
+      "path": "plugins/main-menu.js",
+      "status": "modified",
+      "sha256_before": "2867c5d828da29b2b983676cef41c5dc78afb5d77b8cf4e63e92fa049614ff75",
+      "sha256_after": "2af98b3cc7ef2b1644b8aa340710286d69c74d97caab13ae5ba1cfbe963f89cf",
+      "bytes_after": 6586
+    },
+    {
+      "path": "plugins/owner-addcoins.js",
+      "status": "modified",
+      "sha256_before": "b3da54a47c5fcaee4e8e75a02ae4118e8e36fd96af686dd2104adaca6bcfd552",
+      "sha256_after": "9fc9c40bd113f2cef32ebf9272c3449eb6f500f14eff18aa6f51887339738b72",
+      "bytes_after": 1456
+    },
+    {
+      "path": "plugins/owner-addremove.js",
+      "status": "modified",
+      "sha256_before": "98e2139306884fe80e2c88eb40d5265309eb650ae8e3726321a7b6591f198a28",
+      "sha256_after": "93878fc6dca38b32ca1719b083a7a049c172f519a73e246473604716864d7375",
+      "bytes_after": 5603
+    },
+    {
+      "path": "plugins/owner-anadirxp.js",
+      "status": "modified",
+      "sha256_before": "bf5639f5a5c8e94cc76eb70ce057dd2bac9ad899964060072756c36627b598f5",
+      "sha256_after": "b3085fde9ecd531d4e957b6790b9072ec62fe704001f155a0d75d0b2fb782a04",
+      "bytes_after": 1478
+    },
+    {
+      "path": "plugins/owner-estados.js",
+      "status": "modified",
+      "sha256_before": "c8b0158d17452a396a0a87260aa888e009a165adb00622bd80612660687780cf",
+      "sha256_after": "6c388d87749c62d184bbd6fa86b829774776de0debc3a8952d68bd7563ce08dd",
+      "bytes_after": 15214
+    },
+    {
+      "path": "plugins/owner-quitarcoin.js",
+      "status": "modified",
+      "sha256_before": "222905ade48f0c40dd1d9858f7f4ec72260c0dc76b481f65d5b6a61b003bf946",
+      "sha256_after": "b52f784f7c3b6b51f159b7aca22dac5f38a1361dc1daf321417d96bc4d42ed32",
+      "bytes_after": 1641
+    },
+    {
+      "path": "plugins/owner-quitarxp.js",
+      "status": "modified",
+      "sha256_before": "18409676f3ffb7a7b5431318dfdc5dfe2de359a2f6f8cdaa523e0b054eb1a564",
+      "sha256_after": "ffc36c50400f475ee8b35b87691d68946166c45c7b91e3fabe579a7b2b1c13b5",
+      "bytes_after": 1608
+    },
+    {
+      "path": "plugins/owner-savefiles.js",
+      "status": "modified",
+      "sha256_before": "16588bbb29b8edd618f27479a386ce4a9e3132fdf39f67b1bf4648dc2bb6c000",
+      "sha256_after": "7c4115ef0b3927996568ab48a38d836e662752c850a657d71f6299c5a4caec7f",
+      "bytes_after": 26432
+    },
+    {
+      "path": "plugins/search-appstore.js",
+      "status": "modified",
+      "sha256_before": "3de64e592fd58c1babf562076ef46b663e2b208efd72d843c6361868081e36d3",
+      "sha256_after": "9763e96807b5f9822f1c4a9000deb97e2a579ae34a66e78cf67e64b2f042eb45",
+      "bytes_after": 4828
+    },
+    {
+      "path": "plugins/search-get-html.js",
+      "status": "modified",
+      "sha256_before": "8aff9f3880ac18fa8a84728979c992f41d406ccf72473a111ca40f9530122796",
+      "sha256_after": "08d3faefd906931d664b27fad29af4027ae40ee2360bc15d97f0eed35c7673d1",
+      "bytes_after": 4164
+    },
+    {
+      "path": "plugins/search-github.js",
+      "status": "modified",
+      "sha256_before": "a4ae72de5e5e3bd4396b52ea878355ee2aafea0203468c07137335e4da789af7",
+      "sha256_after": "eaa38a452d33101f5f486b52dcb633ca56df563a0dd6f14de99cab11a2999b96",
+      "bytes_after": 5020
+    },
+    {
+      "path": "plugins/search-patreon.js",
+      "status": "modified",
+      "sha256_before": "a88c22c5f23778eafb933d04d86bc241ce00612c497cff6a527619049c656108",
+      "sha256_after": "e7ee4cc3eddb6863f92230473fc26e68167fe4041d1710b4eb72ba36902f1a3c",
+      "bytes_after": 4499
+    },
+    {
+      "path": "plugins/search-tt.js",
+      "status": "modified",
+      "sha256_before": "e12050350349f51a1766b0ba919b7769ab007fb859b90310c7c47b24fd29a748",
+      "sha256_after": "da88f758b22e34d148389de6d6d359db145b57214a05f11a761571af3ec920cb",
+      "bytes_after": 4723
+    },
+    {
+      "path": "plugins/search-tumblr.js",
+      "status": "modified",
+      "sha256_before": "d992d2822f8420f5a7b36c322d34de073941b1570c2431c536f83ac39132faa2",
+      "sha256_after": "072dc91c7871542dfaef86a68ace76d433da81693d64e8f76605ec62d2ff5ed9",
+      "bytes_after": 5469
+    },
+    {
+      "path": "plugins/search-vimeo.js",
+      "status": "modified",
+      "sha256_before": "6cf3687f3f73a1d84e719f58700dfba1d7c40ba106799fc3438a165fd1ca772e",
+      "sha256_after": "f56e4c9c8c26bfcbb3e475e0d6262d55db77d0b4f8c41cfe086d1df2d79cbaf6",
+      "bytes_after": 4655
+    },
+    {
+      "path": "plugins/serbot-configuracion.js",
+      "status": "modified",
+      "sha256_before": "0906d5b4a6a3719f106dd154876242c2a776442afe72c431b0e0ddd0f074b9d0",
+      "sha256_after": "338d6d00f77b5ec9c82c1d3682813702f3ec1b351544830b40caaac21c4819a8",
+      "bytes_after": 5787
+    },
+    {
+      "path": "plugins/serbot-vincular.js",
+      "status": "modified",
+      "sha256_before": "e89bb522e7abe1c0f8c42c4cf88698c1e799889f76620887c405a1cb243c56d4",
+      "sha256_after": "e0065fa0f2aaa05f375daa6cdc0a3fb5a7ca920dbc53453138b352dca2b433ad",
+      "bytes_after": 15314
+    },
+    {
+      "path": "plugins/stickers-sigstick.js",
+      "status": "modified",
+      "sha256_before": "2b115ed22ad07ddae1673ffa3624b9fed28d75e548d70d75a6a844cb2e7dfa45",
+      "sha256_after": "f5500abca68be2d391a3e9cdb894b6f7e00d5212c854b613c45d2a82ef8ade1c",
+      "bytes_after": 9764
+    },
+    {
+      "path": "plugins/tools-inspectador.js",
+      "status": "modified",
+      "sha256_before": "8753e3f337e53c96a8c28b42b2449c583e0fd79318d3bc2d88850a6cd644e645",
+      "sha256_after": "f4bf7097b594a7b8238ff0512ec70663f22d29f42ad57bd2292f4416e3bcd2dc",
+      "bytes_after": 23474
+    },
+    {
+      "path": "plugins/tools-readviewonce.js",
+      "status": "modified",
+      "sha256_before": "b5c335056de6c040f37fd30b2df50c23d0a094cdd49f4968e35d871fc4c7a0d9",
+      "sha256_after": "90d8e0df2bdec83068990243d2ea0e29a1c0738b8a71eaec127db020622d83a1",
+      "bytes_after": 669
+    },
+    {
+      "path": "plugins/tools-say.js",
+      "status": "modified",
+      "sha256_before": "928f052f809000cb0ca0cff4b69227beaab79cd4e794a700738007fc38fb991d",
+      "sha256_after": "78e3fee0ad4cae63400f216f3d2d43c5c5bf4c260853fdd2643b10526c7ed7bf",
+      "bytes_after": 2687
+    },
+    {
+      "path": "plugins/tools-tenor.js",
+      "status": "modified",
+      "sha256_before": "3353b9d93aeae40a4ffc5e7dad96c35ca399cef815b2c1da95e4d1b9a665d88d",
+      "sha256_after": "28cede1e42807c26f18e00d5d557646210aa5ef0b5268d91049c0aee88ef8a5b",
+      "bytes_after": 3023
+    },
+    {
+      "path": "plugins/tools-whatmusic.js",
+      "status": "modified",
+      "sha256_before": "0c2e34df5eca6ee2ae58379f02cca9e607301b9c7946e9db543daa1ed550e88d",
+      "sha256_after": "4ea2c1fe7457bb8c578f30e55eb02160e19b575077faa68e7b40a59c3322774c",
+      "bytes_after": 4194
+    },
+    {
+      "path": "plugins/unico6.js",
+      "status": "modified",
+      "sha256_before": "e20931bb7482f1a4eac15e51ecbed963ee6bc855944dc0abd8a13b2f8704f709",
+      "sha256_after": "074a278b67dbfe1824dc72e523d5949b6533366dfea0d67d6d7a5cc3cf8460c6",
+      "bytes_after": 3106
+    },
+    {
+      "path": "scripts/comprobar.js",
+      "status": "modified",
+      "sha256_before": "0586e32f0ed0d67e4ec56ae13226dbe9aeda093049b3edf7c0d8b490481dfaa9",
+      "sha256_after": "b5b959d390180b36e3038001f026a281999347528d8088879268ef678b1a106b",
+      "bytes_after": 2284
+    },
+    {
+      "path": "settings.js",
+      "status": "modified",
+      "sha256_before": "df32070f78d129435f07b8ba3bc81743abad85771d8a6720fb51798787902c93",
+      "sha256_after": "99e961648e96cb845689ee149502f65fd1fc7cc2c37f4a77ad89be7e7eee459f",
+      "bytes_after": 6065
+    },
+    {
+      "path": "lib/baileys-compat.js",
+      "status": "new",
+      "sha256_after": "c43217e5802a25288ea24765bcd385746629cc761991f5f7a7bbf358c4985733",
+      "bytes_after": 259
+    },
+    {
+      "path": "lib/command-manager.js",
+      "status": "new",
+      "sha256_after": "2e47e9a7c0d0b6910a7b4e09cc6fe525653176b818ad6d6732932bf5630d6f7b",
+      "bytes_after": 966
+    },
+    {
+      "path": "lib/socket-scope.js",
+      "status": "new",
+      "sha256_after": "51f88bcb5d8c5edeb013ea1283bb813b0ceaf29f45993d13c854e00eccbcb149",
+      "bytes_after": 217
+    },
+    {
+      "path": "package-lock.json",
+      "status": "new",
+      "sha256_after": "3bc8d149f614e3f34d5581123181e59b91da6d111e45214431fba696672858c2",
+      "bytes_after": 580574
+    },
+    {
+      "path": "plugins/owner-runtime-diagnostics.js",
+      "status": "new",
+      "sha256_after": "c4c89482e49efb20101456c1d05e6cb3ceb295544c10c19260501ac8a76f1ee9",
+      "bytes_after": 1189
+    },
+    {
+      "path": "scripts/check-plugins.js",
+      "status": "new",
+      "sha256_after": "35f7ac4d6f3f2014123276d0f49274cf4cbc2ad01b7231576f862bbc1f3996e3",
+      "bytes_after": 1425
+    },
+    {
+      "path": "scripts/start.cjs",
+      "status": "new",
+      "sha256_after": "326d027ac51d7e1755a70ceb3e60629d2fb6bbdf9faf41778b52ba42690036dc",
+      "bytes_after": 322
+    },
+    {
+      "path": "tests/runtime.test.js",
+      "status": "new",
+      "sha256_after": "df3d6b64c51f39e77b7384a17db3c8cd28795a9819d49a35bbd39a443e11aa0f",
+      "bytes_after": 9047
+    }
+  ]
+}

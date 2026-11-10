@@ -1,0 +1,149 @@
+KAGE BAILEYS — PARCHE DE INTERACTIVOS Y PAGOS
+
+ALCANCE REAL
+Este paquete contiene la biblioteca completa del ZIP recibido y un parche de
+transporte. No es una captura de una sesión real ni una habilitación de pagos.
+No se utilizó una cuenta de WhatsApp ni se envió un mensaje a un destinatario.
+La pantalla «Añadir cuenta de pago» de la imagen es interfaz del cliente: no
+puede garantizarse ni activarse universalmente modificando Baileys.
+
+INSTALACIÓN PARA CONSERVAR TUS IMPORTACIONES
+Requisito del paquete original: Node.js >=22.12.0.
+Descomprime el ZIP. Desde la carpeta de tu bot, instala la carpeta extraída:
+
+npm install "@whiskeysockets/baileys@file:./kage-baileys"
+
+La ruta debe apuntar a la carpeta que contiene package.json.
+Alternativamente, descarga el TGZ entregado y, desde la carpeta de tu bot:
+
+npm install "@whiskeysockets/baileys@file:./kage-baileys-interactivos.tgz"
+
+El alias local permite mantener:
+import { proto, generateWAMessageFromContent } from '@whiskeysockets/baileys'
+
+No es obligatorio sustituir imports por kage-baileys si instalas con ese alias.
+No copies la biblioteca manualmente sobre node_modules de otra versión.
+Reinicia el proceso del bot después de instalar.
+
+PLUGINS
+Copia Example/plugins/scarr.mjs y Example/plugins/unico6.mjs a la carpeta de
+plugins de tu bot. Si el cargador solo descubre .js, renómbralos a .js en un
+proyecto ESM. Cada plugin contiene su propio handler y export default.
+No pegues los dos plugins en el mismo archivo.
+El prefijo de comandos depende de tu bot.
+
+scarr
+  Dos tarjetas de imagen con respuesta, llamada, lista, URL y copiar repartidos.
+  La fila «Opción 1» tiene id: opcion_1.
+scarr catalogo
+  Primera tarjeta con productMessage, productId, moneda y vendedor originales.
+  Conserva el botón cta_catalog. Requiere que el producto/negocio exista y que
+  WhatsApp acepte el catálogo y esa presentación en el cliente destinatario.
+scarr experimental
+  Añade conn.kageExperimentalButtons a la segunda tarjeta.
+  Asigna un array de {name, buttonParamsJson} con tus parámetros reales.
+  No crea flujos, catálogos, transacciones ni recordatorios en los servidores.
+unico6 o 2take1
+  Envía el enlace PayPal original mediante cta_url.
+  No afirma que el destinatario haya pagado ni valida el titular del enlace.
+unico6 nativo o 2take1 nativo
+  Usa review_and_pay SOLO si defines conn.kagePaymentOrder con una orden
+  coherente y una configuración comercial real permitida para tu cuenta.
+  El validador local no acredita elegibilidad ni verifica el proveedor remoto.
+
+FUNCIONES EXPORTADAS AÑADIDAS
+createKageNativeFlowButton(name, parameters)
+createKageInteractiveMessage(interactive, options)
+createKageCarouselMessage(cards, options)
+createKageOrderDetails(parameters)
+validateKageInteractiveMessage(content)
+sendKageInteractiveMessage(conn, jid, content, options)
+unwrapKageMessage(message)
+buildKageInteractiveBizNode(message)
+applyKageInteractiveNodes(stanza, message, additionalNodes)
+installKageInteractiveTools(conn)
+
+Métodos nuevos en la conexión:
+conn.sendKageInteractiveMessage(jid, content, options)
+conn.sendKageCarousel(jid, cards, options)
+
+Los métodos de construcción son opcionales. generateWAMessageFromContent,
+generateWAMessageContent, prepareWAMessageMedia y relayMessage siguen siendo
+compatibles con el uso directo del código original. No se eliminan botones
+experimentales al pasar mensajes originales por relayMessage.
+
+CAMBIOS EN TRANSPORTE
+- Inspección de interactiveMessage en todas las envolturas incluidas.
+- Ruta especializada para review_and_pay => native_flow_name: order_details.
+- Ruta mixta para carruseles y combinaciones heterogéneas de botones.
+- Ruta especializada de catálogo/localización/transacción cuando corresponda.
+- Fusión de biz para no generar duplicados al pasar additionalNodes.
+- Prioridad para atributos/nodos indicados expresamente por el consumidor.
+- Conservación de cifrado, destinatarios, tokens y demás nodos del transporte.
+- Sin cambios de contenido para mensajes normales ni para canales.
+- Exportaciones CJS, ESM y declaraciones TypeScript.
+El esquema del ZIP YA contenía Header.productMessage; no se inventaron campos
+protobuf para intentar forzar pantallas del cliente.
+
+ERRORES DEL CÓDIGO DE PAGO ORIGINAL
+1. type no es una URL: describe digital-goods o physical-goods.
+2. Los importes usaban offsets 100 y 1000 mezclados; además el subtotal no
+   coincidía con la suma de artículos. El helper exige un offset común y
+   comprueba la aritmética con enteros. No altera importes silenciosamente.
+3. native_payment_methods vacío no configura ningún proveedor de pago.
+4. El enlace PayPal terminaba en /12, mientras la orden indicaba otro importe.
+   El plugin de enlace conserva la URL y no publica un importe contradictorio.
+5. Se retiró la cita artificial con vendedor 0 e itemCount negativo.
+6. Se usa el mismo messageId al construir y retransmitir el mensaje.
+7. Los errores del plugin se notifican al chat además de escribirse en consola.
+
+LÍMITES DE BOTONES Y FUNCIONES
+cta_reminder, cta_cancel_reminder, address_message, send_location, open_webview,
+mpm, wa_payment_transaction_details, automated_greeting_message_view_catalog y
+galaxy_message NO quedan habilitados únicamente porque se pueda serializar su
+nombre. Necesitan parámetros específicos, contexto del cliente y, en algunos
+casos, recursos o permisos de negocio. El parche permite transportar nombres
+experimentales, pero no promete que todos se dibujen o ejecuten.
+Los flow_id, flow_token y pantallas pegados en el mensaje original no se han
+validado como recursos administrados por tu cuenta. No se presentan como
+formularios operativos. Para ensayarlos, colócalos en kageExperimentalButtons.
+El modo básico no reproduce la tarjeta original con todos los botones a la
+vez; separa los comunes para facilitar pruebas. El modo catálogo conserva la
+tarjeta de producto y el modo experimental admite tus botones adicionales.
+La reacción de confirmación solo marca que relayMessage terminó; no demuestra
+que el destinatario vea el carrusel, pulse el botón ni complete un pago.
+
+PRUEBAS Y RESULTADO
+Se ejecutó npm run check: sintaxis, importaciones locales, TypeScript, pruebas
+automatizadas y comprobación de paquete. Resultado final: 302 aprobadas y 0 fallidas.
+El conjunto original tenía 274 pruebas y pasó antes del parche.
+Las 28 nuevas cubren protobuf, producto/carrusel, rutas de pago, duplicados,
+relayMessage real con cifrado/red simulados y ejecución de los dos plugins.
+Los datos de órdenes de las pruebas son ficticios y exclusivamente locales.
+No se han usado como configuración de pago de producción.
+
+Para repetir en la biblioteca:
+npm install
+npm run check
+node scripts/demo-interactive.cjs
+
+docs/RESULTADO-LOCAL.json: estructura realmente serializada y deserializada
+localmente, marcada expresamente como SIN_WHATSAPP. No es una captura del móvil.
+docs/RESULTADO-PRUEBAS.txt: registro completo de comprobaciones finales.
+docs/CAMBIOS-ARCHIVOS.json: comparación con el ZIP original.
+
+INCIDENCIAS RESUELTAS
+El primer npm install falló por permisos de la caché compartida. Se corrigió
+utilizando una caché de usuario; la instalación y las comprobaciones terminaron
+correctamente. No fue necesario cambiar las dependencias originales.
+Una consulta adicional a un archivo de código de GitHub no pudo recuperarse;
+no se empleó su contenido como evidencia. Se pudo consultar la documentación
+principal del repositorio y la página de Meta indicada abajo.
+
+REFERENCIAS CONSULTADAS
+Documentación comunitaria de nodos nativos y sus restricciones:
+https://github.com/zqdevelopers/zq_baileys_helper
+Documentación de Meta sobre enlaces de pago y elegibilidad regional:
+https://developers.facebook.com/documentation/business-messaging/whatsapp/payments/payments-in/payment-links/
+La documentación de pago consultada es específica de India; no demuestra que
+USD/PayPal/Perú tengan acceso al flujo nativo mostrado en tu captura.
