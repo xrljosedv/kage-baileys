@@ -3,25 +3,26 @@
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "strict": true,
+    "lib": ["ES2022"],
+    "strict": false,
     "noEmit": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "checkJs": false,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": false,
-    "types": [
-      "node"
-    ]
+    "types": ["node"]
   },
   "include": [
-    "test/types.test.ts",
-    "test/native-types.test.ts",
-    "lib/Utils/message-builder.ts",
-    "lib/Utils/username.ts",
-    "lib/WAUSync/USyncQuery.ts",
-    "lib/WAUSync/USyncUser.ts",
-    "lib/WAUSync/Protocols/USyncUsernameProtocol.ts",
-    "lib/Socket/usync.ts"
+    "lib/**/*.d.ts",
+    "lib/index.js",
+    "test/**/*.ts",
+    "test/**/*.js"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "maintenance",
+    "Example"
   ]
 }

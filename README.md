@@ -1,13 +1,13 @@
 <div align="center">
 
-<img src="https://files.catbox.moe/obv0zs.png" alt="KAGE BAILEYS — La Baileys más completa 2026" width="850"/>
+<img src="https://files.catbox.moe/obv0zs.png" alt="KAGE BAILEYS" width="850"/>
 
-# KAGE BAILEYS
+# Kage Baileys
 
-**La Baileys más completa de 2026.**  
-WhatsApp Web API con **portada de perfil (cover photo) para cuentas normales y Business**, botones, carruseles, Native Flows, VoIP, canales, comunidades, Meta AI, LID mapping, álbumes, tablas, bloques de código, mensajes enriquecidos y soporte total del protocolo.
+**Kage Baileys — la mejor Baileys de 2026.**  
+API de WhatsApp Web más completa: portada de perfil (cuentas normales y Business), avatares por defecto estilo WhatsApp, botones, carruseles, Native Flows, VoIP, canales, comunidades, Meta AI, mapeo LID, álbumes, tablas, bloques de código y soporte total del protocolo. Documentación 100 % en español.
 
-Creador: **xrljosedv** • Desarrollador: **Jose** • Documentación 100 % en español • Top 1 en completitud
+Creador: **xrljosedv** • Desarrollador: **Jose** • Documentación 100 % en español
 
 [![npm version](https://img.shields.io/npm/v/kage-baileys.svg)](https://www.npmjs.com/package/kage-baileys)
 [![Downloads](https://img.shields.io/npm/dm/kage-baileys.svg)](https://www.npmjs.com/package/kage-baileys)
@@ -20,82 +20,6 @@ Creador: **xrljosedv** • Desarrollador: **Jose** • Documentación 100 % en e
 
 ---
 
-## Revisión 3.3.1-complete.1
-
-Esta entrega conserva la raíz `kage-baileys` y sus rutas públicas CJS/ESM. Requiere Node >=22.12.0. No instala otro Baileys ni descarga código para modificar la biblioteca en ejecución. Los módulos públicos obligatorios ya no desaparecen silenciosamente cuando falla una importación.
-
-### Lecturas iniciales y consola
-
-Los `408 / Timed Out` de las lecturas iniciales de propiedades, lista de bloqueados y privacidad se gestionan por separado, con hasta tres intentos y espera exponencial. Un fallo no invalida las otras lecturas. Los timeouts recuperables se registran a nivel `debug`, sin imprimir la traza de la captura. Los errores de autenticación y otros fallos permanentes siguen siendo visibles. Esto no elimina los fallos de red o del servidor.
-
-```js
-sock.ev.on('init.queries.update', state => {
-  // status: idle | running | complete | partial | cancelled
-  // tasks: nombre, estado, intentos y resumen del error, si lo hay
-});
-const state = sock.getInitialQueryState();
-// Reintento explícito de lecturas; nunca repite automáticamente un envío.
-const result = await sock.retryInitialQueries();
-```
-
-Configuración opcional: `initQueryRetry: { maxAttempts: 3, baseDelayMs: 1000, logRecoverable: false }`. Los intentos están limitados a cinco. El cierre cancela las esperas y evita reintentos en una conexión terminada; una consulta ya enviada puede permanecer pendiente hasta su timeout de transporte.
-
-### Nombre de usuario, Info y perfil
-
-```js
-const jid = '51900000000@s.whatsapp.net'; // También acepta un JID @lid real
-const users = await sock.fetchUsername(jid);
-const about = await sock.fetchAbout(jid);
-const profile = await sock.fetchUserProfile(jid, {business:true, picture:false});
-console.log(profile.username, profile.about, profile.links, profile.errors);
-await sock.updateAbout('Disponible');
-console.log(sock.getProfileCapabilities());
-```
-
-`fetchUsername` consulta el protocolo USync de nombre de usuario; no obtiene un nombre reservado en la app si WhatsApp no lo devuelve a la sesión vinculada. `resolveUsername('@nombre')` solo resuelve metadatos de contactos ya conocidos o consultados; no es una búsqueda global y no adivina teléfonos a partir de un LID. Un dato no devuelto se representa como `null`, no como una afirmación de que no existe. El perfil devuelve errores por sección cuando el resultado es parcial. Se conservan todos los sitios web comerciales recibidos, sin prometer enlaces personales que el protocolo no entregue.
-
-La lectura de Info conserva texto, fecha y atributos adicionales recibidos; `expiresAt` solo aparece si el nodo incluye `expiration`. No está verificado que el servidor entregue la nueva Info temporal mediante este nodo. La edición de caducidad, audiencia o emoji no está habilitada: `updateAbout(text, opciones)` rechaza opciones no verificadas con `ABOUT_OPTIONS_UNSUPPORTED`, antes de enviar nada. Estos ajustes siguen disponibles en la app móvil.
-
-### Botones y tarjetas
-
-```js
-const {MessageBuilder, parseInteractiveResponse} = require('kage-baileys');
-const MB = MessageBuilder.bind(sock); // O usar sock.messageBuilder
-await new MB.Button().header('Menú').text('Selecciona')
-  .button('Aceptar', 'aceptar').footer('Chiaki').send(jid);
-
-// Sin socket, build() crea un payload; no envía ni sube archivos.
-const payload = await new MessageBuilder.Button().text('Hola')
-  .button('Continuar','continuar').build();
-
-await sock.sendCompatibleButtons(jid, {buttonsMessage:{
-  contentText:'Menú',buttons:[{buttonId:'uno',buttonText:{displayText:'Uno'},type:1}]
-}}); // Conversión explícita al formato nativo antes de un único envío
-
-const reply = parseInteractiveResponse(message);
-```
-
-Se corrigen `Button.build()` y las tarjetas `.card(...)` del constructor existente. `ButtonV2` conserva el formato histórico, pero no puede obligar a un cliente de WhatsApp a mostrarlo. `sendCompatibleButtons` convierte botones históricos, listas y plantillas compatibles a Native Flow; `mode:'legacy'` requiere un mensaje protobuf histórico explícito. No se reenvía automáticamente tras un fallo: hacerlo podría duplicar mensajes. Las respuestas antiguas y nativas se pueden leer con `parseInteractiveResponse`.
-
-`MessageBuilder` expone `Button`, `ButtonV2`, `Carousel`, `AIRich`, `ORich`, `Toolkit` y `bind`. Los medios sin preparar requieren un socket con `waUploadToServer`; los mensajes preparados y el texto se pueden construir offline. En `AIRich`, `.extract(false)`, `.hyperlink(false)`, `.citation(false)` y `.latex(false)` se aplican al texto añadido después de configurar la opción. No se afirma equivalencia completa con cada método del ZIP MessageBuilder 4.7: su cabecera impone restricciones de redistribución y no se ha incorporado ese código restringido.
-
-### Instalación en un bot que ya importa el nombre oficial
-
-La captura muestra una ruta de dependencia bajo `@whiskeysockets/baileys`. Cambiar otro paquete no modifica automáticamente esa importación. Para probar el tarball entregado conservando el nombre que importa Chiaki, coloca el `.tgz` junto al `package.json` del bot y cambia esa dependencia a:
-
-```json
-"@whiskeysockets/baileys": "file:./kage-baileys-3.2.9-chiaki.0.tgz"
-```
-
-Después ejecuta `npm install` y reinicia el proceso. Si el bot importa `kage-baileys`, instala el tarball con ese nombre y conserva esas importaciones. No borres credenciales ni sesiones como método de actualización. Los archivos del bot Chiaki no estaban en estos ZIP y no han sido modificados; sus plugins deben llamar a las nuevas funciones para mostrarlas en comandos como `.lid`.
-
-### Verificación y límites
-
-Se compararon los 262 nombres de exportación del ZIP oficial 7.0.0-rc14 con la API cargada de Kage; están disponibles. Esto verifica presencia de API, no identidad funcional de sus implementaciones. Se comprobaron 498 tipos protobuf y 2424 campos oficiales; se corrigió el campo 114 de la instantánea de encuestas y se conservó el campo histórico 115. El nombre `oldestMessageTimestamp` ya se conserva como alias del mismo campo 2. No se afirma haber actualizado automáticamente cada comportamiento interno de la biblioteca oficial.
-
-Ejecuta `npm run build`, `npm run check` y `npm run test:protocol`. La entrega tiene 390 pruebas offline correctas en Node 22.23.4 y Node 24.22.2. No se conectó una cuenta real de WhatsApp, no se verificó visualmente el cliente móvil y no se publicó en npm.
-
-La auditoría de producción detectó 29 alertas altas de paquetes afectados en la cadena Jimp/Zod, originadas por el aviso GHSA-mrhx-c7xc-m3w5 de Zod (<4.6.6). No son 29 vulnerabilidades distintas. No se forzó un salto incompatible de Zod 3 a Zod 4 para ocultarlas ni se garantiza que sean las únicas vulnerabilidades posibles. Revisa el informe distribuido y estas dependencias antes de uso público. Se conserva la licencia de cada fuente; la licencia MIT del paquete no reemplaza la GPL-3.0 de la dependencia `libsignal`.
 
 ## 📋 Índice
 
@@ -226,6 +150,10 @@ import { makeWASocket } from 'kage-baileys'
 // --- CJS
 const { makeWASocket } = require('kage-baileys')
 ```
+
+
+> Al crear el socket verás el banner de arranque de **Kage Baileys** (creador José · redes xrljose / xrljosedv).  
+> Para silenciarlo: `makeWASocket({ silentBanner: true })` o variable de entorno `KAGE_NO_BANNER=1`.
 
 ## 🚀 Inicio rápido
 
@@ -2246,8 +2174,8 @@ Mantente informado de las actualizaciones y novedades del proyecto:
 
 <div align="center">
 
-**kage-baileys** — API moderna de WhatsApp Web con corrección de @lid a @pn
+**kage-baileys** — la mejor Baileys de 2026 · API de WhatsApp Web con corrección de @lid a @pn
 
-Creado con 🤍 por **Jose** ([xrljosedv](https://github.com/xrljosedv))
+🫧 Creado con amor por **Jose** ([xrljosedv](https://github.com/xrljosedv))
 
 </div>

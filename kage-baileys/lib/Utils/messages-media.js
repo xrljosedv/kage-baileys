@@ -679,6 +679,9 @@ const getWAUploadToServer = ({ customUploadHosts, fetchAgent, logger, options },
         const reqBody = Buffer.isBuffer(stream) ? stream : Buffer.concat(chunks);
         fileEncSha256B64 = (0, exports.encodeBase64EncodedStringForUpload)(fileEncSha256B64);
         let media = Defaults_1.MEDIA_PATH_MAP[mediaType];
+        // Baileys oficial: sticker-pack usa /mms/sticker (no /mms/sticker-pack)
+        if (mediaType === 'sticker-pack') media = '/mms/sticker';
+        if (mediaType === 'thumbnail-sticker-pack') media = '/mms/image';
         if (newsletter) {
             media = media === null || media === void 0 ? void 0 : media.replace('/mms/', '/newsletter/newsletter-');
         }
@@ -1716,6 +1719,9 @@ const getWAUploadToServer = ({ customUploadHosts, fetchAgent, logger, options },
 
             const auth = encodeURIComponent(uploadInfo.auth)
             const url = `https://${hostname}${MEDIA_PATH_MAP[mediaType]}/${fileEncSha256B64}?auth=${auth}&token=${fileEncSha256B64}`
+            if (mediaType === 'sticker-pack') { try { if (typeof media !== 'undefined') media = '/mms/sticker'; } catch (_) {} }
+            if (mediaType === 'sticker-pack') { if (typeof media !== 'undefined') media = '/mms/sticker'; if (typeof mediaPath !== 'undefined') mediaPath = '/mms/sticker'; }
+            if (mediaType === 'thumbnail-sticker-pack') { if (typeof media !== 'undefined') media = '/mms/image'; if (typeof mediaPath !== 'undefined') mediaPath = '/mms/image'; }
 
             let result
 

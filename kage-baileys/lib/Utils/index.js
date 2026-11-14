@@ -18,6 +18,18 @@ __exportStar(require("./generics"), exports);
 __exportStar(require("./decode-wa-message"), exports);
 __exportStar(require("./messages"), exports);
 __exportStar(require("./messages-media"), exports);
+__exportStar(require("./tc-token-utils.js"), exports);
+
+__exportStar(require("./sync-action-utils.js"), exports);
+
+__exportStar(require("./reporting-utils.js"), exports);
+
+__exportStar(require("./pre-key-manager.js"), exports);
+
+__exportStar(require("./offline-node-processor.js"), exports);
+
+__exportStar(require("./sticker-pack.js"), exports);
+
 __exportStar(require("./validate-connection"), exports);
 __exportStar(require("./crypto"), exports);
 __exportStar(require("./signal"), exports);

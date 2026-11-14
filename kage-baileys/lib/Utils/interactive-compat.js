@@ -17,21 +17,40 @@ function buildKageInteractiveBizNode(message) {
     const inner = unwrapKageMessage(message);
     const interactive = inner?.interactiveMessage;
     if (!interactive) return undefined;
-     
+
     const flow = interactive.nativeFlowMessage;
-    if (!interactive.carouselMessage && !flow) return undefined;
+    const carousel = interactive.carouselMessage;
+    if (!carousel && !flow) return undefined;
+
+    // Carrusel: nodo biz explícito para que cargue en privado y grupos
+    if (carousel) {
+        return {
+            tag: 'biz',
+            attrs: {},
+            content: [{
+                tag: 'interactive',
+                attrs: { type: 'native_flow', v: '1' },
+                content: [{ tag: 'native_flow', attrs: { v: '9', name: 'mixed' } }]
+            }]
+        };
+    }
+
     const buttons = flow?.buttons || [];
     const name = buttons[0]?.name;
     const uniform = buttons.length > 0 && buttons.every(b => b.name === name);
-    if (!interactive.carouselMessage && uniform && (name === 'review_and_pay' || name === 'payment_info')) {
-        return { tag:'biz', attrs:{ native_flow_name:name === 'review_and_pay' ? 'order_details' : name } };
+    if (uniform && (name === 'review_and_pay' || name === 'payment_info' || name === 'payment_method' || name === 'payment_status')) {
+        return { tag: 'biz', attrs: { native_flow_name: name === 'review_and_pay' ? 'order_details' : name } };
     }
-    const specialized = !interactive.carouselMessage && uniform && special.has(name);
-    return { tag:'biz', attrs:{}, content:[{
-        tag:'interactive', attrs:{ type:'native_flow', v:'1' }, content:[{
-            tag:'native_flow', attrs:{ v:specialized ? '2' : '9', name:specialized ? name : 'mixed' }
+    const specialized = uniform && special.has(name);
+    return {
+        tag: 'biz',
+        attrs: {},
+        content: [{
+            tag: 'interactive',
+            attrs: { type: 'native_flow', v: '1' },
+            content: [{ tag: 'native_flow', attrs: { v: specialized ? '2' : '9', name: specialized ? name : 'mixed' } }]
         }]
-    }] };
+    };
 }
 function mergeNode(base, extra) {
     const out = { ...base, ...extra, attrs:{ ...base.attrs, ...extra.attrs } };
@@ -122,11 +141,39 @@ function createKageInteractiveMessage(interactive, options = {}) {
     return options.viewOnce === false ? message : {viewOnceMessage:{message}};
 }
 function createKageCarouselMessage(cards, options = {}) {
-    if (!Array.isArray(cards) || !cards.length) throw new TypeError('Se necesita al menos una tarjeta');
+    if (!Array.isArray(cards) || !cards.length) throw new TypeError('cards debe ser un array no vacío');
+    const normalized = cards.map((card, i) => {
+        if (!card || typeof card !== 'object') throw new TypeError('Tarjeta ' + (i + 1) + ' inválida');
+        const header = card.header || {};
+        const hasMedia = !!(header.imageMessage || header.videoMessage || header.documentMessage || header.locationMessage || header.productMessage || header.jpegThumbnail);
+        return {
+            header: {
+                title: header.title || '',
+                subtitle: header.subtitle || '',
+                hasMediaAttachment: header.hasMediaAttachment != null ? !!header.hasMediaAttachment : hasMedia,
+                ...(header.imageMessage ? { imageMessage: header.imageMessage } : {}),
+                ...(header.videoMessage ? { videoMessage: header.videoMessage } : {}),
+                ...(header.documentMessage ? { documentMessage: header.documentMessage } : {}),
+                ...(header.locationMessage ? { locationMessage: header.locationMessage } : {}),
+                ...(header.productMessage ? { productMessage: header.productMessage } : {}),
+                ...(header.jpegThumbnail && !header.imageMessage && !header.videoMessage ? { jpegThumbnail: header.jpegThumbnail } : {})
+            },
+            body: { text: (card.body && card.body.text) || card.body || '' },
+            footer: card.footer ? { text: typeof card.footer === 'string' ? card.footer : (card.footer.text || '') } : undefined,
+            nativeFlowMessage: {
+                buttons: Array.isArray(card.nativeFlowMessage?.buttons)
+                    ? card.nativeFlowMessage.buttons.map(b => ({
+                        name: b.name,
+                        buttonParamsJson: typeof b.buttonParamsJson === 'string' ? b.buttonParamsJson : JSON.stringify(b.buttonParamsJson || {})
+                    }))
+                    : (Array.isArray(card.buttons) ? card.buttons : [])
+            }
+        };
+    });
     return createKageInteractiveMessage({
-        body:{text:options.text ?? ''},
-        ...(options.footer ? {footer:{text:options.footer}} : {}),
-        carouselMessage:{cards, messageVersion:1}
+        body: { text: options.text ?? options.body ?? '' },
+        ...(options.footer ? { footer: { text: options.footer } } : {}),
+        carouselMessage: { cards: normalized, messageVersion: 1 }
     }, options);
 }
 function createKageOrderDetails(parameters) {
@@ -147,6 +194,10 @@ function createKageOrderDetails(parameters) {
         if (!item.name || !Number.isSafeInteger(item.quantity) || item.quantity < 1) throw new TypeError('Producto o cantidad inválidos');
         sum += amount(item.amount,'item.amount') * BigInt(item.quantity);
     }
+    // Si no viene subtotal, se calcula desde los items (compatible con payloads de Ryzewa/bots)
+    if (p.order.subtotal == null) {
+        p.order.subtotal = { value: Number(sum), offset };
+    }
     const subtotal = amount(p.order.subtotal,'order.subtotal');
     if (sum !== subtotal) throw new TypeError('El subtotal no coincide con los productos');
     const tax = p.order.tax ? amount(p.order.tax,'tax') : 0n;
@@ -154,6 +205,10 @@ function createKageOrderDetails(parameters) {
     const discount = p.order.discount ? amount(p.order.discount,'discount') : 0n;
     if (subtotal + tax + shipping - discount !== total) throw new TypeError('El total no coincide con subtotal + impuestos + envío - descuento');
     if (!p.payment_settings?.length && !p.native_payment_methods?.length && !p.payment_configuration) throw new TypeError('Falta una configuración de pago real; usa cta_url para enlaces externos');
+    // Defaults útiles para review_and_pay
+    if (!p.payment_type) p.payment_type = 'upi';
+    if (!p.order.status) p.order.status = 'pending';
+    if (!p.order.order_type) p.order.order_type = 'PAYMENT_REQUEST';
     return createKageNativeFlowButton('review_and_pay', p);
 }
 async function sendKageInteractiveMessage(conn, jid, content, options = {}) {

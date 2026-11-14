@@ -700,7 +700,17 @@ const generateWAMessageFromContent = (jid, message, options) => {
     const { quoted, userJid } = options;
      
     if (quoted && !(0, WABinary_1.isJidNewsletter)(jid)) {
-        const participant = quoted.key.fromMe ? userJid : (quoted.participant || quoted.key.participant || quoted.key.remoteJid);
+        let participant = quoted.key.fromMe ? userJid : (quoted.participant || quoted.key.participant || quoted.key.remoteJid);
+        // Prefer PN over LID for quoted participant (avoids LID confusion in replies)
+        try {
+            if (participant && typeof participant === 'string' && participant.endsWith('@lid')) {
+                const decoded = (0, WABinary_1.jidDecode)(participant);
+                if (decoded && decoded.user && !decoded.user.includes('-')) {
+                    // keep lid only if no better mapping; normalize later if store available
+                    participant = (0, WABinary_1.jidNormalizedUser)(participant);
+                }
+            }
+        } catch (_) {}
         let quotedMsg = (0, exports.normalizeMessageContent)(quoted.message);
         const msgType = (0, exports.getContentType)(quotedMsg);
          
@@ -1849,7 +1859,19 @@ const generateWAMessageContent = async (message, options) => {
             })
         })
 
-        const coverBuffer = await toBuffer((await getStream(cover)).stream)
+        const coverBufferRaw = await toBuffer((await getStream(cover)).stream)
+        // KAGE_COVER_JPEG_FIX: cover debe ser imagen JPEG/PNG para prepareWAMessageMedia
+        let coverBuffer = coverBufferRaw
+        try {
+            const isJpeg = coverBufferRaw[0] === 0xff && coverBufferRaw[1] === 0xd8
+            const isPng = coverBufferRaw[0] === 0x89 && coverBufferRaw[1] === 0x50
+            if (!isJpeg && !isPng) {
+                const sharpLib = (() => { try { return require('sharp') } catch { return null } })()
+                if (sharpLib) {
+                    coverBuffer = await sharpLib(coverBufferRaw).resize(512, 512, { fit: 'inside' }).jpeg({ quality: 85 }).toBuffer()
+                }
+            }
+        } catch (_) {}
 
         const [stickerPackUpload, coverUpload] = await Promise.all([
             encryptedStream(zipBuffer, "sticker-pack", {

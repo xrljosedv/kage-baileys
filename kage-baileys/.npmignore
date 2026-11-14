@@ -1,0 +1,9 @@
+docs/
+reports/
+maintenance/historical/
+maintenance/legacy-viewonce-tests/
+*.log
+.DS_Store
+.git/
+.github/
+node_modules/
